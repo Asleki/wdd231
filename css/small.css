@@ -1,0 +1,403 @@
+/* css/small.css - Base styles (Mobile First - 320px and up) */
+
+/* Root Theme Variables - Adjusted to match your existing colors */
+:root {
+    --header-bg: #333; /* Your current header background */
+    --nav-bg-closed: #333; /* Your current header background for hamburger */
+    --nav-bg-open: rgba(51, 51, 51, 0.95); /* Semi-transparent version of your header/nav background */
+    --nav-link-color: white; /* Your current nav link color */
+    --nav-dropdown-bg: #444; /* Your current dropdown background */
+    --accent-color: #007bff; /* Your current accent blue */
+    --primary-text-color: #333; /* Your general text color */
+    --white-text: white; /* For white text elements */
+    --light-bg: #f0f0f0; /* Your body background */
+    --section-header-bg: #555; /* Your section header background */
+    --section-content-bg: #eee; /* Your section content background */
+    --border-color: #ddd; /* Your border color */
+    --light-border: #ccc; /* Lighter border color */
+    --lighter-bg: #bbb; /* For filter button hover */
+    --darker-accent: #0056b3; /* For project link hover */
+}
+
+
+/* General Reset and Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Example Google Font */
+    line-height: 1.6;
+    color: var(--primary-text-color);
+    background-color: var(--light-bg);
+}
+
+.main-content,
+.site-header .header-container,
+.site-footer .footer-container {
+    max-width: 960px; /* Max width for central content */
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* --- Header --- */
+.site-header {
+    background-color: var(--header-bg); /* Uniform dark background for the very top header */
+    color: var(--white-text);
+    /* --- MODIFIED: Adjusted padding to account for larger logo --- */
+    padding: 0.5rem 0; /* Changed from 1rem 0 */
+    border-bottom: 1px solid #555;
+}
+
+.site-header .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.site-logo-and-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.site-logo {
+    height: 50px; /* Adjust as needed */
+    margin-right: 10px;
+    border-radius: 50%; /* If your logo is circular */
+}
+
+/* --- MOBILE NAVIGATION (Hamburger Menu & Overlay) --- */
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    color: var(--nav-link-color); /* Matches your existing color for the hamburger */
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: block; /* Show hamburger on small screens */
+    z-index: 1001; /* Ensure it's above the navigation overlay */
+}
+
+.main-nav {
+    /* Initially hide the navigation off-screen */
+    position: fixed; /* Position fixed relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Take full screen height */
+    background-color: var(--nav-bg-open); /* Semi-transparent dark overlay */
+    transform: translateX(100%); /* Start completely off-screen to the right */
+    transition: transform 0.3s ease-in-out; /* Smooth slide animation */
+    z-index: 999; /* Below hamburger but above regular content */
+    display: flex; /* Use flexbox to center content */
+    flex-direction: column;
+    justify-content: center; /* Vertically center the links */
+    align-items: center; /* Horizontally center the links */
+}
+
+/* When the 'open' class is added by JavaScript, slide it into view */
+.main-nav.open {
+    transform: translateX(0); /* Slide fully into view */
+}
+
+/* Styling for the list within the mobile nav */
+.main-nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+    width: 80%; /* Constrain the width of the link list */
+    max-width: 300px; /* Max width for larger mobile devices */
+    background-color: transparent; /* No separate background for the ul inside overlay */
+    flex-direction: column; /* Ensure vertical stacking */
+}
+
+/* Styling for each navigation item */
+.main-nav ul li {
+    text-align: center;
+    margin-bottom: 1rem; /* Space between each link */
+}
+
+.main-nav ul li:last-child {
+    margin-bottom: 0; /* No margin after the last item */
+}
+
+/* Styling for the actual links */
+.main-nav ul li a {
+    display: block; /* Make the whole area clickable */
+    padding: 1rem;
+    font-size: 1.2rem; /* Larger font size for mobile */
+    color: var(--white-text); /* White text for better contrast on dark overlay */
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 5px; /* Slightly rounded corners for buttons look */
+}
+
+/* Hover/active states for mobile links */
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    background-color: var(--accent-color);
+    color: var(--white-text);
+}
+
+/* --- Main Content --- */
+.main-content {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* !!! THIS IS THE CRITICAL RULE FOR ALL SECTION HEADERS !!! */
+/* This rule applies the dark background and centers the text */
+.section-header {
+    background-color: var(--section-header-bg); /* The dark background */
+    padding: 0.8rem 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem; /* Give space below the header */
+    text-align: center; /* <<< THIS CENTERS THE TEXT WITHIN THE HEADER BOX */
+}
+
+/* This rule ensures the heading text itself is white and has no extra styling */
+.section-header h1,
+.section-header h2,
+.section-header h3 {
+    margin: 0; /* Remove default margins from h1/h2/h3 */
+    font-size: 1.3rem; /* Consistent font size */
+    color: var(--white-text); /* Ensure text color is white */
+    background: none; /* No background on the h1/h2/h3 itself */
+    padding: 0; /* No padding on the h1/h2/h3 itself */
+}
+
+/* Sections themselves should have no padding, their content divs will */
+section {
+    background-color: var(--white-text);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0; /* No padding directly on the section */
+}
+
+/* This class applies padding to the content area *below* the header */
+.section-content-wrapper {
+    padding: 1.5rem;
+    background-color: var(--section-content-bg); /* Lighter background for content area */
+    border-top: 1px solid var(--light-border); /* Separator from header */
+}
+
+/* --- About and Student Photo Section Layout (Mobile) --- */
+.home-section {
+    display: flex;
+    flex-direction: column; /* Stack vertically on mobile */
+    /* No gap here, as sections themselves have margin-bottom */
+}
+
+.about-me-content,
+.student-photo-content {
+    margin-bottom: 1.5rem; /* Add space between these sections on mobile */
+}
+
+.photo-box {
+    width: 150px;
+    height: 150px;
+    background-color: #bbb;
+    margin: 0.5rem auto; /* Center the box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #999;
+    border-radius: 1rem;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-placeholder-text {
+    position: absolute;
+    color: #555;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+
+
+
+.course-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-bottom: 1rem; /* Padding below buttons */
+    border-bottom: 1px solid var(--light-border);
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    background-color: var(--light-border);
+    border: 1px solid #aaa;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-button:hover {
+    background-color: var(--lighter-bg);
+}
+
+.filter-button.active {
+    background-color: var(--accent-color); /* Blue when active */
+    color: var(--white-text);
+    border-color: var(--darker-accent);
+}
+
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem; /* Padding above course items */
+}
+
+.course-item {
+    background-color: var(--light-border); /* Default for incomplete */
+    border: 1px solid #aaa;
+    padding: 0.8rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-text-color);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* Specific colors for CSE and WDD, and completion status */
+.course-item.cse-course {
+    background-color: #e0f2f7; /* Light blue for CSE */
+    border-color: #a7d9ed;
+}
+
+.course-item.wdd-course {
+    background-color: #ffe0b2; /* Light orange for WDD */
+    border-color: #ffcc80;
+}
+
+.course-item.completed {
+    background-color: #c8e6c9; /* Light green for completed courses */
+    border-color: #a5d6a7;
+    color: #2e7d32; /* Darker green text */
+    font-style: italic;
+}
+
+
+/* Find this section in your css/small.css file */
+.credits-total {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center; /* <<< CHANGE THIS LINE TO CENTER */
+    padding-top: 1rem; /* Padding above credits total */
+    border-top: 1px solid var(--light-border);
+    margin-top: 1rem; /* Space from course list */
+}
+
+/* --- Projects Section --- */
+/* .projects-content styles are handled by .section-content-wrapper */
+
+.project-card {
+    background-color: var(--section-content-bg);
+    border: 1px solid var(--light-border);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem; /* Space between cards on mobile */
+}
+
+.project-card h4 {
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+    background: none;
+    padding: 0;
+    text-align: center;
+}
+
+.project-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.project-card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    margin: 1rem auto 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.project-card a {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--white-text);
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.project-card a:hover {
+    background-color: var(--darker-accent);
+}
+
+.project-card a.placeholder-link {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.project-card a.placeholder-link:hover {
+    background-color: #5a6268;
+}
+
+/* --- Footer --- */
+.site-footer {
+    background-color: var(--header-bg);
+    color: var(--white-text);
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    color: var(--white-text);
+    font-size: 2rem;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+.site-footer p {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}

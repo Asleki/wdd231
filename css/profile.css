@@ -1,0 +1,411 @@
+/* css/profile.css - FINAL ATTEMPT TO CENTER ALL HEADERS */
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.profile-container {
+    max-width: 960px; /* Max width as per typical large screen designs */
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* --- Header --- */
+.profile-header {
+    background-color: #333; /* Uniform dark background for the very top header */
+    color: white;
+    padding: 1rem 0;
+    border-bottom: 1px solid #555;
+}
+
+.profile-header .profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.site-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.site-name i {
+    font-size: 2rem;
+    color: #007bff; /* A blue accent for icons */
+}
+
+.profile-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Allow nav items to wrap */
+    justify-content: center; /* Center nav items on wrap */
+}
+
+.profile-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+
+.profile-nav a:hover,
+.profile-nav a.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+/* --- Main Content --- */
+main.profile-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* !!! THIS IS THE CRITICAL RULE FOR ALL SECTION HEADERS !!! */
+.section-header {
+    background-color: #555; /* The dark background */
+    color: white; /* White text */
+    padding: 0.8rem 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center; /* <<< THIS CENTERS THE TEXT WITHIN THE HEADER BOX */
+}
+
+.section-header h2,
+.section-header h3 {
+    margin: 0; /* Remove default margins from h2/h3 */
+    font-size: 1.3rem; /* Consistent font size */
+    color: inherit; /* Inherit color from parent .section-header */
+    background: none; /* No background on the h2/h3 itself */
+    padding: 0; /* No padding on the h2/h3 itself */
+}
+
+/* Sections themselves should have no padding, their content divs will */
+section {
+    background-color: white;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0; /* No padding directly on the section */
+}
+
+/* This class applies padding to the content area *below* the header */
+.section-content-padding {
+    padding: 1.5rem;
+}
+
+/* Minor adjustments for consistency after header changes */
+.profile-hero {
+    /* Styles handled by .section-header now, just maintain margin/border */
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+}
+
+
+/* --- About Section --- */
+.about-section {
+    display: flex;
+    flex-direction: column; /* Stack on mobile by default */
+    gap: 0; /* No gap between sub-sections on mobile, handled by internal padding/borders */
+}
+
+.about-content {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-top: none; /* Header provides the top border visual */
+    margin-bottom: 1rem; /* Separate from student photo on mobile */
+}
+
+.about-content p {
+    margin-bottom: 0;
+}
+
+.student-photo-placeholder {
+    flex: 1;
+    text-align: center; /* Center content within this box */
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-top: none; /* Header provides the top border visual */
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-box {
+    width: 150px;
+    height: 150px;
+    background-color: #bbb;
+    margin: 0.5rem auto; /* Center the box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #999;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-placeholder-text {
+    position: absolute;
+    color: #555;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+/* --- Courses Section --- */
+/* .courses-section removed: empty ruleset */
+
+.course-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-button:hover {
+    background-color: #bbb;
+}
+
+.filter-button.active {
+    background-color: #555;
+    color: white;
+    border-color: #333;
+}
+
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #eee;
+    margin-bottom: 0;
+}
+
+.course-item {
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    padding: 0.8rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+}
+
+.credits-total {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #eee;
+    padding: 1rem;
+    margin-top: 0;
+    border-top: 1px solid #ccc;
+}
+
+/* --- Projects Section --- */
+/* .projects-section removed: empty ruleset */
+
+.project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 0;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc; /* Separates content from header */
+}
+
+.project-card {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.project-card h4 {
+    margin-bottom: 0.5rem;
+    color: #007bff;
+    background: none;
+    padding: 0;
+    text-align: center; /* Ensure h4 within card is centered */
+}
+
+.project-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.project-card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    margin: 1rem auto 0.5rem;
+    border: 1px solid #ddd;
+}
+.project-card .image-placeholder-text {
+    position: absolute;
+    color: #555;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    top: calc(1.5rem + 180px / 2 + 1rem); /* Adjust based on h4 + img height + margin */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+
+.project-card a {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.project-card a:hover {
+    background-color: #0056b3;
+}
+
+.project-card a.placeholder-link {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.project-card a.placeholder-link:hover {
+    background-color: #5a6268;
+}
+
+/* --- Footer --- */
+.profile-footer {
+    background-color: #333;
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.profile-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.profile-social-links a {
+    color: white;
+    font-size: 2rem;
+    transition: color 0.2s ease;
+}
+
+.profile-social-links a:hover {
+    color: #007bff;
+}
+
+.profile-footer p {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+/* --- Media Queries for Desktop (Larger Screens) --- */
+@media screen and (min-width: 768px) {
+    .profile-nav ul {
+        justify-content: flex-end;
+    }
+
+    /* About Section - Horizontal layout */
+    .about-section {
+        flex-direction: row;
+        align-items: stretch;
+        gap: 1.5rem; /* Re-add gap between the two columns for desktop */
+    }
+
+    .about-content {
+        flex: 2;
+        border-top: 1px solid #ccc;
+    }
+    .student-photo-placeholder {
+        flex: 1;
+        flex-basis: 250px;
+        border-top: 1px solid #ccc;
+    }
+
+    /* Courses Section - Horizontal layout for items */
+    .course-list {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .course-item {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: 250px;
+    }
+
+    /* Projects Section - Horizontal layout for cards */
+    .project-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .project-card {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+    }
+    .project-card .image-placeholder-text {
+        top: calc(1.5rem + 180px / 2 + 1rem);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .project-card {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+    }
+}

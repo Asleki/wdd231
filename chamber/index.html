@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Familia Chambers - For Nairobi. For Business.</title>
+    <meta name="description" content="Official website for La Familia Chambers in Nairobi, Kenya. Fostering local business growth and community connections.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.jpg" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="search-bar-container" class="search-bar-hidden">
+            <input type="search" id="site-search" placeholder="Search businesses...">
+            <div class="search-filters">
+                <select id="filter-category" aria-label="Filter by Business Category">
+                <option value="">All Categories</option>
+                <option value="retail">Retail</option>
+                <option value="food">Food & Beverage</option>
+                <option value="health">Health & Wellness</option>
+                <option value="automotive">Automotive</option>
+                <option value="e-commerce">E-commerce</option>
+            </select>
+            <select id="filter-size" aria-label="Filter by Business Size">
+                <option value="">All Sizes</option>
+                <option value="small">Small Business</option>
+                <option value="medium">Medium Business</option>
+                <option value="large">Large Corporation</option>
+            </select>
+            <select id="filter-popularity" aria-label="Filter by Popularity">
+                <option value="">All Popularity</option>
+                <option value="high">High Popularity</option>
+                <option value="medium">Medium Popularity</option>
+                <option value="low">Low Popularity</option>
+            </select>
+            </div>
+            <button id="search-submit" aria-label="Perform Search"><i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <nav id="main-nav" class="main-nav-closed">
+            <ul class="nav-list">
+               
+                <li><a href="discover.html">Discover Nairobi</a></li>
+                <li><a href="directory.html">Member Directory</a></li>
+                <li class="join-link"><a href="join.html">Join La Familia</a></li>
+                <li><a href="awards.html">Awards & Recognition</a></li>
+                <li><a href="blog.html">Business Blog</a></li>
+                <li><a href="clubs.html">Member Clubs</a></li>
+                <li><a href="calendar.html">Events Calendar</a></li>
+                <li><a href="reviews.html">Member Reviews</a></li>
+                <li><a href="board.html">Board of Directors</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-image-slider">
+                <img src="images/Nairobi city skyline at dusk.webp" alt="Nairobi city skyline at dusk" class="hero-image active-slide">
+                <img src="images/Vibrant Nairobi market scene.webp" alt="Vibrant Nairobi market scene" class="hero-image">
+                <img src="images/Modern business district in Nairobi.webp" alt="Modern business district in Nairobi" class="hero-image">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-text">
+                <h2>For Nairobi. For Business.</h2>
+                <p>Empowering growth and fostering connections in the heart of Kenya's capital.</p>
+                <a href="join.html" class="cta-button primary-cta">Become a Member Today!</a>
+            </div>
+        </section>
+
+        <section class="quick-links-section">
+            <div class="quick-link-card">
+                <a href="events.html">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Upcoming Events</h3>
+                    <p>Don't miss out on networking and learning opportunities.</p>
+                </a>
+            </div>
+            <div class="quick-link-card">
+                <a href="directory.html">
+                    <i class="fas fa-building"></i>
+                    <h3>Member Directory</h3>
+                    <p>Find local businesses and support our community.</p>
+                </a>
+            </div>
+            <div class="quick-link-card">
+                <a href="rewards.html">
+                    <i class="fas fa-gift"></i>
+                    <h3>Referral Programs & Rewards</h3>
+                    <p>Grow with us and enjoy exclusive benefits.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="ad-space">
+            <h3>Support Local, Discover New Opportunities!</h3>
+            <div class="ad-container">
+                <img src="images/ad1.jpg" alt="Advertisement for Local Business 1" class="ad-image active-ad">
+                <img src="images/ad2.jpg" alt="Advertisement for Local Business 2" class="ad-image">
+                <img src="images/ad3.jpg" alt="Advertisement for Local Business 3" class="ad-image">
+                <div class="ad-overlay">
+                    <p>Discover exciting offers from our valued members. <br>Your business could be featured here!</p>
+                    <a href="advertise.html" class="cta-button secondary-cta">Advertise With Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="community-overview">
+            <h3>Why Nairobi?</h3>
+            <div class="overview-grid">
+                <article>
+                    <img src="images/Nairobi economy cityscape.jpg" alt="Nairobi economy cityscape">
+                    <h4>Economic Powerhouse</h4>
+                    <p>Nairobi is East Africa's leading economic hub, offering unparalleled growth potential and a dynamic market.</p>
+                </article>
+                <article>
+                    <img src="images/Diverse Nairobi community smiling faces.jpg" alt="Diverse Nairobi community smiling faces">
+                    <h4>Diverse & Vibrant Community</h4>
+                    <p>Our city thrives on its rich cultural diversity and a spirit of innovation and entrepreneurship.</p>
+                </article>
+                <article>
+                    <img src="images/event.jpg" alt="People networking at a La Familia event">
+                    <h4>Unrivaled Connectivity</h4>
+                    <p>La Familia Chambers connects you to key stakeholders, resources, and a network essential for success.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="weather-and-news">
+            <div class="weather-widget">
+                <h3>Nairobi Weather</h3>
+                <div id="weather-display">
+                    <p>Loading current weather and forecast for Nairobi...</p>
+                    </div>
+            </div>
+            <div class="news-updates">
+                <h3>Latest Chamber News</h3>
+                <article>
+                    <h4><a href="news-article-1.html">New Member Spotlight: Gourmet Bites Bistro!</a></h4>
+                    <p>Welcome Gourmet Bites Bistro to our growing family! Read about their culinary journey.</p>
+                </article>
+                <article>
+                    <h4><a href="news-article-2.html">Chamber to Host Annual Business Summit</a></h4>
+                    <p>Save the date for our flagship event, bringing together leaders and innovators.</p>
+                </article>
+                <a href="news.html" class="cta-button secondary-cta">View All News</a>
+            </div>
+        </section>
+
+        <section class="business-dictionary">
+            <h3>Business Dictionary</h3>
+            <div class="dictionary-grid">
+                <article class="dictionary-term">
+                    <h4>Incubator</h4>
+                    <p>An organization or place designed to accelerate the growth and success of startup companies through various support resources.</p>
+                </article>
+                <article class="dictionary-term">
+                    <h4>Due Diligence</h4>
+                    <p>The research and analysis of a company or organization done in preparation for a business transaction.</p>
+                </article>
+                 <article class="dictionary-term">
+                    <h4>Angel Investor</h4>
+                    <p>An affluent individual who provides capital for a business start-up, usually in exchange for convertible debt or ownership equity.</p>
+                </article>
+                </div>
+        </section>
+
+        <section class="member-spotlights">
+            <h3>Featured Members</h3>
+            <div class="spotlight-carousel">
+                <article class="spotlight-card">
+                    <img src="images/member-spotlight-duka.jpg" alt="Duka Mmoja Supermart storefront">
+                    <h4>Duka Mmoja Supermart</h4>
+                    <p data-category="retail" data-size="medium" data-popularity="high">Your one-stop shop for fresh produce and household essentials.</p>
+                    <a href="directory.html#duka-mmoja">Learn More</a>
+                </article>
+                <article class="spotlight-card">
+                    <img src="images/member-spotlight-afyacare.jpg" alt="AfyaCare Clinic entrance">
+                    <h4>AfyaCare Clinic</h4>
+                    <p data-category="health" data-size="small" data-popularity="medium">Providing compassionate and comprehensive health services for the community.</p>
+                    <a href="directory.html#afyacare">Learn More</a>
+                </article>
+                 <article class="spotlight-card">
+                    <img src="images/member-spotlight-imall.jpg" alt="iMall online shopping website screenshot">
+                    <h4>iMall</h4>
+                    <p data-category="e-commerce" data-size="large" data-popularity="high">Nairobi's premier online shopping destination for everything you need, delivered fast.</p>
+                    <a href="directory.html#imall">Visit iMall</a>
+                </article>
+                 <article class="spotlight-card">
+                    <img src="images/member-spotlight-autogiant.jpg" alt="AutoGiant Motors car showroom">
+                    <h4>AutoGiant Motors</h4>
+                    <p data-category="automotive" data-size="medium" data-popularity="high">Your trusted dealer for new and pre-owned vehicles. Quality and service guaranteed.</p>
+                    <a href="directory.html#autogiant">View Cars</a>
+                </article>
+                 <article class="spotlight-card">
+                    <img src="images/member-spotlight-grandauto.jpg" alt="Grand Auto Imports luxury car dealership">
+                    <h4>Grand Auto Imports</h4>
+                    <p data-category="automotive" data-size="large" data-popularity="medium">Bringing luxury and performance vehicles to Nairobi's discerning drivers.</p>
+                    <a href="directory.html#grandauto">Explore Imports</a>
+                </article>
+                 <article class="spotlight-card">
+                    <img src="images/member-spotlight-wheelnfix.jpg" alt="Wheel N' Fix garage with mechanics">
+                    <h4>Wheel N' Fix</h4>
+                    <p data-category="automotive" data-size="small" data-popularity="medium">Reliable car service, repairs, and genuine spare parts. We keep you moving!</p>
+                    <a href="directory.html#wheelnfix">Book Service</a>
+                </article>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 7XX XXX XXX</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

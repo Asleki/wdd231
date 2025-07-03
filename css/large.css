@@ -1,0 +1,128 @@
+/* css/large.css - Styles for larger screens */
+
+@media screen and (min-width: 768px) {
+    /* Header Navigation */
+    .hamburger-menu {
+        display: none; /* Hide hamburger on larger screens */
+    }
+
+    .main-nav {
+        /* Override mobile styles to display horizontally */
+        position: static; /* No longer fixed */
+        width: auto; /* Allow nav to size to content */
+        height: auto; /* Allow nav to size to content */
+        background-color: transparent; /* No overlay background */
+        transform: translateX(0); /* Ensure it's visible on screen */
+        transition: none; /* Remove transition for desktop */
+        display: block; /* Or flex, depending on its parent's layout */
+        z-index: auto; /* Reset z-index */
+    }
+
+    .main-nav ul {
+        display: flex; /* Always show horizontal nav on larger screens */
+        flex-direction: row;
+        width: auto; /* Allow nav to size to content */
+        margin-top: 0;
+        background: none; /* No background for horizontal nav */
+        justify-content: flex-end; /* Align items to the right */
+        gap: 1.5rem; /* Space between nav items */
+    }
+
+    .main-nav ul li {
+        margin-bottom: 0; /* Remove vertical margin */
+    }
+
+    .main-nav a {
+        padding: 0.5rem 0.5rem; /* Adjust padding for horizontal nav */
+        border-radius: 0; /* Remove rounded corners */
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+        background-color: transparent; /* No background on hover for desktop */
+        color: var(--accent-color); /* Change color on hover instead */
+    }
+
+
+    /* --- About and Student Photo Section Layout (Desktop) --- */
+    .about-and-photo-section {
+        display: flex; /* Make this a flex container */
+        flex-direction: row; /* Arrange children (the wrappers) in a row */
+        align-items: stretch; /* Make sure they stretch to equal height */
+        gap: 1.5rem; /* Space between the two columns */
+
+        /* Apply border/shadow/background to this container, as it visually represents one large section */
+        background-color: white;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 0; /* Padding will be handled by content-wrapper, not this section itself */
+    }
+
+    /* Individual blocks within the about-and-photo-section - remove their individual styling if parent has it */
+    .about-block-wrapper,
+    .photo-block-wrapper {
+        border: none; /* Remove individual borders here, as the parent .about-and-photo-section has it */
+        box-shadow: none;
+        background-color: transparent; /* No background for the wrapper itself */
+
+        /* Allow flex items to grow and shrink */
+        flex-grow: 1;
+        flex-shrink: 1;
+        /* Distribute space; about-me is usually wider than a single photo */
+        /* You can adjust flex-basis or flex-grow ratio here if one needs more width */
+    }
+
+    .about-block-wrapper {
+        flex-basis: 60%; /* Example: About Me takes 60% */
+        max-width: 60%;
+    }
+
+    .photo-block-wrapper {
+        flex-basis: 40%; /* Example: Student Photo takes 40% */
+        max-width: 40%;
+    }
+
+    /* Important: Ensure the content areas within these wrappers have their styling */
+    .about-block-wrapper .section-content-wrapper,
+    .photo-block-wrapper .section-content-wrapper {
+        background-color: #eee; /* Lighter background for content area */
+        border-top: 1px solid #ccc; /* Separator from header */
+        padding: 1.5rem; /* Content padding */
+    }
+
+
+    /* --- Courses Section (Desktop) --- */
+    .course-list {
+        flex-direction: row; /* Horizontal layout for course items */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem; /* Space between course items */
+    }
+
+    .course-item {
+        flex: 0 0 calc(33.333% - 1rem); /* Approx 3 per row (adjust based on design) */
+        max-width: 200px; /* Prevent items from getting too wide */
+    }
+
+    /* --- Projects Section (Desktop) --- */
+    .projects-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Distribute cards */
+        gap: 1.5rem; /* Space between project cards */
+    }
+
+    .project-card {
+        flex: 0 0 calc(50% - 0.75rem); /* Two columns with spacing */
+        max-width: calc(50% - 0.75rem);
+        margin-bottom: 0; /* No bottom margin when in a grid */
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .project-card {
+        flex: 0 0 calc(33.333% - 1rem); /* Three columns with spacing */
+        max-width: calc(33.333% - 1rem);
+    }
+}
