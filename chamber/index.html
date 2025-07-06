@@ -12,70 +12,59 @@
 <body>
 
     <header class="sticky-header">
-        <div class="header-top">
-            <div class="site-branding">
-                <a href="index.html">
-                    <img src="images/lafamilialogo.jpg" alt="La Familia Chambers Logo" class="logo">
-                    <h1>La Familia Chambers</h1>
-                </a>
-            </div>
-            <div class="header-controls">
-                <button id="search-toggle" aria-label="Toggle Search Bar">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button id="hamburger-menu" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
         </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
 
-        <div id="search-bar-container" class="search-bar-hidden">
-            <input type="search" id="site-search" placeholder="Search businesses...">
-            <div class="search-filters">
-                <select id="filter-category" aria-label="Filter by Business Category">
-                <option value="">All Categories</option>
-                <option value="retail">Retail</option>
-                <option value="food">Food & Beverage</option>
-                <option value="health">Health & Wellness</option>
-                <option value="automotive">Automotive</option>
-                <option value="e-commerce">E-commerce</option>
-            </select>
-            <select id="filter-size" aria-label="Filter by Business Size">
-                <option value="">All Sizes</option>
-                <option value="small">Small Business</option>
-                <option value="medium">Medium Business</option>
-                <option value="large">Large Corporation</option>
-            </select>
-            <select id="filter-popularity" aria-label="Filter by Popularity">
-                <option value="">All Popularity</option>
-                <option value="high">High Popularity</option>
-                <option value="medium">Medium Popularity</option>
-                <option value="low">Low Popularity</option>
-            </select>
-            </div>
-            <button id="search-submit" aria-label="Perform Search"><i class="fas fa-arrow-right"></i></button>
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+    </div>
 
-        <nav id="main-nav" class="main-nav-closed">
-            <ul class="nav-list">
-               
-                <li><a href="discover.html">Discover Nairobi</a></li>
-                <li><a href="directory.html">Member Directory</a></li>
-                <li class="join-link"><a href="join.html">Join La Familia</a></li>
-                <li><a href="awards.html">Awards & Recognition</a></li>
-                <li><a href="blog.html">Business Blog</a></li>
-                <li><a href="clubs.html">Member Clubs</a></li>
-                <li><a href="calendar.html">Events Calendar</a></li>
-                <li><a href="reviews.html">Member Reviews</a></li>
-                <li><a href="board.html">Board of Directors</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-
+    <div id="search-bar-container">
+    <input type="search" id="site-search" placeholder="Search businesses, events, news...">
+    <div class="search-filters">
+        <select id="search-type-filter" aria-label="Filter by Category">
+            <option value="all">All Categories</option>
+            <option value="businesses">Businesses</option>
+            <option value="events">Events</option>
+            <option value="news">News</option>
+        </select>
+        <select id="search-location-filter" aria-label="Filter by Location">
+            <option value="all">All Locations</option>
+            <option value="nairobi">Nairobi</option>
+            <option value="mlolongo">Mlolongo</option>
+            </select>
+    </div>
+    <button id="search-submit">Search</button>
+</div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li> </ul>
+    </nav>
+</header>
     <main>
         <section class="hero-section">
             <div class="hero-image-slider">
