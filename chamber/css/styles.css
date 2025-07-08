@@ -179,77 +179,159 @@ body.dark-mode .join-header-cta:hover {
     }
 }
 
-/* Search Bar Styling */
+/* Search Bar Specific Styles */
 #search-bar-container {
-    display: none; /* Hidden by default, JS toggles 'show-search' */
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-    border-top: 1px solid var(--border-color);
-    margin-top: 10px;
+    position: absolute; /* Changed from fixed, depends on header positioning */
+    top: 100%; /* Position right below the header-top */
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg); /* Use a distinct background color */
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    padding: 1rem;
+    z-index: 1000; /* Ensure it's above other content */
+
+    /* Hidden state */
     opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease, max-height 0.3s ease, border-top 0.3s ease;
+    visibility: hidden;
+    transform: translateY(-20px); /* Start slightly above and move down */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s steps(1, end); /* Smooth transition */
 }
 
-#search-bar-container.search-bar-visible {
+#search-bar-container.show-search {
     opacity: 1;
-    max-height: 150px;
-    border-top: 1px solid var(--border-color);
-    padding-bottom: 1rem;
+    visibility: visible;
+    transform: translateY(0); /* Slide into view */
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in, visibility 0.3s steps(1, start); /* Smooth transition */
+}
+
+.search-input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 #site-search {
     flex-grow: 1;
-    padding: 0.5rem;
+    padding: 0.75rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    width: 100%;
+    color: var(--text-color); /* Ensure text is visible */
+    background-color: var(--light-bg); /* Light background for input */
 }
 
 #site-search::placeholder {
-    color: var(--text-color);
-    opacity: 0.7;
+    color: #888; /* Placeholder text color */
 }
 
-.search-filters {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
-    margin-top: 0.5rem;
-}
-
-.search-filters select {
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    font-size: 0.9rem;
-    width: 100%;
-}
-
-#search-submit {
-    padding: 0.5rem 1rem;
+.search-control-btn {
+    padding: 0.75rem 1rem;
     background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1rem;
     transition: background-color 0.2s ease;
-    width: 100%;
-    margin-top: 0.5rem;
+    display: flex; /* For icon alignment */
+    align-items: center;
+    justify-content: center;
 }
 
-#search-submit:hover {
-    background-color: #004494;
+.search-control-btn:hover {
+    background-color: var(--primary-dark);
 }
 
+.search-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.search-filters select {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2C118.8L146.2%2C259.4L5.4%2C118.8h281.6z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.8rem;
+    cursor: pointer;
+}
+
+/* Search History & Suggestions */
+.search-history, .search-suggestions {
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.search-history h4, .search-suggestions h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.search-history ul, .search-suggestions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-history li, .search-suggestions li {
+    padding: 0.5rem 0;
+    border-bottom: 1px dotted var(--border-color);
+    cursor: pointer;
+    color: var(--text-color);
+    transition: background-color 0.2s ease;
+}
+
+.search-history li:last-child, .search-suggestions li:last-child {
+    border-bottom: none;
+}
+
+.search-history li:hover, .search-suggestions li:hover {
+    background-color: var(--light-bg);
+}
+
+
+/* Dark mode specific adjustments for search bar */
+body.dark-mode #search-bar-container {
+    background-color: var(--header-bg); /* Darker background */
+    border-color: #333;
+    box-shadow: rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode #site-search,
+body.dark-mode .search-filters select {
+    background-color: #2a2a4a; /* Darker input/select background */
+    border-color: #444;
+    color: var(--dark-text);
+}
+
+body.dark-mode #site-search::placeholder {
+    color: #bbb;
+}
+
+body.dark-mode .search-filters select {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23e0e0e0%22%20d%3D%22M287%2C118.8L146.2%2C259.4L5.4%2C118.8h281.6z%22%2F%3E%3C%2Fsvg%3E'); /* Lighter arrow for dark mode */
+}
+
+body.dark-mode .search-history li,
+body.dark-mode .search-suggestions li {
+    color: var(--dark-text);
+    border-color: #444;
+}
+
+body.dark-mode .search-history li:hover,
+body.dark-mode .search-suggestions li:hover {
+    background-color: #3a3a5a;
+}
 /* Main Navigation */
 #main-nav {
     background-color: var(--nav-bg);
@@ -485,6 +567,75 @@ main {
 .secondary-cta:hover {
     background-color: #004494; /* Darker primary */
     transform: translateY(-2px);
+}
+
+/* General image styling for placeholder/loading state */
+img {
+    background-color: var(--border-color); /* A light grey background as a placeholder */
+    color: var(--text-color-light); /* Color for alt text */
+    font-size: 0.85rem; /* Size for alt text */
+    text-align: center;
+    font-style: italic;
+    line-height: 1.2;
+    display: flex; /* Use flexbox to center alt text within image bounds */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow if alt text is too long */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing alt text */
+    white-space: normal; /* Allow alt text to wrap if it's too long */
+    padding: 5px; /* Small padding for alt text */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    /* Add a transition for a smoother appearance when the image loads */
+    transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+}
+
+/* When image loads successfully, revert styling to normal image display */
+/* This rule targets images that do NOT have the 'image-error-fallback' class */
+img:not(.image-error-fallback) {
+    background-color: transparent; /* Remove background color */
+    color: transparent; /* Hide alt text color */
+    font-size: 0; /* Hide alt text font size */
+    padding: 0; /* Remove padding */
+    /* Ensure the original display property (e.g., 'block', 'inline-block') is maintained */
+    /* For most images, 'block' or 'inline-block' will be set by their specific classes. */
+    /* If an image initially has 'display: flex' and then loads, it might need to revert to block or inline-block based on its context. */
+    /* For images that need to retain flex or object-fit, ensure those specific rules are after this. */
+}
+
+/* Specific styling for when an image explicitly fails to load */
+img.image-error-fallback {
+    background-color: #d0d0d0; /* A slightly darker grey for explicit errors */
+    color: #555;
+    /* Ensure flex properties are active for error state to show alt text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-indent: 0; /* Remove any text indent that might be present */
+    padding: 5px; /* Ensure padding is there for alt text */
+    font-size: 0.85rem; /* Ensure font size is visible */
+    border: 1px dashed #999; /* Optional: Add a dashed border for visual indication of failure */
+}
+
+/* Override for specific image classes that might have different default displays or object-fits */
+/* Ensure these are after the general 'img' rule if they define 'display' or 'object-fit' */
+.site-branding .logo {
+    object-fit: contain; /* Keep the logo aspect ratio */
+    display: block; /* Example: ensure it's block-level if needed */
+}
+
+#weather-icon { /* For the current weather icon */
+    object-fit: contain;
+    display: block;
+}
+
+.hero-image, .ad-image, .overview-grid img, .spotlight-card img {
+    object-fit: cover; /* These should cover their areas */
+    display: block; /* Example: ensure they are block-level if needed */
+}
+
+.forecast-card img {
+    object-fit: contain; /* Keep the weather icon aspect ratio */
+    display: block; /* Ensure it's block-level within the flex column */
 }
 
 /* Quick Links Section */
@@ -976,6 +1127,440 @@ body.dark-mode .dictionary-term {
 
 .spotlight-card a:hover {
     background-color: #c4644a;
+}
+
+/* --- Directory Insights Section --- */
+.directory-insights {
+    background-color: var(--card-bg);
+    padding: var(--spacing-unit) * 3;
+    margin-bottom: var(--spacing-unit) * 2;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+}
+
+.directory-insights h3 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-unit) * 2;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-unit) * 2;
+    margin-bottom: var(--spacing-unit) * 2;
+}
+
+.insight-card {
+    background-color: var(--light-bg);
+    padding: var(--spacing-unit) * 1.5;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.insight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
+}
+
+.insight-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-unit);
+}
+
+.insight-card h4 {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-unit) * 0.5;
+}
+
+.insight-card p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.insight-card span {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.directory-insights .cta-banner {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--spacing-unit);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    margin-top: var(--spacing-unit) * 2;
+}
+
+.directory-insights .cta-banner a {
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.directory-insights .cta-banner a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* --- Directory Controls Section (New ID) --- */
+.directory-controls-section { /* Wrapper for the controls, if needed for layout */
+    margin-bottom: var(--spacing-unit) * 3;
+}
+
+#directory-search-controls { /* Targeting the specific directory search/filters */
+    background-color: var(--card-bg);
+    padding: var(--spacing-unit) * 2;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+}
+
+.search-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-unit);
+}
+
+#directory-site-search {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+}
+
+#directory-site-search::placeholder {
+    color: #888;
+}
+
+#directory-search-submit {
+    padding: 0.75rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#directory-search-submit:hover {
+    background-color: var(--primary-dark);
+}
+
+.filters-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-unit);
+    align-items: end; /* Align labels and selects */
+}
+
+.filters-group label {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+    display: block; /* Make label take its own line */
+}
+
+.filters-group select,
+.filters-group .btn {
+    width: 100%; /* Ensure selects and buttons fill grid column */
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2C118.8L146.2%2C259.4L5.4%2C118.8h281.6z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.8rem;
+    cursor: pointer;
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
+}
+
+.filters-group .btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.filters-group .btn:hover {
+    background-color: darken(var(--secondary-color), 10%); /* This needs a SASS/LESS preprocessor or hardcoded color */
+    background-color: #c0634c; /* Hardcoded darker secondary for hover */
+}
+
+
+/* Dark mode adjustments for Directory specific elements */
+body.dark-mode .directory-insights {
+    background-color: var(--card-bg); /* Use dark card background */
+    box-shadow: var(--card-shadow);
+}
+
+body.dark-mode .directory-insights h3 {
+    color: var(--secondary-color); /* Light secondary color */
+}
+
+body.dark-mode .insight-card {
+    background-color: #3a3a5a; /* Slightly lighter dark background */
+    box-shadow: rgba(255, 255, 255, 0.03) 0px 3px 5px;
+}
+
+body.dark-mode .insight-card:hover {
+    box-shadow: rgba(255, 255, 255, 0.07) 0px 5px 10px;
+}
+
+body.dark-mode .insight-card i {
+    color: var(--primary-color); /* Dark primary for icons */
+}
+
+body.dark-mode .insight-card h4,
+body.dark-mode .insight-card p {
+    color: var(--dark-text); /* Light text */
+}
+
+body.dark-mode .directory-insights .cta-banner {
+    background-color: var(--primary-dark); /* Darker primary */
+    color: var(--dark-text);
+}
+
+body.dark-mode .directory-insights .cta-banner a {
+    color: var(--secondary-color);
+}
+
+body.dark-mode #directory-search-controls {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+body.dark-mode #directory-site-search,
+body.dark-mode .filters-group select {
+    background-color: #2a2a4a;
+    border-color: #444;
+    color: var(--dark-text);
+}
+
+body.dark-mode #directory-site-search::placeholder {
+    color: #bbb;
+}
+
+body.dark-mode .filters-group select {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23e0e0e0%22%20d%3D%22M287%2C118.8L146.2%2C259.4L5.4%2C118.8h281.6z%22%2F%3E%3C%2Fsvg%3E'); /* Lighter arrow for dark mode */
+}
+
+body.dark-mode .filters-group .btn {
+    background-color: var(--secondary-color); /* Use secondary color for buttons in dark mode too */
+}
+
+body.dark-mode .filters-group .btn:hover {
+    background-color: darken(var(--secondary-color), 10%); /* Needs preprocessor or hardcoded */
+    background-color: #c0634c; /* Hardcoded darker secondary for hover */
+}
+
+/* Member Grid Styling (If not already present and needed for directory) */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-unit) * 2;
+    padding: var(--spacing-unit) * 2 0;
+}
+
+.member-grid .spotlight-card {
+    /* Re-use spotlight-card styles for directory members if appropriate */
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    padding: var(--spacing-unit);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.member-grid .spotlight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+}
+
+.member-grid .spotlight-card img {
+    max-width: 100%;
+    height: 150px; /* Fixed height for consistency */
+    object-fit: contain; /* Ensures logo fits without distortion */
+    border-radius: 4px;
+    margin-bottom: var(--spacing-unit);
+}
+
+.member-grid .spotlight-card h4 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.member-grid .spotlight-card p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-unit);
+    line-height: 1.4;
+}
+
+.member-grid .spotlight-card .cta-button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.member-grid .spotlight-card .cta-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Load More Button Styling */
+.load-more-container {
+    text-align: center;
+    margin-top: var(--spacing-unit) * 2;
+}
+
+#load-more-members {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#load-more-members:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1001; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: var(--spacing-unit); /* Padding around modal */
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: auto;
+    padding: var(--spacing-unit) * 2;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    max-width: 800px; /* Max width for content */
+    width: 90%; /* Responsive width */
+    position: relative;
+    max-height: 90vh; /* Max height to allow scrolling */
+    overflow-y: auto; /* Enable scrolling for content */
+}
+
+.modal-content .close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#member-detail-body {
+    padding-top: var(--spacing-unit);
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+#member-detail-body h3 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-unit);
+}
+
+#member-detail-body img {
+    max-width: 200px; /* Adjust size as needed */
+    height: auto;
+    float: right; /* Float image to the right */
+    margin-left: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+    border-radius: 5px;
+}
+
+#member-detail-body p {
+    margin-bottom: var(--spacing-unit) * 0.75;
+}
+
+#member-detail-body p strong {
+    color: var(--primary-color);
+}
+
+#member-detail-body a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+#member-detail-body a:hover {
+    text-decoration: underline;
+}
+
+/* Dark Mode Specific Styles for directory */
+body.dark-mode .member-grid .spotlight-card {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+body.dark-mode .member-grid .spotlight-card:hover {
+    box-shadow: rgba(255, 255, 255, 0.07) 0px 5px 15px;
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+body.dark-mode .modal-content .close-button {
+    color: var(--dark-text);
+}
+
+body.dark-mode .modal-content .close-button:hover,
+body.dark-mode .modal-content .close-button:focus {
+    color: white;
+}
+
+body.dark-mode #member-detail-body {
+    color: var(--dark-text);
 }
 
 

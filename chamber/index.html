@@ -35,22 +35,33 @@
     </div>
 
     <div id="search-bar-container" class="search-bar-hidden">
+    <div class="search-input-wrapper">
         <input type="search" id="site-search" placeholder="Search businesses, events, news...">
-        <div class="search-filters">
-            <select id="search-type-filter" aria-label="Filter by Category">
-                <option value="all">All Categories</option>
-                <option value="businesses">Businesses</option>
-                <option value="events">Events</option>
-                <option value="news">News</option>
+        <button id="search-clear-btn" class="search-control-btn" aria-label="Clear search input" style="display:none;"><i class="fas fa-times"></i></button>
+        <button id="search-mic-btn" class="search-control-btn" aria-label="Voice search"><i class="fas fa-microphone"></i></button>
+        <button id="search-submit-btn" class="search-control-btn primary-cta" style="display:none;">Search</button>
+    </div>
+    <div class="search-filters">
+        <select id="search-type-filter" aria-label="Filter by Category">
+            <option value="all">All Categories</option>
+            <option value="retail">Retail</option>
+            <option value="health">Health</option>
+            <option value="e-commerce">E-commerce</option>
+            <option value="automotive">Automotive</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="catering">Catering</option>
+            <option value="beauty">Beauty</option>
+            <option value="arts">Arts</option>
             </select>
-            <select id="search-location-filter" aria-label="Filter by Location">
-                <option value="all">All Locations</option>
-                <option value="nairobi">Nairobi</option>
-                <option value="mlolongo">Mlolongo</option>
+        <select id="search-location-filter" aria-label="Filter by Location">
+            <option value="all">All Locations</option>
+            <option value="nairobi">Nairobi</option>
+            <option value="mlolongo">Mlolongo</option>
             </select>
         </div>
-        <button id="search-submit">Search</button>
-    </div>
+    <div id="search-suggestions" class="search-suggestions"></div>
+    <div id="search-history" class="search-history"></div>
+</div>
     <nav id="main-nav" class="main-nav-closed">
         <ul class="nav-list">
             <li><a href="index.html" class="active">Home</a></li>
