@@ -34,23 +34,23 @@
         </div>
     </div>
 
-    <div id="search-bar-container">
-    <input type="search" id="site-search" placeholder="Search businesses, events, news...">
-    <div class="search-filters">
-        <select id="search-type-filter" aria-label="Filter by Category">
-            <option value="all">All Categories</option>
-            <option value="businesses">Businesses</option>
-            <option value="events">Events</option>
-            <option value="news">News</option>
-        </select>
-        <select id="search-location-filter" aria-label="Filter by Location">
-            <option value="all">All Locations</option>
-            <option value="nairobi">Nairobi</option>
-            <option value="mlolongo">Mlolongo</option>
+    <div id="search-bar-container" class="search-bar-hidden">
+        <input type="search" id="site-search" placeholder="Search businesses, events, news...">
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
             </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <button id="search-submit">Search</button>
     </div>
-    <button id="search-submit">Search</button>
-</div>
     <nav id="main-nav" class="main-nav-closed">
         <ul class="nav-list">
             <li><a href="index.html" class="active">Home</a></li>
@@ -62,7 +62,8 @@
             <li><a href="events.html">Events Calendar</a></li>
             <li><a href="reviews.html">Member Reviews</a></li>
             <li><a href="board.html">Board of Directors</a></li>
-            <li><a href="about.html">About Us</a></li> </ul>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
     </nav>
 </header>
     <main>
@@ -170,7 +171,7 @@
                     <h4>Due Diligence</h4>
                     <p>The research and analysis of a company or organization done in preparation for a business transaction.</p>
                 </article>
-                 <article class="dictionary-term">
+                   <article class="dictionary-term">
                     <h4>Angel Investor</h4>
                     <p>An affluent individual who provides capital for a business start-up, usually in exchange for convertible debt or ownership equity.</p>
                 </article>
@@ -192,31 +193,55 @@
                     <p data-category="health" data-size="small" data-popularity="medium">Providing compassionate and comprehensive health services for the community.</p>
                     <a href="directory.html#afyacare">Learn More</a>
                 </article>
-                 <article class="spotlight-card">
+                   <article class="spotlight-card">
                     <img src="images/imalllogo.webp" alt="iMall online shopping website screenshot">
                     <h4>iMall</h4>
                     <p data-category="e-commerce" data-size="large" data-popularity="high">Nairobi's premier online shopping destination for everything you need, delivered fast.</p>
                     <a href="directory.html#imall">Visit iMall</a>
                 </article>
-                 <article class="spotlight-card">
+                   <article class="spotlight-card">
                     <img src="images/acouple.png" alt="AutoGiant Motors car showroom">
                     <h4>AutoGiant Motors</h4>
                     <p data-category="automotive" data-size="medium" data-popularity="high">Your trusted dealer for new and pre-owned vehicles. Quality and service guaranteed.</p>
                     <a href="directory.html#autogiant">View Cars</a>
                 </article>
-                 <article class="spotlight-card">
+                   <article class="spotlight-card">
                     <img src="images/grandautologo.webp" alt="Grand Auto Imports luxury car dealership">
                     <h4>Grand Auto Imports</h4>
                     <p data-category="automotive" data-size="large" data-popularity="medium">Bringing luxury and performance vehicles to Nairobi's discerning drivers.</p>
                     <a href="directory.html#grandauto">Explore Imports</a>
                 </article>
-                 <article class="spotlight-card">
+                   <article class="spotlight-card">
                     <img src="images/wheelnfixlogo.webp" alt="Wheel N' Fix garage with mechanics">
                     <h4>Wheel N' Fix</h4>
                     <p data-category="automotive" data-size="small" data-popularity="medium">Reliable car service, repairs, and genuine spare parts. We keep you moving!</p>
                     <a href="directory.html#wheelnfix">Book Service</a>
                 </article>
-                </div>
+                <article class="spotlight-card">
+                    <img src="images/sokoproperties.webp" alt="Soko Properties building exterior">
+                    <h4>Soko Properties</h4>
+                    <p data-category="real-estate" data-size="medium" data-popularity="high">Your trusted partner for buying, selling, and managing properties in Nairobi.</p>
+                    <a href="directory.html#soko-properties">View Listings</a>
+                </article>
+                <article class="spotlight-card">
+                    <img src="images/tasteofafrica.webp" alt="Taste of Africa Catering food presentation">
+                    <h4>Taste of Africa Catering</h4>
+                    <p data-category="catering" data-size="small" data-popularity="medium">Authentic African and international cuisine for your events, big or small.</p>
+                    <a href="directory.html#taste-of-africa">Explore Menu</a>
+                </article>
+                <article class="spotlight-card">
+                    <img src="images/urbanedge.webp" alt="Urban Edge Barbershop interior with client">
+                    <h4>Urban Edge Barbershop & Spa</h4>
+                    <p data-category="beauty" data-size="small" data-popularity="high">Modern grooming and relaxation services for the contemporary individual.</p>
+                    <a href="directory.html#urban-edge">Book an Appointment</a>
+                </article>
+                <article class="spotlight-card">
+                    <img src="images/creativecanvas.webp" alt="Creative Canvas Studios art class in session">
+                    <h4>Creative Canvas Studios</h4>
+                    <p data-category="arts" data-size="small" data-popularity="medium">Unleash your creativity with art classes and custom design services.</p>
+                    <a href="directory.html#creative-canvas">Discover Workshops</a>
+                </article>
+            </div>
         </section>
     </main>
 

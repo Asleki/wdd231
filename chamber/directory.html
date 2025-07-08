@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member & Business Directory - La Familia Chambers</title>
+    <meta name="description" content="Explore the comprehensive directory of La Familia Chambers members and local businesses in Nairobi.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <style>
+        /* directory.html specific styles - copied from previous design proposal for completeness */
+
+        .directory-page-content {
+            padding-top: var(--spacing-unit) * 2;
+        }
+
+        .hero-small {
+            text-align: center;
+            margin-bottom: var(--spacing-unit) * 3;
+        }
+
+        .hero-small h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .directory-controls {
+            background-color: var(--card-bg);
+            padding: var(--spacing-unit) * 2;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: var(--spacing-unit) * 3;
+        }
+
+        .search-bar-expanded {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-unit);
+            align-items: center;
+        }
+
+        #site-search-directory {
+            flex-grow: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .filters-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-unit);
+            align-items: center;
+            margin-top: var(--spacing-unit);
+            width: 100%;
+        }
+
+        .filters-group label {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .filters-group select,
+        .filters-group button {
+            padding: 0.7rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .filters-group select:hover,
+        .filters-group button:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-unit) * 2;
+        }
+
+        .directory-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+            padding-bottom: var(--spacing-unit);
+        }
+
+        .directory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--card-shadow);
+        }
+
+        .directory-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .directory-card h4 {
+            color: var(--primary-color);
+            margin: var(--spacing-unit) 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .directory-card p {
+            color: var(--text-color);
+            padding: 0 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .directory-card .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: var(--spacing-unit);
+        }
+
+        .directory-card .btn:hover {
+            background-color: #c4644a;
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin-top: var(--spacing-unit) * 3;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--light-bg);
+            margin: auto;
+            padding: var(--spacing-unit) * 2;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .modal-content .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .modal-content .close-button:hover,
+        .modal-content .close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        #member-detail-body {
+            padding-top: var(--spacing-unit);
+        }
+
+        @media (max-width: 768px) {
+            .search-bar-expanded {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filters-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filters-group label,
+            .filters-group select,
+            .filters-group button {
+                width: 100%;
+            }
+            .member-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link active">Member Directory</a></li>
+                <li><a href="#" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="#" class="nav-link">Member Clubs</a></li>
+                <li><a href="#" class="nav-link">Events Calendar</a></li>
+                <li><a href="#" class="nav-link">Member Reviews</a></li>
+                <li><a href="#" class="nav-link">Board of Directors</a></li>
+                <li><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+            <div class="search-filters">
+                <select id="filter-category" aria-label="Filter by Category">
+                    <option value="">All Categories</option>
+                    <option value="retail">Retail</option>
+                    <option value="health">Health</option>
+                    <option value="e-commerce">E-commerce</option>
+                    <option value="automotive">Automotive</option>
+                    <option value="services">Services</option>
+                    <option value="food">Food & Beverage</option>
+                    <option value="design">Design</option>
+                    <option value="real-estate">Real Estate</option>
+                </select>
+                <select id="filter-size" aria-label="Filter by Size">
+                    <option value="">Any Size</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+                <select id="filter-popularity" aria-label="Filter by Popularity">
+                    <option value="">Any Popularity</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <button id="search-submit" class="search-submit" aria-label="Submit Search">Search</button>
+        </div>
+    </header>
+
+    <main class="container directory-page-content">
+        <section class="hero-small">
+            <h2>Our Members & Business Directory</h2>
+            <p>Connect with a diverse network of businesses, entrepreneurs, and services thriving in Nairobi.</p>
+        </section>
+
+        <section class="directory-controls">
+            <div id="search-bar-container" class="search-bar-expanded">
+                <input type="search" id="site-search-directory" placeholder="Search by business name or keyword..." aria-label="Search directory">
+                <button id="directory-search-submit" class="search-submit" aria-label="Search"><i class="fas fa-search"></i></button>
+
+                <div class="filters-group">
+                    <label for="filter-category-directory">Category:</label>
+                    <select id="filter-category-directory">
+                        <option value="">All Categories</option>
+                        <option value="retail">Retail</option>
+                        <option value="health">Health & Wellness</option>
+                        <option value="e-commerce">E-commerce</option>
+                        <option value="automotive">Automotive</option>
+                        <option value="food-beverage">Food & Beverage</option>
+                        <option value="services">Professional Services</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="catering">Catering</option>
+                        <option value="beauty-spa">Barbershop & Spa</option>
+                        <option value="brand-design">Brand & Design</option>
+                    </select>
+
+                    <label for="filter-location-directory">Location:</label>
+                    <select id="filter-location-directory">
+                        <option value="">All Locations</option>
+                        <option value="cbd">CBD</option>
+                        <option value="westlands">Westlands</option>
+                        <option value="kilimani">Kilimani</option>
+                        <option value="upper-hill">Upper Hill</option>
+                        <option value="langata">Langata</option>
+                        <option value="lavington">Lavington</option>
+                        <option value="ruaka">Ruaka</option>
+                    </select>
+
+                    <label for="filter-size-directory">Business Size:</label>
+                    <select id="filter-size-directory">
+                        <option value="">Any Size</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+
+                    <label for="filter-popularity-directory">Sort By:</label>
+                    <select id="filter-sort-directory" aria-label="Sort directory results">
+                        <option value="popularity-desc">Popularity (High to Low)</option>
+                        <option value="popularity-asc">Popularity (Low to High)</option>
+                        <option value="alphabetical-asc">Alphabetical (A-Z)</option>
+                        <option value="alphabetical-desc">Alphabetical (Z-A)</option>
+                        <option value="newest">Newest Members</option>
+                    </select>
+                    <button id="reset-filters" class="btn btn-secondary">Reset Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="directory-listings">
+            <h3>Directory Results <span id="member-count">(Showing X Members)</span></h3>
+            <div id="members-grid" class="member-grid">
+                </div>
+            <div class="load-more-container">
+                <button id="load-more-members" class="btn btn-primary">Load More Members</button>
+            </div>
+        </section>
+
+        <div id="member-detail-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div id="member-detail-body">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content container">
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script>
+        // scripts/directory.js (or integrated into main.js if preferred)
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('site-search-directory');
+            const searchSubmitBtn = document.getElementById('directory-search-submit');
+            const filterCategory = document.getElementById('filter-category-directory');
+            const filterLocation = document.getElementById('filter-location-directory');
+            const filterSize = document.getElementById('filter-size-directory');
+            const filterSort = document.getElementById('filter-sort-directory');
+            const resetFiltersBtn = document.getElementById('reset-filters');
+            const membersGrid = document.getElementById('members-grid');
+            const loadMoreBtn = document.getElementById('load-more-members');
+            const memberCountSpan = document.getElementById('member-count');
+
+            // Modal elements
+            const memberDetailModal = document.getElementById('member-detail-modal');
+            const memberDetailBody = document.getElementById('member-detail-body');
+            const closeModalBtn = memberDetailModal ? memberDetailModal.querySelector('.close-button') : null;
+
+            let allMembers = [];
+            let filteredMembers = [];
+            let currentPage = 1;
+            const membersPerPage = 12;
+
+            // Updated Example Data Structure with 4 new businesses + existing 6
+            const exampleMembersData = [
+                { id: 'duka-lako', name: 'Duka Lako Supermart', category: 'retail', location: 'cbd', size: 'medium', popularity: 'high', description: 'Your one-stop shop for fresh produce and household essentials.', img: 'images/dukalako.webp', fullDescription: 'Duka Lako Supermart is a beloved local grocery store offering a wide range of fresh produce, pantry staples, and household items. Committed to quality and community.', contact: 'info@dukalako.com', website: 'dukalako.com' },
+                { id: 'afyacare', name: 'AfyaCare Clinic', category: 'health', location: 'westlands', size: 'small', popularity: 'medium', description: 'Providing compassionate and comprehensive health services for the community.', img: 'images/afyaclinic.webp', fullDescription: 'AfyaCare Clinic offers primary care, specialized treatments, and wellness programs with a patient-first approach. Dedicated to improving community health.', contact: 'contact@afyacare.co.ke', website: 'afyacare.co.ke' },
+                { id: 'imall', name: 'iMall', category: 'e-commerce', location: 'nairobi-wide', size: 'large', popularity: 'high', description: 'Nairobi\'s premier online shopping destination for everything you need, delivered fast.', img: 'images/imalllogo.webp', fullDescription: 'iMall connects consumers with thousands of products from local and international vendors, offering fast delivery and secure payment options.', contact: 'support@imall.co.ke', website: 'imall.co.ke' },
+                { id: 'autogiant', name: 'AutoGiant Motors', category: 'automotive', location: 'kilimani', size: 'medium', popularity: 'high', description: 'Your trusted dealer for new and pre-owned vehicles. Quality and service guaranteed.', img: 'images/acouple.png', fullDescription: 'AutoGiant Motors prides itself on a wide selection of new and pre-owned vehicles, coupled with exceptional customer service and flexible financing options.', contact: 'sales@autogiant.co.ke', website: 'autogiantmotors.com' },
+                { id: 'grandauto', name: 'Grand Auto Imports', category: 'automotive', location: 'upper-hill', size: 'large', popularity: 'medium', description: 'Bringing luxury and performance vehicles to Nairobi\'s discerning drivers.', img: 'images/grandautologo.webp', fullDescription: 'Grand Auto Imports specializes in high-end vehicles from around the globe, providing a curated selection for discerning clients with a passion for luxury and performance.', contact: 'info@grandautoimports.co.ke', website: 'grandautoimports.com' },
+                { id: 'wheelnfix', name: 'Wheel N\' Fix', category: 'automotive', location: 'cbd', size: 'small', popularity: 'medium', description: 'Reliable car service, repairs, and genuine spare parts. We keep you moving!', img: 'images/wheelnfixlogo.webp', fullDescription: 'Wheel N\' Fix offers comprehensive automotive services, from routine maintenance to complex repairs, ensuring your vehicle runs smoothly and safely with genuine parts.', contact: 'service@wheelnfix.co.ke', website: 'wheelnfix.co.ke' },
+                // New Businesses
+                { id: 'soko-properties', name: 'Soko Properties', category: 'real-estate', location: 'lavington', size: 'medium', popularity: 'high', description: 'Connecting you with prime residential and commercial properties in Nairobi.', img: 'images/sokoproperties.webp', fullDescription: 'Soko Properties is a leading real estate agency in Nairobi, specializing in sales, rentals, and property management for both residential and commercial clients.', contact: 'info@sokoproperties.co.ke', website: 'sokoproperties.co.ke' },
+                { id: 'taste-of-africa', name: 'Taste of Africa Catering', category: 'catering', location: 'langata', size: 'medium', popularity: 'high', description: 'Authentic African and international cuisine for all your events.', img: 'images/tasteofafrica.webp', fullDescription: 'Taste of Africa Catering brings exquisite African and international culinary experiences to your events, from corporate functions to intimate gatherings. Fresh ingredients, memorable flavors.', contact: 'bookings@tasteofafrica.co.ke', website: 'tasteofafrica.co.ke' },
+                { id: 'urban-edge', name: 'Urban Edge Barbershop & Spa', category: 'beauty-spa', location: 'ruaka', size: 'small', popularity: 'medium', description: 'Modern grooming and relaxation services for men and women.', img: 'images/urbanedge.webp', fullDescription: 'Urban Edge offers a contemporary barbershop experience alongside luxurious spa treatments for both men and women. Relax, refresh, and redefine your style.', contact: 'appointments@urbanedge.co.ke', website: 'urbanedge.co.ke' },
+                { id: 'creative-canvas', name: 'Creative Canvas Studios', category: 'brand-design', location: 'westlands', size: 'small', popularity: 'high', description: 'Innovative branding, graphic design, and web development solutions.', img: 'images/creativecanvas.webp', fullDescription: 'Creative Canvas Studios is a full-service brand and design agency specializing in impactful branding, stunning graphic design, and responsive web development to elevate your business.', contact: 'hello@creativecanvas.co.ke', website: 'creativecanvas.co.ke' }
+            ];
+
+            // Function to fetch or load initial members (simulated here)
+            const loadMembers = () => {
+                allMembers = exampleMembersData;
+                applyFiltersAndRender();
+            };
+
+            // Function to render members
+            const renderMembers = () => {
+                membersGrid.innerHTML = ''; // Clear previous results
+                const startIndex = (currentPage - 1) * membersPerPage;
+                const endIndex = startIndex + membersPerPage;
+                const membersToRender = filteredMembers.slice(startIndex, endIndex);
+
+                if (membersToRender.length === 0 && currentPage === 1) {
+                    membersGrid.innerHTML = '<p class="no-results">No members found matching your criteria.</p>';
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    membersToRender.forEach(member => {
+                        const memberCard = document.createElement('article');
+                        memberCard.classList.add('directory-card');
+                        memberCard.setAttribute('data-id', member.id);
+                        memberCard.setAttribute('data-category', member.category);
+                        memberCard.setAttribute('data-location', member.location);
+                        memberCard.setAttribute('data-size', member.size);
+                        memberCard.setAttribute('data-popularity', member.popularity);
+
+                        memberCard.innerHTML = `
+                            <img src="${member.img || 'images/placeholder-logo.webp'}" data-src="${member.img || 'images/placeholder-logo.webp'}" alt="${member.name} logo" class="lazy-load">
+                            <h4>${member.name}</h4>
+                            <p>${member.description}</p>
+                            <button class="btn view-details-btn" data-id="${member.id}">View Details</button>
+                        `;
+                        membersGrid.appendChild(memberCard);
+                    });
+
+                    // Call the lazy load function from main.js if available
+                    if (typeof lazyLoadImages === 'function') {
+                        lazyLoadImages();
+                    }
+
+                    if (filteredMembers.length > endIndex) {
+                        loadMoreBtn.style.display = 'block';
+                    } else {
+                        loadMoreBtn.style.display = 'none';
+                    }
+                }
+                updateMemberCount();
+            };
+
+            // Function to apply filters and sorting
+            const applyFiltersAndRender = () => {
+                let currentMembers = [...allMembers];
+
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm) {
+                    currentMembers = currentMembers.filter(member =>
+                        member.name.toLowerCase().includes(searchTerm) ||
+                        member.description.toLowerCase().includes(searchTerm) ||
+                        (member.fullDescription && member.fullDescription.toLowerCase().includes(searchTerm))
+                    );
+                }
+
+                const selectedCategory = filterCategory.value;
+                if (selectedCategory) {
+                    currentMembers = currentMembers.filter(member => member.category === selectedCategory);
+                }
+
+                const selectedLocation = filterLocation.value;
+                if (selectedLocation) {
+                    currentMembers = currentMembers.filter(member => member.location === selectedLocation);
+                }
+
+                const selectedSize = filterSize.value;
+                if (selectedSize) {
+                    currentMembers = currentMembers.filter(member => member.size === selectedSize);
+                }
+
+                const selectedSort = filterSort.value;
+                currentMembers.sort((a, b) => {
+                    if (selectedSort === 'alphabetical-asc') {
+                        return a.name.localeCompare(b.name);
+                    } else if (selectedSort === 'alphabetical-desc') {
+                        return b.name.localeCompare(a.name);
+                    } else if (selectedSort === 'popularity-desc') {
+                        const popularityOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+                        return popularityOrder[b.popularity] - popularityOrder[a.popularity];
+                    } else if (selectedSort === 'popularity-asc') {
+                        const popularityOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+                        return popularityOrder[a.popularity] - popularityOrder[b.popularity];
+                    }
+                    return 0;
+                });
+
+                filteredMembers = currentMembers;
+                currentPage = 1;
+                renderMembers();
+            };
+
+            const updateMemberCount = () => {
+                if (memberCountSpan) {
+                    memberCountSpan.textContent = `(Showing ${filteredMembers.length} Members)`;
+                }
+            };
+
+
+            // Event Listeners
+            searchInput.addEventListener('input', applyFiltersAndRender);
+            searchSubmitBtn.addEventListener('click', applyFiltersAndRender);
+            filterCategory.addEventListener('change', applyFiltersAndRender);
+            filterLocation.addEventListener('change', applyFiltersAndRender);
+            filterSize.addEventListener('change', applyFiltersAndRender);
+            filterSort.addEventListener('change', applyFiltersAndRender);
+
+            resetFiltersBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                filterCategory.value = '';
+                filterLocation.value = '';
+                filterSize.value = '';
+                filterSort.value = 'popularity-desc';
+                applyFiltersAndRender();
+            });
+
+            loadMoreBtn.addEventListener('click', () => {
+                currentPage++;
+                renderMembers();
+            });
+
+            membersGrid.addEventListener('click', (event) => {
+                if (event.target.classList.contains('view-details-btn')) {
+                    const memberId = event.target.dataset.id;
+                    showMemberDetails(memberId);
+                }
+            });
+
+            const showMemberDetails = (id) => {
+                const member = allMembers.find(m => m.id === id);
+                if (member && memberDetailModal && memberDetailBody) {
+                    memberDetailBody.innerHTML = `
+                        <img src="${member.img || 'images/placeholder-logo.webp'}" alt="${member.name}" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem;">
+                        <h3>${member.name}</h3>
+                        <p><strong>Category:</strong> ${member.category.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
+                        <p><strong>Location:</strong> ${member.location.charAt(0).toUpperCase() + member.location.slice(1)}</p>
+                        <p><strong>Business Size:</strong> ${member.size.charAt(0).toUpperCase() + member.size.slice(1)}</p>
+                        <p>${member.fullDescription || member.description}</p>
+                        ${member.contact ? `<p><strong>Contact:</strong> <a href="mailto:${member.contact}">${member.contact}</a></p>` : ''}
+                        ${member.website ? `<p><strong>Website:</strong> <a href="http://${member.website}" target="_blank">${member.website}</a></p>` : ''}
+                        <a href="directory.html#${member.id}" class="btn btn-primary" style="margin-top: 1rem;">Go to Directory Listing</a>
+                    `;
+                    memberDetailModal.style.display = 'flex';
+                }
+            };
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    memberDetailModal.style.display = 'none';
+                });
+            }
+
+            window.addEventListener('click', (event) => {
+                if (event.target === memberDetailModal) {
+                    memberDetailModal.style.display = 'none';
+                }
+            });
+
+            loadMembers();
+
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                setTimeout(() => showMemberDetails(initialHash), 500);
+            }
+        });
+    </script>
+</body>
+</html>

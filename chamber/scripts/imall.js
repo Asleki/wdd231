@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             shippingLoc: 'Dagoretti South',
             description: 'Experience the ultimate smartphone with the Apple iPhone 12 Pro, featuring a powerful A14 Bionic chip, stunning Ceramic Shield display, and advanced pro camera system for incredible low-light performance. Available in various colors and storage options.',
             folder: 'apple iphone 12 pro',
-            images: ['apple-iphone-12-pro-1.webp', 'apple-iphone-12-pro-2.webp', 'apple-iphone-12-pro-3.webp', 'apple-iphone-12-pro-4.webp', 'apple-iphone-12-pro-5.webp', 'apple-iphone-12-pro-6.webp']
+            images: ['apple-iphone-12-pro-1.jpg', 'apple-iphone-12-pro-2.jpg', 'apple-iphone-12-pro-3.jpg', 'apple-iphone-12-pro-4.jpg', 'apple-iphone-12-pro-5.jpg', 'apple-iphone-12-pro-6.jpg']
         },
         {
             id: 'samsung-a13-5g',
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
             shippingLoc: 'Nairobi',
             description: 'Compact and efficient Arctic Mini Refrigerator, perfect for dorm rooms, offices, or small apartments. Keep your beverages and snacks perfectly chilled.',
             folder: 'Arctic Mini Refridgerator',
-            images: ['arctic-mini-fridge-1.webp', 'arctic-mini-fridge-2.webp', 'arctic-mini-fridge-3.webp', 'image-4.webp', 'image-5.webp', 'image-6.webp'] // Added generic names
+            images: ['arctic-mini-fridge-1.jpg', 'arctic-mini-fridge-2.jpg', 'arctic-mini-fridge-3.jpg', 'arctic-mini-fridge-4.jpg', 'arctic-mini-fridge-5.jpg', 'arctic-mini-fridge-6.jpg'] // Added generic names
         },
         {
             id: 'bottom-load-dispenser',
