@@ -432,15 +432,20 @@ function renderMembers(membersToRender) {
             <p data-category="${member.category}" data-size="${member.size}" data-popularity="${member.popularity}">
                 ${member.description}
             </p>
-            <a href="#" class="cta-button primary-cta view-details-btn" data-member-id="${member.id}">View Details</a>
+            <a href="${member.link}" class="cta-button primary-cta">View Details</a>
         `;
         const imgElement = memberCard.querySelector('img');
         if (imgElement) {
             setupImageFallback(imgElement);
         }
-        memberCard.querySelector('.view-details-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            showMemberDetails(member.id);
+       
+        memberCard.addEventListener('click', (e) => {
+            // Prevent default behavior if clicking on a specific link/button inside the card
+            // (e.g., if you had other links that should behave differently)
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+                return; 
+            }
+            window.location.href = member.link; // Navigate to the member's dedicated page
         });
         membersGrid.appendChild(memberCard);
     }
@@ -697,6 +702,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const location = searchLocationFilter.value;
 
             if (query) {
+
+                const normalizedQuery = query.toLowerCase().replace(/ /g, '-'); // Example normalization
+                const foundMember = allMembersData.find(member => 
+                    member.id === normalizedQuery || member.name.toLowerCase() === query.toLowerCase()
+                );
+
+                if (foundMember) {
+                    window.location.href = foundMember.link; // Redirect to member's specific page
+                    return; // Stop execution of this function
+                }
                 console.log(`Global Search executed for: "${query}" (Type: ${type}, Location: ${location})`);
                 saveSearchHistory(query);
 
