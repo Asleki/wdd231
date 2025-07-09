@@ -1,270 +1,115 @@
 // scripts/common-imall.js
 
-// This file contains global constants and common utility functions
-// used across the iMall website.
+// This file contains common utility functions used across iMall pages.
 
 // --- Global Constants ---
-const CART_STORAGE_KEY = 'imall_cart';
-const WISHLIST_STORAGE_KEY = 'imall_wishlist';
-const SHIPPING_COST = 500;
-const PLACEHOLDER_IMAGE_PATH = 'images/placeholder.webp'; // Corrected to .webp as per earlier discussion
-const API_BASE_URL = 'https://api.imall.com/v1';
+// PLACEHOLDER_IMAGE_PATH is expected to be defined in products.js.
 
-// --- Utility Functions ---
-
+/**
+ * Formats a numeric amount into Kenyan Shillings currency string.
+ * @param {number} amount - The amount to format.
+ * @returns {string} The formatted currency string (e.g., "KSh 1,234").
+ */
 function formatCurrency(amount) {
-    if (typeof amount !== 'number') {
-        console.warn('formatCurrency received non-numeric input:', amount);
-        return 'KSh 0.00';
+    if (typeof amount !== 'number' || isNaN(amount)) {
+        return 'KSh 0.00'; // Default for invalid amounts
     }
     return new Intl.NumberFormat('en-KE', {
         style: 'currency',
         currency: 'KES',
-        currencyDisplay: 'symbol',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        minimumFractionDigits: 0, // No decimals for whole shillings
+        maximumFractionDigits: 0
     }).format(amount);
 }
 
+/**
+ * Handles image loading errors by replacing the image source with a placeholder.
+ * This function should be called via `onerror="handleImageError(this)"` on `<img>` tags.
+ * @param {HTMLImageElement} imageElement - The image element that failed to load.
+ */
 function handleImageError(imageElement) {
-    if (imageElement && imageElement.src !== PLACEHOLDER_IMAGE_PATH) {
+    imageElement.onerror = null; // Prevent infinite loop if placeholder also fails
+    // Ensure PLACEHOLDER_IMAGE_PATH is globally accessible from products.js
+    if (typeof PLACEHOLDER_IMAGE_PATH !== 'undefined') {
         imageElement.src = PLACEHOLDER_IMAGE_PATH;
-        imageElement.alt = 'Image not available';
-        console.warn(`Image failed to load: ${imageElement.dataset.originalSrc || 'unknown'}. Replaced with placeholder.`);
-        imageElement.dataset.originalSrc = imageElement.src;
+    } else {
+        console.error('PLACEHOLDER_IMAGE_PATH is not defined. Cannot set fallback image.');
+        // Fallback to a generic broken image icon if placeholder path is truly unavailable
+        imageElement.src = '';
     }
+    imageElement.alt = 'Image not available';
+    imageElement.style.objectFit = 'contain'; // Adjust style for placeholder
+    console.warn(`Image failed to load: ${imageElement.src}. Using placeholder.`);
 }
 
-// --- Local Storage Utilities ---
-function saveToLocalStorage(key, data) {
-    try {
-        localStorage.setItem(key, JSON.stringify(data));
-    } catch (e) {
-        console.error(`Error saving to localStorage for key "${key}":`, e);
-    }
-}
-
-function getFromLocalStorage(key) {
-    try {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : null;
-    } catch (e) {
-        console.error(`Error retrieving from localStorage for key "${key}":`, e);
-        return null;
-    }
-}
-
-function removeFromLocalStorage(key) {
-    try {
-        localStorage.removeItem(key);
-    } catch (e) {
-        console.error(`Error removing from localStorage for key "${key}":`, e);
-    }
-}
-
-// --- Product/Data Related Utilities ---
-
+/**
+ * Creates the HTML string for a single product card.
+ * This function is crucial for rendering products consistently across pages.
+ * It assumes product objects have properties like: id, name, price, originalPrice, isDiscounted, images (array), rating, reviewsCount.
+ * @param {Object} product - The product object.
+ * @returns {string} The HTML string for the product card.
+ */
 function createProductCardHTML(product) {
-    if (!product || !product.images || product.images.length === 0) {
-        product.images = [PLACEHOLDER_IMAGE_PATH];
-    }
-
-    const originalPriceHTML = product.isDiscounted
-        ? `<p class="original-price">${formatCurrency(product.originalPrice)}</p>`
+    // Ensure PLACEHOLDER_IMAGE_PATH is globally accessible from products.js
+    const fallbackImageUrl = typeof PLACEHOLDER_IMAGE_PATH !== 'undefined' ? PLACEHOLDER_IMAGE_PATH : '';
+    const imageUrl = (product.images && product.images.length > 0) ? product.images[0] : fallbackImageUrl;
+    const originalPriceHTML = product.isDiscounted && product.originalPrice
+        ? `<span class="original-price">${formatCurrency(product.originalPrice)}</span>`
         : '';
+    const ratingStarsHTML = `<span class="stars" style="--rating: ${product.rating || 0};"></span>`;
 
     return `
         <div class="product-card" data-product-id="${product.id}">
-            <div class="product-image-wrapper">
-                <a href="product-detail.html?id=${product.id}"> <img src="${product.images[0]}" alt="${product.name}" class="product-image" onerror="handleImageError(this)"> </a>
-                ${product.isDiscounted ? '<span class="discount-badge">Sale!</span>' : ''}
-            </div>
-            <h3 class="product-name"><a href="product-detail.html?id=${product.id}">${product.name}</a></h3>
-            <p class="product-brand">${product.brand}</p>
-            <div class="product-price-info">
-                <p class="current-price">${formatCurrency(product.price)}</p>
-                ${originalPriceHTML}
-            </div>
-            <div class="product-rating">
-                <span class="stars" style="--rating: ${product.rating};" aria-label="Rating of this product is ${product.rating} out of 5."></span>
-                <span class="reviews-count">(${product.reviewsCount} reviews)</span>
-            </div>
-            <div class="product-card-actions">
-                <button class="add-to-cart-btn" data-product-id="${product.id}" onclick="addToCart('${product.id}')">Add to Cart</button>
-                <button class="wishlist-toggle-btn" data-product-id="${product.id}" title="Add to Wishlist" onclick="toggleWishlist('${product.id}')">
-                    <i class="far fa-heart"></i> </button>
+            <a href="imall-product.html?id=${product.id}" class="product-link">
+                <div class="product-image-wrapper">
+                    <img src="${imageUrl}" alt="${product.name}" onerror="handleImageError(this)">
+                </div>
+            </a>
+            <div class="product-info">
+                <h4 class="product-name"><a href="imall-product.html?id=${product.id}">${product.name}</a></h4>
+                <div class="product-rating">
+                    ${ratingStarsHTML}
+                    <span class="reviews-count">(${product.reviewsCount || 0})</span>
+                </div>
+                <p class="product-price-info">
+                    <span class="current-price">${formatCurrency(product.price)}</span>
+                    ${originalPriceHTML}
+                </p>
+                <div class="product-card-actions">
+                    <button class="btn btn-primary btn-add-to-cart" data-product-id="${product.id}">Add to Cart</button>
+                    <button class="btn btn-outline btn-add-to-wishlist" data-product-id="${product.id}" aria-label="Add to Wishlist">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
             </div>
         </div>
     `;
 }
 
+/**
+ * Utility function to filter products based on a search query.
+ * @param {Array<Object>} products - The array of product objects.
+ * @param {string} query - The search query string.
+ * @returns {Array<Object>} Filtered array of products.
+ */
 function filterProducts(products, query) {
-    if (!query || query.trim() === '') {
-        return products;
-    }
-    const lowerCaseQuery = query.toLowerCase().trim();
-    return products.filter(product => {
-        return product.name.toLowerCase().includes(lowerCaseQuery) ||
-               product.description.toLowerCase().includes(lowerCaseQuery) ||
-               product.brand.toLowerCase().includes(lowerCaseQuery) ||
-               (product.category && product.category.toLowerCase().includes(lowerCaseQuery)) || // Added check for category existence
-               (product.subCategory && product.subCategory.toLowerCase().includes(lowerCaseQuery)); // Added check for subCategory existence
-    });
+    const lowerCaseQuery = query.toLowerCase();
+    return products.filter(product =>
+        product.name.toLowerCase().includes(lowerCaseQuery) ||
+        product.description.toLowerCase().includes(lowerCaseQuery) ||
+        product.brand.toLowerCase().includes(lowerCaseQuery) ||
+        product.category.toLowerCase().includes(lowerCaseQuery) ||
+        (product.subCategory && product.subCategory.toLowerCase().includes(lowerCaseQuery))
+    );
 }
 
+/**
+ * Utility function to get a batch of products for pagination.
+ * @param {Array<Object>} allProducts - The full list of products.
+ * @param {number} startIndex - The starting index for the batch.
+ * @param {number} limit - The maximum number of products to return.
+ * @returns {Array<Object>} A subset of products.
+ */
 function getNextBatchOfProducts(allProducts, startIndex, limit) {
-    if (!Array.isArray(allProducts)) {
-        console.error('getNextBatchOfProducts expects an array for allProducts.');
-        return [];
-    }
     return allProducts.slice(startIndex, startIndex + limit);
 }
-
-function setupSeeMoreLess(fullTextElementId, truncatedTextElementId, toggleButtonId, truncateLength = 150) {
-    const fullTextEl = document.getElementById(fullTextElementId);
-    const truncatedTextEl = document.getElementById(truncatedTextElementId);
-    const toggleButton = document.getElementById(toggleButtonId);
-
-    if (!fullTextEl || !truncatedTextEl || !toggleButton) {
-        console.warn('Could not find all required elements for See More/Less setup.');
-        return;
-    }
-
-    const originalText = fullTextEl.dataset.originalText || fullTextEl.textContent.trim();
-    fullTextEl.dataset.originalText = originalText;
-
-    if (originalText.length <= truncateLength) {
-        truncatedTextEl.textContent = originalText;
-        toggleButton.style.display = 'none';
-        fullTextEl.style.display = 'none';
-        return;
-    }
-
-    truncatedTextEl.textContent = originalText.substring(0, truncateLength) + '...';
-    fullTextEl.style.display = 'none';
-    truncatedTextEl.style.display = 'block';
-    toggleButton.textContent = 'See More';
-
-    toggleButton.onclick = () => {
-        const isCurrentlyTruncated = truncatedTextEl.style.display === 'block';
-
-        if (isCurrentlyTruncated) {
-            truncatedTextEl.style.display = 'none';
-            fullTextEl.style.display = 'block';
-            toggleButton.textContent = 'See Less';
-        } else {
-            fullTextEl.style.display = 'none';
-            truncatedTextEl.style.display = 'block';
-            toggleButton.textContent = 'See More';
-        }
-    };
-}
-
-
-// --- Global Functions (exposed on the window object for direct use in HTML onclick/data attributes) ---
-
-// Updates the visual state of wishlist icons on product cards based on localStorage
-window.updateProductCardWishlistIcons = () => {
-    // Ensure getFromLocalStorage and WISHLIST_STORAGE_KEY are defined
-    const wishlist = getFromLocalStorage(WISHLIST_STORAGE_KEY) || [];
-    document.querySelectorAll('.wishlist-toggle-btn').forEach(button => { // Corrected selector to wishlist-toggle-btn
-        const productId = button.dataset.productId;
-        const icon = button.querySelector('i'); // Get the icon element
-
-        if (wishlist.includes(productId)) {
-            button.classList.add('in-wishlist');
-            if (icon) {
-                icon.classList.remove('fa-regular');
-                icon.classList.add('fa-solid'); // For filled heart
-            }
-        } else {
-            button.classList.remove('in-wishlist');
-            if (icon) {
-                icon.classList.remove('fa-solid');
-                icon.classList.add('fa-regular'); // For outlined heart
-            }
-        }
-    });
-};
-
-// Placeholder/stub for adding to cart functionality
-window.addToCart = (productId) => {
-    console.log(`Product ${productId} added to cart! (Placeholder function in common-imall.js)`);
-    // Example: Add to cart array in localStorage
-    let cart = getFromLocalStorage(CART_STORAGE_KEY) || [];
-    const existingItem = cart.find(item => item.id === productId);
-
-    if (existingItem) {
-        existingItem.quantity = (existingItem.quantity || 1) + 1; // Increment quantity
-    } else {
-        // Assuming ALL_PRODUCTS is available globally
-        const productToAdd = ALL_PRODUCTS.find(p => p.id === productId);
-        if (productToAdd) {
-            cart.push({ id: productId, quantity: 1, ...productToAdd }); // Add product details
-        }
-    }
-    saveToLocalStorage(CART_STORAGE_KEY, cart);
-    // You would typically call a function here to update the cart count display in the header
-    // e.g., updateCartCountDisplay();
-    alert(`Added ${productId} to cart!`); // Simple confirmation
-};
-
-// Placeholder/stub for toggling wishlist status
-window.toggleWishlist = (productId) => {
-    console.log(`Product ${productId} toggled in wishlist! (Placeholder function in common-imall.js)`);
-    let wishlist = getFromLocalStorage(WISHLIST_STORAGE_KEY) || [];
-    const index = wishlist.indexOf(productId);
-
-    if (index > -1) {
-        wishlist.splice(index, 1); // Remove from wishlist
-    } else {
-        wishlist.push(productId); // Add to wishlist
-    }
-    saveToLocalStorage(WISHLIST_STORAGE_KEY, wishlist);
-    window.updateProductCardWishlistIcons(); // Update the icon state immediately
-    // You would typically call a function here to update the wishlist count display in the header
-    // e.g., updateWishlistCountDisplay();
-};
-
-
-// --- DOMContentLoaded for Category Dropdown and initial wishlist icon update ---
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Populate iMall Category Dropdown ---
-    const imallCategoryDropdown = document.getElementById('imall-category-dropdown');
-
-    // Ensure ALL_PRODUCTS is defined and the dropdown element exists
-    if (imallCategoryDropdown && typeof ALL_PRODUCTS !== 'undefined') {
-        const categories = new Set();
-
-        ALL_PRODUCTS.forEach(product => {
-            if (product.category) {
-                categories.add(product.category);
-            }
-        });
-
-        // Clear existing content to prevent duplicates if script runs multiple times
-        imallCategoryDropdown.innerHTML = '';
-
-        // Add an "All Categories" option at the top
-        let allCategoriesHtml = `<a href="imall-category.html?cat=all">All Categories</a>`;
-        imallCategoryDropdown.insertAdjacentHTML('beforeend', allCategoriesHtml);
-
-        // Add unique categories
-        categories.forEach(category => {
-            const categoryEncoded = encodeURIComponent(category.toLowerCase());
-            const categoryHtml = `
-                <a href="imall-category.html?cat=${categoryEncoded}">${category}</a>
-            `;
-            imallCategoryDropdown.insertAdjacentHTML('beforeend', categoryHtml);
-        });
-
-        console.log('iMall categories dropdown populated.');
-    } else {
-        console.warn('iMall categories dropdown or ALL_PRODUCTS not found. Skipping population.');
-    }
-
-    // Initial update of wishlist icons when the DOM content is loaded
-    // This ensures icons reflect current wishlist state upon page load
-    window.updateProductCardWishlistIcons();
-});

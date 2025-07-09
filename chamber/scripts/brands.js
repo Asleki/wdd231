@@ -1,7 +1,7 @@
 // scripts/brands.js
 
 // This file defines the data for the top brands displayed in iMall.
-// The PLACEHOLDER_IMAGE_PATH is assumed to be defined in common-imall.js
+// The PLACEHOLDER_IMAGE_PATH is assumed to be defined in products.js
 // and used by the rendering functions that consume this data.
 
 const TOP_BRANDS = [
@@ -96,3 +96,4 @@ const TOP_BRANDS = [
         description: 'Chinese multinational electronics company known for smartphones, smart home devices, and consumer electronics.'
     }
 ];
+// Note: The CATEGORY_DATA is expected to be defined in products.js, not here.
