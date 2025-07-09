@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iMall - Nairobi's Premier Online Shopping</title>
-    <meta name="description" content="Nairobi's premier online shopping destination. Find everything you need, delivered fast.">
+    <title>iMall - Nairobi's Premier Online Shopping Destination</title>
+    <meta name="description" content="Explore Nairobi's leading online marketplace. Find electronics, fashion, home goods, and more at iMall by La Familia Chambers.">
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css"> <link rel="stylesheet" href="css/imall.css"> </head>
@@ -74,8 +74,8 @@
 
 <nav class="imall-subheader">
     <div class="subheader-content">
-        <a href="imall.html" class="imall-logo">
-            <img src="images/imall-logo.webp" alt="iMall Logo"> <span>iMall</span>
+        <a href="imall.html" class="imall-logo active"> <img src="images/imall-logo.webp" alt="iMall Logo">
+            <span>iMall</span>
         </a>
 
         <div class="imall-search-bar">
@@ -95,33 +95,58 @@
         </ul>
 
         <div class="imall-action-icons">
-            <a href="imall-wishlist.html" class="action-icon">
+            <a href="imall-wishlist.html" class="action-icon" aria-label="My Wishlist">
                 <i class="fas fa-heart"></i>
                 <span id="imall-wishlist-count" class="item-count">0</span>
             </a>
-            <a href="imall-cart.html" class="action-icon">
+            <a href="imall-cart.html" class="action-icon" aria-label="Shopping Cart">
                 <i class="fas fa-shopping-cart"></i>
                 <span id="imall-cart-count" class="item-count">0</span>
             </a>
-            </div>
+            <a href="imall-my-activity.html" class="action-icon" aria-label="My iMall Activity">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
     </div>
 </nav>
 <main>
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Welcome to iMall!</h1>
-            <p>Nairobi's online marketplace for everything you need.</p>
-            <a href="imall-category.html?cat=all" class="btn btn-primary">Start Shopping</a>
-        </div>
-    </section>
-
-    <section class="featured-products">
-        <h2>Featured Products</h2>
-        <div class="product-grid" id="homepage-featured-products">
+   <section id="hero-section">
+    <div id="hero-slider-container" class="hero-slider">
+        <div class="slides-wrapper">
+            <div class="slide active" style="background-image: url('images/hero-slide-1.jpg');">
+                <div class="hero-content">
+                    <h1>Shop Smart, Live Better</h1>
+                    <p>Your one-stop destination for electronics, home goods, and more!</p>
+                    <a href="imall-deals.html" class="primary-btn">Shop Deals Now</a>
+                </div>
             </div>
-    </section>
+            <div class="slide" style="background-image: url('images/hero-slide-2.jpg');">
+                <div class="hero-content">
+                    <h1>Unbeatable Prices, Unmatched Quality</h1>
+                    <p>Discover exclusive products and incredible savings.</p>
+                    <a href="imall-new-arrivals.html" class="primary-btn">Explore New Arrivals</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('images/hero-slide-3.jpg');">
+                <div class="hero-content">
+                    <h1>Your Style, Your Way</h1>
+                    <p>Fashion, home decor, and gadgets to express yourself.</p>
+                    <a href="imall-category.html?cat=fashion" class="primary-btn">Browse Collections</a>
+                </div>
+            </div>
+        </div>
 
-    </main>
+        <div class="slider-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+
+        <button class="slider-arrow prev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-arrow next" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+    </div>
+</section>
+</main>
 
 <footer>
     <div class="footer-grid">
@@ -163,6 +188,13 @@
     </div>
 </footer>
 
-<script src="scripts/main.js"></script>          <script src="scripts/products.js"></script>      <script src="scripts/brands.js"></script>        <script src="scripts/common-imall.js"></script>  <script src="scripts/imall-homepage.js"></script>
+<script src="scripts/products.js"></script>
+<script src="scripts/brands.js"></script>
+<script src="scripts/common-imall.js"></script> 
+<script src="scripts/imall-cart.js"></script>
+<script src="scripts/imall-wishlist.js"></script>
+<script src ="scripts/main.js"></script>
+<script src="scripts/imall-slider.js"></script>
+
 </body>
 </html>

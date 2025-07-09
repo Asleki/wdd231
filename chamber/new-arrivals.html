@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Arrivals - iMall</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Basic inline styles for demo, move to main.css */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center; /* For centering Load More button */
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .load-more-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .load-more-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .load-more-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Re-using .product-card styles from main.css */
+    </style>
+</head>
+<body id="new-arrivals-page"> <header>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="deals.html">Deals</a> |
+            <a href="new-arrivals.html">New Arrivals</a> |
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>New Arrivals</h1>
+        <p>Discover the latest and greatest products just added to our collection!</p>
+
+        <div id="new-arrivals-container" class="product-grid">
+            </div>
+
+        <button id="load-more-new-arrivals-btn" class="load-more-btn" style="display: none;">Load More New Arrivals</button>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script src="scripts/products.js"></script>
+    <script src="scripts/brands.js"></script>
+    <script src="scripts/common-imall.js"></script>
+    <script src="scripts/imall-cart.js"></script>
+    <script src="scripts/imall-new-arrivals.js"></script>
+    <script src="scripts/main.js"></script> </body>
+</html>

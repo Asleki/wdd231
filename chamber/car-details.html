@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="car-detail-title">Loading Car Details...</title>
+    <meta name="description" content="Detailed information about a vehicle at AutoGiant Motors.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/autogiant-motors.css"> <!-- Re-use main styling -->
+    <style>
+        /* Basic styling for car-details page - you can move this to autogiant-motors.css if preferred */
+        .car-details-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            color: var(--text-color);
+        }
+
+        .car-details-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .car-details-header h1 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .car-details-header p {
+            font-size: 1.2em;
+            color: var(--secondary-text-color);
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .main-image-display {
+            width: 100%;
+            height: 500px; /* Fixed height for main image */
+            object-fit: contain; /* or 'cover' */
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            background-color: var(--bg-color); /* Fallback background for images */
+            overflow: hidden; /* Ensures image doesn't spill */
+        }
+
+        .main-image-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Keep aspect ratio, fit inside container */
+            transition: transform 0.3s ease-in-out;
+        }
+        .main-image-display img:hover {
+            transform: scale(1.02);
+        }
+
+
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .thumbnail-gallery img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .thumbnail-gallery img.active-thumbnail {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .car-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background-color: var(--bg-color-light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .info-card p {
+            margin: 5px 0;
+            font-size: 1.05em;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-card ul li {
+            margin-bottom: 5px;
+        }
+
+        .info-card ul li i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .full-description {
+            background-color: var(--bg-color-light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            margin-top: 30px;
+        }
+
+        .full-description h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .full-description p {
+            line-height: 1.6;
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-button-container .btn {
+            font-size: 1.1em;
+            padding: 12px 25px;
+        }
+
+        @media (max-width: 768px) {
+            .car-details-container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+            .car-details-header h1 {
+                font-size: 1.8em;
+            }
+            .car-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-image-display {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Category">
+                    <option value="all">All Categories</option>
+                    <option value="businesses">Businesses</option>
+                    <option value="events">Events</option>
+                    <option value="news">News</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="all">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="mlolongo">Mlolongo</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+        <nav id="main-nav" class="main-nav-closed">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="discover.html">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="active">Member Directory</a></li> <li><a href="awards.html">Awards & Recognition</a></li>
+                <li><a href="blog.html">Business Blog</a></li>
+                <li><a href="clubs.html">Member Clubs</a></li>
+                <li><a href="events.html">Events Calendar</a></li>
+                <li><a href="reviews.html">Member Reviews</a></li>
+                <li><a href="board.html">Board of Directors</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="autogiant-subheader">
+        <div class="dealership-info">
+            <div class="logo">
+                <img src="images/autogiant-logo.png" alt="AutoGiant Motors Logo">
+            </div>
+            <h2>AutoGiant Motors</h2>
+        </div>
+        <div class="dealership-nav">
+            <ul>
+                <li><a href="autogiant-motors.html#hero-section">Home</a></li>
+                <li><a href="autogiant-motors.html#featured-inventory">Featured</a></li>
+                <li><a href="autogiant-motors.html#full-inventory">Inventory</a></li>
+                <li><a href="autogiant-motors.html#about-us">About Us</a></li>
+                <li><a href="autogiant-motors.html#services">Services</a></li>
+                <li><a href="autogiant-motors.html#financing">Financing</a></li>
+                <li><a href="autogiant-motors.html#testimonials">Testimonials</a></li>
+                <li><a href="autogiant-motors-contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="car-details-main">
+        <div class="car-details-container">
+            <div class="car-details-header">
+                <h1 id="car-detail-name"></h1>
+                <p id="car-detail-price"></p>
+            </div>
+
+            <div class="image-gallery">
+                <div class="main-image-display">
+                    <img id="main-car-image" src="" alt="Main car image">
+                </div>
+                <div id="thumbnail-gallery" class="thumbnail-gallery">
+                    <!-- Thumbnails will be injected here -->
+                </div>
+            </div>
+
+            <div class="car-info-grid">
+                <div class="info-card">
+                    <h4>Key Information</h4>
+                    <p><strong>Make:</strong> <span id="car-detail-make"></span></p>
+                    <p><strong>Model:</strong> <span id="car-detail-model"></span></p>
+                    <p><strong>Year:</strong> <span id="car-detail-year"></span></p>
+                    <p><strong>Condition:</strong> <span id="car-detail-condition"></span></p>
+                    <p><strong>Body Type:</strong> <span id="car-detail-body-type"></span></p>
+                    <p><strong>Transmission:</strong> <span id="car-detail-transmission"></span></p>
+                    <p><strong>Engine Size:</strong> <span id="car-detail-engine-size"></span></p>
+                    <p><strong>Color:</strong> <span id="car-detail-color"></span></p>
+                    <p><strong>In Stock:</strong> <span id="car-detail-in-stock"></span></p>
+                </div>
+
+                <div class="info-card">
+                    <h4>Availability & Payment</h4>
+                    <p><strong>Availability:</strong> <span id="car-detail-availability"></span></p>
+                    <p id="car-detail-shipping-fee-row"><strong>Shipping Fee:</strong> <span id="car-detail-shipping-fee"></span></p>
+                    <p id="car-detail-delivery-days-row"><strong>Delivery Days:</strong> <span id="car-detail-delivery-days"></span></p>
+                    <p><strong>VAT Inclusive:</strong> <span id="car-detail-vat-inclusive"></span></p>
+                    <p><strong>Available Colors:</strong> <span id="car-detail-available-colors"></span></p>
+                    <p><strong>Accepted Payments:</strong> <span id="car-detail-payment-modes"></span></p>
+                </div>
+
+                <div class="info-card interior-images-card">
+                    <h4>Interior Views</h4>
+                    <div id="interior-image-gallery" class="thumbnail-gallery">
+                        <!-- Interior thumbnails will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-description">
+                <h3>Vehicle Overview</h3>
+                <p id="car-detail-description">
+                    <!-- A more detailed description could go here, or be generated if available in data -->
+                    This vehicle offers exceptional performance, comfort, and style, meticulously maintained and ready for its next owner. Experience luxury and reliability in one package.
+                </p>
+            </div>
+
+            <div class="back-button-container">
+                <a href="autogiant-motors.html#full-inventory" class="btn btn-secondary">Back to Inventory</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- IMPORTANT: vehicles-data.js MUST load BEFORE car-details.js -->
+    <!-- All custom scripts should ideally be in the same folder for consistency -->
+    <script src="scripts/vehicles-data.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/car-details.js"></script>
+</body>
+</html>
