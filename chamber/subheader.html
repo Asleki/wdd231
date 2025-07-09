@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standalone iMall Subheader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/subheader.css">
+</head>
+<body>
+
+    <section class="imall-subheader">
+        <div class="imall-brand">
+            <a href="#">
+                <img src="images/imalllogo.webp" alt="iMall Logo" class="imall-logo">
+            </a>
+        </div>
+        <div class="imall-search-section">
+            <input type="search" id="imall-search-input" placeholder="Search products on iMall..." aria-label="iMall Product Search">
+            <button id="imall-search-button" aria-label="Search iMall"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="imall-user-actions">
+            <div class="imall-profile-wrapper">
+                <button id="imall-profile-icon" aria-label="User Profile">
+                    <i class="fas fa-user-circle"></i>
+                </button>
+                <div id="imall-profile-dropdown" class="imall-dropdown-menu imall-hidden">
+                    <p class="profile-greeting">Hello, User!</p>
+                    <p class="profile-id">ID: 12345678</p>
+                    <ul>
+                        <li><a href="#" data-feature="orders"><i class="fas fa-box"></i> My Orders</a></li>
+                        <li><a href="#" data-feature="wishlist"><i class="fas fa-heart"></i> Wishlist</a></li>
+                        <li><a href="#" data-feature="reviews"><i class="fas fa-star"></i> My Reviews</a></li>
+                        <li><a href="#" data-feature="coupons"><i class="fas fa-tags"></i> Coupons</a></li>
+                        <li><a href="#" data-feature="messages"><i class="fas fa-envelope"></i> Messages</a></li>
+                        <li><a href="#" data-feature="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#" data-feature="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="imall-cart-wrapper">
+                <button id="imall-cart-icon" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+                <div id="imall-cart-prompt" class="imall-alert-box imall-hidden">
+                    <p>Please log in or register to manage your cart.</p>
+                    <div class="imall-prompt-actions">
+                        <button id="imall-login-btn">Log In</button>
+                        <button id="imall-register-btn">Register</button>
+                    </div>
+                    <button id="imall-continue-exploring" class="imall-text-btn">Continue Exploring</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="imall-feature-alert" class="centered-alert-box imall-hidden">
+        <p>The feature is under development.</p>
+        <button id="imall-alert-ok-btn">OK</button>
+    </div>
+
+   
+
+    <script src="scripts/subheader.js"></script>
+
+</body>
+</html>

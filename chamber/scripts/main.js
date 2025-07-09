@@ -12,7 +12,7 @@ const MEMBERS_PER_PAGE_DIRECTORY = 12; // Number of members to show per load on 
 let allMembersData = [
     {
         id: 'duka-lako-supermart',
-        imgSrc: 'https://via.placeholder.com/150/0000FF/FFFFFF?text=DukaLako',
+        imgSrc: 'images/placeholder.png', // Placeholder image URL
         imgAlt: 'Duka Lako Supermart Logo',
         name: 'Duka Lako Supermart',
         description: 'Your neighborhood supermarket, offering fresh produce, groceries, and household essentials.',
@@ -24,11 +24,11 @@ let allMembersData = [
         foundingYear: 2018,
         contact: 'info@dukalako.co.ke',
         website: 'dukalako.co.ke',
-        link: 'member-pages/dukalako.html' // Example: if you had individual member pages
+        link: 'dukalako.html' 
     },
     {
         id: 'afyacare-clinic',
-        imgSrc: 'https://via.placeholder.com/150/FF0000/FFFFFF?text=AfyaCare',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'AfyaCare Clinic Logo',
         name: 'AfyaCare Clinic',
         description: 'Comprehensive healthcare services for the whole family, from general check-ups to specialized treatments.',
@@ -40,11 +40,11 @@ let allMembersData = [
         foundingYear: 2020,
         contact: 'contact@afyacare.org',
         website: 'afyacare.org',
-        link: 'member-pages/afyacare.html'
+        link: 'afyacare.html'
     },
     {
         id: 'imall-e-commerce',
-        imgSrc: 'https://via.placeholder.com/150/00FF00/FFFFFF?text=iMall',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'iMall E-commerce Logo',
         name: 'iMall E-commerce',
         description: 'Nairobi\'s leading online marketplace for electronics, fashion, and home goods with fast delivery.',
@@ -56,11 +56,11 @@ let allMembersData = [
         foundingYear: 2017,
         contact: 'support@imall.co.ke',
         website: 'imall.co.ke',
-        link: 'member-pages/imall.html'
+        link: 'imall.html'
     },
     {
         id: 'autogiant-motors',
-        imgSrc: 'https://via.placeholder.com/150/FFFF00/000000?text=AutoGiant',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'AutoGiant Motors Logo',
         name: 'AutoGiant Motors',
         description: 'New and pre-owned vehicles. Specializing in imports and local sales with financing options.',
@@ -72,11 +72,11 @@ let allMembersData = [
         foundingYear: 2015,
         contact: 'sales@autogiant.com',
         website: 'autogiant.com',
-        link: 'member-pages/autogiant.html'
+        link: 'autogiant.html'
     },
     {
         id: 'taste-of-africa-catering',
-        imgSrc: 'https://via.placeholder.com/150/FF8800/FFFFFF?text=TasteAfrica',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Taste of Africa Catering Logo',
         name: 'Taste of Africa Catering',
         description: 'Authentic African and international cuisine catering for events of all sizes.',
@@ -88,11 +88,11 @@ let allMembersData = [
         foundingYear: 2019,
         contact: 'events@tasteofafrica.co.ke',
         website: 'tasteofafrica.co.ke',
-        link: 'member-pages/tasteofafrica.html'
+        link: 'tasteofafrica.html'
     },
     {
         id: 'creative-canvas-studios',
-        imgSrc: 'https://via.placeholder.com/150/FF00FF/FFFFFF?text=CreativeCanvas',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Creative Canvas Studios Logo',
         name: 'Creative Canvas Studios',
         description: 'Branding, graphic design, and web development services for businesses looking to make an impact.',
@@ -104,11 +104,11 @@ let allMembersData = [
         foundingYear: 2021,
         contact: 'hello@creativecanvas.com',
         website: 'creativecanvas.com',
-        link: 'member-pages/creativecanvas.html'
+        link: 'creativecanvas.html'
     },
     {
         id: 'soko-properties',
-        imgSrc: 'https://via.placeholder.com/150/00FFFF/000000?text=SokoProp',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Soko Properties Logo',
         name: 'Soko Properties',
         description: 'Leading real estate agency in Nairobi, offering sales, rentals, and property management.',
@@ -120,11 +120,11 @@ let allMembersData = [
         foundingYear: 2010,
         contact: 'info@sokoproperties.co.ke',
         website: 'sokoproperties.co.ke',
-        link: 'member-pages/sokoproperties.html'
+        link: 'sokoproperties.html'
     },
     {
         id: 'urban-edge-barbershop-spa',
-        imgSrc: 'https://via.placeholder.com/150/800080/FFFFFF?text=UrbanEdge',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Urban Edge Barbershop & Spa Logo',
         name: 'Urban Edge Barbershop & Spa',
         description: 'Modern grooming and relaxation services for men and women.',
@@ -136,11 +136,11 @@ let allMembersData = [
         foundingYear: 2022,
         contact: 'book@urbanedge.ke',
         website: 'urbanedge.ke',
-        link: 'member-pages/urbanedge.html'
+        link: 'urbanedge.html'
     },
     {
         id: 'naija-cuisine-hub',
-        imgSrc: 'https://via.placeholder.com/150/ADD8E6/000000?text=NaijaCuisine',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Naija Cuisine Hub Logo',
         name: 'Naija Cuisine Hub',
         description: 'Authentic Nigerian dishes in the heart of Nairobi. Experience a burst of flavors!',
@@ -152,11 +152,11 @@ let allMembersData = [
         foundingYear: 2021,
         contact: 'info@naijacuisinehub.com',
         website: 'naijacuisinehub.com',
-        link: 'member-pages/naijacuisine.html'
+        link: 'naijacuisine.html'
     },
     {
         id: 'techsolutions-africa',
-        imgSrc: 'https://via.placeholder.com/150/C0C0C0/000000?text=TechSol',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'TechSolutions Africa Logo',
         name: 'TechSolutions Africa',
         description: 'IT consulting, software development, and network solutions for businesses of all sizes.',
@@ -168,11 +168,11 @@ let allMembersData = [
         foundingYear: 2016,
         contact: 'contact@techsolutions.africa',
         website: 'techsolutions.africa',
-        link: 'member-pages/techsolutions.html'
+        link: 'techsolutions.html'
     },
     {
         id: 'eco-clean-services',
-        imgSrc: 'https://via.placeholder.com/150/008000/FFFFFF?text=EcoClean',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Eco Clean Services Logo',
         name: 'Eco Clean Services',
         description: 'Eco-friendly cleaning solutions for homes and offices in Nairobi.',
@@ -184,11 +184,11 @@ let allMembersData = [
         foundingYear: 2022,
         contact: 'info@ecoclean.co.ke',
         website: 'ecoclean.co.ke',
-        link: 'member-pages/ecoclean.html'
+        link: 'ecoclean.html'
     },
     {
         id: 'fashion-finesse',
-        imgSrc: 'https://via.placeholder.com/150/FFC0CB/000000?text=FashionFinesse',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Fashion Finesse Boutique Logo',
         name: 'Fashion Finesse Boutique',
         description: 'Trendy and elegant apparel for the modern Kenyan fashionista.',
@@ -200,11 +200,11 @@ let allMembersData = [
         foundingYear: 2019,
         contact: 'sales@fashionfinesse.com',
         website: 'fashionfinesse.com',
-        link: 'member-pages/fashionfinesse.html'
+        link: 'fashionfinesse.html'
     },
     {
         id: 'prime-security-solutions',
-        imgSrc: 'https://via.placeholder.com/150/4B0082/FFFFFF?text=PrimeSec',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Prime Security Solutions Logo',
         name: 'Prime Security Solutions',
         description: 'Advanced security systems and personnel for homes and businesses.',
@@ -216,11 +216,11 @@ let allMembersData = [
         foundingYear: 2014,
         contact: 'info@primesecurity.co.ke',
         website: 'primesecurity.co.ke',
-        link: 'member-pages/primesecurity.html'
+        link: 'primesecurity.html'
     },
     {
         id: 'green-thumb-landscaping',
-        imgSrc: 'https://via.placeholder.com/150/228B22/FFFFFF?text=GreenThumb',
+        imgSrc: 'images/placeholder.png',
         imgAlt: 'Green Thumb Landscaping Logo',
         name: 'Green Thumb Landscaping',
         description: 'Professional landscaping and garden maintenance services.',
@@ -232,7 +232,7 @@ let allMembersData = [
         foundingYear: 2018,
         contact: 'design@greenthumb.co.ke',
         website: 'greenthumb.co.ke',
-        link: 'member-pages/greenthumb.html'
+        link: 'greenthumb.html'
     }
 ];
 
@@ -615,6 +615,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
+
+    // --- Image Error Handling ---
+    const placeholderImagePath = 'images/placeholder.png'; // Make sure this path is correct
+
+    const images = document.querySelectorAll('img'); // Selects all <img> tags
+
+    images.forEach(img => {
+        img.onerror = function() {
+            // Prevent an infinite loop if the placeholder itself fails to load
+            this.onerror = null;
+            // Set the source to the placeholder image
+            this.src = placeholderImagePath;
+            console.warn(`Image failed to load: ${this.alt || this.src}, replaced with placeholder.`);
+        };
+    });
 
     // --- Hamburger Menu Toggle ---
     const hamButton = document.getElementById('hamburger-menu');

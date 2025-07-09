@@ -3,166 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iMall - Duka Lako Supermart</title>
-    <link rel="stylesheet" href="css/imall.css">
+    <title>iMall - Nairobi's Premier Online Shopping</title>
+    <meta name="description" content="Nairobi's premier online shopping destination. Find everything you need, delivered fast.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="css/styles.css"> <link rel="stylesheet" href="css/imall.css"> </head>
 <body>
 
-    <header class="sticky-header">
-        <div class="header-top">
-            <div class="site-branding">
-                <a href="index.html">
-                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
-                    <h1>La Familia Chambers</h1>
-                </a>
-            </div>
-            <div class="header-controls">
-                <a href="join.html" class="join-header-cta">Join La Familia</a>
-
-                <a href="signin.html" class="header-sign-in">Sign In</a> 
-                
-                <button id="cart-toggle" aria-label="View Shopping Cart">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span> </button>
-
-                <button id="search-toggle" aria-label="Toggle Search Bar">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button id="hamburger-menu" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
         </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
 
-        <div id="search-bar-container">
-            <input type="search" id="site-search" placeholder="Search products in iMall...">
-            <div class="search-filters">
-                <select id="search-type-filter" aria-label="Filter by Category">
-                    <option value="all">All Products</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="appliances">Appliances</option>
-                    <option value="home">Home & Kitchen</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="beauty">Beauty & Cosmetics</option>
-                    </select>
-                <select id="search-location-filter" aria-label="Filter by Shipping">
-                    <option value="all">All Shipping</option>
-                    <option value="local">Local Shipping</option>
-                    <option value="overseas">Overseas Shipping</option>
-                </select>
-            </div>
-            <button id="search-submit">Search</button>
-        </div>
-
-        <nav id="main-nav" class="main-nav-closed">
-            <ul class="nav-list">
-                <li><a href="directory.html">Member Directory</a></li>
-                </ul>
-        </nav>
-    </header>
-
-    <div class="imall-subheader">
-        <div class="imall-branding">
-            <img src="images/imalllogo.webp" alt="iMall Logo" class="imall-logo">
-        </div>
-        <div class="imall-categories-menu">
-            <button id="imall-categories-toggle" aria-label="Toggle iMall Categories">
-                <i class="fas fa-bars"></i> Categories
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
             </button>
-            <div id="imall-category-dropdown" class="imall-category-dropdown">
-                <h4>Products</h4>
-                <div class="category-image-row product-previews">
-                    <img src="images/placeholder_product1.jpg" alt="Product 1 Preview" onerror="this.onerror=null;this.src='images/fallback.png';">
-                    <img src="images/placeholder_product2.jpg" alt="Product 2 Preview" onerror="this.onerror=null;this.src='images/fallback.png';">
-                    <img src="images/placeholder_product3.jpg" alt="Product 3 Preview" onerror="this.onerror=null;this.src='images/fallback.png';">
-                    <img src="images/placeholder_product4.jpg" alt="Product 4 Preview" onerror="this.onerror=null;this.src='images/fallback.png';">
-                </div>
-                <ul>
-                    <li><a href="#" data-category="clothes">Clothes</a></li>
-                    <li><a href="#" data-category="shoes">Shoes</a></li>
-                    <li><a href="#" data-category="cosmetics">Cosmetics</a></li>
-                    <li><a href="#" data-category="electronics">Electronics</a></li>
-                    <li><a href="#" data-category="appliances">Appliances</a></li>
-                    <li><a href="#" data-category="home-kitchen">Home & Kitchen</a></li>
-                    </ul>
-                <h4>Brands</h4>
-                <div class="category-image-row brand-previews">
-                    <img src="images/brands/samsunglogo.svg" alt="Samsung Logo" onerror="this.onerror=null;this.src='images/brands/fallback-brand.svg';">
-                    <img src="images/brands/sonylogo.svg" alt="Sony Logo" onerror="this.onerror=null;this.src='images/brands/fallback-brand.svg';">
-                    <img src="images/brands/tecnologo.svg" alt="Tecno Logo" onerror="this.onerror=null;this.src='images/brands/fallback-brand.svg';">
-                    <img src="images/brands/applelogo.svg" alt="Apple Logo" onerror="this.onerror=null;this.src='images/brands/fallback-brand.svg';">
-                </div>
-                <ul>
-                    <li><a href="#" data-brand="samsung">Samsung</a></li>
-                    <li><a href="#" data-brand="von">Von</a></li>
-                    <li><a href="#" data-brand="sony">Sony</a></li>
-                    <li><a href="#" data-brand="huawei">Huawei</a></li>
-                    <li><a href="#" data-brand="apple">Apple</a></li>
-                    <li><a href="#" data-brand="vitron">Vitron</a></li>
-                    <li><a href="#" data-brand="sgin">SGIN</a></li>
-                    <li><a href="#" data-brand="realme">Realme</a></li>
-                    <li><a href="#" data-brand="oppo">Oppo</a></li>
-                    <li><a href="#" data-brand="shijo">SHIJO</a></li>
-                    </ul>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav class="imall-subheader">
+    <div class="subheader-content">
+        <a href="imall.html" class="imall-logo">
+            <img src="images/imall-logo.webp" alt="iMall Logo"> <span>iMall</span>
+        </a>
+
+        <div class="imall-search-bar">
+            <input type="text" id="imall-search-input" placeholder="Search iMall products...">
+            <button id="imall-search-btn" aria-label="Search iMall"><i class="fas fa-search"></i></button>
+        </div>
+
+        <ul class="imall-nav-links">
+            <li class="dropdown">
+                <a href="imall-category.html?cat=all" class="dropbtn">Shop Categories <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content" id="imall-category-dropdown">
+                    </div>
+            </li>
+            <li><a href="imall-new-arrivals.html">New Arrivals</a></li>
+            <li><a href="imall-deals.html">Deals</a></li>
+            <li><a href="imall-contact.html">iMall Support</a></li>
+        </ul>
+
+        <div class="imall-action-icons">
+            <a href="imall-wishlist.html" class="action-icon">
+                <i class="fas fa-heart"></i>
+                <span id="imall-wishlist-count" class="item-count">0</span>
+            </a>
+            <a href="imall-cart.html" class="action-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="imall-cart-count" class="item-count">0</span>
+            </a>
             </div>
+    </div>
+</nav>
+<main>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to iMall!</h1>
+            <p>Nairobi's online marketplace for everything you need.</p>
+            <a href="imall-category.html?cat=all" class="btn btn-primary">Start Shopping</a>
         </div>
-        </div>
+    </section>
 
-    <main class="imall-main-content">
-        <section class="product-listing">
-            <h2>What's New</h2>
-            <div class="product-grid" id="new-products-grid">
-                <div class="product-card">
-                    <img src="images/iMall/apple iphone 12 pro/apple-iphone-12-pro-1.webp" 
-                         alt="Apple iPhone 12 Pro" loading="lazy">
-                    <h3 class="product-name">Apple iPhone 12 Pro</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star-half-alt filled"></i>
-                        <span class="review-count">(120 Reviews)</span>
-                    </div>
-                    <p class="product-price">KSh 12,999</p>
-                    <p class="product-fulfillment">Brand Official | Fulfilled By iMall</p>
-                    <p class="product-shipping">Ships from Dagoretti South (Local Shipping)</p>
-                    <button class="add-to-cart-button">Add to Cart</button>
-                </div>
-
-                <div class="product-card">
-                    <img src="images/iMall/samsung refridgerator/samsung-refridgerator-1.webp" 
-                         alt="Samsung Refrigerator" loading="lazy">
-                    <h3 class="product-name">Samsung Top Mount Refrigerator</h3>
-                    <div class="product-rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="review-count">(45 Reviews)</span>
-                    </div>
-                    <p class="product-price">KSh 55,000</p>
-                    <p class="product-fulfillment">Brand Official | Fulfilled By iMall</p>
-                    <p class="product-shipping">Ships from Nairobi (Local Shipping)</p>
-                    <button class="add-to-cart-button">Add to Cart</button>
-                </div>
-                 </div>
-        </section>
-
-        <section id="product-detail-view" class="product-detail-view">
-            </section>
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="homepage-featured-products">
+            </div>
+    </section>
 
     </main>
 
-    <footer>
-        </footer>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
 
-    <script src="scripts/main.js"></script> 
-    <script src="scripts/imall.js"></script> 
+<script src="scripts/main.js"></script>          <script src="scripts/products.js"></script>      <script src="scripts/brands.js"></script>        <script src="scripts/common-imall.js"></script>  <script src="scripts/imall-homepage.js"></script>
 </body>
 </html>

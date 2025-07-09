@@ -1,65 +1,50 @@
-/* imall.css */
-
-/* --- GLOBAL RESETS FOR FULL WIDTH --- */
-/* Ensure html, body, and main have no default margins/paddings that would prevent full width */
+/* GLOBAL RESETS FOR FULL WIDTH */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    /* This is crucial to prevent horizontal scrollbars if any content slightly overflows */
     overflow-x: hidden; 
 }
 
-main {
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Ensure main itself takes full available width */
-    box-sizing: border-box; /* Include padding in width calculation for main */
-}
-
-
-/* --- iMall Subheader Styling --- */
+/* iMall Subheader Styling */
 .imall-subheader {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribute items with space between them */
-    padding: 15px 20px; /* Internal padding */
-    background-color: #ffffff; /* White background */
-    border-bottom: 1px solid #e0e0e0; /* Subtle border at the bottom */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Light shadow for depth */
+    justify-content: space-between;
+    padding: 10px 25px; /* Increased padding to move elements further from edges */
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     
-    /* Sticky positioning - adjust 'top' based on your main header's height from styles.css */
     position: sticky; 
-    top: var(--header-height, 70px); /* Use CSS variable for main header height if defined, fallback to 70px */
-    z-index: 990; /* Ensure it stays above other content */
+    top: 0;
+    z-index: 990;
     
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    gap: 15px; /* Spacing between flex items */
+    flex-wrap: wrap;
+    gap: 15px;
 
-    /* Simplified and most common approach for full page width.
-       Relies on parent elements (main, body, html) also being 100% width with no padding. */
-    width: 100%; /* Takes 100% of its parent's available width */
-    box-sizing: border-box; /* Ensures padding is included within the 100% width */
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* iMall Brand Text (e.g., "iMall") */
-.imall-subheader .imall-brand {
-    font-size: 1.8rem; /* Adjust font size as needed */
-    font-weight: bold;
-    color: #333; /* Dark color for the text */
-    white-space: nowrap; /* Prevent "iMall" from wrapping */
+/* iMall Brand Logo Styling */
+.imall-subheader .imall-brand .imall-logo {
+    max-height: 45px;
+    width: auto;
+    display: block;
 }
 
 .imall-subheader .imall-brand a {
     text-decoration: none;
-    color: inherit; /* Inherit color from parent */
+    color: inherit;
 }
+
 
 /* iMall Search Section */
 .imall-subheader .imall-search-section {
     display: flex;
-    flex-grow: 1; /* Allows search bar to take available space */
-    max-width: 600px; /* Max width for the search bar (desktop) */
+    flex-grow: 1;
+    max-width: 600px;
     gap: 5px;
 }
 
@@ -67,14 +52,14 @@ main {
     flex-grow: 1;
     padding: 10px 15px;
     border: 1px solid #ddd;
-    border-radius: 25px; /* Rounded corners */
+    border-radius: 25px;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s ease;
 }
 
 .imall-subheader .imall-search-section input[type="search"]:focus {
-    border-color: #007bff; /* Highlight on focus */
+    border-color: #007bff;
 }
 
 .imall-subheader .imall-search-section button {
@@ -96,17 +81,17 @@ main {
 .imall-subheader .imall-user-actions {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between profile and cart icons */
+    gap: 20px;
 }
 
 .imall-subheader .imall-user-actions button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.8rem; /* Size of the icons */
+    font-size: 1.8rem;
     color: #333;
-    position: relative; /* For dropdown/alert positioning */
-    padding: 5px; /* Add some padding around the icon button */
+    position: relative;
+    padding: 5px;
     transition: color 0.3s ease;
 }
 
@@ -114,36 +99,37 @@ main {
     color: #007bff;
 }
 
-/* --- Dropdown Menus & Alert Boxes (Common Styling) --- */
+/* Dropdown Menus & Alert Boxes (Common Styling) */
 .imall-dropdown-menu,
 .imall-alert-box,
 .centered-alert-box {
-    display: none; /* Hidden by default, will be shown via JavaScript */
     position: absolute;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-width: 200px;
-    z-index: 1000; /* Ensure it's on top of other page content */
+    z-index: 1000;
     padding: 15px;
     text-align: left;
-    box-sizing: border-box; /* Include padding in dimensions */
+    box-sizing: border-box;
 }
 
 .imall-hidden {
-    display: none !important; /* Force hide with !important to override other display properties */
+    display: none !important;
 }
 
 /* Profile Dropdown Specifics */
 .imall-profile-wrapper {
-    position: relative; /* Establishes positioning context for the dropdown */
+    position: relative;
 }
 
 .imall-profile-dropdown {
-    top: calc(100% + 10px); /* Position below the icon, with a gap */
-    right: 0; /* Align to the right of the icon */
-    min-width: 220px; /* Wider for more content */
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%); 
+    min-width: 220px;
+    max-width: calc(100vw - 40px);
 }
 
 .imall-profile-dropdown p.profile-greeting {
@@ -176,7 +162,7 @@ main {
     display: block;
     padding: 5px 10px;
     transition: background-color 0.2s ease;
-    display: flex; /* For icon next to text */
+    display: flex;
     align-items: center;
     gap: 10px;
 }
@@ -188,14 +174,16 @@ main {
 
 /* Cart Prompt Specifics */
 .imall-cart-wrapper {
-    position: relative; /* Establishes positioning context for the prompt */
+    position: relative;
 }
 
 .imall-cart-prompt {
     top: calc(100% + 10px);
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
     min-width: 250px;
+    max-width: calc(100vw - 40px);
 }
 
 .imall-cart-prompt p {
@@ -212,7 +200,7 @@ main {
 }
 
 .imall-prompt-actions button {
-    background-color: #28a745; /* Green for Log In */
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
@@ -224,7 +212,7 @@ main {
 }
 
 .imall-prompt-actions button#imall-register-btn {
-    background-color: #6c757d; /* Grey for Register */
+    background-color: #6c757d;
 }
 
 .imall-prompt-actions button:hover {
@@ -247,10 +235,10 @@ button.imall-text-btn:hover {
 
 /* Centered Alert Box for "Feature under Development" */
 .centered-alert-box {
-    position: fixed; /* Fixed to viewport, floats above everything */
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centers the element perfectly */
+    transform: translate(-50%, -50%);
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -258,8 +246,11 @@ button.imall-text-btn:hover {
     padding: 25px;
     text-align: center;
     min-width: 300px;
-    max-width: 90%; /* Responsive max width */
-    z-index: 10000; /* Very high z-index to be on top of everything */
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 10000;
+    box-sizing: border-box;
 }
 
 .centered-alert-box p {
@@ -284,24 +275,24 @@ button.imall-text-btn:hover {
 }
 
 
-/* --- Responsive Adjustments for Subheader --- */
+/* Responsive Adjustments for Subheader */
 @media (max-width: 768px) {
     .imall-subheader {
-        flex-direction: column; /* Stack items vertically */
-        align-items: flex-start; /* Align items to the start (left) */
+        flex-direction: column;
+        align-items: flex-start;
         padding: 10px;
-        gap: 10px; /* Reduce gap on smaller screens */
+        gap: 10px;
     }
 
     .imall-subheader .imall-search-section {
-        width: 100%; /* Make search bar full width */
-        max-width: none; /* Remove max-width constraint */
-        order: 3; /* Move search to bottom on small screens */
+        width: 100%;
+        max-width: none;
+        order: 3;
     }
 
     .imall-subheader .imall-user-actions {
         width: 100%;
-        justify-content: flex-end; /* Align actions to the right */
+        justify-content: flex-end;
         order: 2;
     }
 
@@ -313,11 +304,17 @@ button.imall-text-btn:hover {
     }
 
     /* Adjust dropdowns/alerts position for smaller screens */
-    .imall-dropdown-menu,
-    .imall-alert-box {
-        right: auto;
+    .imall-profile-dropdown,
+    .imall-cart-prompt {
         left: 50%;
         transform: translateX(-50%);
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+        min-width: unset;
+    }
+
+    .imall-dropdown-menu,
+    .imall-alert-box {
         top: calc(100% + 5px);
     }
 }
@@ -336,7 +333,7 @@ button.imall-text-btn:hover {
         font-size: 1.5rem;
     }
 
-    .imall-brand {
-        font-size: 1.5rem;
+    .imall-subheader .imall-brand .imall-logo {
+        max-height: 35px;
     }
 }
