@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duka Lako Supermarket - La Familia Chambers Directory</title>
+    <meta name="description" content="Details for Duka Lako Supermarket, your neighborhood supermarket offering fresh produce, groceries, and household essentials.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Custom styles for this page -->
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Styles for sticky header and main content offset */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 50; /* Ensure main header is on top */
+        }
+        #member-detail-main-content {
+            padding-top: 0; /* Adjusted to 0 to remove space below main header */
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive image for shelves */
+        .responsive-shelf-image {
+            width: 100%;
+            height: auto;
+            max-width: 800px; /* Max width for larger screens */
+            display: block;
+            margin: 0 auto;
+            border-radius: 0.75rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+        }
+
+        /* Product grid for categories */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem; /* gap-6 */
+        }
+
+        .product-card {
+            background-color: #f9fafb; /* bg-gray-50 */
+            border-radius: 0.75rem; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            padding: 1.5rem; /* p-6 */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 160px; /* h-40 */
+            object-fit: cover;
+            border-radius: 0.375rem; /* rounded-md */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* text-gray-800 */
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        .product-card p {
+            color: #4b5563; /* text-gray-600 */
+        }
+
+        /* Chat button and modal styles */
+        .chat-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #3B82F6; /* blue-500 */
+            color: white;
+            border-radius: 9999px; /* rounded-full */
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        .chat-button:hover {
+            background-color: #2563EB; /* blue-600 */
+        }
+
+        .chat-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 101;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .chat-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chat-modal-content {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            width: 90%;
+            max-width: 400px;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .chat-modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #1f2937;
+        }
+
+        .chat-modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6B7280; /* gray-500 */
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .chat-message {
+            max-width: 80%;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+        }
+
+        .chat-message.user {
+            background-color: #DBEAFE; /* blue-100 */
+            align-self: flex-end;
+        }
+
+        .chat-message.bot {
+            background-color: #F3F4F6; /* gray-100 */
+            align-self: flex-start;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input-area input {
+            flex-grow: 1;
+            border: 1px solid #D1D5DB; /* gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .chat-input-area button {
+            background-color: #3B82F6;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .chat-input-area button:hover {
+            background-color: #2563EB;
+        }
+
+        /* Cart icon in header */
+        .header-controls .cart-icon-container {
+            position: relative;
+            display: inline-block;
+            margin-left: 1rem; /* Adjust as needed */
+        }
+
+        .header-controls .cart-item-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #EF4444; /* red-500 */
+            color: white;
+            font-size: 0.75rem; /* text-xs */
+            font-weight: bold;
+            border-radius: 9999px; /* rounded-full */
+            height: 20px;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Add to Cart button on product cards */
+        .product-card .add-to-cart-btn {
+            background-color: #10B981; /* green-500 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.75rem; /* mt-3 */
+            transition: background-color 0.3s ease;
+        }
+        .product-card .add-to-cart-btn:hover {
+            background-color: #059669; /* green-600 */
+        }
+
+        /* Notification message animation */
+        .notification-message {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #10B981; /* green-500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+        .notification-message.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 antialiased">
+
+<header id="main-header" class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" onerror="this.onerror=null; this.src='https://placehold.co/40x40/FF0000/FFFFFF?text=Logo';" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <!-- Cart Icon in Main Header -->
+            <div class="cart-icon-container">
+                <button id="cart-icon-button" aria-label="View Shopping Cart" class="relative p-2 rounded-full hover:bg-gray-200 transition-colors duration-200">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-item-count" class="cart-item-count hidden">0</span>
+                </button>
+            </div>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="member-detail-main-content" class="container mx-auto p-6">
+    <h1 class="text-5xl font-extrabold text-gray-900 text-center mb-10">Duka Lako Supermarket</h1>
+
+    <!-- Internal Navigation -->
+    <nav class="bg-white rounded-xl shadow-lg p-4 mb-10 flex flex-wrap justify-center gap-4">
+        <a href="#about-us" class="text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded-lg transition-colors duration-200">About Us</a>
+        <a href="#products" class="text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded-lg transition-colors duration-200">Products</a>
+        <a href="#store-info" class="text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded-lg transition-colors duration-200">Store Info</a>
+        <a href="#loyalty" class="text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded-lg transition-colors duration-200">Loyalty Program</a>
+        <a href="#contact" class="text-blue-600 hover:text-blue-800 font-semibold px-4 py-2 rounded-lg transition-colors duration-200">Contact Us</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-white rounded-xl shadow-lg mb-12 overflow-hidden">
+        <img src="uploaded:image_3308bc.jpg-aa61d97d-bd4f-4e5a-8197-6508553826c4" alt="Duka Lako Supermarket Hero Image" class="w-full h-64 md:h-96 object-cover" onerror="handleImageError(this);">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-6">
+            <div class="text-center text-white">
+                <h2 class="text-4xl md:text-6xl font-bold mb-4">Freshness, Quality, Value.</h2>
+                <p class="text-lg md:text-xl">Your one-stop shop for all household needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">About Duka Lako Supermarket</h2>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+            <img src="uploaded:image_327a90.jpg-604b42f2-52bf-4a2c-abe7-2caf84ced5c6" alt="Duka Lako Supermarket Interior" class="w-full md:w-1/3 max-w-sm h-auto object-cover rounded-lg shadow-md" onerror="handleImageError(this);">
+            <div class="flex-grow">
+                <p class="text-gray-700 text-lg mb-4">Duka Lako Supermarket is your friendly neighborhood supermarket, committed to providing fresh produce, a wide range of groceries, and all your household essentials. Established with the community in mind, we pride ourselves on offering high-quality products at competitive prices, ensuring a convenient and pleasant shopping experience for every family.</p>
+                <p class="text-gray-700 text-lg">Our mission is to be the preferred choice for daily necessities, fostering a strong relationship with our customers through excellent service and a diverse product selection. We constantly strive to source local and sustainable products, supporting our community and promoting healthy living.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Our Products</h2>
+
+        <!-- Product Category Navigation -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button class="product-category-btn bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="all">All Products</button>
+            <button class="product-category-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="foods">Fresh Foods & Groceries</button>
+            <button class="product-category-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="drinks">Beverages</button>
+            <button class="product-category-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="cakes">Cakes & Bakery</button>
+            <button class="product-category-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="cookware">Cookware & Kitchenware</button>
+            <button class="product-category-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="household">Household Essentials</button>
+            <button class="product-category-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg shadow-md transition-colors duration-300" data-category="electronics">Small Electronics</button>
+        </div>
+
+        <div id="product-display-area" class="product-grid">
+            <!-- Products will be dynamically loaded here by JavaScript -->
+            <p class="col-span-full text-center text-gray-600">Select a category above to view products.</p>
+        </div>
+    </section>
+
+    <!-- Store Layout / Items on Shelves -->
+    <section id="store-info" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Our Store & Shopping Experience</h2>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
+            <div class="flex-grow">
+                <p class="text-gray-700 text-lg mb-4">We've designed Duka Lako Supermarket for easy navigation and a pleasant shopping journey. Our aisles are clearly marked, and products are logically organized to help you find exactly what you need quickly. Our friendly staff are always on hand to assist you.</p>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">See Our Shelves!</h3>
+            </div>
+            <img src="uploaded:image_319c80.jpg-b57f067f-98d6-4e2f-8cab-df14dae2e001" alt="Supermarket Shelves with Products" class="responsive-shelf-image" onerror="handleImageError(this);">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <!-- Busy Hours -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"><i class="fas fa-clock mr-3 text-blue-600"></i> Busy Hours</h3>
+                <p class="text-gray-700 mb-2">Plan your visit to avoid crowds:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li>**Morning (8:00 AM - 10:00 AM):** Usually quiet</li>
+                    <li>**Lunchtime (12:00 PM - 2:00 PM):** Moderate traffic</li>
+                    <li>**Evening Peak (5:00 PM - 7:00 PM):** Heaviest traffic</li>
+                    <li>**Weekends:** Generally busy throughout the day</li>
+                </ul>
+            </div>
+
+            <!-- Types of Payments -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"><i class="fas fa-wallet mr-3 text-blue-600"></i> Payment Methods</h3>
+                <p class="text-gray-700 mb-2">We accept a variety of payment options for your convenience:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li>Credit/Debit Cards (Visa, MasterCard, American Express)</li>
+                    <li>M-Pesa</li>
+                    <li>Cash</li>
+                    <li>Loyalty Points Redemption</li>
+                </ul>
+                <img src="https://placehold.co/300x80/E0E0E0/333333?text=Payment+Logos" alt="Payment Methods Logos" class="mt-4 w-full h-auto object-contain rounded-md" onerror="handleImageError(this);">
+            </div>
+
+            <!-- Shopping Tips -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm col-span-full">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"><i class="fas fa-lightbulb mr-3 text-blue-600"></i> Smart Shopping Tips</h3>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                    <li>Check our weekly flyer for the latest deals and discounts.</li>
+                    <li>Use your Duka Lako Loyalty Card to earn points on every purchase.</li>
+                    <li>Bring your own reusable bags to help the environment.</li>
+                    <li>Shop during off-peak hours for a quicker and more relaxed experience.</li>
+                    <li>Don't hesitate to ask our staff for assistance or product locations.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discounts and Campaigns -->
+    <section id="discounts" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Discounts & Campaigns</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
+                <img src="uploaded:image_30a53a.jpg-554cfe42-b1d7-40c5-b53d-114d072356f4" alt="Weekly Deals Ad" class="w-full h-48 object-cover rounded-md mb-4" onerror="handleImageError(this);">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Weekly Super Deals!</h3>
+                <p class="text-gray-600 mb-4">Check out our fresh weekly discounts on your favorite groceries and household items. New deals every Monday!</p>
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg shadow-md transition-colors duration-300">View Weekly Flyer</button>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
+                <img src="https://placehold.co/300x200/C1FFDD/333333?text=Seasonal+Campaign" alt="Seasonal Campaign Ad" class="w-full h-48 object-cover rounded-md mb-4" onerror="handleImageError(this);">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Seasonal Savings Campaign</h3>
+                <p class="text-gray-600 mb-4">Enjoy special seasonal discounts and themed product bundles. Perfect for holidays and celebrations!</p>
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg shadow-md transition-colors duration-300">Explore Campaigns</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyalty Program Section -->
+    <section id="loyalty" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Duka Lako Loyalty Program</h2>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+            <img src="https://placehold.co/400x250/B0E0E6/333333?text=Loyalty+Card" alt="Loyalty Card" class="w-full md:w-1/3 max-w-sm h-auto object-cover rounded-lg shadow-md" onerror="handleImageError(this);">
+            <div class="flex-grow">
+                <p class="text-gray-700 text-lg mb-4">Join the Duka Lako Loyalty Program today and start earning points on every purchase! Our loyalty program is designed to reward our valued customers with exclusive benefits, discounts, and special offers.</p>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">How to Get Your Card:</h3>
+                <ul class="list-disc list-inside text-gray-600 mb-4">
+                    <li>Sign up at any customer service desk in our supermarket.</li>
+                    <li>Provide your basic details (name, phone number, email).</li>
+                    <li>Receive your physical or digital loyalty card instantly!</li>
+                </ul>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">How to Use Your Points:</h3>
+                <ul class="list-disc list-inside text-gray-600 mb-4">
+                    <li>**Earn:** Present your card at checkout to earn 1 point for every $1 spent.</li>
+                    <li>**Redeem:** 100 points can be redeemed for $1 off your purchase.</li>
+                    <li>**Exclusive Offers:** Get access to member-only discounts and early bird promotions.</li>
+                </ul>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
+                    Join Now!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">What Our Customers Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div class="flex items-center mb-3">
+                    <img src="https://placehold.co/60x60/D1D5DB/FFFFFF?text=JD" alt="Customer Avatar" class="rounded-full mr-4">
+                    <div>
+                        <p class="font-semibold text-gray-800">Jane Doe</p>
+                        <div class="text-yellow-500">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 italic">"Duka Lako is my go-to supermarket! Always fresh produce and great deals. The staff are incredibly helpful and friendly. Highly recommend!"</p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div class="flex items-center mb-3">
+                    <img src="https://placehold.co/60x60/D1D5DB/FFFFFF?text=SM" alt="Customer Avatar" class="rounded-full mr-4">
+                    <div>
+                        <p class="font-semibold text-gray-800">Samuel Mwangi</p>
+                        <div class="text-yellow-500">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 italic">"Fantastic selection, especially in the bakery section. Their cakes are divine! The loyalty program is a huge plus, saving me money on every shop."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="bg-white rounded-xl shadow-lg p-8 mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Contact Duka Lako Supermarket</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <p class="text-gray-700 text-lg mb-4">Have questions or need assistance? Reach out to us using the details below:</p>
+                <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2 text-blue-600"></i> 456 Market Street, Mlolongo, Kenya</p>
+                <p class="text-gray-600 mb-2"><i class="fas fa-phone mr-2 text-blue-600"></i> +254 712 345 678</p>
+                <p class="text-gray-600 mb-4"><i class="fas fa-envelope mr-2 text-blue-600"></i> <a href="mailto:info@dukalako.co.ke" class="text-blue-600 hover:underline">info@dukalako.co.ke</a></p>
+                <p class="text-gray-600 mb-2"><i class="fas fa-clock mr-2 text-blue-600"></i> **Opening Hours:**</p>
+                <ul class="list-disc list-inside text-gray-600 ml-6">
+                    <li>Monday - Saturday: 8:00 AM - 9:00 PM</li>
+                    <li>Sunday: 9:00 AM - 7:00 PM</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Send Us a Message</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label for="contact-name" class="block text-gray-700 text-sm font-bold mb-2">Your Name:</label>
+                        <input type="text" id="contact-name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label for="contact-email" class="block text-gray-700 text-sm font-bold mb-2">Your Email:</label>
+                        <input type="email" id="contact-email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john.doe@example.com">
+                    </div>
+                    <div>
+                        <label for="contact-message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                        <textarea id="contact-message" name="message" rows="5" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Chat Support Button -->
+<button id="chat-button" class="chat-button" aria-label="Open chat support">
+    <i class="fas fa-comments text-2xl"></i>
+</button>
+
+<!-- Chat Modal Overlay -->
+<div id="chat-modal-overlay" class="chat-modal-overlay">
+    <div class="chat-modal-content">
+        <div class="chat-modal-header">
+            <span>Duka Lako Support</span>
+            <button id="chat-modal-close-btn" class="chat-modal-close-btn">&times;</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="chat-message bot">Hello! How can I help you today?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type your message..." aria-label="Chat input">
+            <button id="chat-send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Notification Message (for Add to Cart feedback) -->
+<div id="notification-message" class="notification-message">
+    <!-- Message will be inserted here by JavaScript -->
+</div>
+
+<script>
+    // --- Utility Functions ---
+
+    /**
+     * Handles image loading errors by replacing the src with a placeholder.
+     * @param {HTMLImageElement} imageElement - The image element that failed to load.
+     */
+    function handleImageError(imageElement) {
+        imageElement.onerror = null; // Prevent infinite loop
+        imageElement.src = 'https://placehold.co/300x200/FF0000/FFFFFF?text=Image+Error'; // Generic placeholder
+    }
+
+    /**
+     * Displays a temporary notification message.
+     * @param {string} messageText - The message to display.
+     * @param {boolean} isSuccess - True for success (green), false for error (red).
+     */
+    function displayNotification(messageText, isSuccess = true) {
+        const notificationMessageDiv = document.getElementById('notification-message');
+        if (notificationMessageDiv) {
+            notificationMessageDiv.textContent = messageText;
+            notificationMessageDiv.classList.remove('bg-green-500', 'bg-red-500');
+            notificationMessageDiv.classList.add(isSuccess ? 'bg-green-500' : 'bg-red-500', 'show');
+
+            setTimeout(() => {
+                notificationMessageDiv.classList.remove('show');
+            }, 3000);
+        }
+    }
+
+    // --- Product Data (Example - In a real app, this would come from an API) ---
+    const DUKA_LAKO_PRODUCTS = {
+        foods: [
+            { id: 'food1', name: 'Organic Apples', desc: 'Fresh, crisp organic apples.', price: 2.99, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Apples' },
+            { id: 'food2', name: 'Farm Fresh Eggs', desc: 'Locally sourced, large brown eggs.', price: 4.50, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Eggs' },
+            { id: 'food3', name: 'Whole Wheat Bread', desc: 'Baked fresh daily, rich in fiber.', price: 3.25, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Bread' },
+            { id: 'food4', name: 'Ground Beef (Lean)', desc: 'Premium lean ground beef, perfect for meals.', price: 7.99, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Beef' },
+            { id: 'food5', name: 'Assorted Vegetables', desc: 'Seasonal mix of garden-fresh vegetables.', price: 5.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Veggies' },
+            { id: 'food6', name: 'Cheddar Cheese Block', desc: 'Sharp cheddar cheese, great for snacking or cooking.', price: 6.75, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Cheese' }
+        ],
+        drinks: [
+            { id: 'drink1', name: 'Fresh Orange Juice', desc: '100% pure squeezed orange juice.', price: 4.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Orange+Juice' },
+            { id: 'drink2', name: 'Sparkling Water (Lemon)', desc: 'Refreshing lemon-flavored sparkling water.', price: 1.50, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Sparkling+Water' },
+            { id: 'drink3', name: 'Assorted Sodas (6-pack)', desc: 'Your favorite soda brands in one pack.', price: 5.99, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Sodas' },
+            { id: 'drink4', name: 'Green Tea Bags (20ct)', desc: 'Premium green tea for a healthy boost.', price: 3.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Green+Tea' }
+        ],
+        cakes: [
+            { id: 'cake1', name: 'Chocolate Fudge Cake', desc: 'Decadent chocolate cake with rich fudge frosting.', price: 25.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Chocolate+Cake' },
+            { id: 'cake2', name: 'Vanilla Bean Cupcakes (4-pack)', desc: 'Fluffy vanilla cupcakes with buttercream.', price: 8.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Cupcakes' },
+            { id: 'cake3', name: 'Artisan Sourdough Loaf', desc: 'Crusty sourdough bread, perfect with meals.', price: 4.75, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Sourdough' }
+        ],
+        cookware: [
+            { id: 'cook1', name: 'Non-Stick Frying Pan', desc: 'Durable 10-inch non-stick pan.', price: 19.99, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Frying+Pan' },
+            { id: 'cook2', name: 'Stainless Steel Pot Set', desc: '3-piece set, ideal for various cooking needs.', price: 49.99, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Pot+Set' },
+            { id: 'cook3', name: 'Silicone Spatula Set', desc: 'Heat-resistant spatulas for baking and cooking.', price: 9.50, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Spatulas' }
+        ],
+        household: [
+            { id: 'house1', name: 'Multi-Surface Cleaner', desc: 'Effective cleaner for all household surfaces.', price: 6.25, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Cleaner' },
+            { id: 'house2', name: 'Laundry Detergent (Liquid)', desc: 'Powerful liquid detergent for fresh clothes.', price: 12.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Detergent' },
+            { id: 'house3', name: 'Paper Towels (6-roll)', desc: 'Absorbent paper towels for spills and cleaning.', price: 8.50, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Paper+Towels' }
+        ],
+        electronics: [
+            { id: 'elec1', name: 'AA Batteries (4-pack)', desc: 'Long-lasting alkaline AA batteries.', price: 4.99, img: 'https://placehold.co/200x150/CCE5FF/333333?text=AA+Batteries' },
+            { id: 'elec2', name: 'LED Light Bulb (E27)', desc: 'Energy-efficient LED bulb for home lighting.', price: 7.50, img: 'https://placehold.co/200x150/CCE5FF/333333?text=LED+Bulb' },
+            { id: 'elec3', name: 'Universal Power Strip', desc: 'Multi-outlet power strip with surge protection.', price: 15.00, img: 'https://placehold.co/200x150/CCE5FF/333333?text=Power+Strip' }
+        ]
+    };
+
+    // --- DOM Element References ---
+    const currentYearSpan = document.getElementById('current-year');
+    const mainHeader = document.getElementById('main-header');
+    const memberDetailMainContent = document.getElementById('member-detail-main-content');
+    const productCategoryButtons = document.querySelectorAll('.product-category-btn');
+    const productDisplayArea = document.getElementById('product-display-area');
+
+    // Chat elements
+    const chatButton = document.getElementById('chat-button');
+    const chatModalOverlay = document.getElementById('chat-modal-overlay');
+    const chatModalCloseBtn = document.getElementById('chat-modal-close-btn');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSendButton = document.getElementById('chat-send-button');
+
+    // Cart elements
+    const cartIconButton = document.getElementById('cart-icon-button');
+    const cartItemCountSpan = document.getElementById('cart-item-count');
+
+    // --- Cart State (using localStorage for persistence) ---
+    let cartItems = JSON.parse(localStorage.getItem('dukaLakoCart')) || [];
+
+    /**
+     * Updates the padding of the main content area to account for the sticky header.
+     */
+    function updateMainContentPadding() {
+        if (mainHeader && memberDetailMainContent) {
+            const mainHeaderHeight = mainHeader.offsetHeight;
+            memberDetailMainContent.style.paddingTop = `0px`; // Ensures content starts right below the header
+        }
+    }
+
+    /**
+     * Renders products for a given category.
+     * @param {string} category - The category key (e.g., 'foods', 'drinks', 'all').
+     */
+    function renderProducts(category) {
+        productDisplayArea.innerHTML = ''; // Clear existing products
+        let productsToDisplay = [];
+
+        if (category === 'all') {
+            // Flatten all products into one array for 'All Products'
+            for (const key in DUKA_LAKO_PRODUCTS) {
+                productsToDisplay = productsToDisplay.concat(DUKA_LAKO_PRODUCTS[key]);
+            }
+        } else if (DUKA_LAKO_PRODUCTS[category]) {
+            productsToDisplay = DUKA_LAKO_PRODUCTS[category];
+        }
+
+        if (productsToDisplay.length === 0) {
+            productDisplayArea.innerHTML = '<p class="col-span-full text-center text-gray-600">No products found for this category.</p>';
+            return;
+        }
+
+        productsToDisplay.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="${product.img}" alt="${product.name}" onerror="handleImageError(this);">
+                <h3>${product.name}</h3>
+                <p>${product.desc}</p>
+                <p class="text-xl font-bold text-green-600 mt-2">$${product.price.toFixed(2)}</p>
+                <button class="add-to-cart-btn" data-product-id="${product.id}" data-product-name="${product.name}" data-product-price="${product.price}">Add to Cart</button>
+            `;
+            productDisplayArea.appendChild(productCard);
+        });
+    }
+
+    /**
+     * Adds a product to the cart.
+     * @param {string} productId - The ID of the product.
+     * @param {string} productName - The name of the product.
+     * @param {number} productPrice - The price of the product.
+     */
+    function addToCart(productId, productName, productPrice) {
+        const existingItemIndex = cartItems.findIndex(item => item.id === productId);
+
+        if (existingItemIndex > -1) {
+            cartItems[existingItemIndex].quantity += 1;
+        } else {
+            cartItems.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
+        }
+        localStorage.setItem('dukaLakoCart', JSON.stringify(cartItems));
+        updateCartCount();
+        displayNotification(`${productName} added to cart!`);
+    }
+
+    /**
+     * Updates the displayed count of items in the shopping cart icon.
+     */
+    function updateCartCount() {
+        const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+        cartItemCountSpan.textContent = totalItems;
+        if (totalItems > 0) {
+            cartItemCountSpan.classList.remove('hidden');
+        } else {
+            cartItemCountSpan.classList.add('hidden');
+        }
+    }
+
+    /**
+     * Adds a message to the chat display.
+     * @param {string} message - The message text.
+     * @param {string} sender - 'user' or 'bot'.
+     */
+    function addChatMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('chat-message', sender);
+        messageDiv.textContent = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+    }
+
+    /**
+     * Simulates a bot response.
+     * @param {string} userMessage - The user's message.
+     */
+    function simulateBotResponse(userMessage) {
+        let botResponse = "I'm sorry, I didn't understand that. Can you please rephrase or ask about our products, hours, or loyalty program?";
+
+        const lowerCaseMessage = userMessage.toLowerCase();
+
+        if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
+            botResponse = "Hello! How can I assist you today?";
+        } else if (lowerCaseMessage.includes('products') || lowerCaseMessage.includes('items')) {
+            botResponse = "We offer a wide range of products including fresh foods, beverages, bakery items, cookware, household essentials, and small electronics. You can browse them in the 'Products' section!";
+        } else if (lowerCaseMessage.includes('hours') || lowerCaseMessage.includes('open') || lowerCaseMessage.includes('close')) {
+            botResponse = "Our opening hours are Monday-Saturday: 8:00 AM - 9:00 PM, and Sunday: 9:00 AM - 7:00 PM.";
+        } else if (lowerCaseMessage.includes('loyalty') || lowerCaseMessage.includes('card') || lowerCaseMessage.includes('points')) {
+            botResponse = "Our Loyalty Program lets you earn points on every purchase! You can sign up at our customer service desk. 100 points can be redeemed for $1 off.";
+        } else if (lowerCaseMessage.includes('discounts') || lowerCaseMessage.includes('deals') || lowerCaseMessage.includes('campaigns')) {
+            botResponse = "We have weekly super deals and seasonal campaigns! Check the 'Discounts & Campaigns' section on our page for the latest offers.";
+        } else if (lowerCaseMessage.includes('location') || lowerCaseMessage.includes('address')) {
+            botResponse = "We are located at 456 Market Street, Mlolongo, Kenya.";
+        } else if (lowerCaseMessage.includes('thank you') || lowerCaseMessage.includes('thanks')) {
+            botResponse = "You're welcome! Is there anything else?";
+        }
+
+        setTimeout(() => {
+            addChatMessage(botResponse, 'bot');
+        }, 500); // Simulate typing delay
+    }
+
+    // --- Event Listeners and Initial Setup ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set current year in footer
+        currentYearSpan.textContent = new Date().getFullYear();
+
+        // Adjust main content padding on load and resize
+        updateMainContentPadding();
+        window.addEventListener('resize', updateMainContentPadding);
+
+        // Observe changes in the main header (e.g., search bar expanding/collapsing)
+        const observer = new MutationObserver(updateMainContentPadding);
+        if (mainHeader) {
+            observer.observe(mainHeader, { attributes: true, childList: true, subtree: true });
+        }
+
+        // Smooth scroll for internal navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = mainHeader.offsetHeight; // Get height of sticky header
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    // Adjust offset to scroll to just below the sticky header
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20; // Added 20px for visual comfort
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Event listeners for product category buttons
+        productCategoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active state from all buttons
+                productCategoryButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-500', 'hover:bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-200', 'hover:bg-gray-300', 'text-gray-800');
+                });
+                // Add active state to clicked button
+                button.classList.add('bg-blue-500', 'hover:bg-blue-600', 'text-white');
+                button.classList.remove('bg-gray-200', 'hover:bg-gray-300', 'text-gray-800');
+
+                const category = button.dataset.category;
+                renderProducts(category);
+            });
+        });
+
+        // Event listener for "Add to Cart" buttons (delegated)
+        productDisplayArea.addEventListener('click', (event) => {
+            if (event.target.classList.contains('add-to-cart-btn')) {
+                const productId = event.target.dataset.productId;
+                const productName = event.target.dataset.productName;
+                const productPrice = parseFloat(event.target.dataset.productPrice);
+                addToCart(productId, productName, productPrice);
+            }
+        });
+
+        // Cart icon button click
+        cartIconButton.addEventListener('click', () => {
+            window.location.href = 'imall-my-activity.html'; // Navigate to the cart page
+        });
+
+        // Initially render 'All Products' and update cart count
+        renderProducts('all');
+        updateCartCount();
+
+        // Chat button events
+        chatButton.addEventListener('click', () => {
+            chatModalOverlay.classList.add('active');
+        });
+
+        chatModalCloseBtn.addEventListener('click', () => {
+            chatModalOverlay.classList.remove('active');
+        });
+
+        chatModalOverlay.addEventListener('click', (event) => {
+            if (event.target === chatModalOverlay) {
+                chatModalOverlay.classList.remove('active');
+            }
+        });
+
+        chatSendButton.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                addChatMessage(message, 'user');
+                simulateBotResponse(message);
+                chatInput.value = '';
+            }
+        });
+
+        chatInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                chatSendButton.click();
+            }
+        });
+    });
+</script>
+<script src ="scripts/main.js"></script>
+</body>
+</html>

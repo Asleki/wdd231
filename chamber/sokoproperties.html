@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SokoProperties | La Familia Chambers - Your Real Estate Partner</title>
+    <meta name="description" content="Find your dream home or investment property with SokoProperties by La Familia Chambers. Explore penthouses, bungalows, mansions, and more across Nairobi.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <!-- Main La Familia Chambers styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for SokoProperties */
+        :root {
+            --soko-primary: #007bff; /* Blue */
+            --soko-secondary: #28a745; /* Green */
+            --soko-accent: #ffc107; /* Yellow */
+            --soko-text: #333333;
+            --soko-bg: #F4F7F6; /* Light background */
+            --soko-card-bg: #FFFFFF;
+            --soko-border: #E0E0E0;
+            --soko-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --soko-primary: #66b3ff; /* Lighter Blue */
+            --soko-secondary: #66cc99; /* Lighter Green */
+            --soko-accent: #ffdb58; /* Brighter Yellow */
+            --soko-text: #E0E0E0;
+            --soko-bg: #1A1A1A;
+            --soko-card-bg: #2C2C2C;
+            --soko-border: #444444;
+            --soko-shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        /* General sections */
+        .section-soko {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--soko-text);
+            background-color: var(--soko-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-soko {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-soko::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--soko-accent);
+            border-radius: 3px;
+        }
+
+        /* Hero section */
+        .hero-soko {
+            background-image: url('https://placehold.co/1920x500/007bff/ffffff?text=SokoProperties+Hero'); /* Placeholder */
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            padding-top: 0;
+        }
+
+        .hero-soko::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .hero-soko h1 {
+            font-size: 3.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+
+        .hero-soko p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        /* Sub-navigation for SokoProperties */
+        .sub-nav {
+            background-color: var(--soko-card-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--soko-border);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-top: -2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sub-nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sub-nav-list a, .sub-nav-list button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--soko-text);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .sub-nav-list a:hover, .sub-nav-list button:hover {
+            background-color: var(--soko-border);
+        }
+
+        .sub-nav-list a.active {
+            background-color: var(--soko-primary);
+            color: white;
+        }
+        body.dark-mode .sub-nav-list a.active {
+            background-color: var(--soko-accent);
+            color: var(--soko-primary);
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .search-container input[type="text"] {
+            flex-grow: 1;
+            max-width: 400px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--soko-border);
+            border-radius: 0.5rem;
+            background-color: var(--soko-card-bg);
+            color: var(--soko-text);
+        }
+        .search-container button {
+            background-color: var(--soko-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .search-container button:hover {
+            background-color: #0056b3;
+        }
+        .search-suggestions-dropdown {
+            position: absolute;
+            background-color: var(--soko-card-bg);
+            border: 1px solid var(--soko-border);
+            border-radius: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            width: calc(100% - 2rem); /* Adjust based on parent padding */
+            max-width: 400px;
+            box-shadow: 0 4px 8px var(--soko-shadow);
+            z-index: 500;
+            display: none;
+            margin-top: 5px;
+        }
+        .search-suggestions-dropdown.active {
+            display: block;
+        }
+        .search-suggestions-dropdown div {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--soko-border);
+            color: var(--soko-text);
+        }
+        .search-suggestions-dropdown div:last-child {
+            border-bottom: none;
+        }
+        .search-suggestions-dropdown div:hover {
+            background-color: var(--soko-border);
+        }
+
+        /* Categories Dropdown */
+        .categories-dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+        .categories-dropdown {
+            position: absolute;
+            background-color: var(--soko-card-bg);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            right: 0; /* Align to the right of its parent button */
+            display: none; /* Hidden by default */
+        }
+        .categories-dropdown.active {
+            display: block;
+        }
+        .categories-dropdown label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--soko-text);
+        }
+        .categories-dropdown select, .categories-dropdown input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--soko-border);
+            border-radius: 0.3rem;
+            background-color: var(--soko-bg);
+            color: var(--soko-text);
+        }
+
+        /* Property Cards */
+        .property-card {
+            background-color: var(--soko-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--soko-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--soko-shadow);
+        }
+        .property-image-container {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--soko-border);
+        }
+        .property-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #A0D2EB; /* Light blue placeholder */
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 1rem;
+            box-sizing: border-box;
+            display: none; /* Hidden by default, shown by JS on error */
+        }
+        .property-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card h3 {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            margin-bottom: 0.75rem;
+        }
+        .property-card p {
+            color: var(--soko-text);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        .property-card .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--soko-secondary);
+            margin-top: 1rem;
+        }
+        .property-card .views {
+            font-size: 0.9rem;
+            color: var(--soko-text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .property-card .views i {
+            color: var(--soko-accent);
+        }
+        .load-more-btn {
+            display: block;
+            margin: 2rem auto;
+            background-color: var(--soko-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .load-more-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Property Detail Page */
+        .property-detail-container {
+            padding: 2rem;
+            background-color: var(--soko-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px var(--soko-shadow);
+            margin-top: 2rem;
+        }
+        .property-detail-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .property-detail-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        .property-detail-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        .property-detail-thumbnails img {
+            width: 100px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+        .property-detail-thumbnails img.active {
+            border-color: var(--soko-primary);
+        }
+        .property-detail-info h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            margin-bottom: 1rem;
+        }
+        .property-detail-info .meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--soko-text);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .property-detail-info .meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .property-detail-info .meta i {
+            color: var(--soko-accent);
+        }
+        .property-detail-info .price-section {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--soko-secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .property-detail-info .price-section select {
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            border: 1px solid var(--soko-border);
+            background-color: var(--soko-bg);
+            color: var(--soko-text);
+        }
+        .property-detail-info p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .property-detail-agent {
+            background-color: var(--soko-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            border: 1px solid var(--soko-border);
+        }
+        .property-detail-agent h3 {
+            font-size: 1.8rem;
+            color: var(--soko-primary);
+            margin-bottom: 1rem;
+        }
+        .property-detail-agent img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        .property-detail-agent .contact-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .property-detail-agent .contact-info i {
+            color: var(--soko-accent);
+        }
+        .property-detail-reviews, .property-detail-installments {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--soko-border);
+        }
+        .property-detail-reviews h3, .property-detail-installments h3 {
+            font-size: 2rem;
+            color: var(--soko-secondary);
+            margin-bottom: 1rem;
+        }
+        .installment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .installment-table th, .installment-table td {
+            border: 1px solid var(--soko-border);
+            padding: 0.75rem;
+            text-align: left;
+            color: var(--soko-text);
+        }
+        .installment-table th {
+            background-color: var(--soko-border);
+            font-weight: bold;
+            color: var(--soko-primary);
+        }
+        .installment-calculator label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--soko-text);
+        }
+        .installment-calculator input[type="number"] {
+            padding: 0.5rem;
+            border: 1px solid var(--soko-border);
+            border-radius: 0.3rem;
+            background-color: var(--soko-bg);
+            color: var(--soko-text);
+            margin-right: 1rem;
+        }
+        .installment-calculator button {
+            background-color: var(--soko-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;
+            border: none;
+            cursor: pointer;
+        }
+        .installment-results {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--soko-text);
+        }
+        .add-to-favorites-btn {
+            background-color: var(--soko-accent);
+            color: var(--soko-primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        .add-to-favorites-btn:hover {
+            background-color: #e6b300;
+        }
+
+        /* About Us Page */
+        .about-us-content h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .about-us-content p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--soko-text);
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .team-member-card {
+            background-color: var(--soko-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--soko-shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--soko-shadow);
+        }
+        .team-member-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem auto;
+            border: 3px solid var(--soko-primary);
+        }
+        .team-member-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            margin-bottom: 0.5rem;
+        }
+        .team-member-card p {
+            font-size: 1rem;
+            color: var(--soko-text);
+            margin-bottom: 0.5rem;
+        }
+        .team-member-card .contact-details {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--soko-text);
+        }
+        .team-member-card .contact-details i {
+            color: var(--soko-accent);
+            margin-right: 0.5rem;
+        }
+        .about-us-contact-form {
+            background-color: var(--soko-card-bg);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px var(--soko-shadow);
+            max-width: 600px;
+            margin: 3rem auto 0 auto;
+        }
+        .about-us-contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--soko-text);
+        }
+        .about-us-contact-form input[type="text"],
+        .about-us-contact-form input[type="email"],
+        .about-us-contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--soko-border);
+            border-radius: 0.5rem;
+            background-color: var(--soko-bg);
+            color: var(--soko-text);
+            transition: border-color 0.3s ease;
+        }
+        .about-us-contact-form input:focus,
+        .about-us-contact-form textarea:focus {
+            border-color: var(--soko-primary);
+            outline: none;
+        }
+        .about-us-contact-form button[type="submit"] {
+            background-color: var(--soko-secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .about-us-contact-form button[type="submit"]:hover {
+            background-color: #1e7e34;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero-soko h1 {
+                font-size: 3rem;
+            }
+            .hero-soko p {
+                font-size: 1.3rem;
+            }
+            .section-title-soko {
+                font-size: 2.2rem;
+            }
+            .sub-nav-list {
+                gap: 1rem;
+            }
+            .sub-nav-list a, .sub-nav-list button {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-soko {
+                height: 350px;
+            }
+            .hero-soko h1 {
+                font-size: 2.2rem;
+            }
+            .hero-soko p {
+                font-size: 1rem;
+            }
+            .section-title-soko {
+                font-size: 1.8rem;
+            }
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-container input[type="text"] {
+                max-width: 100%;
+            }
+            .search-suggestions-dropdown {
+                max-width: 100%;
+                left: 0;
+                right: 0;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            .sub-nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .sub-nav-list a, .sub-nav-list button {
+                width: 45%;
+                text-align: center;
+            }
+            .property-detail-gallery {
+                grid-template-columns: 1fr;
+            }
+            .property-detail-main-image {
+                height: 300px;
+            }
+            .property-detail-thumbnails {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified La Familia Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="tasteofafrica.html">Taste of Africa Catering</a></li>
+            <li><a href="afyacare-clinic.html">AfyaCare Clinic</a></li>
+            <li><a href="sokoproperties.html" class="active">SokoProperties</a></li>
+        </ul>
+    </nav>
+</header>
+<!-- End Unified La Familia Header -->
+
+<main>
+    <!-- SokoProperties Sub-Navigation -->
+    <nav class="sub-nav">
+        <ul class="sub-nav-list">
+            <li><a href="#properties-listing-content" id="nav-properties" class="active">Properties</a></li>
+            <li><a href="#about-us-content" id="nav-about-us">About Us</a></li>
+            <li class="categories-dropdown-container">
+                <button id="categories-toggle">Categories <i class="fas fa-caret-down"></i></button>
+                <div id="categories-dropdown" class="categories-dropdown">
+                    <label for="property-type-filter">Property Type:</label>
+                    <select id="property-type-filter">
+                        <option value="all">All Types</option>
+                        <option value="penthouse">Penthouse</option>
+                        <option value="bungalow">Bungalow</option>
+                        <option value="mansion">Mansion</option>
+                        <option value="apartment">Apartment</option>
+                    </select>
+
+                    <label for="bedrooms-filter">Bedrooms:</label>
+                    <input type="number" id="bedrooms-filter" min="1" placeholder="Min Bedrooms">
+
+                    <label for="location-filter">Location:</label>
+                    <select id="location-filter">
+                        <option value="all">All Locations</option>
+                        <option value="Karen">Karen</option>
+                        <option value="Lavington">Lavington</option>
+                        <option value="Kilimani">Kilimani</option>
+                        <option value="Westlands">Westlands</option>
+                        <option value="Runda">Runda</option>
+                        <option value="Kileleshwa">Kileleshwa</option>
+                    </select>
+                    <button id="apply-filters-btn" class="mt-4 w-full">Apply Filters</button>
+                </div>
+            </li>
+            <li><a href="sokoproperties-my-activity.html" id="nav-my-activity"><i class="fas fa-heart"></i> My Favorites</a></li>
+        </ul>
+    </nav>
+
+    <!-- Properties Listing Content -->
+    <div id="properties-listing-content" class="section-soko">
+        <h2 class="section-title-soko">Available Properties</h2>
+        <div class="search-container relative mb-8">
+            <input type="text" id="property-search-input" placeholder="Search by name, location..." class="flex-grow">
+            <button id="property-search-button"><i class="fas fa-search"></i> Search</button>
+            <div id="property-search-suggestions" class="search-suggestions-dropdown">
+                <!-- Suggestions will be populated here -->
+            </div>
+        </div>
+
+        <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Property cards will be loaded here by JavaScript -->
+        </div>
+        <button id="load-more-properties" class="load-more-btn">Load More Properties</button>
+    </div>
+
+    <!-- Property Detail Content (Initially hidden) -->
+    <div id="property-detail-content" class="section-soko" style="display: none;">
+        <button id="back-to-listings" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md mb-6 hover:bg-gray-300 transition-colors"><i class="fas fa-arrow-left mr-2"></i> Back to Listings</button>
+        <div class="property-detail-container">
+            <div class="property-detail-gallery">
+                <img id="detail-main-image" src="" alt="Main Property Image" class="property-detail-main-image">
+                <div id="detail-thumbnails" class="property-detail-thumbnails">
+                    <!-- Thumbnails will be loaded here -->
+                </div>
+            </div>
+
+            <div class="property-detail-info">
+                <h2 id="detail-property-name"></h2>
+                <div class="meta">
+                    <span><i class="fas fa-map-marker-alt"></i> <span id="detail-location"></span></span>
+                    <span><i class="fas fa-bed"></i> <span id="detail-bedrooms"></span> Beds</span>
+                    <span><i class="fas fa-eye"></i> <span id="detail-views"></span> Views</span>
+                </div>
+                <div class="price-section">
+                    Price: <span id="detail-price-display"></span>
+                    <select id="currency-converter">
+                        <option value="USD">USD</option>
+                        <option value="KES">KES</option>
+                    </select>
+                </div>
+                <button id="add-to-favorites" class="add-to-favorites-btn"><i class="fas fa-heart"></i> Add to Favorites</button>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">Description</h3>
+                <p id="detail-description"></p>
+
+                <div class="property-detail-agent">
+                    <h3>Contact Agent</h3>
+                    <div class="flex items-center mb-4">
+                        <img id="agent-image" src="" alt="Agent Photo">
+                        <div>
+                            <p class="font-bold text-lg" id="agent-name"></p>
+                            <p class="text-sm text-gray-600" id="agent-role"></p>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone-alt"></i> <span id="agent-phone"></span></p>
+                        <p><i class="fas fa-envelope"></i> <span id="agent-email"></span></p>
+                        <p><i class="fas fa-building"></i> Branch: <span id="agent-branch"></span></p>
+                        <p><i class="fas fa-globe"></i> Deals with: <span id="agent-locations"></span></p>
+                    </div>
+                </div>
+
+                <div id="installment-section" class="property-detail-installments" style="display: none;">
+                    <h3>Installment Payment Plan</h3>
+                    <table class="installment-table">
+                        <thead>
+                            <tr>
+                                <th>Payment Type</th>
+                                <th>Amount (USD)</th>
+                                <th>Amount (KES)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cash Price</td>
+                                <td id="install-cash-usd"></td>
+                                <td id="install-cash-kes"></td>
+                            </tr>
+                            <tr>
+                                <td>Down Payment</td>
+                                <td id="install-down-usd"></td>
+                                <td id="install-down-kes"></td>
+                            </tr>
+                            <tr>
+                                <td>Monthly Installment</td>
+                                <td id="install-monthly-usd"></td>
+                                <td id="install-monthly-kes"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Installment Price</td>
+                                <td id="install-total-usd"></td>
+                                <td id="install-total-kes"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="installment-calculator mt-4">
+                        <label for="down-payment-input">Calculate with your Down Payment (USD):</label>
+                        <input type="number" id="down-payment-input" min="0" value="0">
+                        <button id="calculate-installments">Calculate</button>
+                        <div id="installment-results" class="installment-results mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="property-detail-reviews">
+                    <h3>Reviews & Rating</h3>
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-500 text-xl mr-2">★★★★☆</span> (4.5/5)
+                    </div>
+                    <p class="italic text-gray-600">"A truly magnificent property! The space and location are perfect. Highly recommend." - Satisfied Buyer</p>
+                    <p class="italic text-gray-600 mt-2">"Great investment opportunity, smooth process with the agent." - Investor</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Content (Initially hidden) -->
+    <div id="about-us-content" class="section-soko" style="display: none;">
+        <h2 class="section-title-soko">About SokoProperties</h2>
+        <p class="text-lg leading-relaxed mb-6">
+            SokoProperties, a proud venture of La Familia Chambers, is dedicated to revolutionizing the real estate experience in Nairobi and beyond. With a deep understanding of the local market and a commitment to transparency, we connect discerning buyers with exceptional properties, from luxurious penthouses to cozy family bungalows. Our mission is to make your property journey seamless, informed, and ultimately successful.
+        </p>
+        <p class="text-lg leading-relaxed mb-6">
+            Founded in 2020, SokoProperties quickly grew to become a trusted name, known for our personalized service and extensive portfolio. We believe in building lasting relationships, guiding our clients through every step of the buying, selling, or renting process with integrity and expertise.
+        </p>
+
+        <h2 class="section-title-soko mt-12">Our Dedicated Team</h2>
+        <div id="team-members-grid" class="team-grid">
+            <!-- Team members will be populated here by JavaScript -->
+        </div>
+
+        <h2 class="section-title-soko mt-12">Contact SokoProperties</h2>
+        <div class="about-us-contact-form">
+            <p class="text-center mb-6 text-lg">Have a question or need assistance? Fill out the form below and our team will get back to you shortly.</p>
+            <form id="sokoproperties-contact-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="contact-email">Your Email</label>
+                        <input type="email" id="contact-email" name="email" placeholder="john.doe@example.com" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="contact-subject">Subject</label>
+                    <input type="text" id="contact-subject" name="subject" placeholder="Inquiry about a property">
+                </div>
+                <div>
+                    <label for="contact-message">Your Message</label>
+                    <textarea id="contact-message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                </div>
+                <div class="text-center mt-6">
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Unified La Familia Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="board.html">Our Board</a></li>
+                <li><a href="join.html">Membership</a></li>
+                <li><a href="partnerships.html">Partnerships</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/lafamiliachambers" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliach" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/lafamiliachambers" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/la-familia-chambers" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="newsletter-text">Join our newsletter for updates:</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email" aria-label="Your email">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+<!-- End Unified La Familia Footer -->
+
+<script src="scripts/main.js"></script> <!-- Assuming this handles global JS like hamburger menu -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Global Elements & Utility Functions (from La Familia template) ---
+        const header = document.querySelector('.sticky-header');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const siteSearchInput = document.getElementById('site-search'); // Global search
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBarContainer = document.getElementById('search-bar-container');
+
+        // Dark mode preference (from La Familia template)
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Adjust hero padding (from La Familia template, adapted for SokoProperties heroes)
+        const adjustHeroPadding = () => {
+            const headerHeight = header.offsetHeight;
+            const sokoHero = document.querySelector('.hero-soko');
+            if (sokoHero) {
+                sokoHero.style.paddingTop = `${headerHeight}px`;
+            }
+        };
+        window.addEventListener('load', adjustHeroPadding);
+        window.addEventListener('resize', adjustHeroPadding);
+        hamburgerMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('main-nav-closed');
+            mainNav.classList.toggle('main-nav-open');
+            adjustHeroPadding();
+        });
+
+        // Dark Mode Toggle (from La Familia template)
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            modeToggle.querySelector('i').classList.replace(
+                isDarkMode ? 'fa-moon' : 'fa-sun',
+                isDarkMode ? 'fa-sun' : 'fa-moon'
+            );
+        });
+
+        // Global Search Bar Toggle (from La Familia template)
+        searchToggle.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('search-bar-hidden');
+            searchBarContainer.classList.toggle('search-bar-active');
+            if (searchBarContainer.classList.contains('search-bar-active')) {
+                siteSearchInput.focus();
+            }
+        });
+
+        // Placeholder for global search functionality (from La Familia template)
+        document.getElementById('search-submit-btn').addEventListener('click', () => {
+            alert(`Global search for: ${siteSearchInput.value}`);
+        });
+        document.getElementById('search-clear-btn').addEventListener('click', () => {
+            siteSearchInput.value = '';
+        });
+        document.getElementById('search-mic-btn').addEventListener('click', () => {
+            alert('Voice search not implemented.');
+        });
+        siteSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                alert(`Global search for: ${siteSearchInput.value}`);
+            }
+        });
+
+
+        // --- SokoProperties Specific Elements ---
+        const propertiesListingContent = document.getElementById('properties-listing-content');
+        const propertyDetailContent = document.getElementById('property-detail-content');
+        const aboutUsContent = document.getElementById('about-us-content');
+
+        const navProperties = document.getElementById('nav-properties');
+        const navAboutUs = document.getElementById('nav-about-us');
+        const categoriesToggle = document.getElementById('categories-toggle');
+        const categoriesDropdown = document.getElementById('categories-dropdown');
+        const applyFiltersBtn = document.getElementById('apply-filters-btn');
+
+        const propertySearchInput = document.getElementById('property-search-input');
+        const propertySearchSuggestions = document.getElementById('property-search-suggestions');
+        const propertyTypeFilter = document.getElementById('property-type-filter');
+        const bedroomsFilter = document.getElementById('bedrooms-filter');
+        const locationFilter = document.getElementById('location-filter');
+
+        const propertiesGrid = document.getElementById('properties-grid');
+        const loadMoreButton = document.getElementById('load-more-properties');
+        let propertiesDisplayedCount = 0;
+        const propertiesPerLoad = 12; // 4 per row, 3 rows
+
+        const detailMainImage = document.getElementById('detail-main-image');
+        const detailThumbnails = document.getElementById('detail-thumbnails');
+        const detailPropertyName = document.getElementById('detail-property-name');
+        const detailLocation = document.getElementById('detail-location');
+        const detailBedrooms = document.getElementById('detail-bedrooms');
+        const detailViews = document.getElementById('detail-views');
+        const detailPriceDisplay = document.getElementById('detail-price-display');
+        const currencyConverter = document.getElementById('currency-converter');
+        const detailDescription = document.getElementById('detail-description');
+        const agentImage = document.getElementById('agent-image');
+        const agentName = document.getElementById('agent-name');
+        const agentRole = document.getElementById('agent-role');
+        const agentPhone = document.getElementById('agent-phone');
+        const agentEmail = document.getElementById('agent-email');
+        const agentBranch = document.getElementById('agent-branch');
+        const agentLocations = document.getElementById('agent-locations');
+        const installmentSection = document.getElementById('installment-section');
+        const installCashUsd = document.getElementById('install-cash-usd');
+        const installCashKes = document.getElementById('install-cash-kes');
+        const installDownUsd = document.getElementById('install-down-usd');
+        const installDownKes = document.getElementById('install-down-kes');
+        const installMonthlyUsd = document.getElementById('install-monthly-usd');
+        const installMonthlyKes = document.getElementById('install-monthly-kes');
+        const installTotalUsd = document.getElementById('install-total-usd');
+        const installTotalKes = document.getElementById('install-total-kes');
+        const downPaymentInput = document.getElementById('down-payment-input');
+        const calculateInstallmentsBtn = document.getElementById('calculate-installments');
+        const installmentResults = document.getElementById('installment-results');
+        const backToListingsBtn = document.getElementById('back-to-listings');
+        const addToFavoritesBtn = document.getElementById('add-to-favorites');
+
+        const teamMembersGrid = document.getElementById('team-members-grid');
+        const sokopropertiesContactForm = document.getElementById('sokoproperties-contact-form');
+
+        // --- Data ---
+        const propertiesData = [
+            {
+                id: 'prop1', name: 'Luxury Penthouse with City Views', type: 'penthouse', bedrooms: 4, location: 'Westlands', priceUSD: 750000, views: 1230, agentId: 'agent1', installmentsAvailable: true,
+                description: 'Experience unparalleled luxury in this stunning penthouse offering panoramic city views. Features include a private elevator, smart home automation, and a rooftop pool. Perfect for discerning individuals seeking an exclusive urban retreat.',
+                images: [
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Exterior',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Living',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Kitchen',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Bedroom',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Bathroom'
+                ]
+            },
+            {
+                id: 'prop2', name: 'Spacious Family Bungalow', type: 'bungalow', bedrooms: 3, location: 'Karen', priceUSD: 320000, views: 890, agentId: 'agent2', installmentsAvailable: false,
+                description: 'A charming and spacious bungalow nestled in the serene Karen neighborhood. Features a large garden, ample parking, and a cozy fireplace. Ideal for families looking for tranquility and space.',
+                images: [
+                    'https://placehold.co/800x600/28a745/ffffff?text=Bungalow+Exterior',
+                    'https://placehold.co/800x600/28a745/ffffff?text=Bungalow+Garden',
+                    'https://placehold.co/800x600/28a745/ffffff?text=Bungalow+Interior'
+                ]
+            },
+            {
+                id: 'prop3', name: 'Grand Mansion with Expansive Grounds', type: 'mansion', bedrooms: 6, location: 'Runda', priceUSD: 1500000, views: 2500, agentId: 'agent1', installmentsAvailable: true,
+                description: 'An exquisite mansion set on sprawling grounds in the prestigious Runda area. Boasts multiple living areas, a gourmet kitchen, swimming pool, and staff quarters. A perfect blend of luxury and privacy.',
+                images: [
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Exterior',
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Pool',
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Hall',
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Bedroom'
+                ]
+            },
+            {
+                id: 'prop4', name: 'Modern Apartment in Kilimani', type: 'apartment', bedrooms: 2, location: 'Kilimani', priceUSD: 180000, views: 670, agentId: 'agent3', installmentsAvailable: false,
+                description: 'Sleek and modern apartment in the vibrant Kilimani area. Features open-plan living, high-end finishes, and access to a gym and communal recreation areas. Ideal for young professionals.',
+                images: [
+                    'https://placehold.co/800x600/dc3545/ffffff?text=Apartment+Exterior',
+                    'https://placehold.co/800x600/dc3545/ffffff?text=Apartment+Living',
+                    'https://placehold.co/800x600/dc3545/ffffff?text=Apartment+Gym'
+                ]
+            },
+            {
+                id: 'prop5', name: 'Cozy Bungalow with Private Garden', type: 'bungalow', bedrooms: 2, location: 'Lavington', priceUSD: 280000, views: 520, agentId: 'agent2', installmentsAvailable: true,
+                description: 'A charming 2-bedroom bungalow with its own private garden, perfect for small families or couples. Located in a quiet part of Lavington, close to amenities.',
+                images: [
+                    'https://placehold.co/800x600/17a2b8/ffffff?text=Bungalow+Lavington',
+                    'https://placehold.co/800x600/17a2b8/ffffff?text=Bungalow+Kitchen'
+                ]
+            },
+            {
+                id: 'prop6', name: 'Executive Penthouse with Rooftop Terrace', type: 'penthouse', bedrooms: 3, location: 'Karen', priceUSD: 950000, views: 1800, agentId: 'agent3', installmentsAvailable: true,
+                description: 'This executive penthouse offers breathtaking views and a spacious rooftop terrace, ideal for entertaining. High-end finishes and smart home features throughout.',
+                images: [
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Penthouse+Karen',
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Rooftop+Terrace'
+                ]
+            },
+            {
+                id: 'prop7', name: 'Traditional Mansion with Lush Gardens', type: 'mansion', bedrooms: 5, location: 'Westlands', priceUSD: 1200000, views: 2100, agentId: 'agent1', installmentsAvailable: false,
+                description: 'A timeless mansion featuring classic architecture and expansive, well-manicured gardens. Offers ample space for family living and grand entertaining.',
+                images: [
+                    'https://placehold.co/800x600/fd7e14/ffffff?text=Mansion+Westlands',
+                    'https://placehold.co/800x600/fd7e14/ffffff?text=Mansion+Garden'
+                ]
+            },
+            {
+                id: 'prop8', name: 'Compact Apartment for Singles', type: 'apartment', bedrooms: 1, location: 'Kilimani', priceUSD: 120000, views: 450, agentId: 'agent2', installmentsAvailable: false,
+                description: 'A well-designed 1-bedroom apartment, perfect for singles or young couples. Conveniently located near amenities and public transport.',
+                images: [
+                    'https://placehold.co/800x600/20c997/ffffff?text=Apartment+Kilimani',
+                    'https://placehold.co/800x600/20c997/ffffff?text=Apartment+Interior'
+                ]
+            },
+            {
+                id: 'prop9', name: 'Sprawling Bungalow with Farm Land', type: 'bungalow', bedrooms: 4, location: 'Runda', priceUSD: 450000, views: 980, agentId: 'agent3', installmentsAvailable: true,
+                description: 'This unique bungalow comes with a significant plot of land, ideal for small-scale farming or future expansion. Offers a peaceful rural feel within city limits.',
+                images: [
+                    'https://placehold.co/800x600/6610f2/ffffff?text=Bungalow+Runda',
+                    'https://placehold.co/800x600/6610f2/ffffff?text=Farm+Land'
+                ]
+            },
+            {
+                id: 'prop10', name: 'Exclusive Penthouse with Helipad Access', type: 'penthouse', bedrooms: 5, location: 'Lavington', priceUSD: 2000000, views: 3000, agentId: 'agent1', installmentsAvailable: true,
+                description: 'The epitome of luxury living, this penthouse boasts direct helipad access, a private cinema, and unparalleled bespoke interiors. For the ultimate high-flyer.',
+                images: [
+                    'https://placehold.co/800x600/e83e8c/ffffff?text=Penthouse+Lavington',
+                    'https://placehold.co/800x600/e83e8c/ffffff?text=Private+Cinema'
+                ]
+            },
+            {
+                id: 'prop11', name: 'Charming Bungalow near Golf Course', type: 'bungalow', bedrooms: 3, location: 'Karen', priceUSD: 380000, views: 750, agentId: 'agent2', installmentsAvailable: false,
+                description: 'A delightful bungalow located just minutes from a prestigious golf course. Features spacious rooms and a manicured lawn, perfect for golf enthusiasts.',
+                images: [
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Bungalow+Golf',
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Bungalow+Interior'
+                ]
+            },
+            {
+                id: 'prop12', name: 'Historic Mansion with Modern Amenities', type: 'mansion', bedrooms: 7, location: 'Kilimani', priceUSD: 1300000, views: 1900, agentId: 'agent3', installmentsAvailable: true,
+                description: 'A beautifully preserved historic mansion updated with all modern comforts. Combines old-world charm with contemporary living, ideal for large families.',
+                images: [
+                    'https://placehold.co/800x600/00CED1/ffffff?text=Mansion+Historic',
+                    'https://placehold.co/800x600/00CED1/ffffff?text=Mansion+Modern'
+                ]
+            },
+            {
+                id: 'prop13', name: 'City Center Apartment', type: 'apartment', bedrooms: 2, location: 'Westlands', priceUSD: 210000, views: 580, agentId: 'agent1', installmentsAvailable: false,
+                description: 'Conveniently located apartment in Westlands, offering easy access to business districts and entertainment. Ideal for urban living.',
+                images: [
+                    'https://placehold.co/800x600/FFD700/000000?text=Apartment+Westlands',
+                    'https://placehold.co/800x600/FFD700/000000?text=Apartment+Balcony'
+                ]
+            },
+            {
+                id: 'prop14', name: 'Serene Runda Bungalow', type: 'bungalow', bedrooms: 3, location: 'Runda', priceUSD: 390000, views: 910, agentId: 'agent2', installmentsAvailable: true,
+                description: 'A peaceful bungalow in the leafy suburbs of Runda, offering a quiet escape from the city bustle. Features a spacious compound and mature trees.',
+                images: [
+                    'https://placehold.co/800x600/C0C0C0/000000?text=Bungalow+Runda+Serene',
+                    'https://placehold.co/800x600/C0C0C0/000000?text=Bungalow+Living'
+                ]
+            },
+            {
+                id: 'prop15', name: 'Lavington Penthouse with Gym', type: 'penthouse', bedrooms: 3, location: 'Lavington', priceUSD: 880000, views: 1500, agentId: 'agent3', installmentsAvailable: true,
+                description: 'Luxurious penthouse in Lavington with exclusive access to a state-of-the-art gym and swimming pool. Modern design and high ceilings.',
+                images: [
+                    'https://placehold.co/800x600/800080/FFFFFF?text=Penthouse+Lavington+Gym',
+                    'https://placehold.co/800x600/800080/FFFFFF?text=Penthouse+Pool'
+                ]
+            },
+            {
+                id: 'prop16', name: 'Karen Mansion with Helipad', type: 'mansion', bedrooms: 6, location: 'Karen', priceUSD: 2500000, views: 3500, agentId: 'agent1', installmentsAvailable: true,
+                description: 'An ultra-exclusive mansion in Karen featuring its own private helipad, cinema, and extensive security. The ultimate in privacy and luxury.',
+                images: [
+                    'https://placehold.co/800x600/000080/FFFFFF?text=Mansion+Karen+Helipad',
+                    'https://placehold.co/800x600/000080/FFFFFF?text=Mansion+Cinema'
+                ]
+            }
+            // Add more properties up to 30 as needed for load more functionality
+        ];
+
+        const agentsData = [
+            {
+                id: 'agent1', name: 'Alice Mwangi', role: 'Senior Sales Agent', image: 'https://placehold.co/120x120/FFD700/000000?text=AM', contact: '+254712345678', email: 'alice.m@sokoproperties.co.ke', branchLocation: 'Westlands Office', dealsWithLocations: ['Westlands', 'Runda', 'Lavington']
+            },
+            {
+                id: 'agent2', name: 'Ben Kipkemboi', role: 'Property Consultant', image: 'https://placehold.co/120x120/0A8754/FFFFFF?text=BK', contact: '+254723456789', email: 'ben.k@sokoproperties.co.ke', branchLocation: 'Karen Office', dealsWithLocations: ['Karen', 'Kilimani']
+            },
+            {
+                id: 'agent3', name: 'Catherine Wanjiru', role: 'Luxury Property Specialist', image: 'https://placehold.co/120x120/C33B32/FFFFFF?text=CW', contact: '+254734567890', email: 'catherine.w@sokoproperties.co.ke', branchLocation: 'Kilimani Office', dealsWithLocations: ['Kilimani', 'Lavington', 'Karen']
+            },
+            {
+                id: 'admin1', name: 'David Jones', role: 'Operations Manager', image: 'https://placehold.co/120x120/6c757d/FFFFFF?text=DJ', contact: null, email: 'david.j@sokoproperties.co.ke', branchLocation: 'Head Office', dealsWithLocations: ['All']
+            }
+        ];
+
+        const USD_TO_KES_RATE = 130; // Example exchange rate
+
+        // --- Core Functions ---
+
+        /**
+         * Toggles visibility of main content sections and updates sub-navigation active state.
+         * @param {string} sectionId - The ID of the section to show ('properties-listing-content', 'property-detail-content', 'about-us-content').
+         */
+        function showSection(sectionId) {
+            propertiesListingContent.style.display = 'none';
+            propertyDetailContent.style.display = 'none';
+            aboutUsContent.style.display = 'none';
+
+            navProperties.classList.remove('active');
+            navAboutUs.classList.remove('active');
+
+            if (sectionId === 'properties-listing-content') {
+                propertiesListingContent.style.display = 'block';
+                navProperties.classList.add('active');
+                loadProperties(); // Reload properties when returning to listing
+            } else if (sectionId === 'property-detail-content') {
+                propertyDetailContent.style.display = 'block';
+                // No active nav for detail page
+            } else if (sectionId === 'about-us-content') {
+                aboutUsContent.style.display = 'block';
+                navAboutUs.classList.add('active');
+                populateAboutUs(); // Populate About Us content
+            }
+            adjustHeroPadding(); // Re-adjust hero padding after section change
+        }
+
+        /**
+         * Renders a single property card HTML element.
+         * @param {object} property - The property data object.
+         * @returns {HTMLElement} The created property card element.
+         */
+        function renderPropertyCard(property) {
+            const card = document.createElement('div');
+            card.classList.add('property-card');
+            card.dataset.id = property.id; // Store ID for easy lookup
+
+            card.innerHTML = `
+                <div class="property-image-container">
+                    <img src="${property.images[0]}" alt="${property.name}" class="property-image" onerror="this.onerror=null;this.src='https://placehold.co/400x300/A0D2EB/333333?text=Image+Unavailable'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder">${property.name}</div>
+                </div>
+                <div class="property-card-content">
+                    <h3>${property.name}</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> ${property.location}</p>
+                    <p><i class="fas fa-bed"></i> ${property.bedrooms} Bedrooms</p>
+                    <p class="price">$${property.priceUSD.toLocaleString()}</p>
+                    <p class="views"><i class="fas fa-eye"></i> ${property.views.toLocaleString()} Views</p>
+                </div>
+            `;
+            card.addEventListener('click', () => showPropertyDetails(property.id));
+            return card;
+        }
+
+        /**
+         * Loads and displays properties based on current filters.
+         * @param {object} filters - Object containing filter criteria (type, bedrooms, location, search query).
+         */
+        function loadProperties(filters = {}) {
+            let currentProperties = propertiesData;
+
+            // Apply search query filter
+            const searchQuery = propertySearchInput.value.toLowerCase();
+            if (searchQuery) {
+                currentProperties = currentProperties.filter(p =>
+                    p.name.toLowerCase().includes(searchQuery) ||
+                    p.location.toLowerCase().includes(searchQuery) ||
+                    p.type.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            // Apply category filters
+            if (filters.type && filters.type !== 'all') {
+                currentProperties = currentProperties.filter(p => p.type === filters.type);
+            }
+            if (filters.bedrooms) {
+                currentProperties = currentProperties.filter(p => p.bedrooms >= parseInt(filters.bedrooms));
+            }
+            if (filters.location && filters.location !== 'all') {
+                currentProperties = currentProperties.filter(p => p.location === filters.location);
+            }
+
+            propertiesGrid.innerHTML = ''; // Clear current grid
+            propertiesDisplayedCount = 0; // Reset count
+
+            displayNextProperties(currentProperties);
+
+            // Show/hide load more button
+            if (currentProperties.length > propertiesPerLoad) {
+                loadMoreButton.style.display = 'block';
+            } else {
+                loadMoreButton.style.display = 'none';
+            }
+        }
+
+        /**
+         * Displays the next set of properties.
+         * @param {Array} filteredProperties - The array of properties to display from.
+         */
+        function displayNextProperties(filteredProperties = propertiesData) {
+            const endIndex = propertiesDisplayedCount + propertiesPerLoad;
+            const propertiesToDisplay = filteredProperties.slice(propertiesDisplayedCount, endIndex);
+
+            if (propertiesToDisplay.length === 0 && propertiesDisplayedCount === 0) {
+                propertiesGrid.innerHTML = '<p class="text-center text-xl text-gray-600 dark:text-gray-400 col-span-full">No properties match your criteria.</p>';
+                loadMoreButton.style.display = 'none';
+                return;
+            }
+
+            propertiesToDisplay.forEach(property => {
+                propertiesGrid.appendChild(renderPropertyCard(property));
+            });
+            propertiesDisplayedCount += propertiesToDisplay.length;
+
+            if (propertiesDisplayedCount >= filteredProperties.length) {
+                loadMoreButton.style.display = 'none';
+            } else {
+                loadMoreButton.style.display = 'block';
+            }
+        }
+
+        /**
+         * Populates the property detail page with specific property data.
+         * @param {string} propertyId - The ID of the property to display.
+         */
+        function showPropertyDetails(propertyId) {
+            const property = propertiesData.find(p => p.id === propertyId);
+            if (!property) {
+                alert('Property not found!');
+                return;
+            }
+
+            // Basic details
+            detailPropertyName.textContent = property.name;
+            detailLocation.textContent = property.location;
+            detailBedrooms.textContent = property.bedrooms;
+            detailViews.textContent = property.views.toLocaleString();
+            detailDescription.textContent = property.description;
+
+            // Price and Currency Converter
+            let currentPriceUSD = property.priceUSD;
+            detailPriceDisplay.textContent = `$${currentPriceUSD.toLocaleString()}`;
+            currencyConverter.value = 'USD'; // Reset to USD
+            currencyConverter.onchange = () => {
+                if (currencyConverter.value === 'KES') {
+                    detailPriceDisplay.textContent = `KES ${(currentPriceUSD * USD_TO_KES_RATE).toLocaleString()}`;
+                } else {
+                    detailPriceDisplay.textContent = `$${currentPriceUSD.toLocaleString()}`;
+                }
+            };
+
+            // Gallery
+            detailThumbnails.innerHTML = '';
+            detailMainImage.src = property.images[0];
+            detailMainImage.onerror = () => {
+                detailMainImage.src = 'https://placehold.co/800x600/A0D2EB/333333?text=Image+Unavailable';
+            };
+
+            property.images.forEach((imgSrc, index) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `Thumbnail ${index + 1}`;
+                img.classList.add('rounded-md');
+                if (index === 0) img.classList.add('active');
+                img.addEventListener('click', () => {
+                    detailMainImage.src = imgSrc;
+                    detailThumbnails.querySelectorAll('img').forEach(thumb => thumb.classList.remove('active'));
+                    img.classList.add('active');
+                });
+                img.onerror = () => {
+                    img.src = 'https://placehold.co/100x75/A0D2EB/333333?text=Thumb';
+                };
+                detailThumbnails.appendChild(img);
+            });
+
+            // Agent Info
+            const agent = agentsData.find(a => a.id === property.agentId);
+            if (agent) {
+                agentImage.src = agent.image || 'https://placehold.co/120x120/D3D3D3/000000?text=Agent';
+                agentImage.onerror = () => { agentImage.src = 'https://placehold.co/120x120/D3D3D3/000000?text=Agent'; };
+                agentName.textContent = agent.name;
+                agentRole.textContent = agent.role;
+                agentPhone.textContent = agent.contact || 'N/A';
+                agentEmail.textContent = agent.email || 'N/A';
+                agentBranch.textContent = agent.branchLocation || 'N/A';
+                agentLocations.textContent = agent.dealsWithLocations.join(', ') || 'N/A';
+            } else {
+                // Hide agent section or show generic message if no agent found
+                document.querySelector('.property-detail-agent').style.display = 'none';
+            }
+
+            // Installment Section
+            if (property.installmentsAvailable) {
+                installmentSection.style.display = 'block';
+                // Initial installment display (e.g., 10% down, 24 months)
+                const defaultDownPayment = property.priceUSD * 0.10;
+                const remainingBalance = property.priceUSD - defaultDownPayment;
+                const numberOfMonths = 24; // Example
+                const monthlyInstallment = remainingBalance / numberOfMonths;
+                const totalInstallmentPrice = property.priceUSD; // Assuming no interest for simplicity in this example
+
+                installCashUsd.textContent = `$${property.priceUSD.toLocaleString()}`;
+                installCashKes.textContent = `KES ${(property.priceUSD * USD_TO_KES_RATE).toLocaleString()}`;
+                installDownUsd.textContent = `$${defaultDownPayment.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                installDownKes.textContent = `KES ${(defaultDownPayment * USD_TO_KES_RATE).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                installMonthlyUsd.textContent = `$${monthlyInstallment.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                installMonthlyKes.textContent = `KES ${(monthlyInstallment * USD_TO_KES_RATE).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                installTotalUsd.textContent = `$${totalInstallmentPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                installTotalKes.textContent = `KES ${(totalInstallmentPrice * USD_TO_KES_RATE).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                downPaymentInput.value = defaultDownPayment;
+                installmentResults.textContent = ''; // Clear previous results
+
+                calculateInstallmentsBtn.onclick = () => {
+                    const userDownPayment = parseFloat(downPaymentInput.value);
+                    if (isNaN(userDownPayment) || userDownPayment < 0 || userDownPayment > property.priceUSD) {
+                        installmentResults.textContent = 'Please enter a valid down payment amount.';
+                        return;
+                    }
+                    const newRemainingBalance = property.priceUSD - userDownPayment;
+                    const newMonthlyInstallment = newRemainingBalance / numberOfMonths; // Still 24 months
+                    const newTotalInstallmentPrice = userDownPayment + (newMonthlyInstallment * numberOfMonths); // No interest
+
+                    installDownUsd.textContent = `$${userDownPayment.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    installDownKes.textContent = `KES ${(userDownPayment * USD_TO_KES_RATE).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    installMonthlyUsd.textContent = `$${newMonthlyInstallment.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    installMonthlyKes.textContent = `KES ${(newMonthlyInstallment * USD_TO_KES_RATE).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    installTotalUsd.textContent = `$${newTotalInstallmentPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    installTotalKes.textContent = `KES ${(newTotalInstallmentPrice * USD_TO_KES_RATE).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+                    installmentResults.textContent = `Calculated for ${numberOfMonths} months.`;
+                };
+
+            } else {
+                installmentSection.style.display = 'none';
+            }
+
+            // Add to Favorites
+            addToFavoritesBtn.onclick = () => {
+                let favorites = JSON.parse(localStorage.getItem('sokoFavorites')) || [];
+                if (!favorites.includes(property.id)) {
+                    favorites.push(property.id);
+                    localStorage.setItem('sokoFavorites', JSON.stringify(favorites));
+                    alert(`${property.name} added to your favorites!`);
+                } else {
+                    alert(`${property.name} is already in your favorites.`);
+                }
+            };
+
+            showSection('property-detail-content');
+        }
+
+        /**
+         * Populates the About Us section dynamically.
+         */
+        function populateAboutUs() {
+            teamMembersGrid.innerHTML = ''; // Clear previous team members
+            agentsData.forEach(member => {
+                const memberCard = document.createElement('div');
+                memberCard.classList.add('team-member-card');
+                const contactHtml = member.contact ? `<p><i class="fas fa-phone-alt"></i> ${member.contact}</p>` : '';
+                const emailHtml = member.email ? `<p><i class="fas fa-envelope"></i> ${member.email}</p>` : '';
+                const branchHtml = member.branchLocation ? `<p><i class="fas fa-building"></i> ${member.branchLocation}</p>` : '';
+                const locationsHtml = member.dealsWithLocations && member.dealsWithLocations.length > 0 ? `<p><i class="fas fa-globe"></i> Deals with: ${member.dealsWithLocations.join(', ')}</p>` : '';
+
+                memberCard.innerHTML = `
+                    <img src="${member.image}" alt="${member.name}" onerror="this.onerror=null;this.src='https://placehold.co/120x120/D3D3D3/000000?text=Agent';">
+                    <h3>${member.name}</h3>
+                    <p class="text-gray-600">${member.role}</p>
+                    <div class="contact-details">
+                        ${contactHtml}
+                        ${emailHtml}
+                        ${branchHtml}
+                        ${locationsHtml}
+                    </div>
+                `;
+                teamMembersGrid.appendChild(memberCard);
+            });
+
+            // Contact Form Submission (placeholder)
+            sokopropertiesContactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(sokopropertiesContactForm);
+                const formObject = Object.fromEntries(formData.entries());
+                console.log('Contact Form Submitted:', formObject);
+                alert('Thank you for your message! We will get back to you soon.');
+                sokopropertiesContactForm.reset();
+            });
+        }
+
+        // --- Event Listeners ---
+
+        // Sub-navigation clicks
+        navProperties.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('properties-listing-content');
+        });
+
+        navAboutUs.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('about-us-content');
+        });
+
+        // Categories Dropdown Toggle
+        categoriesToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent document click from immediately closing
+            categoriesDropdown.classList.toggle('active');
+            // Hide suggestions if categories dropdown is active
+            propertySearchSuggestions.classList.remove('active');
+        });
+
+        // Close categories dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!categoriesDropdown.contains(e.target) && e.target !== categoriesToggle) {
+                categoriesDropdown.classList.remove('active');
+            }
+            // Also close search suggestions if clicked outside
+            if (!propertySearchSuggestions.contains(e.target) && e.target !== propertySearchInput) {
+                propertySearchSuggestions.classList.remove('active');
+            }
+        });
+
+        // Apply Filters button
+        applyFiltersBtn.addEventListener('click', () => {
+            const filters = {
+                type: propertyTypeFilter.value,
+                bedrooms: bedroomsFilter.value,
+                location: locationFilter.value
+            };
+            loadProperties(filters);
+            categoriesDropdown.classList.remove('active'); // Close dropdown after applying
+        });
+
+        // Property Search Input with Suggestions
+        propertySearchInput.addEventListener('input', () => {
+            const query = propertySearchInput.value.toLowerCase();
+            propertySearchSuggestions.innerHTML = '';
+
+            if (query.length > 1) { // Start suggesting after 1 character
+                let suggestions = [];
+                const selectedType = propertyTypeFilter.value;
+                const selectedBedrooms = bedroomsFilter.value;
+                const selectedLocation = locationFilter.value;
+
+                // Filter properties based on current category selections first
+                let relevantProperties = propertiesData;
+                if (selectedType !== 'all') {
+                    relevantProperties = relevantProperties.filter(p => p.type === selectedType);
+                }
+                if (selectedBedrooms) {
+                    relevantProperties = relevantProperties.filter(p => p.bedrooms >= parseInt(selectedBedrooms));
+                }
+                if (selectedLocation !== 'all') {
+                    relevantProperties = relevantProperties.filter(p => p.location === selectedLocation);
+                }
+
+                // Then filter by search query within relevant properties
+                suggestions = relevantProperties.filter(p =>
+                    p.name.toLowerCase().includes(query) ||
+                    p.location.toLowerCase().includes(query) ||
+                    p.type.toLowerCase().includes(query)
+                ).map(p => p.name);
+
+                // Remove duplicates and limit suggestions
+                suggestions = [...new Set(suggestions)].slice(0, 5); // Max 5 suggestions
+
+                if (suggestions.length > 0) {
+                    suggestions.forEach(sug => {
+                        const div = document.createElement('div');
+                        div.textContent = sug;
+                        div.addEventListener('click', () => {
+                            propertySearchInput.value = sug;
+                            propertySearchSuggestions.classList.remove('active');
+                            loadProperties({
+                                type: propertyTypeFilter.value,
+                                bedrooms: bedroomsFilter.value,
+                                location: locationFilter.value
+                            }); // Re-load properties with applied filters and selected suggestion
+                        });
+                        propertySearchSuggestions.appendChild(div);
+                    });
+                    propertySearchSuggestions.classList.add('active');
+                } else {
+                    propertySearchSuggestions.classList.remove('active');
+                }
+            } else {
+                propertySearchSuggestions.classList.remove('active');
+            }
+        });
+
+        // Property Search Button
+        document.getElementById('property-search-button').addEventListener('click', () => {
+            loadProperties({
+                type: propertyTypeFilter.value,
+                bedrooms: bedroomsFilter.value,
+                location: locationFilter.value
+            });
+            propertySearchSuggestions.classList.remove('active'); // Hide suggestions after search
+        });
+
+        // Load More Properties
+        loadMoreButton.addEventListener('click', () => {
+            // Get current filters to apply to the next load
+            const currentFilters = {
+                type: propertyTypeFilter.value,
+                bedrooms: bedroomsFilter.value,
+                location: locationFilter.value
+            };
+            let filtered = propertiesData;
+            const searchQuery = propertySearchInput.value.toLowerCase();
+
+            // Re-apply all filters to the full data set to get the correct next slice
+            if (searchQuery) {
+                filtered = filtered.filter(p =>
+                    p.name.toLowerCase().includes(searchQuery) ||
+                    p.location.toLowerCase().includes(searchQuery) ||
+                    p.type.toLowerCase().includes(searchQuery)
+                );
+            }
+            if (currentFilters.type && currentFilters.type !== 'all') {
+                filtered = filtered.filter(p => p.type === currentFilters.type);
+            }
+            if (currentFilters.bedrooms) {
+                filtered = filtered.filter(p => p.bedrooms >= parseInt(currentFilters.bedrooms));
+            }
+            if (currentFilters.location && currentFilters.location !== 'all') {
+                filtered = filtered.filter(p => p.location === currentFilters.location);
+            }
+
+            displayNextProperties(filtered);
+        });
+
+        // Back to Listings button
+        backToListingsBtn.addEventListener('click', () => {
+            showSection('properties-listing-content');
+        });
+
+        // Initial load
+        showSection('properties-listing-content'); // Default to properties listing
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    });
+</script>
+</body>
+</html>

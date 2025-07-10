@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Familia Chambers - Awards & Recognition</title>
+    <meta name="description" content="Explore the awards and recognition programs by La Familia Chambers, celebrating business excellence and community contributions.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Specific styles for the Awards & Recognition page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .awards-header {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-lg);
+            padding: var(--spacing-unit);
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+        }
+
+        .awards-header h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .awards-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .awards-list {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column layout for each award event */
+            gap: 3rem; /* More space between major award events */
+            padding-bottom: 2rem;
+        }
+
+        .award-event-item {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .award-event-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+        }
+
+        .award-event-item h3 {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .award-event-item .event-meta {
+            font-size: 1rem;
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .award-event-item .event-meta i {
+            color: var(--primary-color);
+        }
+
+        .award-event-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .award-event-item > p { /* Direct paragraph under award-event-item */
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        .award-categories {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .award-categories h4 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .award-category {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .award-category h5 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .award-category p {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .award-category strong {
+            color: var(--secondary-color);
+        }
+
+        .award-category ul {
+            list-style: none; /* Remove default bullet */
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+
+        .award-category ul li {
+            margin-bottom: 0.3rem;
+            color: var(--text-color-light);
+            font-size: 0.95rem;
+        }
+
+        .award-category ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .awards-header h2 {
+                font-size: 2rem;
+            }
+            .award-event-item {
+                padding: 1.5rem;
+            }
+            .award-event-item h3 {
+                font-size: 1.8rem;
+            }
+            .award-categories h4 {
+                font-size: 1.4rem;
+            }
+            .award-category h5 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .awards-header h2 {
+                font-size: 1.6rem;
+            }
+            .awards-header p {
+                font-size: 1rem;
+            }
+            .award-event-item {
+                padding: 1rem;
+            }
+            .award-event-item h3 {
+                font-size: 1.5rem;
+            }
+            .award-event-item .event-meta {
+                font-size: 0.85rem;
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .award-categories h4 {
+                font-size: 1.2rem;
+            }
+            .award-category {
+                padding: 1rem;
+            }
+            .award-category h5 {
+                font-size: 1.1rem;
+            }
+            .award-category p, .award-category ul li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li class="active-nav-link"><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Awards & Recognition Page -->
+<main>
+    <section class="awards-header">
+        <h2 id="awards-page-title">Awards & Recognition</h2>
+        <p id="awards-page-description">Celebrating excellence and significant contributions within our business community and beyond.</p>
+    </section>
+
+    <section class="awards-list" id="awards-events-list">
+        <!-- Award events will be dynamically loaded here by JavaScript -->
+        <p style="text-align: center; color: var(--text-color);">Loading awards information...</p>
+    </section>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript (for header/footer functionality) -->
+<script src="scripts/main.js"></script>
+
+<!-- Awards Page Specific JavaScript -->
+<script>
+    // Helper function to generate placeholder image URLs
+    function generatePlaceholderImage(width, height, text, bgColor = 'cccccc', textColor = '333333') {
+        return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
+    }
+
+    // Data for awards and recognition events
+    const laFamiliaAwards = [
+        {
+            id: 'business-excellence-2024',
+            title: 'Annual Business Excellence Awards 2024',
+            date: 'December 12, 2024',
+            description: 'The Annual Business Excellence Awards celebrate outstanding achievements and contributions of businesses and entrepreneurs in Nairobi and Mlolongo. This year, we focused on innovation and sustainable growth.',
+            image: generatePlaceholderImage(700, 400, 'Awards Ceremony 2024', 'f0e68c', '333333'),
+            categories: [
+                {
+                    name: 'Innovator of the Year',
+                    nominees: ['TechSolutions Africa', 'Creative Canvas Studios', 'iMall E-commerce'],
+                    winner: 'TechSolutions Africa'
+                },
+                {
+                    name: 'Small Business of the Year',
+                    nominees: ['Duka Lako Supermart', 'AfyaCare Clinic', 'Taste of Africa Catering'],
+                    winner: 'Duka Lako Supermart'
+                },
+                {
+                    name: 'Community Impact Award',
+                    nominees: ['Eco Clean Services', 'Green Thumb Landscaping', 'Naija Cuisine Hub'],
+                    winner: 'Eco Clean Services'
+                },
+                {
+                    name: 'Entrepreneur of the Year',
+                    // Individual nominees, keeping specific names
+                    nominees: ['Grace Wanjiku (Tech Innovate)', 'Collins Omondi (Event Solutions)', 'Faith Chebet (Marketing Pro)'],
+                    winner: 'Grace Wanjiku (Tech Innovate)'
+                }
+            ]
+        },
+        {
+            id: 'rising-stars-2023',
+            title: 'Rising Stars Business Awards 2023',
+            date: 'June 20, 2023',
+            description: 'Our inaugural "Rising Stars" awards recognized promising new businesses and startups that have shown significant potential and growth within their first three years of operation.',
+            image: generatePlaceholderImage(700, 400, 'Rising Stars 2023', 'add8e6', '333333'),
+            categories: [
+                {
+                    name: 'Startup of the Year',
+                    nominees: ['Urban Edge Barbershop & Spa', 'Naija Cuisine Hub', 'Fashion Finesse Boutique'],
+                    winner: 'Fashion Finesse Boutique'
+                },
+                {
+                    name: 'Tech Startup Award',
+                    nominees: ['Creative Canvas Studios', 'TechSolutions Africa', 'iMall E-commerce'],
+                    winner: 'Creative Canvas Studios'
+                },
+                {
+                    name: 'Creative Business Award',
+                    nominees: ['Taste of Africa Catering', 'Green Thumb Landscaping', 'Urban Edge Barbershop & Spa'],
+                    winner: 'Taste of Africa Catering'
+                }
+            ]
+        },
+        {
+            id: 'legacy-leaders-2022',
+            title: 'Legacy Leaders Gala 2022',
+            date: 'October 5, 2022',
+            description: 'The Legacy Leaders Gala honored established businesses and individuals who have demonstrated sustained excellence, leadership, and a lasting positive impact on the regional economy over many years.',
+            image: generatePlaceholderImage(700, 400, 'Legacy Gala 2022', 'd8bfd8', '333333'),
+            categories: [
+                {
+                    name: 'Lifetime Achievement Award',
+                    // Individual nominees, keeping specific names
+                    nominees: ['Zawadi Mzuri (Manufacturing Leader)', 'Robert Ngugi (Financial Visionary)'],
+                    winner: 'Zawadi Mzuri (Manufacturing Leader)'
+                },
+                {
+                    name: 'Sustainable Business Practices',
+                    nominees: ['Eco Clean Services', 'Green Thumb Landscaping', 'Soko Properties'],
+                    winner: 'Green Thumb Landscaping'
+                },
+                {
+                    name: 'Employer of Choice',
+                    nominees: ['TechSolutions Africa', 'Prime Security Solutions', 'Soko Properties'],
+                    winner: 'Prime Security Solutions'
+                }
+            ]
+        }
+    ];
+
+    // Function to render awards information
+    function renderAwards() {
+        const awardsListContainer = document.getElementById('awards-events-list');
+        if (!awardsListContainer) return;
+
+        awardsListContainer.innerHTML = ''; // Clear the "Loading awards information..." message
+
+        if (laFamiliaAwards.length === 0) {
+            awardsListContainer.innerHTML = '<p style="text-align: center; color: var(--text-color);">No awards information available at this time. Please check back later!</p>';
+            return;
+        }
+
+        laFamiliaAwards.forEach(event => {
+            const eventItemDiv = document.createElement('div');
+            eventItemDiv.classList.add('award-event-item');
+            eventItemDiv.setAttribute('data-event-id', event.id);
+
+            let categoriesHtml = '';
+            if (event.categories && event.categories.length > 0) {
+                categoriesHtml = '<div class="award-categories"><h4>Award Categories & Winners</h4>';
+                event.categories.forEach(category => {
+                    const nomineesList = category.nominees.map(nominee => `<li>${nominee}</li>`).join('');
+                    categoriesHtml += `
+                        <div class="award-category">
+                            <h5>${category.name}</h5>
+                            <p><strong>Winner:</strong> ${category.winner}</p>
+                            <p><strong>Nominees:</strong></p>
+                            <ul>
+                                ${nomineesList}
+                            </ul>
+                        </div>
+                    `;
+                });
+                categoriesHtml += '</div>';
+            }
+
+            eventItemDiv.innerHTML = `
+                <h3>${event.title}</h3>
+                <div class="event-meta">
+                    <i class="fas fa-calendar-alt"></i> <span>${event.date}</span>
+                </div>
+                <img src="${event.image}" alt="${event.title} Image">
+                <p>${event.description}</p>
+                ${categoriesHtml}
+            `;
+            awardsListContainer.appendChild(eventItemDiv);
+        });
+    }
+
+    // Run rendering function when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', renderAwards);
+</script>
+
+</body>
+</html>

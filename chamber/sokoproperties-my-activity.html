@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Activity | SokoProperties - La Familia Chambers</title>
+    <meta name="description" content="View your favorite SokoProperties, manage your cart, and proceed to checkout.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for SokoProperties (copied from sokoproperties.html for consistency) */
+        :root {
+            --soko-primary: #007bff; /* Blue */
+            --soko-secondary: #28a745; /* Green */
+            --soko-accent: #ffc107; /* Yellow */
+            --soko-text: #333333;
+            --soko-bg: #F4F7F6; /* Light background */
+            --soko-card-bg: #FFFFFF;
+            --soko-border: #E0E0E0;
+            --soko-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --soko-primary: #66b3ff; /* Lighter Blue */
+            --soko-secondary: #66cc99; /* Lighter Green */
+            --soko-accent: #ffdb58; /* Brighter Yellow */
+            --soko-text: #E0E0E0;
+            --soko-bg: #1A1A1A;
+            --soko-card-bg: #2C2C2C;
+            --soko-border: #444444;
+            --soko-shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        /* General sections */
+        .section-soko {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--soko-text);
+            background-color: var(--soko-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-soko {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-soko::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--soko-accent);
+            border-radius: 3px;
+        }
+
+        /* Sub-navigation for SokoProperties */
+        .sub-nav {
+            background-color: var(--soko-card-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--soko-border);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-top: -2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sub-nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sub-nav-list a, .sub-nav-list button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--soko-text);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .sub-nav-list a:hover, .sub-nav-list button:hover {
+            background-color: var(--soko-border);
+        }
+
+        .sub-nav-list a.active {
+            background-color: var(--soko-primary);
+            color: white;
+        }
+        body.dark-mode .sub-nav-list a.active {
+            background-color: var(--soko-accent);
+            color: var(--soko-primary);
+        }
+
+
+        /* Favorites List */
+        #favorites-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .favorite-item {
+            background-color: var(--soko-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--soko-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .favorite-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--soko-shadow);
+        }
+
+        .favorite-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--soko-border);
+        }
+
+        .favorite-item-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .favorite-item-content h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--soko-primary);
+            margin-bottom: 0.75rem;
+        }
+        .favorite-item-content p {
+            color: var(--soko-text);
+            margin-bottom: 0.5rem;
+        }
+        .favorite-item-content .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--soko-secondary);
+            margin-top: 1rem;
+        }
+        .favorite-item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+        .favorite-item-actions button {
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .remove-btn {
+            background-color: #dc3545; /* Red */
+            color: white;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+        .view-property-btn {
+            background-color: var(--soko-primary);
+            color: white;
+        }
+        .view-property-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #checkout-summary {
+            background-color: var(--soko-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--soko-shadow);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        #checkout-summary h3 {
+            font-size: 2.2rem;
+            color: var(--soko-primary);
+            margin-bottom: 1.5rem;
+        }
+        #checkout-summary p {
+            font-size: 1.3rem;
+            color: var(--soko-text);
+            margin-bottom: 1rem;
+        }
+        #checkout-summary .total-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--soko-secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .proceed-checkout-btn {
+            background-color: var(--soko-secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .proceed-checkout-btn:hover {
+            background-color: #1e7e34;
+        }
+        .no-favorites-message {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--soko-text);
+            margin-top: 5rem;
+        }
+
+
+        /* Checkout Modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--soko-card-bg);
+            margin: auto;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 5px 15px var(--soko-shadow);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            color: var(--soko-text);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--soko-primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+            font-size: 2.2rem;
+            color: var(--soko-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-content form div {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--soko-text);
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="email"],
+        .modal-content input[type="tel"],
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--soko-border);
+            border-radius: 0.5rem;
+            background-color: var(--soko-bg);
+            color: var(--soko-text);
+            transition: border-color 0.3s ease;
+        }
+
+        .modal-content input:focus,
+        .modal-content select:focus,
+        .modal-content textarea:focus {
+            border-color: var(--soko-primary);
+            outline: none;
+        }
+
+        .payment-method-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method-options label {
+            background-color: var(--soko-bg);
+            border: 1px solid var(--soko-border);
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .payment-method-options input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .payment-method-options input[type="radio"]:checked + label {
+            background-color: var(--soko-primary);
+            color: white;
+            border-color: var(--soko-primary);
+        }
+
+        #bank-details-section {
+            background-color: var(--soko-bg);
+            border: 1px solid var(--soko-border);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: none; /* Hidden by default */
+        }
+        #bank-details-section p {
+            margin-bottom: 0.5rem;
+            color: var(--soko-text);
+        }
+
+        .checkout-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .checkout-buttons button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+
+        .cancel-btn {
+            background-color: #6c757d; /* Gray */
+            color: white;
+        }
+        .cancel-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .confirm-payment-btn {
+            background-color: var(--soko-secondary);
+            color: white;
+        }
+        .confirm-payment-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        .checkout-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .checkout-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .checkout-message.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .checkout-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .section-title-soko {
+                font-size: 2.2rem;
+            }
+            .sub-nav-list {
+                gap: 1rem;
+            }
+            .sub-nav-list a, .sub-nav-list button {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .section-title-soko {
+                font-size: 1.8rem;
+            }
+            .sub-nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .sub-nav-list a, .sub-nav-list button {
+                width: 45%;
+                text-align: center;
+            }
+            #favorites-list {
+                grid-template-columns: 1fr;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            .modal-content h2 {
+                font-size: 1.8rem;
+            }
+            .payment-method-options {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .checkout-buttons {
+                flex-direction: column-reverse;
+                gap: 0.75rem;
+            }
+            .checkout-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="tasteofafrica.html">Taste of Africa Catering</a></li>
+            <li><a href="afyacare-clinic.html">AfyaCare Clinic</a></li>
+            <li><a href="sokoproperties.html">SokoProperties</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <nav class="sub-nav">
+        <ul class="sub-nav-list">
+            <li><a href="sokoproperties.html" id="nav-properties">Properties</a></li>
+            <li><a href="sokoproperties.html#about-us-content" id="nav-about-us">About Us</a></li>
+            <li><a href="#" id="nav-my-activity" class="active"><i class="fas fa-heart"></i> My Favorites</a></li>
+        </ul>
+    </nav>
+
+    <div id="my-activity-content" class="section-soko">
+        <h2 class="section-title-soko">My Favorite Properties</h2>
+
+        <div id="favorites-list">
+            </div>
+
+        <div id="checkout-summary">
+            <h3>Checkout Summary</h3>
+            <p>Total items: <span id="total-items">0</span></p>
+            <p>Estimated Total Price: <span id="estimated-total-price">$0.00</span></p>
+            <button id="proceed-checkout-btn" class="proceed-checkout-btn" disabled>Proceed to Checkout</button>
+        </div>
+
+        <p id="no-favorites-message" class="no-favorites-message" style="display: none;">
+            You haven't added any properties to your favorites yet. Start exploring <a href="sokoproperties.html" class="text-soko-primary underline">properties</a> now!
+        </p>
+    </div>
+
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Complete Your Purchase</h2>
+            <form id="checkout-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="fullName" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+2547XXXXXXXX" required>
+                </div>
+                <div>
+                    <label for="address">Billing Address</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Apartment, street, city..." required></textarea>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-4">Payment Method</h3>
+                <div class="payment-method-options">
+                    <div>
+                        <input type="radio" id="pay-bank" name="paymentMethod" value="Bank Transfer" required>
+                        <label for="pay-bank"><i class="fas fa-university"></i> Bank Transfer</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="pay-card" name="paymentMethod" value="Credit/Debit Card">
+                        <label for="pay-card"><i class="fas fa-credit-card"></i> Credit/Debit Card</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="pay-paypal" name="paymentMethod" value="PayPal">
+                        <label for="pay-paypal"><i class="fab fa-paypal"></i> PayPal</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="pay-cash" name="paymentMethod" value="Cash/Cheque">
+                        <label for="pay-cash"><i class="fas fa-money-bill-wave"></i> Cash/Cheque (Visit Office)</label>
+                    </div>
+                </div>
+
+                <div id="bank-details-section">
+                    <label for="select-bank">Select Your Bank:</label>
+                    <select id="select-bank" name="selectedBank">
+                        <option value="">-- Select Bank --</option>
+                        <option value="KCB Bank Kenya">KCB Bank Kenya</option>
+                        <option value="Equity Bank Kenya">Equity Bank Kenya</option>
+                        <option value="Standard Chartered Bank Kenya">Standard Chartered Bank Kenya</option>
+                        <option value="Co-operative Bank of Kenya">Co-operative Bank of Kenya</option>
+                        <option value="NCBA Bank Kenya">NCBA Bank Kenya</option>
+                        <option value="Absa Bank Kenya">Absa Bank Kenya</option>
+                    </select>
+                    <p class="mt-4"><strong>SokoProperties Bank Details:</strong></p>
+                    <p>Account Name: La Familia Chambers Ltd</p>
+                    <p>Account Number: XXXXXX7890</p>
+                    <p>Bank: KCB Bank Kenya</p>
+                    <p>Branch: Westlands</p>
+                    <p class="text-sm italic text-gray-500">Please make the transfer and share the M-Pesa or transaction confirmation with us.</p>
+                </div>
+
+                <div class="checkout-buttons">
+                    <button type="button" id="cancel-checkout" class="cancel-btn">Cancel</button>
+                    <button type="submit" id="confirm-payment-btn" class="confirm-payment-btn">Confirm Payment</button>
+                </div>
+                <div id="checkout-message" class="checkout-message mt-4" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="board.html">Our Board</a></li>
+                <li><a href="join.html">Membership</a></li>
+                <li><a href="partnerships.html">Partnerships</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/lafamiliachambers" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliach" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/lafamiliachambers" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/la-familia-chambers" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="newsletter-text">Join our newsletter for updates:</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email" aria-label="Your email">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+<script src="scripts/main.js"></script> <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Global Elements & Utility Functions (from La Familia template) ---
+        const header = document.querySelector('.sticky-header');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const siteSearchInput = document.getElementById('site-search'); // Global search
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBarContainer = document.getElementById('search-bar-container');
+
+        // Dark mode preference (from La Familia template)
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Adjust hero padding (from La Familia template, adapted for SokoProperties heroes)
+        const adjustHeroPadding = () => {
+            const headerHeight = header.offsetHeight;
+            const sokoHero = document.querySelector('.hero-soko');
+            if (sokoHero) {
+                sokoHero.style.paddingTop = `${headerHeight}px`;
+            }
+        };
+        window.addEventListener('load', adjustHeroPadding);
+        window.addEventListener('resize', adjustHeroPadding);
+        hamburgerMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('main-nav-closed');
+            mainNav.classList.toggle('main-nav-open');
+            adjustHeroPadding();
+        });
+
+        // Dark Mode Toggle (from La Familia template)
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            modeToggle.querySelector('i').classList.replace(
+                isDarkMode ? 'fa-moon' : 'fa-sun',
+                isDarkMode ? 'fa-sun' : 'fa-moon'
+            );
+        });
+
+        // Global Search Bar Toggle (from La Familia template)
+        searchToggle.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('search-bar-hidden');
+            searchBarContainer.classList.toggle('search-bar-active');
+            if (searchBarContainer.classList.contains('search-bar-active')) {
+                siteSearchInput.focus();
+            }
+        });
+
+        // Placeholder for global search functionality (from La Familia template)
+        document.getElementById('search-submit-btn').addEventListener('click', () => {
+            alert(`Global search for: ${siteSearchInput.value}`);
+        });
+        document.getElementById('search-clear-btn').addEventListener('click', () => {
+            siteSearchInput.value = '';
+        });
+        document.getElementById('search-mic-btn').addEventListener('click', () => {
+            alert('Voice search not implemented.');
+        });
+        siteSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                alert(`Global search for: ${siteSearchInput.value}`);
+            }
+        });
+
+
+        // --- SokoProperties Data (Mirror from sokoproperties.html for data consistency) ---
+        // In a real application, this data would likely come from a shared JS file or API.
+        const propertiesData = [
+            {
+                id: 'prop1', name: 'Luxury Penthouse with City Views', type: 'penthouse', bedrooms: 4, location: 'Westlands', priceUSD: 750000, views: 1230, agentId: 'agent1', installmentsAvailable: true,
+                description: 'Experience unparalleled luxury in this stunning penthouse offering panoramic city views. Features include a private elevator, smart home automation, and a rooftop pool. Perfect for discerning individuals seeking an exclusive urban retreat.',
+                images: [
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Exterior',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Living',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Kitchen',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Bedroom',
+                    'https://placehold.co/800x600/007bff/ffffff?text=Penthouse+Bathroom'
+                ]
+            },
+            {
+                id: 'prop2', name: 'Spacious Family Bungalow', type: 'bungalow', bedrooms: 3, location: 'Karen', priceUSD: 320000, views: 890, agentId: 'agent2', installmentsAvailable: false,
+                description: 'A charming and spacious bungalow nestled in the serene Karen neighborhood. Features a large garden, ample parking, and a cozy fireplace. Ideal for families looking for tranquility and space.',
+                images: [
+                    'https://placehold.co/800x600/28a745/ffffff?text=Bungalow+Exterior',
+                    'https://placehold.co/800x600/28a745/ffffff?text=Bungalow+Garden',
+                    'https://placehold.co/800x600/28a745/ffffff?text=Bungalow+Interior'
+                ]
+            },
+            {
+                id: 'prop3', name: 'Grand Mansion with Expansive Grounds', type: 'mansion', bedrooms: 6, location: 'Runda', priceUSD: 1500000, views: 2500, agentId: 'agent1', installmentsAvailable: true,
+                description: 'An exquisite mansion set on sprawling grounds in the prestigious Runda area. Boasts multiple living areas, a gourmet kitchen, swimming pool, and staff quarters. A perfect blend of luxury and privacy.',
+                images: [
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Exterior',
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Pool',
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Hall',
+                    'https://placehold.co/800x600/ffc107/333333?text=Mansion+Bedroom'
+                ]
+            },
+            {
+                id: 'prop4', name: 'Modern Apartment in Kilimani', type: 'apartment', bedrooms: 2, location: 'Kilimani', priceUSD: 180000, views: 670, agentId: 'agent3', installmentsAvailable: false,
+                description: 'Sleek and modern apartment in the vibrant Kilimani area. Features open-plan living, high-end finishes, and access to a gym and communal recreation areas. Ideal for young professionals.',
+                images: [
+                    'https://placehold.co/800x600/dc3545/ffffff?text=Apartment+Exterior',
+                    'https://placehold.co/800x600/dc3545/ffffff?text=Apartment+Living',
+                    'https://placehold.co/800x600/dc3545/ffffff?text=Apartment+Gym'
+                ]
+            },
+            {
+                id: 'prop5', name: 'Cozy Bungalow with Private Garden', type: 'bungalow', bedrooms: 2, location: 'Lavington', priceUSD: 280000, views: 520, agentId: 'agent2', installmentsAvailable: true,
+                description: 'A charming 2-bedroom bungalow with its own private garden, perfect for small families or couples. Located in a quiet part of Lavington, close to amenities.',
+                images: [
+                    'https://placehold.co/800x600/17a2b8/ffffff?text=Bungalon+Lavington',
+                    'https://placehold.co/800x600/17a2b8/ffffff?text=Bungalow+Kitchen'
+                ]
+            },
+            {
+                id: 'prop6', name: 'Executive Penthouse with Rooftop Terrace', type: 'penthouse', bedrooms: 3, location: 'Karen', priceUSD: 950000, views: 1800, agentId: 'agent3', installmentsAvailable: true,
+                description: 'This executive penthouse offers breathtaking views and a spacious rooftop terrace, ideal for entertaining. High-end finishes and smart home features throughout.',
+                images: [
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Penthouse+Karen',
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Rooftop+Terrace'
+                ]
+            },
+            {
+                id: 'prop7', name: 'Traditional Mansion with Lush Gardens', type: 'mansion', bedrooms: 5, location: 'Westlands', priceUSD: 1200000, views: 2100, agentId: 'agent1', installmentsAvailable: false,
+                description: 'A timeless mansion featuring classic architecture and expansive, well-manicured gardens. Offers ample space for family living and grand entertaining.',
+                images: [
+                    'https://placehold.co/800x600/fd7e14/ffffff?text=Mansion+Westlands',
+                    'https://placehold.co/800x600/fd7e14/ffffff?text=Mansion+Garden'
+                ]
+            },
+            {
+                id: 'prop8', name: 'Compact Apartment for Singles', type: 'apartment', bedrooms: 1, location: 'Kilimani', priceUSD: 120000, views: 450, agentId: 'agent2', installmentsAvailable: false,
+                description: 'A well-designed 1-bedroom apartment, perfect for singles or young couples. Conveniently located near amenities and public transport.',
+                images: [
+                    'https://placehold.co/800x600/20c997/ffffff?text=Apartment+Kilimani',
+                    'https://placehold.co/800x600/20c997/ffffff?text=Apartment+Interior'
+                ]
+            },
+            {
+                id: 'prop9', name: 'Sprawling Bungalow with Farm Land', type: 'bungalow', bedrooms: 4, location: 'Runda', priceUSD: 450000, views: 980, agentId: 'agent3', installmentsAvailable: true,
+                description: 'This unique bungalow comes with a significant plot of land, ideal for small-scale farming or future expansion. Offers a peaceful rural feel within city limits.',
+                images: [
+                    'https://placehold.co/800x600/6610f2/ffffff?text=Bungalow+Runda',
+                    'https://placehold.co/800x600/6610f2/ffffff?text=Farm+Land'
+                ]
+            },
+            {
+                id: 'prop10', name: 'Exclusive Penthouse with Helipad Access', type: 'penthouse', bedrooms: 5, location: 'Lavington', priceUSD: 2000000, views: 3000, agentId: 'agent1', installmentsAvailable: true,
+                description: 'The epitome of luxury living, this penthouse boasts direct helipad access, a private cinema, and unparalleled bespoke interiors. For the ultimate high-flyer.',
+                images: [
+                    'https://placehold.co/800x600/e83e8c/ffffff?text=Penthouse+Lavington',
+                    'https://placehold.co/800x600/e83e8c/ffffff?text=Private+Cinema'
+                ]
+            },
+            {
+                id: 'prop11', name: 'Charming Bungalow near Golf Course', type: 'bungalow', bedrooms: 3, location: 'Karen', priceUSD: 380000, views: 750, agentId: 'agent2', installmentsAvailable: false,
+                description: 'A delightful bungalow located just minutes from a prestigious golf course. Features spacious rooms and a manicured lawn, perfect for golf enthusiasts.',
+                images: [
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Bungalow+Golf',
+                    'https://placehold.co/800x600/6f42c1/ffffff?text=Bungalow+Interior'
+                ]
+            },
+            {
+                id: 'prop12', name: 'Historic Mansion with Modern Amenities', type: 'mansion', bedrooms: 7, location: 'Kilimani', priceUSD: 1300000, views: 1900, agentId: 'agent3', installmentsAvailable: true,
+                description: 'A beautifully preserved historic mansion updated with all modern comforts. Combines old-world charm with contemporary living, ideal for large families.',
+                images: [
+                    'https://placehold.co/800x600/00CED1/ffffff?text=Mansion+Historic',
+                    'https://placehold.co/800x600/00CED1/ffffff?text=Mansion+Modern'
+                ]
+            },
+            {
+                id: 'prop13', name: 'City Center Apartment', type: 'apartment', bedrooms: 2, location: 'Westlands', priceUSD: 210000, views: 580, agentId: 'agent1', installmentsAvailable: false,
+                description: 'Conveniently located apartment in Westlands, offering easy access to business districts and entertainment. Ideal for urban living.',
+                images: [
+                    'https://placehold.co/800x600/FFD700/000000?text=Apartment+Westlands',
+                    'https://placehold.co/800x600/FFD700/000000?text=Apartment+Balcony'
+                ]
+            },
+            {
+                id: 'prop14', name: 'Serene Runda Bungalow', type: 'bungalow', bedrooms: 3, location: 'Runda', priceUSD: 390000, views: 910, agentId: 'agent2', installmentsAvailable: true,
+                description: 'A peaceful bungalow in the leafy suburbs of Runda, offering a quiet escape from the city bustle. Features a spacious compound and mature trees.',
+                images: [
+                    'https://placehold.co/800x600/C0C0C0/000000?text=Bungalow+Runda+Serene',
+                    'https://placehold.co/800x600/C0C0C0/000000?text=Bungalow+Living'
+                ]
+            },
+            {
+                id: 'prop15', name: 'Lavington Penthouse with Gym', type: 'penthouse', bedrooms: 3, location: 'Lavington', priceUSD: 880000, views: 1500, agentId: 'agent3', installmentsAvailable: true,
+                description: 'Luxurious penthouse in Lavington with exclusive access to a state-of-the-art gym and swimming pool. Modern design and high ceilings.',
+                images: [
+                    'https://placehold.co/800x600/800080/FFFFFF?text=Penthouse+Lavington+Gym',
+                    'https://placehold.co/800x600/800080/FFFFFF?text=Penthouse+Pool'
+                ]
+            },
+            {
+                id: 'prop16', name: 'Karen Mansion with Helipad', type: 'mansion', bedrooms: 6, location: 'Karen', priceUSD: 2500000, views: 3500, agentId: 'agent1', installmentsAvailable: true,
+                description: 'An ultra-exclusive mansion in Karen featuring its own private helipad, cinema, and extensive security. The ultimate in privacy and luxury.',
+                images: [
+                    'https://placehold.co/800x600/000080/FFFFFF?text=Mansion+Karen+Helipad',
+                    'https://placehold.co/800x600/000080/FFFFFF?text=Mansion+Cinema'
+                ]
+            }
+        ];
+
+        const USD_TO_KES_RATE = 130; // Example exchange rate
+
+        // --- My Activity Specific Elements ---
+        const favoritesList = document.getElementById('favorites-list');
+        const checkoutSummary = document.getElementById('checkout-summary');
+        const totalItemsSpan = document.getElementById('total-items');
+        const estimatedTotalPriceSpan = document.getElementById('estimated-total-price');
+        const proceedCheckoutBtn = document.getElementById('proceed-checkout-btn');
+        const noFavoritesMessage = document.getElementById('no-favorites-message');
+
+        const checkoutModal = document.getElementById('checkout-modal');
+        const closeModalBtn = checkoutModal.querySelector('.close-button');
+        const cancelCheckoutBtn = document.getElementById('cancel-checkout');
+        const checkoutForm = document.getElementById('checkout-form');
+        const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+        const bankDetailsSection = document.getElementById('bank-details-section');
+        const selectBank = document.getElementById('select-bank');
+        const checkoutMessage = document.getElementById('checkout-message');
+
+        // --- Functions ---
+
+        /**
+         * Loads and displays favorite properties from localStorage.
+         */
+        function loadFavoriteProperties() {
+            const favoritePropertyIds = JSON.parse(localStorage.getItem('sokoFavorites')) || [];
+            favoritesList.innerHTML = ''; // Clear existing list
+            let totalPropertiesPrice = 0;
+
+            if (favoritePropertyIds.length === 0) {
+                noFavoritesMessage.style.display = 'block';
+                checkoutSummary.style.display = 'none';
+                proceedCheckoutBtn.disabled = true;
+                return;
+            } else {
+                noFavoritesMessage.style.display = 'none';
+                checkoutSummary.style.display = 'block';
+                proceedCheckoutBtn.disabled = false;
+            }
+
+            favoritePropertyIds.forEach(id => {
+                const property = propertiesData.find(p => p.id === id);
+                if (property) {
+                    totalPropertiesPrice += property.priceUSD;
+                    const favoriteItem = document.createElement('div');
+                    favoriteItem.classList.add('favorite-item');
+                    favoriteItem.dataset.id = property.id;
+
+                    favoriteItem.innerHTML = `
+                        <img src="${property.images[0]}" alt="${property.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x200/A0D2EB/333333?text=Image+Unavailable';">
+                        <div class="favorite-item-content">
+                            <h3>${property.name}</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> ${property.location}</p>
+                            <p><i class="fas fa-bed"></i> ${property.bedrooms} Bedrooms</p>
+                            <p class="price">$${property.priceUSD.toLocaleString()}</p>
+                        </div>
+                        <div class="favorite-item-actions">
+                            <a href="sokoproperties.html#property-detail-content?id=${property.id}" class="view-property-btn"><i class="fas fa-eye"></i> View Property</a>
+                            <button class="remove-btn" data-id="${property.id}"><i class="fas fa-trash-alt"></i> Remove</button>
+                        </div>
+                    `;
+                    favoritesList.appendChild(favoriteItem);
+                }
+            });
+
+            totalItemsSpan.textContent = favoritePropertyIds.length;
+            estimatedTotalPriceSpan.textContent = `$${totalPropertiesPrice.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+
+            // Add event listeners for remove buttons
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const idToRemove = e.target.dataset.id || e.target.closest('button').dataset.id;
+                    removeFavorite(idToRemove);
+                });
+            });
+        }
+
+        /**
+         * Removes a property from favorites in localStorage and reloads the list.
+         * @param {string} propertyId - The ID of the property to remove.
+         */
+        function removeFavorite(propertyId) {
+            let favorites = JSON.parse(localStorage.getItem('sokoFavorites')) || [];
+            favorites = favorites.filter(id => id !== propertyId);
+            localStorage.setItem('sokoFavorites', JSON.stringify(favorites));
+            alert('Property removed from favorites.');
+            loadFavoriteProperties(); // Reload the list
+        }
+
+        /**
+         * Shows the checkout modal.
+         */
+        function showCheckoutModal() {
+            checkoutModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            checkoutMessage.style.display = 'none'; // Hide previous messages
+            checkoutForm.reset(); // Reset form fields
+            bankDetailsSection.style.display = 'none'; // Hide bank details
+            document.getElementById('confirm-payment-btn').disabled = false; // Enable button
+        }
+
+        /**
+         * Hides the checkout modal.
+         */
+        function hideCheckoutModal() {
+            checkoutModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        /**
+         * Displays a message in the checkout modal.
+         * @param {string} message - The message to display.
+         * @param {string} type - 'success', 'info', or 'error'.
+         */
+        function displayCheckoutMessage(message, type) {
+            checkoutMessage.textContent = message;
+            checkoutMessage.className = `checkout-message ${type}`;
+            checkoutMessage.style.display = 'block';
+        }
+
+        // --- Event Listeners ---
+
+        // Global La Familia Header related
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Sub-navigation clicks
+        // Note: For sokoProperties.html links, direct to the correct page/section.
+        // For My Activity, it's already the active page.
+        document.getElementById('nav-properties').addEventListener('click', (e) => {
+            // This should navigate to sokoproperties.html
+            window.location.href = 'sokoproperties.html';
+        });
+        document.getElementById('nav-about-us').addEventListener('click', (e) => {
+            // This should navigate to sokoproperties.html and then hash to about-us-content
+            window.location.href = 'sokoproperties.html#about-us-content';
+        });
+        document.getElementById('nav-my-activity').addEventListener('click', (e) => {
+            e.preventDefault(); // Stay on this page
+        });
+
+
+        // Proceed to Checkout button
+        proceedCheckoutBtn.addEventListener('click', showCheckoutModal);
+
+        // Close modal button
+        closeModalBtn.addEventListener('click', hideCheckoutModal);
+        cancelCheckoutBtn.addEventListener('click', hideCheckoutModal);
+
+        // Close modal if clicked outside content
+        window.addEventListener('click', (event) => {
+            if (event.target === checkoutModal) {
+                hideCheckoutModal();
+            }
+        });
+
+        // Payment method selection logic
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'Bank Transfer') {
+                    bankDetailsSection.style.display = 'block';
+                    selectBank.setAttribute('required', 'required');
+                } else {
+                    bankDetailsSection.style.display = 'none';
+                    selectBank.removeAttribute('required');
+                }
+            });
+        });
+
+        // Checkout form submission
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const selectedBank = paymentMethod === 'Bank Transfer' ? selectBank.value : 'N/A';
+
+            const favoritePropertyIds = JSON.parse(localStorage.getItem('sokoFavorites')) || [];
+            const purchasedProperties = favoritePropertyIds.map(id => propertiesData.find(p => p.id === id)).filter(Boolean);
+            const totalPrice = purchasedProperties.reduce((sum, prop) => sum + prop.priceUSD, 0);
+
+            let message = '';
+            let messageType = '';
+
+            if (paymentMethod === 'Cash/Cheque') {
+                message = `Thank you for your interest! Your order for properties worth $${totalPrice.toLocaleString()} is confirmed. Please visit our nearest office to complete the payment via Cash or Cheque. We will contact you shortly to arrange a meeting.`;
+                messageType = 'info';
+            } else if (paymentMethod === 'Bank Transfer') {
+                if (!selectedBank || selectedBank === '-- Select Bank --') {
+                    displayCheckoutMessage('Please select your bank for bank transfer.', 'error');
+                    return;
+                }
+                message = `Your order for properties worth $${totalPrice.toLocaleString()} has been placed via Bank Transfer. Please complete the transfer to the provided SokoProperties bank details. We will verify your payment and contact you.`;
+                messageType = 'info';
+            } else if (paymentMethod === 'Credit/Debit Card' || paymentMethod === 'PayPal') {
+                message = `Payment for $${totalPrice.toLocaleString()} via ${paymentMethod} has been processed successfully! We will be in touch shortly to finalize the property transfer details.`;
+                messageType = 'success';
+                // In a real app, this would involve a payment gateway
+            }
+
+            console.log('Checkout Details:', {
+                fullName, email, phone, address, paymentMethod, selectedBank, purchasedProperties, totalPrice
+            });
+
+            displayCheckoutMessage(message, messageType);
+            document.getElementById('confirm-payment-btn').disabled = true; // Disable button after successful attempt
+
+            // Optionally clear favorites after successful checkout
+            // localStorage.removeItem('sokoFavorites');
+            // loadFavoriteProperties(); // Reload to show empty list
+            // setTimeout(() => hideCheckoutModal(), 5000); // Hide modal after 5 seconds
+        });
+
+        // Initial load of favorite properties
+        loadFavoriteProperties();
+    });
+</script>
+</body>
+</html>

@@ -47,12 +47,6 @@
     color: var(--primary-color); /* Hover effect matching primary brand color */
 }
 
-.imall-logo img {
-    height: 35px; /* Adjust size of iMall logo */
-    margin-right: 0.5rem;
-    border-radius: 4px; /* Slightly rounded corners for the logo image */
-}
-
 /* Active state for the current page's logo/link */
 .imall-logo.active {
     color: var(--primary-color);
@@ -146,6 +140,8 @@
     border-radius: 5px;
     padding: 0.5rem 0;
     border: 1px solid var(--border-color);
+    max-height: 300px; /* Added: Limit height for scrollability */
+    overflow-y: auto; /* Added: Enable vertical scrolling */
 }
 
 .imall-nav-links .dropdown-content a {
@@ -166,6 +162,12 @@
 .imall-nav-links .dropdown:hover .dropdown-content {
     display: block;
 }
+
+/* For dropdown to show/hide with JS class toggle */
+.imall-nav-links .dropdown-content.show {
+    display: block;
+}
+
 
 /* Action Icons (Wishlist, Cart, Profile) */
 .imall-action-icons {
@@ -252,6 +254,8 @@
         min-width: auto;
         border-top: 1px solid var(--border-color); /* Add a separator */
         margin-top: 0.5rem;
+        max-height: none; /* Allow full height on mobile when stacked */
+        overflow-y: visible; /* Disable scrolling on mobile when stacked */
     }
 
     .imall-nav-links .dropdown-content a {
@@ -371,13 +375,9 @@
 .imall-nav-links .dropdown-content.show {
     display: block;
 }
-/* Ensure hover still works if JS isn't active, but JS will control 'show' */
+/* Show the dropdown menu on hover */
 .imall-nav-links .dropdown:hover .dropdown-content {
-    /* Keep this for hover behavior, but JS will manage 'show' class */
-    display: none; /* Hide by default, JS will add .show */
-}
-.imall-nav-links .dropdown:hover .dropdown-content.show {
-    display: block; /* Ensure it stays visible if JS has added 'show' */
+    display: block;
 }
 /* --- 1. Hero Section Styling --- */
 /* Targeting #hero-section and assuming content inside #hero-slider-container */

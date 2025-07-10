@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Finesse - All Products</title>
+    <meta name="description" content="Explore all products from Fashion Finesse Boutique. Filter by category, brand, and more.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Inline styles for Fashion Finesse specific elements to ensure basic layout -->
+    <style>
+        /* General layout for the subheader - Copied from fashionfinesse.html for consistency */
+        .ff-subheader {
+            background-color: var(--card-bg); /* Inherit from main styles */
+            padding: var(--spacing-unit);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .ff-subheader-left, .ff-subheader-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ff-subheader-logo img {
+            height: 50px; /* Adjust as needed */
+            width: auto;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .ff-search-bar {
+            display: flex;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .ff-search-bar input {
+            flex-grow: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .ff-search-bar button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .ff-search-bar button:hover {
+            background-color: #c4644a;
+        }
+
+        .ff-categories-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .ff-categories-nav li {
+            position: relative;
+        }
+
+        .ff-categories-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .ff-categories-nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .ff-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 0.5rem 0;
+            top: 100%; /* Position below the parent link */
+            left: 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .ff-dropdown-content a {
+            color: var(--text-color);
+            padding: 8px 16px;
+            text-decoration: none;
+            display: block;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+
+        .ff-dropdown-content a:hover {
+            background-color: var(--hover-bg);
+            color: var(--primary-color);
+        }
+
+        /* Show dropdown on hover (JS will handle toggle for touch) */
+        .ff-categories-nav li:hover .ff-dropdown-content {
+            display: block;
+        }
+
+        .ff-cart-icon {
+            position: relative;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .ff-cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 0.2em 0.5em;
+            font-size: 0.7rem;
+            min-width: 20px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        /* Styles for product listing page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+                /* Custom Message Container Styles */
+        .ff-message-container {
+            padding: 1rem;
+            margin: 1rem auto;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: none; /* Hidden by default, shown by JS */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: relative;
+            z-index: 1000; /* Ensure it's on top */
+        }
+
+        .ff-message-container.ff-message-success {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Dark green */
+            border: 1px solid #c3e6cb;
+        }
+
+        .ff-message-container.ff-message-error {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24; /* Dark red */
+            border: 1px solid #f5c6cb;
+        }
+
+        .ff-message-container.ff-message-info {
+            background-color: #d1ecf1; /* Light blue */
+            color: #0c5460; /* Dark blue */
+            border: 1px solid #bee5eb;
+        }
+
+        /* For showing the message with opacity transition */
+        .ff-message-container[style*="display: block"] {
+            opacity: 1;
+        }
+
+        .ff-products-header {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-lg);
+                    padding: var(--spacing-unit);
+                    background-color: var(--card-bg);
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px var(--card-shadow);
+                }
+
+                .ff-products-header h2 {
+                    color: var(--primary-color);
+                    font-size: 2.2rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                .ff-products-header p {
+                    color: var(--text-color);
+                    font-size: 1.1rem;
+                }
+
+        .ff-filters-sort {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background-color: var(--card-bg);
+            padding: var(--spacing-unit);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+        }
+
+        .ff-filters-sort select,
+        .ff-filters-sort input[type="number"] {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .ff-filters-sort select:focus,
+        .ff-filters-sort input[type="number"]:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .ff-product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding-bottom: 2rem; /* Space before footer */
+        }
+
+        /* Product Card styles (copied from fashionfinesse.html for consistency) */
+        .ff-product-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            position: relative; /* For favorite icon positioning */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push button to bottom */
+        }
+
+        .ff-product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ff-product-card img {
+            max-width: 100%;
+            height: 200px; /* Slightly larger for product page */
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 0.8rem;
+            background-color: var(--light-bg); /* For placeholder */
+        }
+
+        .ff-product-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ff-product-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ff-product-card .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: auto; /* Push to bottom */
+        }
+
+        .ff-product-card .cta-button:hover {
+            background-color: #c4644a;
+        }
+
+        .ff-product-card .cta-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .ff-product-meta {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ff-product-meta .rating {
+            color: gold;
+        }
+
+        .ff-product-meta .stock-status.in-stock {
+            color: green;
+            font-weight: bold;
+        }
+
+        .ff-product-meta .stock-status.out-of-stock {
+            color: red;
+            font-weight: bold;
+        }
+
+        .ff-favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .ff-favorite-icon.favorited {
+            color: red; /* Or a distinct color when favorited */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ff-subheader {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .ff-subheader-left, .ff-subheader-right {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+            .ff-search-bar {
+                width: 100%;
+                max-width: 100%;
+                margin-top: 0.5rem;
+            }
+            .ff-categories-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-top: 1rem;
+            }
+            .ff-filters-sort {
+                flex-direction: column;
+                align-items: center;
+            }
+            .ff-filters-sort select,
+            .ff-filters-sort input[type="number"] {
+                width: 90%;
+            }
+            .ff-product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ff-subheader-logo img {
+                height: 40px;
+            }
+            .ff-categories-nav ul {
+                gap: 0.5rem;
+            }
+            .ff-categories-nav a {
+                font-size: 0.9rem;
+            }
+            .ff-cart-icon {
+                font-size: 1.5rem;
+            }
+            .ff-cart-count {
+                font-size: 0.6rem;
+                min-width: 16px;
+            }
+            .ff-products-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Fashion Finesse Subheader (Identical to homepage for consistency) -->
+<div class="ff-subheader">
+    <div class="ff-subheader-left">
+        <a href="fashionfinesse.html" class="ff-subheader-logo">
+            <img src="https://placehold.co/150x50/ff7f50/ffffff?text=Fashion+Finesse" alt="Fashion Finesse Logo">
+        </a>
+        <div class="ff-search-bar">
+            <input type="search" id="ff-product-search" placeholder="Search products, brands..." aria-label="Fashion Finesse Product Search">
+            <button id="ff-search-submit-btn" aria-label="Search Products"><i class="fas fa-search"></i></button>
+            <div id="ff-search-suggestions" class="ff-search-suggestions"></div>
+        </div>
+    </div>
+    <div class="ff-subheader-right">
+        <nav class="ff-categories-nav">
+            <ul id="ff-categories-list">
+                <!-- Categories will be dynamically populated by JS -->
+                <li><a href="fashionfinesse-products.html?filter=new-arrivals">New Arrivals</a></li>
+            </ul>
+        </nav>
+        <div class="ff-cart-icon">
+            <a href="fashionfinesse-my-activity.html?tab=cart" aria-label="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="ff-cart-count" id="ff-cart-count">0</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content for Products Page -->
+<main>
+    <!-- Custom message container -->
+    <div id="ff-message-container" class="ff-message-container" style="display: none;"></div>
+
+    <section class="ff-products-header">
+        <h2 id="ff-products-page-title">All Products</h2>
+        <p id="ff-products-page-description">Browse our extensive collection of trendy and elegant apparel.</p>
+    </section>
+
+    <section class="ff-filters-sort">
+        <select id="ff-filter-category" aria-label="Filter by Category">
+            <option value="all">All Categories</option>
+            <!-- Options will be dynamically populated by JS -->
+        </select>
+
+        <select id="ff-filter-subcategory" aria-label="Filter by Subcategory" disabled>
+            <option value="all">All Subcategories</option>
+            <!-- Options will be dynamically populated by JS based on category selection -->
+        </select>
+
+        <select id="ff-filter-brand" aria-label="Filter by Brand">
+            <option value="all">All Brands</option>
+            <!-- Options will be dynamically populated by JS -->
+        </select>
+
+        <input type="number" id="ff-filter-min-price" placeholder="Min Price" aria-label="Minimum Price Filter">
+        <input type="number" id="ff-filter-max-price" placeholder="Max Price" aria-label="Maximum Price Filter">
+
+        <select id="ff-sort-by" aria-label="Sort products by">
+            <option value="default">Default Sort</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="name-asc">Name: A-Z</option>
+            <option value="name-desc">Name: Z-A</option>
+            <option value="rating-desc">Rating: High to Low</option>
+        </select>
+    </section>
+
+    <section class="ff-product-listing">
+        <div class="ff-product-grid" id="ff-product-grid">
+            <!-- Products will be dynamically loaded by JS -->
+            <p style="text-align: center; color: var(--text-color);">Loading products...</p>
+        </div>
+    </section>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+<!-- Fashion Finesse Specific JavaScript -->
+<script src="scripts/fashionfinesse.js"></script>
+
+</body>
+</html>

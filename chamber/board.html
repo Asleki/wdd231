@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Familia Chambers - Board & Team</title>
+    <meta name="description" content="Meet the Board of Directors and the dedicated team members of La Familia Chambers.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Specific styles for the Board & Team page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .board-team-header {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-lg);
+            padding: var(--spacing-unit);
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+        }
+
+        .board-team-header h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-team-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            margin-bottom: 3rem;
+        }
+
+        .team-section h3 {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .team-member-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--card-shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+
+        .team-member-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .team-member-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member-card p {
+            font-size: 1rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        .team-member-card .bio-snippet {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .team-member-card .social-links {
+            margin-top: 1rem;
+        }
+
+        .team-member-card .social-links a {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin: 0 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .team-member-card .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .board-team-header h2 {
+                font-size: 2rem;
+            }
+            .team-section h3 {
+                font-size: 1.8rem;
+            }
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            .team-member-card {
+                padding: 1rem;
+            }
+            .team-member-card img {
+                width: 120px;
+                height: 120px;
+            }
+            .team-member-card h4 {
+                font-size: 1.3rem;
+            }
+            .team-member-card p {
+                font-size: 0.9rem;
+            }
+            .team-member-card .bio-snippet {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .board-team-header h2 {
+                font-size: 1.6rem;
+            }
+            .board-team-header p {
+                font-size: 1rem;
+            }
+            .team-section h3 {
+                font-size: 1.5rem;
+            }
+            .team-grid {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+            .team-member-card img {
+                width: 100px;
+                height: 100px;
+            }
+            .team-member-card h4 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li class="active-nav-link"><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Board & Team Page -->
+<main>
+    <section class="board-team-header">
+        <h2 id="board-page-title">Our Leadership & Team</h2>
+        <p id="board-page-description">Meet the dedicated individuals guiding La Familia Chambers towards a prosperous future for our community.</p>
+    </section>
+
+    <section class="team-section">
+        <h3>Board of Directors</h3>
+        <div class="team-grid" id="board-of-directors-grid">
+            <!-- Board members will be dynamically loaded here by JavaScript -->
+            <p style="text-align: center; color: var(--text-color); grid-column: 1 / -1;">Loading Board Members...</p>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <h3>Our Executive Team</h3>
+        <div class="team-grid" id="executive-team-grid">
+            <!-- Executive team members will be dynamically loaded here by JavaScript -->
+            <p style="text-align: center; color: var(--text-color); grid-column: 1 / -1;">Loading Executive Team...</p>
+        </div>
+    </section>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<!-- Board & Team Page Specific JavaScript -->
+<script>
+    // Helper function to generate placeholder image URLs
+    function generatePlaceholderImage(width, height, text, bgColor = 'cccccc', textColor = '333333') {
+        return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
+    }
+
+    // Data for Board of Directors
+    const laFamiliaBoardMembers = [
+        {
+            name: 'Zawadi Mzuri',
+            title: 'Chairperson',
+            image: generatePlaceholderImage(150, 150, 'Zawadi Mzuri', 'a0c0a0', 'ffffff'),
+            bio: 'Zawadi Mzuri is a seasoned entrepreneur and advocate for sustainable business practices. With over 20 years of experience in the manufacturing sector, she brings a wealth of knowledge in strategic leadership and community development. Her vision for La Familia Chambers is to foster an inclusive and innovative business ecosystem.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'David Kimani',
+            title: 'Vice-Chairperson',
+            image: generatePlaceholderImage(150, 150, 'David Kimani', 'c0a0c0', 'ffffff'),
+            bio: 'David Kimani is a legal expert specializing in corporate law and governance. He provides invaluable legal counsel and strategic guidance to the Board, ensuring compliance and ethical operations. David is passionate about creating fair opportunities for all businesses.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Dr. Aisha Hassan',
+            title: 'Secretary',
+            image: generatePlaceholderImage(150, 150, 'Dr. Aisha Hassan', 'a0a0c0', 'ffffff'),
+            bio: 'Dr. Aisha Hassan is an accomplished academic and researcher with a focus on economic development. As Secretary, she meticulously manages board communications and documentation, contributing her analytical skills to policy formulation and strategic planning.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Robert Ngugi',
+            title: 'Treasurer',
+            image: generatePlaceholderImage(150, 150, 'Robert Ngugi', 'c0c0a0', 'ffffff'),
+            bio: 'Robert Ngugi is a certified public accountant with extensive experience in financial management and auditing. He oversees the Chamber\'s financial health, ensuring transparency and fiscal responsibility. Robert is committed to maximizing resource utilization for member benefits.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Sarah Ochieng',
+            title: 'Board Member',
+            image: generatePlaceholderImage(150, 150, 'Sarah Ochieng', 'e0e0a0', 'ffffff'),
+            bio: 'Sarah Ochieng is a dynamic marketing professional with a proven track record in brand building and digital strategy. She brings fresh perspectives on member engagement and outreach, helping the Chamber connect with a wider audience and enhance its value proposition.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Michael Mutua',
+            title: 'Board Member',
+            image: generatePlaceholderImage(150, 150, 'Michael Mutua', 'a0e0e0', 'ffffff'),
+            bio: 'Michael Mutua is a technology innovator and founder of a successful tech startup. His expertise in emerging technologies and digital transformation is crucial for guiding the Chamber\'s initiatives to support tech-driven businesses and foster a vibrant innovation ecosystem.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        }
+    ];
+
+    // Data for Executive Team
+    const laFamiliaExecutiveTeam = [
+        {
+            name: 'Grace Wanjiku',
+            title: 'Chief Executive Officer (CEO)',
+            image: generatePlaceholderImage(150, 150, 'Grace Wanjiku', 'f0c0f0', 'ffffff'),
+            bio: 'Grace Wanjiku leads the day-to-day operations of La Familia Chambers, driving strategic initiatives and ensuring the Chamber\'s mission is achieved. With a background in organizational leadership and non-profit management, she is dedicated to fostering a thriving business community.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Peter Mwangi',
+            title: 'Operations Manager',
+            image: generatePlaceholderImage(150, 150, 'Peter Mwangi', 'c0f0c0', 'ffffff'),
+            bio: 'Peter Mwangi oversees all operational aspects of the Chamber, ensuring smooth execution of programs and events. His meticulous planning and logistical expertise are vital for delivering high-quality services to members.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Esther Njeri',
+            title: 'Membership Coordinator',
+            image: generatePlaceholderImage(150, 150, 'Esther Njeri', 'f0f0c0', 'ffffff'),
+            bio: 'Esther Njeri is the primary point of contact for new and existing members, dedicated to ensuring their needs are met and they fully benefit from Chamber resources. She plays a key role in member retention and recruitment.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Collins Omondi',
+            title: 'Events Manager',
+            image: generatePlaceholderImage(150, 150, 'Collins Omondi', 'c0f0f0', 'ffffff'),
+            bio: 'Collins Omondi is responsible for conceptualizing, planning, and executing all Chamber events, from large-scale summits to intimate networking sessions. His creativity and organizational skills ensure memorable and impactful experiences.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        },
+        {
+            name: 'Faith Chebet',
+            title: 'Communications Manager',
+            image: generatePlaceholderImage(150, 150, 'Faith Chebet', 'f0c0c0', 'ffffff'),
+            bio: 'Faith Chebet manages all internal and external communications for La Familia Chambers, including press releases, newsletters, and social media. She ensures that the Chamber\'s message is clear, consistent, and reaches its target audience effectively.',
+            social: {
+                linkedin: '#',
+                twitter: '#'
+            }
+        }
+    ];
+
+    // Function to render team members
+    function renderTeamMembers(members, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = ''; // Clear loading message
+
+        if (members.length === 0) {
+            container.innerHTML = `<p style="text-align: center; color: var(--text-color); grid-column: 1 / -1;">No ${containerId.replace(/-/g, ' ')} available at this time.</p>`;
+            return;
+        }
+
+        members.forEach(member => {
+            const memberCard = document.createElement('div');
+            memberCard.classList.add('team-member-card');
+            memberCard.innerHTML = `
+                <img src="${member.image}" alt="${member.name}">
+                <h4>${member.name}</h4>
+                <p>${member.title}</p>
+                <div class="bio-snippet">${member.bio}</div>
+                <div class="social-links">
+                    ${member.social.linkedin ? `<a href="${member.social.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>` : ''}
+                    ${member.social.twitter ? `<a href="${member.social.twitter}" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+                    <!-- Add more social icons as needed -->
+                </div>
+            `;
+            container.appendChild(memberCard);
+        });
+    }
+
+    // Run rendering functions when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTeamMembers(laFamiliaBoardMembers, 'board-of-directors-grid');
+        renderTeamMembers(laFamiliaExecutiveTeam, 'executive-team-grid');
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfyaCare Clinic - Your Health, Our Priority</title>
+    <meta name="description" content="AfyaCare Clinic offers comprehensive medical services, dedicated to your health and well-being in Mlolongo, Machakos County.">
+    <link rel="icon" href="images/afyacare_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for AfyaCare Clinic specific elements */
+        /* Define Light Mode Colors for AfyaCare */
+        :root {
+            --afyacare-primary: #10B981; /* Emerald green */
+            --afyacare-secondary: #059669; /* Darker emerald */
+            --afyacare-accent: #3B82F6; /* Blue for highlights */
+            --afyacare-text-dark: #1F2937; /* Dark gray for text */
+            --afyacare-text-light: #F9FAFB; /* Light gray for text on dark backgrounds */
+            --afyacare-bg-light: #F9FAFB; /* Light background for sections */
+            --afyacare-card-bg: #FFFFFF; /* Card background in light mode */
+            --afyacare-shadow: rgba(0,0,0,0.08); /* Card shadow */
+            --afyacare-border: #D1D5DB; /* Input/general border */
+        }
+
+        /* Define Dark Mode Colors for AfyaCare */
+        body.dark-mode {
+            --afyacare-primary: #059669; /* Slightly darker green for dark mode primary */
+            --afyacare-secondary: #047857; /* Even darker green */
+            --afyacare-accent: #60A5FA; /* Lighter blue for dark mode accent */
+            --afyacare-text-dark: #E5E7EB; /* Light text for dark backgrounds */
+            --afyacare-text-light: #1F2937; /* Dark text on light elements (e.g. within card on dark background) */
+            --afyacare-bg-light: #1F2937; /* Dark background for sections */
+            --afyacare-card-bg: #374151; /* Card background in dark mode */
+            --afyacare-shadow: rgba(0,0,0,0.25); /* Darker shadow */
+            --afyacare-border: #4B5563; /* Dark mode border */
+        }
+
+        /* AfyaCare Clinic Sticky Header */
+        .afyacare-header {
+            position: fixed;
+            /* Top will be set by JS below based on La Familia header height */
+            width: 100%;
+            z-index: 999; /* Just below La Familia header's 1000 */
+            background-color: var(--afyacare-primary);
+            color: var(--afyacare-text-light);
+            box-shadow: 0 2px 5px var(--afyacare-shadow);
+            transition: top 0.3s ease-in-out, background-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            flex-wrap: wrap;
+        }
+        .afyacare-header .logo-name {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .afyacare-header .logo-name img {
+            height: 50px;
+            width: auto;
+        }
+        .afyacare-header .logo-name h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .afyacare-header .nav-links a {
+            color: var(--afyacare-text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s ease;
+            border-radius: 0.375rem;
+        }
+        .afyacare-header .nav-links a:hover {
+            background-color: var(--afyacare-secondary);
+        }
+
+        /* Hero Carousel */
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            height: 500px; /* Adjust as needed */
+            overflow: hidden;
+            /* Padding top will be set by JS to clear both sticky headers */
+            padding-top: 0; /* Initial 0, will be set by JS */
+        }
+        @media (max-width: 768px) {
+            .hero-carousel {
+                height: 350px;
+            }
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 1; /* Below dots */
+            display: flex; /* To center content */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            color: white; /* Default text color for overlay */
+            text-align: center;
+        }
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-overlay {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .carousel-overlay h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .carousel-overlay p {
+            font-size: 1.2rem;
+            max-width: 800px;
+        }
+        .carousel-overlay .cta-button {
+            margin-top: 2rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 0.375rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            display: inline-block; /* Ensure padding works */
+            text-decoration: none; /* Remove underline */
+            color: var(--afyacare-text-light); /* Text color set by variable */
+            background-color: var(--afyacare-accent);
+        }
+        .carousel-overlay .cta-button:hover {
+            background-color: #2563EB; /* Darker blue on hover */
+            transform: translateY(-2px);
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3; /* Above slides */
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: white;
+        }
+
+        /* General Section Styling */
+        .section-container {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--afyacare-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--afyacare-accent);
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Services Grid */
+        .service-card, .professional-card, .application-form {
+            background-color: var(--afyacare-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--afyacare-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--afyacare-shadow);
+        }
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .service-card-content {
+            padding: 1.5rem;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--afyacare-secondary);
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+        .service-card p, .service-card .price-list li {
+            color: var(--afyacare-text-dark);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+        .service-card .price-list li strong {
+            color: var(--afyacare-accent);
+            transition: color 0.3s ease;
+        }
+
+        /* Professionals Section */
+        .professional-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        .professional-card:hover {
+            transform: translateY(-5px);
+        }
+        .professional-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--afyacare-primary);
+            transition: border-color 0.3s ease;
+        }
+        .professional-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--afyacare-secondary);
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .professional-card p {
+            font-size: 1rem;
+            color: var(--afyacare-text-dark);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+        .professional-card .title {
+            font-weight: 600;
+            color: var(--afyacare-accent);
+            margin-bottom: 1rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        /* Applications Section */
+        .application-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--afyacare-text-dark);
+            transition: color 0.3s ease;
+        }
+        .application-form input[type="text"],
+        .application-form input[type="email"],
+        .application-form input[type="file"],
+        .application-form textarea,
+        .application-form select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--afyacare-border);
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--afyacare-text-dark);
+            background-color: var(--afyacare-card-bg);
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+        }
+        .application-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .application-form button {
+            background-color: var(--afyacare-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .application-form button:hover {
+            background-color: var(--afyacare-secondary);
+        }
+
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100; /* Higher than other content, but lower than La Familia Chambers header */
+        }
+        .chatbot-icon {
+            background-color: var(--afyacare-accent);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+        .chatbot-popup {
+            position: absolute;
+            bottom: 80px; /* Above the icon */
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background-color: var(--afyacare-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 25px var(--afyacare-shadow);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .chatbot-popup.active {
+            display: flex;
+        }
+        .chatbot-header {
+            background-color: var(--afyacare-secondary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .chatbot-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: var(--afyacare-bg-light); /* Lighter background for messages */
+            transition: background-color 0.3s ease;
+        }
+        .chat-message {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chat-message.user {
+            background-color: var(--afyacare-accent);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+            transition: background-color 0.3s ease;
+        }
+        .chat-message.bot {
+            background-color: var(--afyacare-border); /* Use border color for bot bubbles */
+            color: var(--afyacare-text-dark);
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--afyacare-border);
+            transition: border-color 0.3s ease;
+        }
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--afyacare-border);
+            border-radius: 0.5rem;
+            margin-right: 0.75rem;
+            background-color: var(--afyacare-card-bg);
+            color: var(--afyacare-text-dark);
+            transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+        .chatbot-input button {
+            background-color: var(--afyacare-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .chatbot-input button:hover {
+            background-color: var(--afyacare-secondary);
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .afyacare-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            .afyacare-header .nav-links {
+                margin-top: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+            .afyacare-header .nav-links a {
+                flex: 1 1 auto;
+                text-align: center;
+                margin: 0.25rem;
+            }
+            .carousel-overlay h1 {
+                font-size: 2rem;
+            }
+            .carousel-overlay p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .service-card, .professional-card {
+                margin-bottom: 2rem; /* Add spacing for smaller screens */
+            }
+            .chatbot-popup {
+                width: 90%;
+                left: 5%;
+                right: 5%;
+                bottom: 1rem;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+            </ul>
+    </nav>
+</header>
+<header class="afyacare-header" id="afyacare-header">
+    <div class="logo-name">
+        <img src="images/afyacare_logo.png" alt="AfyaCare Clinic Logo">
+        <h2>AfyaCare Clinic</h2>
+    </div>
+    <nav class="nav-links">
+        <a href="#about-us">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#professionals">Our Team</a>
+        <a href="#applications">Careers</a>
+        <a href="#contact-us">Contact Us</a>
+    </nav>
+</header>
+<main class="bg-gray-100 text-gray-800 font-sans">
+    <section class="hero-carousel" id="hero-carousel">
+        <div class="carousel-dots" id="carousel-dots"></div>
+    </section>
+
+    <section id="services" class="section-container" style="background-color: var(--afyacare-bg-light);">
+        <h2 class="section-title">Our Comprehensive Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="service-card">
+                <img src="images/service_consultation.webp" alt="General Consultation">
+                <div class="service-card-content">
+                    <h3>General Medical Consultations</h3>
+                    <p>Our experienced general practitioners provide thorough examinations, diagnoses, and treatment plans for a wide range of common illnesses and health concerns.</p>
+                    <h4>Payment Methods & Pricing:</h4>
+                    <ul class="list-disc list-inside price-list">
+                        <li><strong>Cash/M-Pesa:</strong> KES 1,500 - KES 2,500 (depending on complexity)</li>
+                        <li><strong>Major Medical Insurances:</strong> NHIF, Britam, Jubilee, AAR (Co-pay may apply)</li>
+                        <li><strong>Card Payments:</strong> Visa, MasterCard</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/service_ambulance.webp" alt="Ambulance Services">
+                <div class="service-card-content">
+                    <h3>Emergency Ambulance Services</h3>
+                    <p>Equipped with state-of-the-art medical equipment, our ambulances provide rapid response and safe transportation for critical emergencies, staffed by trained paramedics.</p>
+                    <h4>Payment Methods & Pricing:</h4>
+                    <ul class="list-disc list-inside price-list">
+                        <li><strong>Emergency Call Out:</strong> KES 8,000 - KES 20,000 (within Mlolongo/Nairobi, depending on distance and severity)</li>
+                        <li><strong>Inter-county Transfer:</strong> Quoted per km</li>
+                        <li><strong>Direct Billing to Insurance:</strong> Available for approved partners</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/service_lab.webp" alt="Laboratory Services">
+                <div class="service-card-content">
+                    <h3>Diagnostic Laboratory Services</h3>
+                    <p>We offer a full range of accurate and timely laboratory tests including blood work, urine analysis, pathology, and more, crucial for precise diagnoses.</p>
+                    <h4>Payment Methods & Pricing:</h4>
+                    <ul class="list-disc list-inside price-list">
+                        <li><strong>Full Blood Count (FBC):</strong> KES 700</li>
+                        <li><strong>Urinalysis:</strong> KES 500</li>
+                        <li><strong>Malaria Test:</strong> KES 600</li>
+                        <li><strong>Comprehensive Metabolic Panel:</strong> KES 2,000</li>
+                        <li><strong>Insurance Coverage:</strong> Check with your provider for specific lab test coverage.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/service_pharmacy.webp" alt="Pharmacy Services">
+                <div class="service-card-content">
+                    <h3>On-site Pharmacy</h3>
+                    <p>Our well-stocked pharmacy provides convenient access to prescribed medications and over-the-counter drugs, ensuring you get the right treatment without delay.</p>
+                    <h4>Payment Methods & Pricing:</h4>
+                    <ul class="list-disc list-inside price-list">
+                        <li><strong>Prescription Medications:</strong> Prices vary by medication (regulated by PPB)</li>
+                        <li><strong>Over-the-Counter:</strong> Standard retail pricing</li>
+                        <li><strong>Payment Options:</strong> Cash, M-Pesa, Card, Insurance (for covered prescriptions)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/service_pediatrics.webp" alt="Pediatric Services">
+                <div class="service-card-content">
+                    <h3>Specialized Pediatric Care</h3>
+                    <p>Dedicated medical care for infants, children, and adolescents, focusing on their unique health and developmental needs, from routine check-ups to vaccinations.</p>
+                    <h4>Payment Methods & Pricing:</h4>
+                    <ul class="list-disc list-inside price-list">
+                        <li><strong>Pediatric Consultation:</strong> KES 2,000 - KES 3,500</li>
+                        <li><strong>Vaccinations:</strong> Prices vary by vaccine (e.g., Polio, Measles)</li>
+                        <li><strong>Child Health Check-ups:</strong> KES 1,800</li>
+                        <li><strong>Accepted Insurances:</strong> AAR, Jubilee, Sanlam (verify child-specific benefits)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/service_funeral.webp" alt="Funeral Services">
+                <div class="service-card-content">
+                    <h3>Mortuary & Funeral Support Services</h3>
+                    <p>In times of loss, AfyaCare Clinic extends compassionate support, offering mortuary services and guidance through the necessary arrangements with dignity and respect.</p>
+                    <h4>Payment Methods & Pricing:</h4>
+                    <ul class="list-disc list-inside price-list">
+                        <li><strong>Mortuary Storage (per day):</strong> KES 500 - KES 1,000</li>
+                        <li><strong>Embalming Services:</strong> KES 10,000 - KES 15,000</li>
+                        <li><strong>Basic Funeral Arrangement Support:</strong> KES 5,000 (consultation & coordination)</li>
+                        <li><strong>Payment Options:</strong> Cash, Bank Transfer, M-Pesa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-us" class="section-container" style="background-color: var(--afyacare-bg-light);">
+        <h2 class="section-title">Meet Our Professionals & Our Journey</h2>
+        <div class="text-center mb-12">
+            <p class="text-lg leading-relaxed max-w-3xl mx-auto" style="color: var(--afyacare-text-dark);">
+                At AfyaCare Clinic, we believe in a holistic approach to health, driven by a team of dedicated and compassionate professionals. Our journey began with a vision to provide accessible, high-quality medical care to every member of our community.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="professional-card">
+                <img src="images/prof_ceo.webp" alt="Dr. Almasi Juma, CEO">
+                <h3>Dr. Almasi Juma</h3>
+                <span class="title">Chief Executive Officer</span>
+                <p>With over 20 years in healthcare management, Dr. Juma leads AfyaCare Clinic with a passion for community health and innovative medical solutions. His vision guides our commitment to excellence and patient-centered care.</p>
+            </div>
+
+            <div class="professional-card">
+                <img src="images/prof_doctor1.webp" alt="Dr. Zawadi Mwai, Lead General Practitioner">
+                <h3>Dr. Zawadi Mwai</h3>
+                <span class="title">Lead General Practitioner</span>
+                <p>Dr. Mwai is a highly respected GP with 15 years of experience. Her expertise spans family medicine, chronic disease management, and preventative health. Patients value her empathetic approach and thorough diagnostics.</p>
+            </div>
+
+            <div class="professional-card">
+                <img src="images/prof_doctor2.webp" alt="Dr. Kiprono Cheruiyot, Pediatrician">
+                <h3>Dr. Kiprono Cheruiyot</h3>
+                <span class="title">Pediatrician</span>
+                <p>Specializing in child health, Dr. Cheruiyot is beloved by families for his gentle demeanor and expert care for children of all ages. He focuses on healthy development and age-appropriate medical interventions.</p>
+            </div>
+
+            <div class="professional-card">
+                <img src="images/prof_nurse.webp" alt="Sister Akinyi Otieno, Nurse Manager">
+                <h3>Sister Akinyi Otieno</h3>
+                <span class="title">Nurse Manager</span>
+                <p>Sister Akinyi brings 10 years of nursing experience and strong leadership to our team. She ensures seamless patient flow, coordinates care, and upholds the highest standards of nursing practice.</p>
+            </div>
+
+            <div class="professional-card">
+                <img src="images/prof_labtech.webp" alt="Mr. Kevin Omondi, Senior Lab Technologist">
+                <h3>Mr. Kevin Omondi</h3>
+                <span class="title">Senior Lab Technologist</span>
+                <p>Kevin is our meticulous Senior Lab Technologist, ensuring the accuracy and reliability of all diagnostic tests. His dedication to precision is fundamental to our clinic's diagnostic capabilities.</p>
+            </div>
+
+            <div class="professional-card">
+                <img src="images/prof_paramedic.webp" alt="Ms. Sarah Wanjiku, Lead Paramedic">
+                <h3>Ms. Sarah Wanjiku</h3>
+                <span class="title">Lead Paramedic</span>
+                <p>Sarah leads our ambulance team with exceptional emergency medical skills and calm under pressure. Her swift and expert actions are vital in providing pre-hospital care and safe transport.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications" class="section-container" style="background-color: var(--afyacare-bg-light);">
+        <h2 class="section-title">Join Our Team: Media & Career Applications</h2>
+        <div class="text-center mb-8">
+            <p class="text-lg leading-relaxed max-w-2xl mx-auto" style="color: var(--afyacare-text-dark);">
+                Are you passionate about healthcare and committed to making a difference? AfyaCare Clinic is always looking for talented individuals to join our growing family. We also welcome media inquiries and partnership proposals.
+            </p>
+            <p class="text-md mt-4" style="color: var(--afyacare-text-dark);">
+                Please use the form below to submit your application or inquiry.
+            </p>
+        </div>
+
+        <div class="application-form max-w-3xl mx-auto">
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="applicationType">Type of Application/Inquiry</label>
+                    <select id="applicationType" name="applicationType" required>
+                        <option value="">Select one</option>
+                        <option value="job_application">Job Application</option>
+                        <option value="internship">Internship</option>
+                        <option value="media_inquiry">Media Inquiry / Press</option>
+                        <option value="partnership_proposal">Partnership Proposal</option>
+                        <option value="general_inquiry">General Inquiry</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="e.g., Application for Nurse Position" required>
+                </div>
+                <div class="mt-4">
+                    <label for="message">Your Message / Cover Letter</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Tell us about yourself and why you're interested..." required></textarea>
+                </div>
+                <div class="mt-4">
+                    <label for="resume">Upload Resume/Portfolio (PDF, DOCX, JPG - max 5MB)</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                </div>
+                <div class="mt-6 text-center">
+                    <button type="submit">Submit Application</button>
+                </div>
+            </form>
+            <p class="text-center mt-6 text-sm" style="color: var(--afyacare-text-dark);">
+                **Application Review Timeline:** We aim to review all applications within **5-7 business days** and provide feedback or next steps. Media inquiries are typically responded to within 24-48 hours.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact-us" class="section-container" style="background-color: var(--afyacare-bg-light);">
+        <h2 class="section-title">Reach Out To Us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="text-center md:text-left">
+                <p class="text-lg leading-relaxed mb-6" style="color: var(--afyacare-text-dark);">
+                    We are located conveniently in Mlolongo, Machakos County, easily accessible for all your healthcare needs.
+                </p>
+                <p class="text-xl font-semibold mb-4" style="color: var(--afyacare-secondary);">Our Location:</p>
+                <p class="text-lg mb-2" style="color: var(--afyacare-text-dark);"><i class="fas fa-map-marker-alt mr-2" style="color: var(--afyacare-primary);"></i> AfyaCare Clinic, Mlolongo Town, Off Mombasa Road, Machakos County, Kenya</p>
+                <p class="text-lg mb-2" style="color: var(--afyacare-text-dark);"><i class="fas fa-phone-alt mr-2" style="color: var(--afyacare-primary);"></i> +254 7XX XXX XXX (Main Line)</p>
+                <p class="text-lg mb-2" style="color: var(--afyacare-text-dark);"><i class="fas fa-phone-alt mr-2" style="color: var(--afyacare-primary);"></i> +254 7XX XXX XXX (Emergency Ambulance)</p>
+                <p class="text-lg mb-2" style="color: var(--afyacare-text-dark);"><i class="fas fa-envelope mr-2" style="color: var(--afyacare-primary);"></i> info@afyacareclinic.co.ke</p>
+                <p class="text-lg mb-4" style="color: var(--afyacare-text-dark);"><i class="fas fa-clock mr-2" style="color: var(--afyacare-primary);"></i> Open Monday - Saturday: 8:00 AM - 6:00 PM</p>
+                <a href="https://maps.google.com/?q=AfyaCare+Clinic+Mlolongo" target="_blank" rel="noopener" class="inline-block px-6 py-3 rounded-lg font-semibold transition duration-300" style="background-color: var(--afyacare-primary); color: white;">
+                    <i class="fas fa-directions mr-2"></i> Get Directions on Google Maps
+                </a>
+            </div>
+            <div class="map-placeholder">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.825656133465!2d36.99464017417596!3d-1.2829397356247903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f132e4d0c1e55%3A0x6b8d9c0e2c3f7b2e!2sMlolongo!5e0!3m2!1sen!2ske!4v1701234567890!5m2!1sen!2ske"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-lg"></iframe>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<div class="chatbot-container">
+    <div class="chatbot-icon" id="chatbot-toggle" aria-label="Open Chatbot">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div class="chatbot-popup" id="chatbot-popup">
+        <div class="chatbot-header">
+            <span>AfyaCare Assistant (Online 24/7)</span>
+            <button id="chatbot-close">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="chat-message bot">Hello! How can I assist you today? Feel free to ask about our services, appointments, or anything else.</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input-field" placeholder="Type your message...">
+            <button id="chatbot-send-button"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+<script src="scripts/main.js"></script>
+<script>
+    // Adjust AfyaCare Clinic header position based on La Familia Chambers header height
+    document.addEventListener('DOMContentLoaded', () => {
+        const laFamiliaHeader = document.querySelector('.sticky-header');
+        const afyacareHeader = document.getElementById('afyacare-header');
+        const heroCarousel = document.getElementById('hero-carousel');
+
+        function adjustAfyaCareHeaderPosition() {
+            const laFamiliaHeaderHeight = laFamiliaHeader.offsetHeight;
+            afyacareHeader.style.top = `${laFamiliaHeaderHeight}px`;
+
+            // Adjust hero section padding to clear both sticky headers
+            const afyacareHeaderHeight = afyacareHeader.offsetHeight;
+            heroCarousel.style.paddingTop = `${laFamiliaHeaderHeight + afyacareHeaderHeight}px`;
+        }
+
+        // Initial adjustment
+        adjustAfyaCareHeaderPosition();
+
+        // Adjust on window resize and on La Familia Chambers header's content changes (if dynamic)
+        window.addEventListener('resize', adjustAfyaCareHeaderPosition);
+        const observer = new MutationObserver(adjustAfyaCareHeaderPosition);
+        observer.observe(laFamiliaHeader, { attributes: true, childList: true, subtree: true });
+
+        // Hero Carousel Logic with Dynamic Content
+        const heroSlidesData = [
+            {
+                image: 'images/hero_consultation.webp',
+                headline: 'Your Health, Our Priority',
+                description: 'Providing compassionate and comprehensive healthcare services for the well-being of our community.',
+                ctaText: 'Explore Our Services',
+                ctaLink: '#services'
+            },
+            {
+                image: 'images/hero_pediatrics_doctors.webp', // Assuming this image exists or you'll add it
+                headline: 'Caring for Our Youngest Patients',
+                description: 'Specialized pediatric care for infants, children, and adolescents, ensuring their healthy growth and development.',
+                ctaText: 'Learn About Pediatric Services',
+                ctaLink: '#services'
+            },
+            {
+                image: 'images/hero_emergency_response.webp', // Assuming this image exists or you'll add it
+                headline: '24/7 Emergency Medical Response',
+                description: 'Rapid and reliable ambulance services, equipped to handle critical emergencies anytime, anywhere in the region.',
+                ctaText: 'Call Emergency Now',
+                ctaLink: 'tel:+2547XXXYYYZZZ' // Replace with actual emergency number
+            },
+            {
+                image: 'images/hero_lab_results.webp', // Assuming this image exists or you'll add it
+                headline: 'Accurate Diagnostics, Faster Results',
+                description: 'State-of-the-art laboratory services providing precise and timely test results for effective treatment.',
+                ctaText: 'View Lab Services',
+                ctaLink: '#services'
+            }
+        ];
+
+        const carouselDotsContainer = document.getElementById('carousel-dots');
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        // Function to create and display a slide
+        function showSlide(index) {
+            // Remove active class from all existing slides and dots
+            const existingSlides = document.querySelectorAll('.carousel-slide');
+            existingSlides.forEach(slide => slide.remove()); // Remove all previous slides
+            carouselDotsContainer.innerHTML = ''; // Clear existing dots
+
+            const slideData = heroSlidesData[index];
+
+            // Create new slide element
+            const slideElement = document.createElement('div');
+            slideElement.classList.add('carousel-slide');
+            slideElement.style.backgroundImage = `url('${slideData.image}')`;
+
+            // Create overlay content
+            slideElement.innerHTML = `
+                <div class="carousel-overlay">
+                    <h1>${slideData.headline}</h1>
+                    <p>${slideData.description}</p>
+                    <a href="${slideData.ctaLink}" class="cta-button">${slideData.ctaText}</a>
+                </div>
+            `;
+            heroCarousel.prepend(slideElement); // Add new slide to the carousel (before dots)
+
+            // Add active class after a short delay to ensure transition works
+            setTimeout(() => {
+                slideElement.classList.add('active');
+            }, 50); // Small delay for CSS transition
+
+            // Create dots and set active dot
+            heroSlidesData.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === index) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    clearInterval(slideInterval); // Clear interval on manual click
+                    showSlide(i);
+                    startSlideInterval(); // Restart interval
+                });
+                carouselDotsContainer.appendChild(dot);
+            });
+
+            currentSlideIndex = index;
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % heroSlidesData.length;
+            showSlide(currentSlideIndex);
+        }
+
+        function startSlideInterval() {
+            slideInterval = setInterval(nextSlide, 6000); // Auto-rotate slides every 6 seconds
+        }
+
+        // Initialize first slide and start rotation
+        showSlide(currentSlideIndex);
+        startSlideInterval();
+
+
+        // Chatbot Logic
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotPopup = document.getElementById('chatbot-popup');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInputField = document.getElementById('chatbot-input-field');
+        const chatbotSendButton = document.getElementById('chatbot-send-button');
+
+        chatbotToggle.addEventListener('click', () => {
+            chatbotPopup.classList.toggle('active');
+            if (chatbotPopup.classList.contains('active')) {
+                chatbotInputField.focus();
+            }
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbotPopup.classList.remove('active');
+        });
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to bottom
+        }
+
+        async function handleUserMessage() {
+            const userMessage = chatbotInputField.value.trim();
+            if (userMessage === '') return;
+
+            addMessage(userMessage, 'user');
+            chatbotInputField.value = '';
+
+            // Simulate bot response based on current date for specific details
+            setTimeout(() => {
+                let botResponse = "I'm sorry, I couldn't understand that. Please ask about our services, appointments, or contact details.";
+
+                const lowerCaseMessage = userMessage.toLowerCase();
+                const currentDate = new Date();
+                const dayOfWeek = currentDate.toLocaleString('en-US', { weekday: 'long' }); // e.g., 'Thursday'
+
+                // Given current date is Thursday, July 10, 2025 at 2:29:25 PM EAT.
+                // Assuming standard business hours Mon-Sat, 8:00 AM - 6:00 PM
+                const currentHour = currentDate.getHours(); // 0-23
+                const isWeekday = dayOfWeek !== 'Saturday' && dayOfWeek !== 'Sunday';
+                const isBusinessHours = currentHour >= 8 && currentHour < 18; // 8 AM to 6 PM
+
+                let todayHoursStatus;
+                if (dayOfWeek === 'Sunday') {
+                    todayHoursStatus = 'closed today.';
+                } else if (dayOfWeek === 'Saturday') {
+                    todayHoursStatus = 'open until 6:00 PM today.';
+                } else { // Monday to Friday
+                    todayHoursStatus = 'open until 6:00 PM today.';
+                }
+
+
+                if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
+                    botResponse = "Hello! How can I assist you with AfyaCare Clinic services today?";
+                } else if (lowerCaseMessage.includes('services')) {
+                    botResponse = "AfyaCare Clinic offers General Consultations, Ambulance Services, Lab Diagnostics, Pharmacy, Specialized Pediatric Care, and Mortuary/Funeral Support. You can find more details in the 'Services' section above.";
+                } else if (lowerCaseMessage.includes('appointment')) {
+                    botResponse = "To book an appointment, please call us directly at +254 7XX XXX XXX during working hours, or visit our clinic. We look forward to seeing you!";
+                } else if (lowerCaseMessage.includes('location') || lowerCaseMessage.includes('find us')) {
+                    botResponse = "AfyaCare Clinic is located in Mlolongo Town, Off Mombasa Road, Machakos County, Kenya. You can find directions on Google Maps in the 'Contact Us' section.";
+                } else if (lowerCaseMessage.includes('price') || lowerCaseMessage.includes('cost')) {
+                    botResponse = "Pricing for each service is detailed in our 'Services' section. It varies depending on the specific service. For a personalized quote, please visit or call us.";
+                } else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('doctors') || lowerCaseMessage.includes('staff')) {
+                    botResponse = "Our professional team includes experienced doctors, nurses, lab technologists, and paramedics. You can learn more about them in the 'Meet Our Professionals' section.";
+                } else if (lowerCaseMessage.includes('applications') || lowerCaseMessage.includes('careers')) {
+                    botResponse = "If you're looking to join our team or have a media inquiry, please use the application form in the 'Join Our Team' section. We aim to review applications within 5-7 business days.";
+                } else if (lowerCaseMessage.includes('emergency')) {
+                    botResponse = "For emergencies, please call our dedicated ambulance line at +254 7XX XXX XXX immediately. Our emergency services are available 24/7.";
+                } else if (lowerCaseMessage.includes('hours') || lowerCaseMessage.includes('open')) {
+                    botResponse = `Our clinic is open Monday - Saturday, from 8:00 AM to 6:00 PM. We are currently ${todayHoursStatus}`;
+                } else if (lowerCaseMessage.includes('feedback') || lowerCaseMessage.includes('review')) {
+                    botResponse = "We appreciate your feedback! Please feel free to share your thoughts directly with our reception, or you can contact us via email or phone.";
+                }
+
+                addMessage(botResponse, 'bot');
+            }, 800); // Simulate typing delay
+        }
+
+        chatbotSendButton.addEventListener('click', handleUserMessage);
+        chatbotInputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleUserMessage();
+            }
+        });
+    });
+</script>
+</body>
+</html>

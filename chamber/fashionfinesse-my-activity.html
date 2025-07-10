@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Finesse - My Activity</title>
+    <meta name="description" content="View your shopping cart, favorite items, and order history on Fashion Finesse.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Inline styles for Fashion Finesse specific elements to ensure basic layout -->
+    <style>
+        /* General layout for the subheader - Copied from fashionfinesse.html for consistency */
+        .ff-subheader {
+            background-color: var(--card-bg); /* Inherit from main styles */
+            padding: var(--spacing-unit);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .ff-subheader-left, .ff-subheader-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ff-subheader-logo img {
+            height: 50px; /* Adjust as needed */
+            width: auto;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .ff-search-bar {
+            display: flex;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .ff-search-bar input {
+            flex-grow: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .ff-search-bar button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .ff-search-bar button:hover {
+            background-color: #c4644a;
+        }
+
+        .ff-categories-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .ff-categories-nav li {
+            position: relative;
+        }
+
+        .ff-categories-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .ff-categories-nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .ff-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 0.5rem 0;
+            top: 100%; /* Position below the parent link */
+            left: 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .ff-dropdown-content a {
+            color: var(--text-color);
+            padding: 8px 16px;
+            text-decoration: none;
+            display: block;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+
+        .ff-dropdown-content a:hover {
+            background-color: var(--hover-bg);
+            color: var(--primary-color);
+        }
+
+        /* Show dropdown on hover (JS will handle toggle for touch) */
+        .ff-categories-nav li:hover .ff-dropdown-content {
+            display: block;
+        }
+
+        .ff-cart-icon {
+            position: relative;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .ff-cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 0.2em 0.5em;
+            font-size: 0.7rem;
+            min-width: 20px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        /* Custom Notification Message Styles (copied from css-message-container) */
+        .ff-message-container {
+            padding: 1rem;
+            margin: 1rem auto;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: none; /* Hidden by default, shown by JS */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: relative;
+            z-index: 1000; /* Ensure it's on top */
+        }
+
+        .ff-message-container.ff-message-success {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Dark green */
+            border: 1px solid #c3e6cb;
+        }
+
+        .ff-message-container.ff-message-error {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24; /* Dark red */
+            border: 1px solid #f5c6cb;
+        }
+
+        .ff-message-container.ff-message-info {
+            background-color: #d1ecf1; /* Light blue */
+            color: #0c5460; /* Dark blue */
+            border: 1px solid #bee5eb;
+        }
+
+        /* For showing the message with opacity transition */
+        .ff-message-container[style*="display: block"] {
+            opacity: 1;
+        }
+
+        /* My Activity Page Specific Styles */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ff-activity-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .ff-activity-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        }
+
+        .ff-activity-tab-button {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            white-space: nowrap; /* Prevent text wrapping inside button */
+        }
+
+        .ff-activity-tab-button:hover {
+            background-color: var(--hover-bg);
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .ff-activity-tab-button.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .ff-tab-content {
+            display: none; /* Hidden by default */
+            padding: 1rem 0;
+        }
+
+        .ff-tab-content.active {
+            display: block; /* Show active tab content */
+        }
+
+        .ff-tab-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Shopping Cart Styles */
+        .ff-cart-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .ff-cart-item {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 5px var(--card-shadow);
+        }
+
+        .ff-cart-item input[type="checkbox"] {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+
+        .ff-cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .ff-cart-item-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .ff-cart-item-info h3 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .ff-cart-item-info h3 a:hover {
+            color: var(--secondary-color);
+        }
+
+        .ff-cart-item-info p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .ff-cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .ff-cart-quantity-input {
+            width: 60px;
+            padding: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .ff-remove-item-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .ff-remove-item-btn:hover {
+            background-color: #c4644a;
+        }
+
+        .ff-cart-summary {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        .ff-cart-summary p {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .ff-cart-summary .cta-button {
+            width: auto;
+            padding: 0.8rem 2rem;
+        }
+
+        .ff-cart-summary label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        .ff-cart-summary label input[type="checkbox"] {
+            transform: scale(1.2);
+        }
+
+
+        /* Favorites Styles (using existing product card) */
+        .ff-favorites-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ff-product-card {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 5px var(--card-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ff-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .ff-product-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .ff-product-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .ff-product-card h3 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .ff-product-card h3 a:hover {
+            color: var(--secondary-color);
+        }
+
+        .ff-product-card p {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .ff-product-meta {
+            font-size: 0.85rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        .ff-product-meta .rating {
+            color: gold; /* Star color */
+        }
+
+        .ff-product-meta .stock-status {
+            font-weight: bold;
+        }
+
+        .ff-product-meta .stock-status.in-stock {
+            color: green;
+        }
+
+        .ff-product-meta .stock-status.out-of-stock {
+            color: red;
+        }
+
+        .ff-product-card .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .ff-product-card .cta-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .ff-product-card .cta-button:disabled {
+            background-color: var(--disabled-bg);
+            cursor: not-allowed;
+        }
+
+        .ff-favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .ff-favorite-icon:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .ff-favorite-icon.fas {
+            color: var(--secondary-color); /* Solid heart for favorited */
+        }
+
+        /* Order History Styles (static for now) */
+        .ff-order-history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ff-order-item {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px var(--card-shadow);
+        }
+
+        .ff-order-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .ff-order-item p {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .ff-order-item ul {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 0.8rem;
+        }
+
+        .ff-order-item ul li {
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+            color: var(--text-color-light);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ff-subheader {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .ff-subheader-left, .ff-subheader-right {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+            .ff-search-bar {
+                width: 100%;
+                max-width: 100%;
+                margin-top: 0.5rem;
+            }
+            .ff-categories-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-top: 1rem;
+            }
+            .ff-cart-items-grid, .ff-favorites-items-grid {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+            .ff-activity-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            .ff-activity-tab-button {
+                width: 100%;
+                text-align: center;
+            }
+            .ff-cart-summary {
+                align-items: center; /* Center buttons and total */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ff-subheader-logo img {
+                height: 40px;
+            }
+            .ff-categories-nav ul {
+                gap: 0.5rem;
+            }
+            .ff-categories-nav a {
+                font-size: 0.9rem;
+            }
+            .ff-cart-icon {
+                font-size: 1.5rem;
+            }
+            .ff-cart-count {
+                font-size: 0.6rem;
+                min-width: 16px;
+            }
+            .ff-activity-container {
+                padding: 1rem;
+            }
+            .ff-activity-tab-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            .ff-cart-item img {
+                width: 100px;
+                height: 100px;
+            }
+            .ff-cart-item-info h3 {
+                font-size: 1.1rem;
+            }
+            .ff-cart-item-info p {
+                font-size: 0.85rem;
+            }
+            .ff-cart-quantity-input {
+                width: 50px;
+                font-size: 0.9rem;
+            }
+            .ff-remove-item-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            .ff-cart-summary p {
+                font-size: 1.1rem;
+            }
+            .ff-cart-summary .cta-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Custom Notification Message Container -->
+<div id="ff-message-container" class="ff-message-container" style="display: none;"></div>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Fashion Finesse Subheader (Identical to homepage for consistency) -->
+<div class="ff-subheader">
+    <div class="ff-subheader-left">
+        <a href="fashionfinesse.html" class="ff-subheader-logo">
+            <img src="https://placehold.co/150x50/ff7f50/ffffff?text=Fashion+Finesse" alt="Fashion Finesse Logo">
+        </a>
+        <div class="ff-search-bar">
+            <input type="search" id="ff-product-search" placeholder="Search products, brands..." aria-label="Fashion Finesse Product Search">
+            <button id="ff-search-submit-btn" aria-label="Search Products"><i class="fas fa-search"></i></button>
+            <div id="ff-search-suggestions" class="ff-search-suggestions"></div>
+        </div>
+    </div>
+    <div class="ff-subheader-right">
+        <nav class="ff-categories-nav">
+            <ul id="ff-categories-list">
+                <!-- Categories will be dynamically populated by JS -->
+                <li><a href="fashionfinesse-products.html?filter=new-arrivals">New Arrivals</a></li>
+            </ul>
+        </nav>
+        <div class="ff-cart-icon">
+            <a href="fashionfinesse-my-activity.html?tab=cart" aria-label="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="ff-cart-count" id="ff-cart-count">0</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content for My Activity Page -->
+<main>
+    <section class="ff-activity-container">
+        <h2>My Activity</h2>
+        <div class="ff-activity-tabs">
+            <button class="ff-activity-tab-button active" data-tab="cart">Shopping Cart (<span id="ff-cart-tab-count">0</span>)</button>
+            <button class="ff-activity-tab-button" data-tab="favorites">Favorites (<span id="ff-favorites-tab-count">0</span>)</button>
+            <button class="ff-activity-tab-button" data-tab="orders">Order History</button>
+        </div>
+
+        <div id="ff-cart-content" class="ff-tab-content active">
+            <h3>Your Shopping Cart</h3>
+            <div id="ff-cart-items" class="ff-cart-items-grid">
+                <!-- Cart items will be loaded here by JavaScript -->
+                <p style="text-align: center; color: var(--text-color);">Your cart is empty.</p>
+            </div>
+            <div class="ff-cart-summary">
+                <label for="ff-select-all-cart-items">
+                    <input type="checkbox" id="ff-select-all-cart-items"> Select All
+                </label>
+                <p>Total: Ksh <span id="ff-cart-total">0</span></p>
+                <button class="cta-button" id="ff-checkout-btn" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <div id="ff-favorites-content" class="ff-tab-content">
+            <h3>Your Favorite Items</h3>
+            <div id="ff-favorites-items" class="ff-favorites-items-grid">
+                <!-- Favorite items will be loaded here by JavaScript -->
+                <p style="text-align: center; width: 100%; color: var(--text-color);">You have no favorite items yet.</p>
+            </div>
+        </div>
+
+        <div id="ff-orders-content" class="ff-tab-content">
+            <h3>Your Order History</h3>
+            <div id="ff-order-history-list" class="ff-order-history-list">
+                <!-- Order history will be loaded here by JavaScript -->
+                <p style="text-align: center; color: var(--text-color);">No past orders found.</p>
+                <!-- Example of a static order item for demonstration -->
+                <div class="ff-order-item">
+                    <h4>Order #FF-20231026-123456-7890</h4>
+                    <p>Date: October 26, 2023</p>
+                    <p>Grand Total: Ksh 7,200</p>
+                    <p>Delivery: Doorstep (Rider)</p>
+                    <p>Status: Delivered</p>
+                    <ul>
+                        <li>Men's Slim Fit Chinos (x1) - Ksh 3,800</li>
+                        <li>Classic White Sneakers (x1) - Ksh 3,400</li>
+                    </ul>
+                </div>
+                <div class="ff-order-item">
+                    <h4>Order #FF-20230915-098765-4321</h4>
+                    <p>Date: September 15, 2023</p>
+                    <p>Grand Total: Ksh 5,500</p>
+                    <p>Delivery: Pick up from Nairobi CBD Branch</p>
+                    <p>Status: Ready for Pickup</p>
+                    <ul>
+                        <li>Unisex Graphic Tee (x2) - Ksh 3,600</li>
+                        <li>Woven Canvas Belt (x1) - Ksh 1,900</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+<!-- Fashion Finesse Specific JavaScript -->
+<script src="scripts/fashionfinesse.js"></script>
+
+</body>
+</html>
