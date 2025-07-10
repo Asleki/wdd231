@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Thumb Landscaping - La Familia Chambers Member</title>
+    <meta name="description" content="Explore Green Thumb Landscaping's services, portfolio, and how to request their expert landscaping and garden maintenance services in Nairobi.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Specific styles for Member Detail pages */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .member-detail-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .member-logo {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .member-detail-container h2 {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .member-detail-container .tagline {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .member-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left; /* Align text within sections to left */
+        }
+
+        .member-section h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center; /* Center section titles */
+        }
+
+        .member-section p, .member-section ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .member-section ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+        }
+
+        .member-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .member-info-item {
+            background-color: var(--light-bg);
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .member-info-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .member-info-item span,
+        .member-info-item a {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .member-info-item a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Portfolio/Gallery specific styles */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .portfolio-item .caption {
+            padding: 1rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        /* Call to Action (CTA) styles */
+        .cta-section {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color-light); /* Lighter primary for CTA */
+            border-radius: 8px;
+            margin-top: 3rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .cta-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #c4644a; /* Darker secondary */
+            transform: translateY(-2px);
+        }
+
+        .back-to-directory {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: 2rem;
+        }
+
+        .back-to-directory:hover {
+            background-color: #4a5a6a; /* Darker shade of primary */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .member-detail-container, .member-section {
+                padding: 1.5rem;
+            }
+            .member-detail-container h2 {
+                font-size: 2.2rem;
+            }
+            .member-detail-container .tagline {
+                font-size: 1.1rem;
+            }
+            .member-section h3 {
+                font-size: 1.8rem;
+            }
+            .member-section p, .member-section ul {
+                font-size: 1rem;
+            }
+            .member-info-grid, .portfolio-grid {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+            .cta-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .member-detail-container, .member-section {
+                padding: 1rem;
+            }
+            .member-detail-container h2 {
+                font-size: 1.8rem;
+            }
+            .member-detail-container .tagline {
+                font-size: 1rem;
+            }
+            .member-section h3 {
+                font-size: 1.5rem;
+            }
+            .member-section p, .member-section ul {
+                font-size: 0.95rem;
+            }
+            .member-info-item strong {
+                font-size: 0.9rem;
+            }
+            .member-info-item span,
+            .member-info-item a {
+                font-size: 0.85rem;
+            }
+            .cta-button, .back-to-directory {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li class="active-nav-link"><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Member Detail Page -->
+<main>
+    <section class="member-detail-container" id="member-header-content">
+        <!-- Member logo, name, tagline -->
+        <p style="text-align: center; color: var(--text-color);">Loading member header...</p>
+    </section>
+
+    <section class="member-section" id="member-about-section">
+        <h3>About Green Thumb Landscaping</h3>
+        <p>Green Thumb Landscaping has been transforming outdoor spaces across Nairobi and its environs since 2018. Our passion lies in creating breathtaking, sustainable landscapes that not only enhance the aesthetic appeal of your property but also provide serene and functional environments for relaxation and enjoyment.</p>
+        <p>We believe a well-designed and maintained garden is an extension of your living or working space, contributing to well-being and increasing property value. Our team of certified horticulturists and experienced landscapers works closely with clients to bring their vision to life, ensuring every project, big or small, is executed with precision and care.</p>
+    </section>
+
+    <section class="member-section" id="member-services-section">
+        <h3>Our Services</h3>
+        <p>We offer a comprehensive range of landscaping and garden maintenance services tailored to meet the unique needs of residential and commercial clients:</p>
+        <ul>
+            <li><strong>Landscape Design & Installation:</strong> From conceptualization to execution, including hardscaping (patios, walkways) and softscaping (planting, lawns).</li>
+            <li><strong>Garden Maintenance:</strong> Regular upkeep services including mowing, pruning, weeding, fertilization, and pest control.</li>
+            <li><strong>Irrigation Systems:</strong> Design and installation of efficient watering systems to ensure your garden thrives with minimal effort.</li>
+            <li><strong>Tree & Shrub Care:</strong> Expert care for trees and shrubs, including planting, pruning, and health management.</li>
+            <li><strong>Vertical Gardens & Green Walls:</strong> Innovative solutions for urban spaces, bringing greenery to vertical surfaces.</li>
+            <li><strong>Water Features:</strong> Design and installation of ponds, fountains, and other water elements to add tranquility.</li>
+            <li><strong>Seasonal Planting:</strong> Advice and implementation for seasonal flowers and plants to keep your garden vibrant year-round.</li>
+        </ul>
+    </section>
+
+    <section class="member-section" id="member-portfolio-section">
+        <h3>Our Portfolio</h3>
+        <p>See some of our recent projects that showcase our dedication to beauty and sustainability:</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/a0c0a0/ffffff?text=Residential+Garden" alt="Residential Garden Project">
+                <div class="caption">Lush Residential Garden in Karen</div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/c0a0c0/ffffff?text=Commercial+Landscape" alt="Commercial Landscape Project">
+                <div class="caption">Corporate Office Green Space, CBD</div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/a0a0c0/ffffff?text=Vertical+Garden" alt="Vertical Garden Project">
+                <div class="caption">Innovative Vertical Garden, Westlands</div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/c0c0a0/ffffff?text=Water+Feature" alt="Water Feature Project">
+                <div class="caption">Tranquil Pond Installation, Lavington</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="member-section" id="member-contact-section">
+        <h3>Get in Touch & Request Services</h3>
+        <p>Ready to transform your outdoor space? Contact Green Thumb Landscaping today for a consultation or to request a quote. Our team is eager to discuss your landscaping needs and provide expert solutions.</p>
+        <div class="member-info-grid">
+            <div class="member-info-item">
+                <strong>Email:</strong> <a href="mailto:design@greenthumb.co.ke">design@greenthumb.co.ke</a>
+            </div>
+            <div class="member-info-item">
+                <strong>Phone:</strong> <span>+254 7XX XXX XXX</span> <!-- Placeholder phone -->
+            </div>
+            <div class="member-info-item">
+                <strong>Location:</strong> <span>Lavington, Nairobi</span>
+            </div>
+            <div class="member-info-item">
+                <strong>Operating Hours:</strong> <span>Mon-Fri: 8:00 AM - 5:00 PM</span>
+            </div>
+        </div>
+        <div class="cta-section">
+            <h3>Request a Free Consultation</h3>
+            <p>Let's discuss your dream garden. Click below to schedule a no-obligation consultation with our design experts.</p>
+            <a href="mailto:design@greenthumb.co.ke?subject=Consultation Request - Green Thumb Landscaping" class="cta-button">Request Consultation</a>
+        </div>
+    </section>
+
+    <section class="member-section" id="member-careers-section">
+        <h3>Join Our Team</h3>
+        <p>Are you passionate about horticulture and landscaping? Green Thumb Landscaping is always looking for talented and dedicated individuals to join our growing team. We offer a dynamic work environment and opportunities for professional growth.</p>
+        <div class="cta-section">
+            <h3>Explore Career Opportunities</h3>
+            <p>Visit our careers page or send us your resume to learn more about current openings.</p>
+            <a href="#" class="cta-button">View Open Positions</a> <!-- Placeholder link -->
+        </div>
+    </section>
+
+    <div style="text-align: center;">
+        <a href="directory.html" class="back-to-directory"><i class="fas fa-arrow-left"></i> Back to Member Directory</a>
+    </div>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<!-- Member Detail Page Specific JavaScript -->
+<script>
+    // Helper function to generate placeholder image URLs
+    function generatePlaceholderImage(width, height, text, bgColor = 'cccccc', textColor = '333333') {
+        return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
+    }
+
+    // Specific member data for this page
+    const greenThumbLandscapingData = {
+        id: 'green-thumb-landscaping',
+        imgSrc: 'https://placehold.co/200x150/32cd32/ffffff?text=Green+Thumb+Logo',
+        imgAlt: 'Green Thumb Landscaping Logo',
+        name: 'Green Thumb Landscaping',
+        description: 'Professional landscaping and garden maintenance services.',
+        fullDescription: 'Green Thumb Landscaping specializes in creating and maintaining beautiful outdoor spaces. From initial design and softscaping to irrigation and ongoing garden maintenance, our team of experts transforms ordinary yards into lush, vibrant landscapes. We are passionate about greenery and dedicated to enhancing the aesthetic appeal and value of your property with sustainable and artistic designs.',
+        category: 'services',
+        location: 'lavington',
+        size: 'small', // Retained for potential future use or consistency in data structure, but not displayed
+        popularity: 'medium', // Retained for potential future use or consistency in data structure, but not displayed
+        foundingYear: 2018,
+        contact: 'design@greenthumb.co.ke',
+        website: 'greenthumb.co.ke',
+        link: 'greenthumb.html',
+        phone: '+254 722 123 456', // Added specific phone number
+        operatingHours: 'Mon-Fri: 8:00 AM - 5:00 PM' // Added operating hours
+    };
+
+    // Function to render member details
+    function renderMemberDetails() {
+        console.log("renderMemberDetails function called for Green Thumb Landscaping.");
+        const memberHeaderContainer = document.getElementById('member-header-content');
+        if (!memberHeaderContainer) {
+            console.error("member-header-content container not found.");
+            return;
+        }
+
+        const member = greenThumbLandscapingData; // Directly use the specific data for this page
+
+        if (!member) {
+            memberHeaderContainer.innerHTML = '<p style="text-align: center; color: red;">Member information not found for Green Thumb Landscaping.</p>';
+            console.error(`Green Thumb Landscaping data object is null or undefined.`);
+            return;
+        }
+
+        // Populate the header section
+        memberHeaderContainer.innerHTML = `
+            <img src="${member.imgSrc || generatePlaceholderImage(200, 150, member.name + ' Logo')}" alt="${member.imgAlt}" class="member-logo">
+            <h2>${member.name}</h2>
+            <p class="tagline">${member.description}</p>
+        `;
+
+        // Update the contact section dynamically with the new phone and hours
+        const contactSection = document.getElementById('member-contact-section');
+        if (contactSection) {
+            const contactGrid = contactSection.querySelector('.member-info-grid');
+            if (contactGrid) {
+                contactGrid.innerHTML = `
+                    <div class="member-info-item">
+                        <strong>Email:</strong> <a href="mailto:${member.contact}">${member.contact}</a>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Phone:</strong> <span>${member.phone}</span>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Location:</strong> <span>${member.location.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Operating Hours:</strong> <span>${member.operatingHours}</span>
+                    </div>
+                `;
+            }
+        }
+
+        console.log("Green Thumb Landscaping details rendered successfully.");
+    }
+
+    // Run rendering function when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOMContentLoaded fired for green-thumb-landscaping.html.");
+        try {
+            renderMemberDetails();
+        } catch (e) {
+            console.error("Error rendering Green Thumb Landscaping details:", e);
+            const memberHeaderContainer = document.getElementById('member-header-content');
+            if (memberHeaderContainer) {
+                memberHeaderContainer.innerHTML = `<p style="text-align: center; color: red;">Error loading member details: ${e.message}. Please check the console for details.</p>`;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

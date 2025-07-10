@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Innovations - Leading Tech Solutions & Online Courses</title>
+    <meta name="description" content="Apex Innovations: Your partner for cutting-edge software development, AI, cloud solutions, and digital transformation. Explore our online courses, campaigns, and career opportunities.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Apex Innovations Specific Styles */
+        :root {
+            --ai-primary-color: #007bff; /* A vibrant blue */
+            --ai-secondary-color: #28a745; /* A complementary green */
+            --ai-accent-color: #ffc107; /* A bright yellow for highlights */
+            --ai-light-bg: #e9ecef; /* Light gray for sections */
+            --ai-dark-text: #343a40; /* Darker text for contrast */
+        }
+
+        /* Override some general styles for Apex specific sections if needed */
+        .member-detail-container, .member-section {
+            background-color: var(--card-bg); /* Use general card background */
+            box-shadow: 0 4px 8px var(--card-shadow);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .member-detail-container h2, .member-section h3 {
+            color: var(--ai-primary-color); /* Use AI primary for titles */
+            text-align: center;
+        }
+
+        .member-detail-container .tagline {
+            color: var(--ai-secondary-color);
+        }
+
+        /* Apex Subheader */
+        .ai-subheader {
+            background-color: var(--ai-primary-color);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .ai-subheader-logo img {
+            height: 40px;
+            border-radius: 5px;
+        }
+
+        .ai-subheader-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .ai-subheader-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .ai-subheader-nav a:hover {
+            color: var(--ai-accent-color);
+        }
+
+        /* Hero Section */
+        .ai-hero {
+            background: url('https://placehold.co/1200x600/007bff/ffffff?text=Innovate+With+Apex') no-repeat center center / cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden; /* For ad placement */
+        }
+
+        .ai-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            border-radius: 8px;
+        }
+
+        .ai-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ai-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .ai-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .ai-hero .cta-button {
+            background-color: var(--ai-secondary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 50px; /* Pill shape */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .ai-hero .cta-button:hover {
+            background-color: #218838; /* Darker green */
+            transform: translateY(-3px);
+        }
+
+        .ai-ad-banner {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--ai-accent-color);
+            color: var(--ai-dark-text);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Services Section (Icons) */
+        .ai-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .ai-service-item {
+            background-color: var(--ai-light-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ai-service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .ai-service-item i {
+            font-size: 3rem;
+            color: var(--ai-primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .ai-service-item h4 {
+            font-size: 1.3rem;
+            color: var(--ai-secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .ai-service-item p {
+            font-size: 0.95rem;
+            color: var(--ai-dark-text);
+            line-height: 1.6;
+        }
+
+        /* Online Courses Section */
+        .ai-courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ai-course-card {
+            background-color: var(--ai-light-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ai-course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .ai-course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .ai-course-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .ai-course-card h4 {
+            font-size: 1.6rem;
+            color: var(--ai-primary-color);
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+
+        .ai-course-card p {
+            font-size: 1rem;
+            color: var(--ai-dark-text);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .ai-course-card .course-meta {
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        .ai-course-card .course-meta span {
+            margin-right: 1rem;
+        }
+
+        .ai-course-card .course-meta i {
+            color: var(--ai-secondary-color);
+            margin-right: 0.3rem;
+        }
+
+        .ai-course-card .cta-button {
+            display: block;
+            width: calc(100% - 3rem); /* Adjust for padding */
+            margin: 0 1.5rem 1.5rem 1.5rem; /* Center and add bottom margin */
+            padding: 0.8rem 1.5rem;
+            background-color: var(--ai-secondary-color);
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .ai-course-card .cta-button:hover {
+            background-color: #218838;
+        }
+
+        /* Trivia Quiz */
+        .ai-trivia-quiz {
+            background-color: var(--ai-primary-color-light);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .ai-trivia-quiz h4 {
+            font-size: 1.8rem;
+            color: var(--ai-primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .ai-trivia-quiz p {
+            font-size: 1.1rem;
+            color: var(--ai-dark-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-quiz-question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--ai-dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .ai-quiz-options button {
+            background-color: white;
+            border: 1px solid var(--ai-primary-color);
+            color: var(--ai-primary-color);
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .ai-quiz-options button:hover {
+            background-color: var(--ai-primary-color);
+            color: white;
+        }
+
+        .ai-quiz-options button.selected {
+            background-color: var(--ai-primary-color);
+            color: white;
+        }
+
+        .ai-quiz-feedback {
+            margin-top: 1.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .ai-quiz-feedback.correct {
+            color: var(--ai-secondary-color);
+        }
+
+        .ai-quiz-feedback.incorrect {
+            color: #dc3545; /* Red */
+        }
+
+        .ai-quiz-discount {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--ai-primary-color);
+            font-weight: bold;
+        }
+
+        /* Campaigns Section */
+        .ai-campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ai-campaign-card {
+            background-color: var(--ai-light-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ai-campaign-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .ai-campaign-card h4 {
+            font-size: 1.6rem;
+            color: var(--ai-primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .ai-campaign-card p {
+            font-size: 1rem;
+            color: var(--ai-dark-text);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Testimonials Section */
+        .ai-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .ai-testimonial-card {
+            background-color: var(--ai-light-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+            font-style: italic;
+            color: var(--ai-dark-text);
+            position: relative;
+        }
+
+        .ai-testimonial-card::before {
+            content: "\f10d"; /* Font Awesome quote-left icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 2rem;
+            color: rgba(0, 123, 255, 0.2); /* Light primary color */
+        }
+
+        .ai-testimonial-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            padding-top: 1rem; /* Space for quote icon */
+        }
+
+        .ai-testimonial-card .author {
+            font-weight: bold;
+            color: var(--ai-secondary-color);
+            font-style: normal;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* General CTA Button (used in multiple places) */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--ai-secondary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .back-to-directory {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: 2rem;
+        }
+
+        .back-to-directory:hover {
+            background-color: #4a5a6a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .ai-hero h1 {
+                font-size: 3rem;
+            }
+            .ai-hero p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ai-subheader {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .ai-subheader-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .ai-hero {
+                padding: 6rem 1rem;
+            }
+            .ai-hero h1 {
+                font-size: 2.5rem;
+            }
+            .ai-hero p {
+                font-size: 1.1rem;
+            }
+            .ai-ad-banner {
+                position: static;
+                margin-top: 1rem;
+                display: block;
+                text-align: center;
+            }
+            .member-detail-container, .member-section {
+                padding: 1.5rem;
+            }
+            .member-detail-container h2, .member-section h3 {
+                font-size: 1.8rem;
+            }
+            .ai-services-grid, .ai-courses-grid, .ai-campaigns-grid, .ai-testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .ai-trivia-quiz button {
+                width: calc(100% - 1rem); /* Full width minus margin */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ai-hero {
+                padding: 4rem 0.5rem;
+            }
+            .ai-hero h1 {
+                font-size: 2rem;
+            }
+            .ai-hero p {
+                font-size: 1rem;
+            }
+            .ai-subheader-logo img {
+                height: 35px;
+            }
+            .ai-subheader-nav a {
+                font-size: 0.9rem;
+            }
+            .member-detail-container h2, .member-section h3 {
+                font-size: 1.5rem;
+            }
+            .member-section p, .member-section ul {
+                font-size: 0.95rem;
+            }
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li class="active-nav-link"><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Apex Innovations Subheader -->
+<div class="ai-subheader">
+    <div class="ai-subheader-logo">
+        <a href="apex-innovations.html">
+            <img src="https://placehold.co/150x40/4CAF50/ffffff?text=Apex+Innovations" alt="Apex Innovations Logo">
+        </a>
+    </div>
+    <nav class="ai-subheader-nav">
+        <ul>
+            <li><a href="#ai-hero">Home</a></li>
+            <li><a href="#ai-about-section">About Us</a></li>
+            <li><a href="#ai-services-section">Services</a></li>
+            <li><a href="#ai-courses-section">Courses</a></li>
+            <li><a href="#ai-case-studies-section">Projects</a></li>
+            <li><a href="#ai-contact-section">Contact</a></li>
+            <li><a href="#ai-careers-section">Careers</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Main Content for Apex Innovations Page -->
+<main>
+    <section class="ai-hero" id="ai-hero">
+        <div class="ai-hero-content">
+            <h1>Innovate Your Future with Apex Innovations</h1>
+            <p>Leading the way in custom software, AI, and digital transformation for businesses worldwide.</p>
+            <a href="#ai-courses-section" class="cta-button">Explore Our Courses</a>
+        </div>
+        <div class="ai-ad-banner" id="ai-ad-banner">
+            <!-- Ads will rotate here -->
+            <span id="ai-ad-text">Limited Time: 15% Off All AI Courses!</span>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-about-section">
+        <h3>About Apex Innovations</h3>
+        <p>Apex Innovations is a pioneering technology firm based in Nairobi, dedicated to empowering businesses through cutting-edge software and innovative digital strategies. Established in 2017, we have a proven track record of transforming complex challenges into seamless, efficient, and scalable solutions. Our team comprises visionary engineers, data scientists, and strategic consultants passionate about driving digital transformation and fostering growth for our clients.</p>
+        <p>We believe in a collaborative approach, working closely with our partners to understand their unique needs and deliver bespoke solutions that not only meet but exceed expectations. Our commitment to excellence and continuous innovation ensures that our clients stay ahead in a rapidly evolving technological landscape.</p>
+    </section>
+
+    <section class="member-section" id="ai-services-section">
+        <h3>Our Core Services</h3>
+        <p>Apex Innovations offers a comprehensive suite of technology services designed to optimize your operations and enhance your digital presence:</p>
+        <div class="ai-services-grid">
+            <div class="ai-service-item">
+                <i class="fas fa-code"></i>
+                <h4>Custom Software Development</h4>
+                <p>Tailored applications and platforms built to exact business requirements, from web and mobile apps to enterprise solutions.</p>
+            </div>
+            <div class="ai-service-item">
+                <i class="fas fa-brain"></i>
+                <h4>Artificial Intelligence & Machine Learning</h4>
+                <p>Implementing AI-driven solutions for data analysis, automation, predictive modeling, and enhanced decision-making.</p>
+            </div>
+            <div class="ai-service-item">
+                <i class="fas fa-cloud"></i>
+                <h4>Cloud Solutions & Migration</h4>
+                <p>Expert guidance and implementation for cloud infrastructure (AWS, Azure, Google Cloud), ensuring scalability, security, and efficiency.</p>
+            </div>
+            <div class="ai-service-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>Data Analytics & Business Intelligence</h4>
+                <p>Transforming raw data into actionable insights through advanced analytics, dashboards, and reporting.</p>
+            </div>
+            <div class="ai-service-item">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Cybersecurity Consulting</h4>
+                <p>Comprehensive security assessments, strategy development, and implementation to protect your digital assets from evolving threats.</p>
+            </div>
+            <div class="ai-service-item">
+                <i class="fas fa-sync-alt"></i>
+                <h4>Digital Transformation Strategy</h4>
+                <p>Guiding businesses through their digital journey, optimizing processes, and integrating new technologies for sustainable growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-courses-section">
+        <h3>Online Learning Programs</h3>
+        <p>Advance your career with our expert-led online courses. Gain practical skills in the most in-demand technologies.</p>
+
+        <div class="ai-courses-grid">
+            <div class="ai-course-card">
+                <img src="https://placehold.co/400x200/007bff/ffffff?text=Software+Dev+Course" alt="Custom Software Development Course">
+                <div class="ai-course-card-content">
+                    <h4>Mastering Custom Software Development</h4>
+                    <p>Learn full-stack development, agile methodologies, and build scalable applications from scratch. Ideal for aspiring developers and IT professionals.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 12 Weeks</span>
+                        <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                    </div>
+                    <a href="#ai-course-registration" class="cta-button">Enroll Now</a>
+                </div>
+            </div>
+            <div class="ai-course-card">
+                <img src="https://placehold.co/400x200/28a745/ffffff?text=AI+ML+Course" alt="AI & Machine Learning Course">
+                <div class="ai-course-card-content">
+                    <h4>Applied Artificial Intelligence & Machine Learning</h4>
+                    <p>Dive into AI/ML concepts, build intelligent systems, and explore data science applications. Perfect for data enthusiasts and innovators.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 10 Weeks</span>
+                        <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                    </div>
+                    <a href="#ai-course-registration" class="cta-button">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-trivia-quiz">
+            <h4>Test Your Tech Knowledge & Get a Discount!</h4>
+            <p>Answer our quick quiz correctly to unlock an exclusive discount on your next course enrollment!</p>
+            <div id="ai-quiz-content">
+                <p id="ai-quiz-question" class="ai-quiz-question">Loading quiz question...</p>
+                <div id="ai-quiz-options" class="ai-quiz-options">
+                    <!-- Quiz options will be loaded here -->
+                </div>
+                <button id="ai-quiz-submit" class="cta-button" style="margin-top: 1rem;">Submit Answer</button>
+                <p id="ai-quiz-feedback" class="ai-quiz-feedback"></p>
+                <p id="ai-quiz-discount" class="ai-quiz-discount"></p>
+                <button id="ai-quiz-next" class="cta-button" style="margin-top: 1rem; display: none;">Next Question</button>
+            </div>
+        </div>
+
+        <div class="ai-campaign-card" style="margin-top: 2rem;">
+            <h4>Exclusive Offer: Free Tech Device!</h4>
+            <p>Enroll in any two online courses and receive a complimentary high-performance tech device (e.g., a tablet or smart wearable) to boost your learning experience!</p>
+            <a href="#ai-course-registration" class="cta-button">Claim Your Device</a>
+        </div>
+
+        <div class="cta-section" id="ai-course-registration" style="margin-top: 3rem;">
+            <h3>Ready to Enroll?</h3>
+            <p>Fill out the form below to register for your desired course. Our admissions team will get back to you shortly.</p>
+            <form id="ai-registration-form" class="ai-registration-form" style="max-width: 600px; margin: 0 auto; text-align: left;">
+                <div style="margin-bottom: 1rem;">
+                    <label for="reg-name" style="display: block; margin-bottom: 0.5rem; color: var(--ai-dark-text);">Full Name:</label>
+                    <input type="text" id="reg-name" name="name" required style="width: 100%; padding: 0.8rem; border-radius: 5px; border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color);">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="reg-email" style="display: block; margin-bottom: 0.5rem; color: var(--ai-dark-text);">Email:</label>
+                    <input type="email" id="reg-email" name="email" required style="width: 100%; padding: 0.8rem; border-radius: 5px; border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color);">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="reg-phone" style="display: block; margin-bottom: 0.5rem; color: var(--ai-dark-text);">Phone (Optional):</label>
+                    <input type="tel" id="reg-phone" name="phone" style="width: 100%; padding: 0.8rem; border-radius: 5px; border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color);">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="reg-course" style="display: block; margin-bottom: 0.5rem; color: var(--ai-dark-text);">Desired Course:</label>
+                    <select id="reg-course" name="course" required style="width: 100%; padding: 0.8rem; border-radius: 5px; border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color);">
+                        <option value="">Select a Course</option>
+                        <option value="software-dev">Mastering Custom Software Development</option>
+                        <option value="ai-ml">Applied Artificial Intelligence & Machine Learning</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Submit Registration</button>
+            </form>
+            <p id="registration-message" style="margin-top: 1rem; font-weight: bold;"></p>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-case-studies-section">
+        <h3>Our Key Projects & Case Studies</h3>
+        <p>Explore how Apex Innovations has helped businesses achieve their digital goals:</p>
+        <div class="solutions-grid">
+            <div class="solution-item">
+                <i class="fas fa-desktop"></i>
+                <h4>E-commerce Platform Revamp</h4>
+                <p>Designed and deployed a high-performance e-commerce platform for a major retail client, increasing conversion rates by 30%.</p>
+            </div>
+            <div class="solution-item">
+                <i class="fas fa-robot"></i>
+                <h4>AI-Powered Customer Support</h4>
+                <p>Implemented an AI chatbot and automation system for a service provider, reducing customer response times by 50%.</p>
+            </div>
+            <div class="solution-item">
+                <i class="fas fa-cloud"></i>
+                <h4>Cloud Infrastructure Migration</h4>
+                <p>Migrated a large enterprise's on-premise infrastructure to a secure cloud environment, improving scalability and reducing operational costs.</p>
+            </div>
+            <div class="solution-item">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Advanced Threat Detection System</h4>
+                <p>Developed and deployed a custom cybersecurity solution for a financial institution, enhancing their defense against cyber threats.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-testimonials-section">
+        <h3>What Our Students & Clients Say</h3>
+        <p>Hear directly from those who have experienced the Apex Innovations difference:</p>
+        <div class="ai-testimonials-grid">
+            <div class="ai-testimonial-card">
+                <p>"The 'Mastering Custom Software Development' course was a game-changer for my career. The instructors are top-notch, and the hands-on projects prepared me perfectly for the industry."</p>
+                <span class="author">- Jane Wanjiku, Software Developer</span>
+            </div>
+            <div class="ai-testimonial-card">
+                <p>"Apex Innovations transformed our internal data processes with their AI solutions. We've seen incredible efficiency gains and insights we never thought possible. Truly innovative partners!"</p>
+                <span class="author">- David Kimani, CEO, TechGrow Ltd.</span>
+            </div>
+            <div class="ai-testimonial-card">
+                <p>"I took the AI/ML course and was amazed by the depth of knowledge and practical application. The quiz was fun, and the discount was a great bonus! Highly recommend."</p>
+                <span class="author">- Sarah Adhiambo, Data Scientist</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-campaigns-section">
+        <h3>Latest Campaigns & News</h3>
+        <p>Stay updated with our exciting initiatives and expansion plans.</p>
+        <div class="ai-campaigns-grid">
+            <div class="ai-campaign-card">
+                <h4>Nairobi Tech Summit 2025: Platinum Sponsor!</h4>
+                <p>Apex Innovations is proud to announce our Platinum Sponsorship for the upcoming Nairobi Tech Summit. Join us for keynote speeches, workshops, and exclusive networking opportunities.</p>
+                <a href="#" class="cta-button">Learn More</a>
+            </div>
+            <div class="ai-campaign-card">
+                <h4>New Branch Opening Soon: Mombasa!</h4>
+                <p>We're expanding! Apex Innovations is thrilled to announce the upcoming opening of our new branch in Mombasa. We're looking for talented individuals to join our coastal team and new partners in the region.</p>
+                <a href="#ai-careers-section" class="cta-button">Explore Mombasa Opportunities</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-contact-section">
+        <h3>Connect with Apex Innovations</h3>
+        <p>Ready to innovate and transform your business or career? Contact Apex Innovations today for a detailed discussion on how our expertise can benefit you.</p>
+        <div class="member-info-grid">
+            <div class="member-info-item">
+                <strong>Email:</strong> <a href="mailto:info@apexinnovations.co.ke">info@apexinnovations.co.ke</a>
+            </div>
+            <div class="member-info-item">
+                <strong>Phone:</strong> <span>+254 711 987 654</span>
+            </div>
+            <div class="member-info-item">
+                <strong>Location:</strong> <span>Westlands, Nairobi, Kenya</span>
+            </div>
+            <div class="member-info-item">
+                <strong>Operating Hours:</strong> <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+            </div>
+            <div class="member-info-item">
+                <strong>Website:</strong> <a href="http://apexinnovations.co.ke" target="_blank" rel="noopener">apexinnovations.co.ke</a>
+            </div>
+            <div class="member-info-item">
+                <strong>Follow Us:</strong>
+                <div class="social-icons" style="display: inline-flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <a href="https://facebook.com/apexinnovations" target="_blank" rel="noopener" aria-label="Apex Innovations on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/apexinnovations" target="_blank" rel="noopener" aria-label="Apex Innovations on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/apexinnovations" target="_blank" rel="noopener" aria-label="Apex Innovations on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="cta-section">
+            <h3>Request a Free Consultation or Demo</h3>
+            <p>Let's explore how our innovative solutions can drive your business forward. Click below to schedule a no-obligation consultation.</p>
+            <a href="mailto:info@apexinnovations.co.ke?subject=Consultation Request - Apex Innovations" class="cta-button">Request Consultation</a>
+        </div>
+    </section>
+
+    <section class="member-section" id="ai-careers-section">
+        <h3>Career Opportunities at Apex Innovations</h3>
+        <p>Join a team of passionate innovators and shape the future of technology. Apex Innovations offers a dynamic and challenging environment where talent thrives and contributions are valued. We are always looking for bright minds in software development, AI, data science, and cybersecurity.</p>
+        <div class="cta-section">
+            <h3>Explore Open Positions</h3>
+            <p>Ready to make an impact? Visit our careers portal to view current job openings and apply.</p>
+            <a href="#" class="cta-button">View Open Positions</a> <!-- Placeholder link -->
+        </div>
+    </section>
+
+    <div style="text-align: center;">
+        <a href="directory.html" class="back-to-directory"><i class="fas fa-arrow-left"></i> Back to Member Directory</a>
+    </div>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<!-- Apex Innovations Page Specific JavaScript -->
+<script>
+    // Helper function to generate placeholder image URLs
+    function generatePlaceholderImage(width, height, text, bgColor = 'cccccc', textColor = '333333') {
+        return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
+    }
+
+    // Specific member data for this page (Apex Innovations)
+    const apexInnovationsData = {
+        id: 'apex-innovations',
+        imgSrc: 'https://placehold.co/200x150/4CAF50/ffffff?text=Apex+Logo', // Different placeholder color
+        imgAlt: 'Apex Innovations Logo',
+        name: 'Apex Innovations',
+        description: 'Leading the future with cutting-edge technology and innovative solutions.',
+        fullDescription: 'Apex Innovations is a dynamic technology firm dedicated to delivering groundbreaking solutions that empower businesses to thrive in the digital age. We specialize in custom software development, AI integration, and digital transformation strategies, helping our clients achieve unparalleled efficiency and competitive advantage. Our team of visionary engineers and strategists is committed to pushing the boundaries of what\'s possible, turning complex challenges into innovative opportunities.',
+        category: 'technology',
+        location: 'westlands',
+        foundingYear: 2017,
+        contact: 'info@apexinnovations.co.ke',
+        website: 'apexinnovations.co.ke',
+        link: 'apex-innovations.html',
+        phone: '+254 711 987 654',
+        operatingHours: 'Mon-Fri: 9:00 AM - 6:00 PM',
+        ads: [
+            "Limited Time: 15% Off All AI Courses!",
+            "New Cohort for Software Dev starts Oct 1st!",
+            "Join our Cybersecurity Webinar - Free Registration!",
+            "Early Bird Discount: Digital Transformation Masterclass!"
+        ],
+        quizQuestions: [
+            {
+                question: "Which programming language is commonly used for AI and Machine Learning?",
+                options: ["Java", "Python", "C++", "HTML"],
+                answer: "Python"
+            },
+            {
+                question: "What does 'SaaS' stand for in cloud computing?",
+                options: ["Software as a Service", "System as a Solution", "Security as a Service", "Server and Storage"],
+                answer: "Software as a Service"
+            },
+            {
+                question: "Which of these is a type of cyber attack?",
+                options: ["Phishing", "Debugging", "Compiling", "Refactoring"],
+                answer: "Phishing"
+            }
+        ]
+    };
+
+    // Global variables for quiz state
+    let currentQuizQuestionIndex = 0;
+    let selectedQuizOption = null;
+
+    // Function to display ad banners
+    function displayAdBanner() {
+        const adBanner = document.getElementById('ai-ad-text');
+        if (adBanner && apexInnovationsData.ads && apexInnovationsData.ads.length > 0) {
+            let adIndex = 0;
+            setInterval(() => {
+                adBanner.textContent = apexInnovationsData.ads[adIndex];
+                adIndex = (adIndex + 1) % apexInnovationsData.ads.length;
+            }, 5000); // Change ad every 5 seconds
+        }
+    }
+
+    // Function to render quiz question
+    function renderQuizQuestion() {
+        const quizQuestionElem = document.getElementById('ai-quiz-question');
+        const quizOptionsElem = document.getElementById('ai-quiz-options');
+        const quizSubmitBtn = document.getElementById('ai-quiz-submit');
+        const quizNextBtn = document.getElementById('ai-quiz-next');
+        const quizFeedbackElem = document.getElementById('ai-quiz-feedback');
+        const quizDiscountElem = document.getElementById('ai-quiz-discount');
+
+        if (!quizQuestionElem || !quizOptionsElem || !quizSubmitBtn || !quizNextBtn || !quizFeedbackElem || !quizDiscountElem) {
+            console.error("One or more quiz elements not found.");
+            return;
+        }
+
+        const currentQuestion = apexInnovationsData.quizQuestions[currentQuizQuestionIndex];
+        if (!currentQuestion) {
+            quizQuestionElem.textContent = "Quiz completed! Thanks for playing.";
+            quizOptionsElem.innerHTML = '';
+            quizSubmitBtn.style.display = 'none';
+            quizNextBtn.style.display = 'none';
+            quizFeedbackElem.textContent = '';
+            quizDiscountElem.textContent = '';
+            return;
+        }
+
+        quizQuestionElem.textContent = currentQuestion.question;
+        quizOptionsElem.innerHTML = '';
+        selectedQuizOption = null; // Reset selection
+
+        currentQuestion.options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.addEventListener('click', () => {
+                // Remove 'selected' class from all buttons
+                Array.from(quizOptionsElem.children).forEach(btn => btn.classList.remove('selected'));
+                // Add 'selected' class to the clicked button
+                button.classList.add('selected');
+                selectedQuizOption = option;
+            });
+            quizOptionsElem.appendChild(button);
+        });
+
+        quizSubmitBtn.style.display = 'block';
+        quizNextBtn.style.display = 'none';
+        quizFeedbackElem.textContent = '';
+        quizDiscountElem.textContent = '';
+    }
+
+    // Function to check quiz answer
+    function checkQuizAnswer() {
+        const quizFeedbackElem = document.getElementById('ai-quiz-feedback');
+        const quizDiscountElem = document.getElementById('ai-quiz-discount');
+        const quizSubmitBtn = document.getElementById('ai-quiz-submit');
+        const quizNextBtn = document.getElementById('ai-quiz-next');
+
+        if (selectedQuizOption === null) {
+            quizFeedbackElem.textContent = "Please select an answer.";
+            quizFeedbackElem.className = 'ai-quiz-feedback incorrect';
+            return;
+        }
+
+        const currentQuestion = apexInnovationsData.quizQuestions[currentQuizQuestionIndex];
+        if (selectedQuizOption === currentQuestion.answer) {
+            quizFeedbackElem.textContent = "Correct! You've earned a discount!";
+            quizFeedbackElem.className = 'ai-quiz-feedback correct';
+            quizDiscountElem.textContent = "Your discount code: APEXQUIZ10 (10% off any course)";
+        } else {
+            quizFeedbackElem.textContent = `Incorrect. The correct answer was: "${currentQuestion.answer}". Try the next question!`;
+            quizFeedbackElem.className = 'ai-quiz-feedback incorrect';
+            quizDiscountElem.textContent = ""; // Clear any previous discount
+        }
+
+        quizSubmitBtn.style.display = 'none';
+        quizNextBtn.style.display = 'block'; // Show next button
+        // Disable all options after submission
+        Array.from(document.getElementById('ai-quiz-options').children).forEach(btn => btn.disabled = true);
+    }
+
+    // Function to move to next quiz question
+    function nextQuizQuestion() {
+        currentQuizQuestionIndex++;
+        // Re-enable options for the next question
+        Array.from(document.getElementById('ai-quiz-options').children).forEach(btn => btn.disabled = false);
+        renderQuizQuestion();
+    }
+
+    // Handle form submission for course registration
+    function handleRegistrationFormSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        const form = event.target;
+        const name = form.elements['name'].value;
+        const email = form.elements['email'].value;
+        const course = form.elements['course'].value;
+        const registrationMessage = document.getElementById('registration-message');
+
+        if (name && email && course) {
+            registrationMessage.textContent = `Thank you, ${name}! Your registration for "${form.elements['course'].options[form.elements['course'].selectedIndex].text}" has been received. A confirmation email will be sent to ${email}.`;
+            registrationMessage.style.color = 'var(--ai-secondary-color)';
+            form.reset(); // Clear the form
+        } else {
+            registrationMessage.textContent = "Please fill in all required fields.";
+            registrationMessage.style.color = '#dc3545'; // Red for error
+        }
+    }
+
+    // Function to render static member details (header and contact)
+    function renderStaticMemberDetails() {
+        console.log("renderStaticMemberDetails function called for Apex Innovations.");
+        const memberHeaderContainer = document.getElementById('member-header-content');
+        if (!memberHeaderContainer) {
+            console.error("member-header-content container not found.");
+            return;
+        }
+
+        const member = apexInnovationsData; // Directly use the specific data for this page
+
+        if (!member) {
+            memberHeaderContainer.innerHTML = '<p style="text-align: center; color: red;">Member information not found for Apex Innovations.</p>';
+            console.error(`Apex Innovations data object is null or undefined.`);
+            return;
+        }
+
+        // Populate the header section
+        memberHeaderContainer.innerHTML = `
+            <img src="${member.imgSrc || generatePlaceholderImage(200, 150, member.name + ' Logo')}" alt="${member.imgAlt}" class="member-logo">
+            <h2>${member.name}</h2>
+            <p class="tagline">${member.description}</p>
+        `;
+
+        // Update the contact section dynamically with the new phone and hours
+        const contactSection = document.getElementById('ai-contact-section');
+        if (contactSection) {
+            const contactGrid = contactSection.querySelector('.member-info-grid');
+            if (contactGrid) {
+                contactGrid.innerHTML = `
+                    <div class="member-info-item">
+                        <strong>Email:</strong> <a href="mailto:${member.contact}">${member.contact}</a>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Phone:</strong> <span>${member.phone}</span>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Location:</strong> <span>${member.location.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Operating Hours:</strong> <span>${member.operatingHours}</span>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Website:</strong> <a href="http://${member.website}" target="_blank" rel="noopener">${member.website}</a>
+                    </div>
+                    <div class="member-info-item">
+                        <strong>Follow Us:</strong>
+                        <div class="social-icons" style="display: inline-flex; gap: 0.5rem; margin-top: 0.5rem;">
+                            <a href="https://facebook.com/apexinnovations" target="_blank" rel="noopener" aria-label="Apex Innovations on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/apexinnovations" target="_blank" rel="noopener" aria-label="Apex Innovations on Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://linkedin.com/company/apexinnovations" target="_blank" rel="noopener" aria-label="Apex Innovations on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        console.log("Apex Innovations static details rendered successfully.");
+    }
+
+
+    // Run all rendering and interactive functions when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOMContentLoaded fired for apex-innovations.html.");
+        try {
+            renderStaticMemberDetails();
+            displayAdBanner(); // Start ad rotation
+            renderQuizQuestion(); // Load the first quiz question
+
+            // Attach quiz event listeners
+            const quizSubmitBtn = document.getElementById('ai-quiz-submit');
+            if (quizSubmitBtn) {
+                quizSubmitBtn.addEventListener('click', checkQuizAnswer);
+            }
+
+            const quizNextBtn = document.getElementById('ai-quiz-next');
+            if (quizNextBtn) {
+                quizNextBtn.addEventListener('click', nextQuizQuestion);
+            }
+
+            // Attach registration form listener
+            const registrationForm = document.getElementById('ai-registration-form');
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', handleRegistrationFormSubmit);
+            }
+
+        } catch (e) {
+            console.error("Error initializing Apex Innovations page:", e);
+            const memberHeaderContainer = document.getElementById('member-header-content');
+            if (memberHeaderContainer) {
+                memberHeaderContainer.innerHTML = `<p style="text-align: center; color: red;">Error loading page content: ${e.message}. Please check the console for details.</p>`;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
