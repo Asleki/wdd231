@@ -1,0 +1,191 @@
+/* css/autogiant-motors-contact.css */
+
+/* --- Contact Section --- */
+.contact-section {
+    padding: 6 * var(--spacing-unit) 0; /* MORE VERTICAL SPACING */
+    background-color: var(--background-color); /* Ensure consistent background */
+    transition: background-color 0.3s ease;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Larger min-width for columns */
+    gap: 3 * var(--spacing-unit); /* More gap between contact cards */
+}
+
+.contact-info, .contact-form, .contact-hours {
+    padding: 3 * var(--spacing-unit); /* SIGNIFICANTLY MORE PADDING */
+    border: 1px solid var(--border-color); /* Border for definition */
+    border-radius: var(--border-radius); /* Rounded corners for appealing cards */
+    box-shadow: var(--shadow-md); /* Medium shadow for depth */
+    background-color: var(--card-bg); /* Card background for these sections */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Make them flex containers */
+    flex-direction: column; /* Stack content vertically */
+}
+
+.contact-grid h3 {
+    font-size: 1.6em; /* Larger headings for contact cards */
+    margin-top: 0;
+    margin-bottom: 2 * var(--spacing-unit); /* More space below headings */
+    color: var(--primary-color); /* Headings in primary color */
+    font-weight: 700;
+    text-align: center; /* Center contact card headings */
+}
+
+.contact-info p, .contact-hours p {
+    margin-bottom: 1.2 * var(--spacing-unit); /* More spacing between text lines */
+    line-height: 1.7;
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.contact-info iframe {
+    margin-top: 2 * var(--spacing-unit); /* More space above map */
+    border-radius: var(--border-radius-sm); /* Slightly rounded map */
+    width: 100%;
+    height: 350px; /* Taller map */
+    display: block;
+    border: 1px solid var(--border-color); /* Subtle border for map */
+}
+
+.contact-info .directions-link {
+    margin-top: 2 * var(--spacing-unit); /* More space above directions link */
+    text-align: center; /* Center the directions link */
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.8 * var(--spacing-unit);
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+    width: calc(100% - 24px); /* Adjusted for 12px padding on each side */
+    padding: 1.2 * var(--spacing-unit); /* Increased padding */
+    margin-bottom: 1.8 * var(--spacing-unit); /* More space below inputs */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    box-sizing: border-box;
+    background-color: var(--element-bg); /* Use element-bg for input fields */
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px; /* Minimum height for textarea */
+}
+
+.contact-form button {
+    width: 100%;
+    margin-top: 1.5 * var(--spacing-unit); /* Space above the send message button */
+}
+
+.contact-hours ul {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--spacing-unit);
+    flex-grow: 1; /* Allows the list to take up available space */
+}
+
+.contact-hours ul li {
+    margin-bottom: 0.8 * var(--spacing-unit);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+    display: flex;
+    align-items: center;
+}
+
+.contact-hours i {
+    margin-right: 0.8 * var(--spacing-unit);
+    color: var(--primary-color);
+    font-size: 1.2em; /* Slightly larger icon */
+}
+
+.social-links {
+    margin-top: 2.5 * var(--spacing-unit); /* More space */
+    display: flex;
+    justify-content: center; /* Center social links */
+    gap: 2 * var(--spacing-unit); /* More gap between icons */
+}
+
+.social-links a {
+    font-size: 1.8em; /* Larger icons */
+    color: var(--text-color-light);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px); /* Subtle lift on hover */
+}
+
+/* Responsive Adjustments for Contact Page */
+@media (max-width: 992px) {
+    .contact-section {
+        padding: 5 * var(--spacing-unit) 0;
+    }
+    .contact-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5 * var(--spacing-unit);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 4 * var(--spacing-unit) 0;
+    }
+    .contact-grid {
+        flex-direction: column; /* Ensure stacking on smaller screens */
+        gap: 3 * var(--spacing-unit);
+    }
+    .contact-info, .contact-form, .contact-hours {
+        padding: 2.5 * var(--spacing-unit);
+    }
+    .contact-info iframe {
+        height: 300px;
+    }
+    .social-links {
+        gap: 1.5 * var(--spacing-unit);
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 3 * var(--spacing-unit) 0;
+    }
+    .contact-info, .contact-form, .contact-hours {
+        padding: 2 * var(--spacing-unit);
+    }
+    .contact-info iframe {
+        height: 250px;
+    }
+    .contact-grid h3 {
+        font-size: 1.4em;
+    }
+    .social-links {
+        font-size: 1.6em;
+    }
+}
+

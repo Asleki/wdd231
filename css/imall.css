@@ -1,0 +1,1149 @@
+/* --- iMall Subheader Styles --- */
+
+/* Main container for the iMall subheader */
+.imall-subheader {
+    background-color: var(--card-bg); /* Use card background for a clean, slightly different look */
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem var(--spacing-unit); /* Adjusted padding for a slightly more compact look */
+    display: flex;
+    justify-content: center; /* Center content initially */
+    align-items: center;
+    box-shadow: var(--shadow-sm); /* Subtle shadow for depth */
+    position: sticky; /* Make it sticky */
+    /*
+     * IMPORTANT: The 'top' value below needs to be adjusted based on the EXACT height
+     * of your main '.sticky-header'. If your main header is, for example, 80px tall,
+     * set this to 80px. If it's dynamic, you might need JavaScript to calculate it.
+     * For now, assuming a fixed height or it will just stick below the main header's flow.
+     */
+    top: 0; /* Adjust this if main header is also sticky and has a fixed height */
+    z-index: 990; /* Lower than main header (1000) but higher than main content */
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Inner content wrapper for spacing and responsiveness */
+.imall-subheader .subheader-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Constrain width to match your .container */
+    flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+    gap: 1.5rem; /* Spacing between major header elements */
+}
+
+/* iMall Logo and Title */
+.imall-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--heading-color); /* Darker text for prominence */
+    font-size: 1.3rem; /* Slightly smaller than main site H1 */
+    font-weight: 700; /* Bold */
+    transition: color 0.3s ease;
+}
+
+.imall-logo:hover {
+    color: var(--primary-color); /* Hover effect matching primary brand color */
+}
+
+/* Active state for the current page's logo/link */
+.imall-logo.active {
+    color: var(--primary-color);
+    /* You could add a subtle border or underline for active state */
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 3px;
+}
+
+
+/* iMall Search Bar */
+.imall-search-bar {
+    display: flex;
+    flex-grow: 1; /* Allows it to take available space */
+    max-width: 450px; /* Max width for the search bar */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden; /* Ensures border-radius applies to children */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Inner shadow for depth */
+}
+
+.imall-search-bar input {
+    flex-grow: 1;
+    padding: 0.6rem 1rem;
+    border: none; /* Remove individual input border */
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background-color: var(--element-bg); /* Use element background */
+}
+
+.imall-search-bar input::placeholder {
+    color: var(--text-color-light);
+}
+
+.imall-search-bar button {
+    background-color: var(--primary-color); /* Primary color for search button */
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.imall-search-bar button:hover {
+    background-color: var(--primary-dark); /* Darker primary on hover */
+}
+
+/* iMall Navigation Links (Categories, New Arrivals, Deals, Support) */
+.imall-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem; /* Spacing between main nav items */
+    align-items: center;
+}
+
+.imall-nav-links li {
+    position: relative; /* For dropdown positioning */
+}
+
+.imall-nav-links a {
+    text-decoration: none;
+    color: var(--text-color); /* Default text color */
+    font-weight: 500;
+    padding: 0.5rem 0; /* Vertical padding for click area */
+    transition: color 0.3s ease;
+}
+
+.imall-nav-links a:hover {
+    color: var(--secondary-color); /* Accent color on hover */
+}
+
+/* Dropdown specific styles (Shop Categories) */
+.imall-nav-links .dropdown .dropbtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.imall-nav-links .dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: var(--card-bg); /* Card background for dropdown */
+    min-width: 200px;
+    box-shadow: var(--shadow-md); /* Medium shadow for dropdown */
+    z-index: 1000; /* Ensure it's on top */
+    top: calc(100% + 5px); /* Position slightly below the trigger */
+    left: 0;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    border: 1px solid var(--border-color);
+    max-height: 300px; /* Added: Limit height for scrollability */
+    overflow-y: auto; /* Added: Enable vertical scrolling */
+}
+
+.imall-nav-links .dropdown-content a {
+    color: var(--text-color);
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap; /* Prevent category names from wrapping */
+    font-weight: 400; /* Lighter font weight for dropdown items */
+}
+
+.imall-nav-links .dropdown-content a:hover {
+    background-color: var(--light-bg); /* Light background on hover for dropdown items */
+    color: var(--primary-color);
+}
+
+/* Show the dropdown menu on hover */
+.imall-nav-links .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* For dropdown to show/hide with JS class toggle */
+.imall-nav-links .dropdown-content.show {
+    display: block;
+}
+
+
+/* Action Icons (Wishlist, Cart, Profile) */
+.imall-action-icons {
+    display: flex;
+    gap: 1.2rem; /* Spacing between icons */
+    align-items: center;
+}
+
+.imall-action-icons .action-icon {
+    position: relative;
+    color: var(--text-color);
+    font-size: 1.3rem; /* Icon size */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 0.2rem; /* Add some padding for easier clicking */
+}
+
+.imall-action-icons .action-icon:hover {
+    color: var(--secondary-color); /* Accent color on hover */
+}
+
+/* Active state for the current page's icon (e.g., on imall-my-activity.html) */
+.imall-action-icons .action-icon.active {
+    color: var(--primary-color); /* Primary color for active icon */
+    transform: scale(1.1); /* Slightly enlarge active icon */
+}
+
+/* Item Count Badge (for Cart and Wishlist) */
+.imall-action-icons .item-count {
+    position: absolute;
+    top: -0.5rem; /* Adjust position */
+    right: -0.5rem; /* Adjust position */
+    background-color: var(--accent-color); /* Bold accent color for counts */
+    color: white;
+    border-radius: 50%;
+    padding: 0.1rem 0.4rem; /* Smaller padding for a compact badge */
+    font-size: 0.7rem;
+    min-width: 1.2rem; /* Ensure it's a circle even with single digit */
+    height: 1.2rem; /* Ensure it's a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1; /* Center text vertically */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+/* --- Responsive Adjustments for iMall Subheader --- */
+@media (max-width: 992px) { /* Tablet and smaller */
+    .imall-subheader .subheader-content {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start; /* Align to the left */
+        gap: 1rem;
+    }
+
+    .imall-search-bar {
+        width: 100%; /* Full width search bar */
+        max-width: none;
+    }
+
+    .imall-nav-links {
+        flex-direction: column; /* Stack navigation links */
+        width: 100%;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .imall-nav-links li {
+        width: 100%; /* Make list items take full width */
+    }
+
+    .imall-nav-links a {
+        padding: 0.5rem 0; /* Keep padding */
+        width: 100%; /* Ensure links are clickable across full width */
+    }
+
+    /* Adjust dropdown for mobile: make it static */
+    .imall-nav-links .dropdown-content {
+        position: static; /* Flows with the document */
+        box-shadow: none; /* No shadow */
+        background-color: transparent; /* Transparent background */
+        border: none; /* No border */
+        padding: 0.5rem 0;
+        min-width: auto;
+        border-top: 1px solid var(--border-color); /* Add a separator */
+        margin-top: 0.5rem;
+        max-height: none; /* Allow full height on mobile when stacked */
+        overflow-y: visible; /* Disable scrolling on mobile when stacked */
+    }
+
+    .imall-nav-links .dropdown-content a {
+        padding-left: 1.5rem; /* Indent dropdown items */
+    }
+
+    .imall-action-icons {
+        width: 100%;
+        justify-content: flex-end; /* Push icons to the right */
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) { /* Smaller mobile devices */
+    .imall-subheader {
+        padding: 0.6rem var(--spacing-unit);
+    }
+    .imall-logo {
+        font-size: 1.2rem;
+    }
+    .imall-logo img {
+        height: 30px;
+    }
+    .imall-search-bar input,
+    .imall-search-bar button {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    .imall-action-icons {
+        gap: 1rem;
+        font-size: 1.1rem;
+    }
+}
+/* C:\wdd231\chamber\styles\imall.css */
+
+/* ... (Your existing iMall Subheader Styles will remain at the top) ... */
+
+
+/* --- General Section Styling (Reused for consistency on homepage) --- */
+/* Changed to use IDs for sections as per your HTML */
+#categories-section,
+#super-picks-section,
+#featured-products-section,
+#top-brands-section,
+#why-choose-us-section {
+    max-width: 1200px; /* Max width for content */
+    margin: 50px auto; /* Center sections and add vertical space */
+    padding: 0 20px; /* Horizontal padding */
+}
+
+/* Common style for H2 titles in sections */
+#categories-section h2,
+#super-picks-section h2,
+#featured-products-section h2,
+#top-brands-section h2,
+#why-choose-us-section h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+#categories-section h2::after,
+#super-picks-section h2::after,
+#featured-products-section h2::after,
+#top-brands-section h2::after,
+#why-choose-us-section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #007bff; /* Primary color highlight */
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* --- Styles for Category-Specific Brands Section --- */
+.category-brands-section {
+    max-width: 1200px; /* Match main content width */
+    margin: 50px auto; /* Add vertical spacing and center */
+    padding: 0 20px; /* Horizontal padding */
+}
+
+.category-brands-section .section-title {
+    /* Reusing existing .section-title styles, but you can override if needed */
+    text-align: center;
+    font-size: 2.5em; /* Example, adjust as needed */
+    color: var(--heading-color); /* Example, adjust as needed */
+    margin-bottom: 40px;
+}
+
+/* Ensure brand names are styled within the brand item */
+.brand-item p {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 10px; /* Space between logo and name */
+}
+
+/* Responsive adjustments for the category brands section */
+@media (max-width: 768px) {
+    .category-brands-section .section-title {
+        font-size: 2em; /* Smaller title on tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .category-brands-section .section-title {
+        font-size: 1.8em; /* Even smaller title on mobiles */
+    }
+    .brand-item p {
+        font-size: 0.85em; /* Smaller text on mobile */
+    }
+}
+/* For dropdown to show/hide with JS class toggle */
+.imall-nav-links .dropdown-content.show {
+    display: block;
+}
+/* Show the dropdown menu on hover */
+.imall-nav-links .dropdown:hover .dropdown-content {
+    display: block;
+}
+/* --- 1. Hero Section Styling --- */
+/* Targeting #hero-section and assuming content inside #hero-slider-container */
+#hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero-banner.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#hero-slider-container { /* This will hold your hero content */
+    max-width: 800px;
+    /* Add specific slider styles if you implement a JS slider */
+}
+
+/* If you want the text content to be part of the slider container, use this */
+/* Assuming the HTML structure for hero content will be inside #hero-slider-container */
+.hero-content {
+    /* Styles for h1, p, and button within the hero */
+}
+
+#hero-slider-container h1 { /* Targeting the h1 that will be in your hero */
+    font-size: 4em; /* Larger heading */
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.1;
+}
+
+#hero-slider-container p { /* Targeting the p that will be in your hero */
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#hero-slider-container .primary-btn { /* Targeting the button that will be in your hero */
+    font-size: 1.2em;
+    padding: 12px 30px;
+    border-radius: 5px;
+}
+
+/* --- Hero Section Slider Specific Styling (Add these to your imall.css) --- */
+
+#hero-section {
+    /* Existing styles for the overall hero section background, text alignment, etc. */
+    position: relative; /* Needed for positioning slider arrows/dots absolutely within this section */
+    overflow: hidden; /* Crucial to hide parts of slides that are off-screen */
+    padding: 0; /* Remove padding from #hero-section itself, as slides will control padding */
+}
+
+#hero-slider-container {
+    width: 100%;
+    height: 100%; /* Take full height of its parent #hero-section */
+    position: relative; /* For containing arrows and dots */
+    overflow: hidden; /* Ensures slides don't overflow this container before transitions */
+    /* Remove max-width and flex properties if they conflict with slider behavior */
+    max-width: none;
+    display: block; /* Override flex if it was applied, as slides-wrapper will manage display */
+}
+
+.slides-wrapper {
+    display: flex; /* Arranges slides horizontally */
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out; /* Smooth transition for slide changes */
+    position: relative; /* For z-index if needed */
+}
+
+.slide {
+    min-width: 100%; /* Each slide takes up 100% of the slider container's width */
+    flex-shrink: 0; /* Prevents slides from shrinking */
+    height: 100%; /* Each slide takes up 100% of the slider container's height */
+    background-size: cover;
+    background-position: center;
+    display: flex; /* To center content within the slide */
+    align-items: center;
+    justify-content: center;
+    color: white; /* Ensure text is visible on dark backgrounds */
+    text-align: center;
+    position: relative; /* For pseudo-elements like overlays */
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for better text readability */
+    z-index: 1; /* Place overlay above background image but below content */
+}
+
+.hero-content {
+    position: relative; /* Position relative to z-index above overlay */
+    z-index: 2;
+    max-width: 800px; /* Constrain content width within the slide */
+    padding: 100px 20px; /* Padding for the content inside each slide */
+    box-sizing: border-box; /* Include padding in width */
+    margin: 0 auto; /* Center content horizontally */
+}
+
+/* Override existing hero content styles to ensure they apply correctly within the slide */
+.hero-content h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    line-height: 1.1;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content .primary-btn {
+    font-size: 1.2em;
+    padding: 12px 30px;
+    border-radius: 5px;
+    /* Add any specific button styles if needed, e.g., background, color */
+}
+
+
+/* Slider Navigation Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10; /* Ensure dots are above slides and content */
+}
+
+.dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5); /* Lighter white for inactive dots */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.8); /* Subtle border for visibility */
+}
+
+.dot.active {
+    background-color: var(--primary-color); /* Primary color for active dot */
+    transform: scale(1.2); /* Slightly larger active dot */
+    border-color: var(--primary-dark);
+}
+
+.dot:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.8); /* Brighter on hover */
+}
+
+/* Styles for the Search Suggestions Container */
+.imall-search-suggestions {
+    position: absolute; /* Position relative to its parent .subheader-content or a wrapper */
+    top: calc(100% + 5px); /* Position below the search bar */
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg); /* Match card background */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: var(--shadow-md);
+    z-index: 1000; /* Ensure it's above other content */
+    max-height: 200px; /* Limit height and make it scrollable */
+    overflow-y: auto;
+    display: none; /* Hidden by default, shown by JS */
+    width: calc(100% - 3rem); /* Adjust width to match search bar, considering gap */
+    max-width: 450px; /* Match max-width of search bar */
+    margin-left: auto; /* Center it if subheader-content is flex-direction: column */
+    margin-right: auto;
+}
+
+.imall-search-suggestions.show {
+    display: block; /* Show when active */
+}
+
+.imall-search-suggestions .suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--border-color-light); /* Lighter border between items */
+}
+
+.imall-search-suggestions .suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.imall-search-suggestions .suggestion-item:hover {
+    background-color: var(--light-bg); /* Light background on hover */
+    color: var(--primary-color);
+}
+
+/* Adjustments for responsive behavior if the subheader stacks */
+@media (max-width: 992px) {
+    .imall-search-suggestions {
+        position: static; /* Stack naturally below the search bar */
+        width: 100%; /* Take full width */
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        border-top: none; /* No top border if stacking directly below search bar */
+        border-radius: 0 0 5px 5px; /* Only bottom corners rounded */
+    }
+}
+/* Slider Arrows */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4); /* Darker, semi-transparent background */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Ensure arrows are above slides and content */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+    transform: translateY(-50%) scale(1.05); /* Slight enlarge on hover */
+}
+
+.slider-arrow.prev {
+    left: 20px;
+}
+
+.slider-arrow.next {
+    right: 20px;
+}
+
+
+/* --- Responsive Adjustments for Hero Slider --- */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 3em;
+    }
+    .hero-content p {
+        font-size: 1.2em;
+    }
+    .slider-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .slider-arrow.prev {
+        left: 10px;
+    }
+    .slider-arrow.next {
+        right: 10px;
+    }
+    .slider-dots {
+        bottom: 15px;
+    }
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #hero-section {
+        min-height: 400px; /* Adjust minimum height */
+    }
+    .hero-content {
+        padding: 80px 15px; /* Adjust content padding */
+    }
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .slider-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    .slider-arrow.prev {
+        left: 5px;
+    }
+    .slider-arrow.next {
+        right: 5px;
+    }
+    .slider-dots {
+        bottom: 10px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    #hero-section {
+        min-height: 350px;
+    }
+    .hero-content {
+        padding: 60px 10px;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+    .hero-content .primary-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    .slider-arrow {
+        display: none; /* Hide arrows on very small screens if they feel cramped */
+    }
+}
+
+/* --- Categories Section Styling --- */
+/* You had an existing .category-grid, let's style it */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+    justify-content: center;
+}
+
+.category-item { /* Assuming you'll have a .category-item class for individual category cards */
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none; /* For links */
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.category-item img {
+    max-width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.category-item h3 {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+
+/* --- 2. Top Brands Section Styling --- */
+/* Changed .brands-grid to #top-brands-container to match your HTML */
+#top-brands-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid for brands */
+    gap: 25px;
+    justify-content: center; /* Center items if they don't fill the row */
+    align-items: center;
+}
+
+.brand-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 150px; /* Fixed height for consistency */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflowing parts of logo */
+}
+
+.brand-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.brand-item img {
+    max-width: 100%;
+    max-height: 100%; /* Ensure image fits within the fixed height */
+    object-fit: contain; /* Maintain aspect ratio without cropping */
+    display: block; /* Remove extra space below image */
+    margin: auto; /* Center image within the item */
+    background-color: #f0f0f0; /* Placeholder background */
+}
+
+
+/* --- 3. Super Picks & 4. Featured Products Sections Styling --- */
+/* These sections use a common product grid, targeting your #super-picks-container and #featured-products-container */
+.product-grid { /* This class is already on your HTML containers */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 4 columns on desktop, responsive */
+    gap: 30px;
+    justify-content: center; /* Center items if not enough to fill the row */
+    padding: 0 10px; /* Small padding to prevent cards from touching edges */
+}
+
+/* Basic Product Card Styling (essential for createProductCardHTML output) */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative; /* For badges/wishlist icon positioning */
+    padding-bottom: 15px; /* Space for actions */
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-image-wrapper {
+    width: 100%;
+    padding-top: 100%; /* Creates a square aspect ratio */
+    position: relative;
+    overflow: hidden;
+    background-color: #f8f8f8; /* Light background for images */
+}
+
+.product-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the whole image is visible */
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image-wrapper img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.product-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 15px 10px 5px;
+    color: #333;
+}
+
+.product-name a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-name a:hover {
+    color: #007bff;
+}
+
+.product-brand {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.product-price-info {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.current-price {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #007bff;
+    margin-right: 8px;
+}
+
+.original-price {
+    font-size: 0.9em;
+    color: #888;
+    text-decoration: line-through;
+}
+
+.product-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Star rating component (uses CSS variables for filled stars) */
+.stars {
+    --rating: 0; /* Default rating (will be overridden by inline style) */
+    display: inline-block;
+    font-family: 'Font Awesome 6 Free'; /* Updated for Font Awesome 6 */
+    font-weight: 900; /* For solid stars */
+    font-size: 1em;
+    letter-spacing: 0.1em; /* Space between stars */
+    line-height: 1;
+    position: relative;
+    color: #ddd; /* Empty star color */
+    white-space: nowrap; /* Prevent stars from wrapping */
+    margin-right: 5px;
+}
+
+.stars::before {
+    content: '\f005 \f005 \f005 \f005 \f005'; /* Five empty stars */
+}
+
+.stars::after {
+    content: '\f005 \f005 \f005 \f005 \f005'; /* Five filled stars */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--rating) / 5 * 100%); /* Fill width based on rating */
+    overflow: hidden;
+    color: #ffc107; /* Gold for filled stars */
+}
+
+.reviews-count {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.product-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: auto; /* Pushes actions to the bottom of the card */
+    padding: 0 15px;
+}
+
+/* Styles for search bar within Featured Products section */
+#featured-products-section .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#featured-products-section .search-bar input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#featured-products-section .search-bar button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#featured-products-section .search-bar button:hover {
+    background-color: #0056b3;
+}
+
+/* Load More Products Button */
+.load-more-btn {
+    display: block; /* Make it block level */
+    margin: 40px auto 60px auto; /* Center and provide vertical space */
+    padding: 12px 30px;
+    font-size: 1.1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* In case it's an <a> tag */
+    text-align: center;
+}
+
+.load-more-btn:hover {
+    background-color: #0056b3;
+}
+
+/* --- Why Choose Us Section --- */
+/* Assuming this will also be populated by JS or have static content */
+#why-choose-us-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.choose-us-item { /* Example item style */
+    text-align: center;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.choose-us-item i {
+    font-size: 3em;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.choose-us-item h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.choose-us-item p {
+    font-size: 0.95em;
+    color: #666;
+}
+
+
+/* --- Responsive Adjustments for iMall Homepage Sections --- */
+@media (max-width: 992px) {
+    #hero-slider-container h1 {
+        font-size: 3em;
+    }
+    #hero-slider-container p {
+        font-size: 1.2em;
+    }
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust columns for tablets */
+    }
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    #hero-section {
+        padding: 80px 20px;
+        min-height: 400px;
+    }
+    #hero-slider-container h1 {
+        font-size: 2.5em;
+    }
+    #hero-slider-container p {
+        font-size: 1em;
+    }
+    #categories-section h2,
+    #super-picks-section h2,
+    #featured-products-section h2,
+    #top-brands-section h2,
+    #why-choose-us-section h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    #top-brands-container {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+    }
+    .brand-item {
+        height: 120px;
+    }
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust columns for smaller tablets */
+        gap: 20px;
+    }
+    .category-item {
+        padding: 15px;
+    }
+    .category-item img {
+        max-width: 80px;
+    }
+    .choose-us-item {
+        padding: 20px;
+    }
+    .choose-us-item i {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 576px) {
+    #hero-section {
+        padding: 60px 15px;
+        min-height: 350px;
+    }
+    #hero-slider-container h1 {
+        font-size: 2em;
+    }
+    #hero-slider-container p {
+        font-size: 0.9em;
+    }
+    #categories-section h2,
+    #super-picks-section h2,
+    #featured-products-section h2,
+    #top-brands-section h2,
+    #why-choose-us-section h2 {
+        font-size: 1.8em;
+    }
+    #top-brands-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    }
+    .brand-item {
+        height: 100px;
+        padding: 10px;
+    }
+    .product-grid {
+        grid-template-columns: 1fr; /* Single column on small mobile */
+        gap: 25px;
+        padding: 0 5px;
+    }
+    .product-card-actions {
+        flex-direction: column; /* Stack buttons on very small screens */
+        gap: 8px;
+    }
+    .product-card-actions button {
+        width: 100%; /* Full width for stacked buttons */
+    }
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .category-item img {
+        max-width: 60px;
+        margin-bottom: 10px;
+    }
+    #featured-products-section .search-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    #featured-products-section .search-bar input,
+    #featured-products-section .search-bar button {
+        width: 100%;
+    }
+    .load-more-btn {
+        width: calc(100% - 40px); /* Adjust for padding */
+    }
+    #why-choose-us-container {
+        grid-template-columns: 1fr;
+    }
+}

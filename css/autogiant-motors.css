@@ -1,0 +1,776 @@
+/* css/autogiant-motors.css */
+
+/* AutoGiant Motors Sub-Header specific styles */
+.autogiant-subheader {
+    position: sticky;
+    top: 139px; /* Adjust this value if your main header's height is different */
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg); /* Use nav-bg variable */
+    border-bottom: 1px solid var(--border-color); /* Use border-color variable */
+    box-shadow: var(--shadow-sm); /* Use small shadow variable */
+    z-index: 999; /* Lower than main header's 1000, but higher than content */
+    padding: var(--spacing-unit) calc(2 * var(--spacing-unit)); /* Use spacing unit */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    height: 60px; /* Fixed height for consistency of this subheader */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for dark mode */
+}
+
+.autogiant-subheader .dealership-info {
+    display: flex;
+    align-items: center;
+}
+
+.autogiant-subheader .dealership-info .logo img {
+    height: 40px; /* Smaller logo for subheader */
+    margin-right: 1.5 * var(--spacing-unit); /* Use spacing unit */
+}
+
+.autogiant-subheader .dealership-info h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--heading-color); /* Use heading-color variable */
+    transition: color 0.3s ease; /* Smooth transition for dark mode */
+}
+
+.autogiant-subheader .dealership-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* --- NEW: Significantly increased gap between navigation items --- */
+    gap: 3 * var(--spacing-unit); /* More space for nav links */
+}
+
+.autogiant-subheader .dealership-nav ul li a {
+    text-decoration: none;
+    /* --- NEW: Nav links in blue --- */
+    color: var(--primary-color); /* Changed to primary-color for blue */
+    font-weight: 500; /* Slightly bolder for navigation links */
+    padding: 0.5 * var(--spacing-unit) 0;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.autogiant-subheader .dealership-nav ul li a:hover {
+    color: var(--primary-dark); /* Darker blue on hover */
+    text-decoration: underline; /* Added underline on hover for better UX */
+}
+
+/* --- GLOBAL SECTION STYLING IMPROVEMENTS --- */
+section {
+    padding: 6 * var(--spacing-unit) 0; /* MORE VERTICAL SPACING for all sections */
+    background-color: var(--background-color); /* Ensure sections use background color variable */
+    transition: background-color 0.3s ease;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8em; /* Larger, more impactful titles */
+    margin-bottom: 4 * var(--spacing-unit); /* More space below title */
+    color: var(--heading-color);
+    font-weight: 700; /* Bolder titles */
+    transition: color 0.3s ease;
+}
+
+/* --- BUTTON STYLING (Applying styles from main.css for consistency) --- */
+.btn {
+    display: inline-block;
+    padding: 1.2 * var(--spacing-unit) 2.5 * var(--spacing-unit); /* Increased padding for bigger buttons */
+    border-radius: var(--border-radius); /* Use variable for border-radius */
+    font-size: 1.1em; /* Slightly larger font */
+    font-weight: 600; /* Bolder text */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    border: none; /* Default to no border, unless specified by specific classes */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-dark);
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: var(--shadow-md);
+}
+
+/* Bottom Spacer - This will just add space at the very bottom of the main content before the footer */
+.bottom-spacer {
+    height: 100px; /* Ensures space above footer */
+    width: 100%;
+}
+
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Increased height for more impact */
+    overflow: hidden;
+    margin-bottom: 6 * var(--spacing-unit); /* More space below hero */
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    box-shadow: var(--shadow-lg); /* Add a subtle shadow to the hero */
+}
+
+.hero-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5); /* Darken image more for text readability */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 3 * var(--spacing-unit); /* Increased padding */
+    box-sizing: border-box;
+}
+
+.hero-overlay h1 {
+    font-size: 3.8em; /* Larger, bolder hero title */
+    margin-bottom: 1.5 * var(--spacing-unit); /* More space below title */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7); /* Stronger shadow for text */
+    font-weight: 800;
+}
+
+.hero-overlay p {
+    font-size: 1.3em; /* Slightly larger paragraph */
+    margin-bottom: 3.5 * var(--spacing-unit); /* More space below paragraph */
+    max-width: 700px; /* Wider text for better flow */
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+.hero-overlay .btn {
+    margin-top: 2 * var(--spacing-unit);
+}
+
+.hero-overlay .quick-contact {
+    margin-top: 3 * var(--spacing-unit); /* More space for quick contact */
+    font-size: 1.1em; /* Slightly larger quick contact text */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2 * var(--spacing-unit); /* Gap for quick contact items */
+}
+
+.hero-overlay .quick-contact span {
+    /* margin is now handled by gap */
+}
+
+.hero-overlay .quick-contact a {
+    color: #fff;
+    text-decoration: none; /* No default underline */
+    border-bottom: 1px solid rgba(255,255,255,0.5); /* Subtle underline */
+    transition: border-color 0.2s ease;
+}
+.hero-overlay .quick-contact a:hover {
+    border-color: white; /* Solid underline on hover */
+}
+
+/* --- Featured Inventory Section --- */
+#featured-inventory {
+    position: relative;
+    /* Removed overflow: hidden as it's not a carousel anymore */
+    padding-bottom: 6 * var(--spacing-unit);
+}
+
+.carousel-container {
+    /* --- NEW: Display three featured vehicles with spacing --- */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 2.5 * var(--spacing-unit); /* Spacing between grid items */
+    /* Removed carousel specific properties: */
+    /* overflow-x: auto; */
+    /* scroll-snap-type: x mandatory; */
+    /* -webkit-overflow-scrolling: touch; */
+    /* padding-bottom: 2 * var(--spacing-unit); */
+    margin: 0; /* No side margin needed for a static grid */
+}
+
+.carousel-item {
+    /* flex: 0 0 320px; <-- Removed as it's now a grid item */
+    scroll-snap-align: start;
+    border: 1px solid var(--border-color); /* Use border-color variable */
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 1.5 * var(--spacing-unit);
+    box-shadow: var(--shadow-md); /* Medium shadow for cards */
+    background-color: var(--card-bg); /* Use card-bg variable */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-item:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: var(--shadow-lg); /* Enhanced shadow on hover */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 200px; /* Slightly taller images */
+    object-fit: cover;
+    margin-bottom: var(--spacing-unit);
+    border-top-left-radius: var(--border-radius); /* Apply radius to image top corners */
+    border-top-right-radius: var(--border-radius);
+}
+
+.carousel-item h3 {
+    font-size: 1.4em; /* Slightly larger heading */
+    margin-bottom: 0.8 * var(--spacing-unit);
+    color: var(--heading-color);
+    font-weight: 600; /* Bolder heading */
+    padding: 0 1 * var(--spacing-unit); /* Small horizontal padding */
+}
+
+.carousel-item p {
+    color: var(--primary-color); /* Price in primary color */
+    font-weight: bold;
+    font-size: 1.2em; /* Larger price */
+    margin-bottom: 1.8 * var(--spacing-unit); /* More space below price */
+    padding: 0 1 * var(--spacing-unit);
+}
+
+/* --- Removed Carousel Navigation Buttons as it's now a static grid --- */
+.carousel-nav {
+    display: none; /* Hide navigation buttons */
+}
+.carousel-nav.prev { display: none; }
+.carousel-nav.next { display: none; }
+
+
+/* Full Vehicle Inventory Section */
+.inventory-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5 * var(--spacing-unit);
+    margin-bottom: 3.5 * var(--spacing-unit); /* More space below controls */
+    padding: 2 * var(--spacing-unit); /* Increased padding */
+    background-color: var(--element-bg); /* Use element-bg variable */
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    box-shadow: var(--shadow-sm); /* Subtle shadow for the controls box */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inventory-controls input,
+.inventory-controls select {
+    padding: 1.1 * var(--spacing-unit) 1.5 * var(--spacing-unit); /* Adjusted padding */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm); /* Smaller radius for inputs */
+    font-size: var(--font-size-base); /* Use base font size variable */
+    flex: 1 1 200px;
+    min-width: 150px;
+    background-color: var(--card-bg); /* Inputs background same as cards for consistency */
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.inventory-controls input:focus,
+.inventory-controls select:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Highlight focus with primary color */
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2); /* Subtle glow on focus */
+}
+
+.inventory-controls .btn {
+    flex-grow: 1;
+    min-width: 120px;
+}
+
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly larger min-width */
+    gap: 3 * var(--spacing-unit); /* Increased gap between cards */
+    padding-top: var(--spacing-unit);
+}
+
+.vehicle-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    overflow: hidden;
+    box-shadow: var(--shadow-md); /* Medium shadow for cards */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--card-bg); /* Use card-bg variable */
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-8px); /* More pronounced lift on hover */
+    box-shadow: var(--shadow-lg); /* Larger shadow on hover */
+}
+
+.vehicle-card img {
+    width: 100%;
+    height: 220px; /* Taller images */
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.vehicle-card .card-details {
+    padding: 2 * var(--spacing-unit); /* Increased padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-card h3 {
+    font-size: 1.5em; /* Larger heading */
+    margin-top: 0;
+    margin-bottom: 0.8 * var(--spacing-unit);
+    color: var(--heading-color);
+    font-weight: 700; /* Bolder heading */
+}
+
+.vehicle-card .vehicle-year-mileage {
+    font-size: 1em; /* Slightly larger text */
+    color: var(--text-color-light);
+    margin-bottom: 0.8 * var(--spacing-unit);
+}
+
+.vehicle-card .vehicle-price {
+    font-size: 1.6em; /* Larger price */
+    font-weight: bold;
+    color: var(--accent-color); /* Use accent-color variable for price */
+    margin-bottom: 1.8 * var(--spacing-unit); /* More space below price */
+    margin-top: auto;
+}
+
+.load-more-container {
+    text-align: center;
+    margin-top: 5 * var(--spacing-unit); /* More space above load more button */
+}
+
+/* About Us Section */
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4 * var(--spacing-unit); /* More gap */
+    align-items: center;
+}
+
+.about-text {
+    flex: 2;
+    min-width: 320px; /* Increased min-width */
+}
+
+.about-text p {
+    font-size: var(--font-size-base); /* Ensure consistent paragraph font size */
+    line-height: 1.7; /* Better readability */
+    color: var(--text-color);
+    margin-bottom: 1.5 * var(--spacing-unit); /* Space between paragraphs */
+}
+
+.about-text ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 2.5 * var(--spacing-unit); /* More space */
+}
+
+.about-text ul li {
+    margin-bottom: var(--spacing-unit);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+}
+
+.about-text ul li i {
+    color: var(--success-color);
+    margin-right: var(--spacing-unit);
+}
+
+.about-image {
+    flex: 1;
+    min-width: 280px; /* Increased min-width */
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    box-shadow: var(--shadow-md); /* Add shadow to images */
+}
+
+/* Service Section */
+.service-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4 * var(--spacing-unit); /* More gap */
+    align-items: flex-start;
+}
+
+.service-description {
+    flex: 2;
+    min-width: 320px;
+}
+
+.service-description h3 {
+    margin-top: 2.5 * var(--spacing-unit);
+    margin-bottom: 1.5 * var(--spacing-unit);
+    color: var(--heading-color);
+    font-size: 1.8em; /* Larger heading */
+    font-weight: 700;
+}
+
+.service-description p {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 1.5 * var(--spacing-unit);
+}
+
+.service-description ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted minmax */
+    gap: 1.5 * var(--spacing-unit); /* More gap */
+    margin-bottom: 2.5 * var(--spacing-unit);
+}
+
+.service-description ul li {
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+}
+
+.service-description ul li i {
+    color: var(--primary-color);
+    margin-right: 0.8 * var(--spacing-unit);
+}
+
+.service-image {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+}
+
+.service-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    box-shadow: var(--shadow-md); /* Add shadow to images */
+}
+
+/* Financing Section */
+.finance-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4 * var(--spacing-unit); /* More gap */
+}
+
+.finance-text {
+    flex: 1.5;
+    min-width: 320px;
+}
+
+.finance-text p {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 1.5 * var(--spacing-unit);
+}
+
+.finance-text ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 2.5 * var(--spacing-unit);
+}
+
+.finance-text ul li {
+    margin-bottom: var(--spacing-unit);
+    color: var(--text-color);
+    font-size: var(--font-size-base);
+}
+
+.finance-text ul li i {
+    color: var(--secondary-color);
+    margin-right: 0.8 * var(--spacing-unit);
+}
+
+.finance-calculator {
+    flex: 1;
+    min-width: 300px; /* Increased min-width */
+    background-color: var(--card-bg); /* Use card-bg for calculator for consistency */
+    padding: 3 * var(--spacing-unit); /* More padding */
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    box-shadow: var(--shadow-md); /* Medium shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.finance-calculator h3 {
+    text-align: center;
+    margin-bottom: 2.5 * var(--spacing-unit);
+    color: var(--heading-color);
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.finance-calculator label {
+    display: block;
+    margin-bottom: 0.8 * var(--spacing-unit);
+    font-weight: 600; /* Bolder label */
+    color: var(--heading-color); /* Labels use heading color */
+}
+
+.finance-calculator input {
+    width: calc(100% - 24px); /* Adjusted for 12px padding on each side */
+    padding: 1.2 * var(--spacing-unit); /* Increased padding for inputs */
+    margin-bottom: 2 * var(--spacing-unit); /* More space below inputs */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-base);
+    box-sizing: border-box;
+    background-color: var(--element-bg); /* Use element-bg for input fields */
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.finance-calculator input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.finance-calculator p strong {
+    display: block;
+    text-align: center;
+    font-size: 2em; /* Larger result font */
+    color: var(--success-color);
+    margin-top: 2.5 * var(--spacing-unit);
+    margin-bottom: 2.5 * var(--spacing-unit);
+}
+
+.finance-calculator button {
+    width: 100%;
+}
+
+
+/* --- Testimonials Section --- */
+.testimonials-section {
+    background-color: var(--light-bg); /* Use light-bg variable */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.testimonial-grid {
+    /* --- NEW: Display testimonials vertically --- */
+    display: grid;
+    grid-template-columns: 1fr; /* Single column for vertical display */
+    gap: 2.5 * var(--spacing-unit); /* Gap between vertical items */
+}
+
+.testimonial-card {
+    background-color: var(--card-bg);
+    padding: 2.8 * var(--spacing-unit); /* More padding */
+    border-radius: var(--border-radius); /* Consistent border-radius */
+    box-shadow: var(--shadow-md); /* Medium shadow */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: var(--shadow-lg); /* Enhanced shadow on hover */
+}
+
+.testimonial-card p {
+    font-style: italic;
+    margin-bottom: 1.8 * var(--spacing-unit); /* More space */
+    color: var(--text-color);
+    flex-grow: 1;
+    line-height: 1.7; /* Better readability */
+    font-size: var(--font-size-base);
+}
+
+.testimonial-card .customer-name {
+    font-weight: bold;
+    color: var(--primary-color); /* Customer name in primary color */
+    text-align: right;
+    display: block;
+    font-size: 1.1em;
+}
+
+
+/* Responsive Adjustments for AutoGiant Motors Page */
+@media (max-width: 992px) {
+    section {
+        padding: 5 * var(--spacing-unit) 0;
+    }
+    .section-title {
+        font-size: 2.5em;
+        margin-bottom: 3.5 * var(--spacing-unit);
+    }
+    .hero-section {
+        height: 450px;
+    }
+    .hero-overlay h1 {
+        font-size: 3.2em;
+    }
+    .hero-overlay p {
+        font-size: 1.1em;
+    }
+    /* --- Featured Vehicles responsiveness --- */
+    .carousel-container {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on tablets */
+        gap: 2 * var(--spacing-unit);
+    }
+    .vehicle-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5 * var(--spacing-unit);
+    }
+}
+
+@media (max-width: 768px) {
+    .autogiant-subheader {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding-bottom: var(--spacing-unit);
+        top: 115px; /* Adjust this to match your main header's actual height at this breakpoint */
+    }
+
+    .autogiant-subheader .dealership-nav ul {
+        flex-wrap: wrap;
+        margin-top: var(--spacing-unit);
+        gap: 1.5 * var(--spacing-unit); /* Increased gap for tablets, but allows wrapping */
+    }
+
+    .autogiant-subheader .dealership-nav ul li {
+        margin: 0;
+    }
+
+    section {
+        padding: 4 * var(--spacing-unit) 0;
+    }
+    .section-title {
+        font-size: 2.2em;
+        margin-bottom: 3 * var(--spacing-unit);
+    }
+
+    .hero-section {
+        height: 380px;
+        margin-bottom: 4 * var(--spacing-unit);
+    }
+
+    .hero-overlay h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-overlay p {
+        font-size: 1em;
+        margin-bottom: 2.5 * var(--spacing-unit);
+    }
+
+    .inventory-controls {
+        flex-direction: column;
+        padding: 1.5 * var(--spacing-unit);
+        margin-bottom: 2.5 * var(--spacing-unit);
+    }
+
+    .inventory-controls input,
+    .inventory-controls select,
+    .inventory-controls .btn {
+        width: 100%;
+        flex-grow: 0;
+    }
+
+    .vehicle-grid {
+        gap: 2 * var(--spacing-unit);
+    }
+
+    .about-content, .service-content, .finance-content {
+        flex-direction: column;
+        gap: 3 * var(--spacing-unit); /* Stacked items need less gap */
+    }
+
+    .about-image, .service-image, .finance-calculator {
+        margin-top: 2 * var(--spacing-unit); /* Add space when stacking */
+    }
+}
+
+@media (max-width: 480px) {
+    .autogiant-subheader .dealership-info h2 {
+        font-size: 1.2em;
+    }
+    .autogiant-subheader .dealership-nav ul li {
+        margin: 0;
+        font-size: 0.9em;
+    }
+    .autogiant-subheader .dealership-nav ul {
+        gap: 0.8 * var(--spacing-unit); /* Smaller gap for very small screens */
+    }
+    .hero-section {
+        height: 300px;
+    }
+    .hero-overlay h1 {
+        font-size: 2em;
+    }
+    .hero-overlay p {
+        font-size: 0.9em;
+    }
+    .hero-overlay .quick-contact {
+        flex-direction: column;
+        gap: var(--spacing-unit);
+    }
+    /* --- Featured Vehicles responsiveness (single column on mobile) --- */
+    .carousel-container {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 2 * var(--spacing-unit);
+    }
+    section {
+        padding: 3 * var(--spacing-unit) 0;
+    }
+    .section-title {
+        font-size: 2em;
+        margin-bottom: 2.5 * var(--spacing-unit);
+    }
+    .btn {
+        font-size: 1em;
+        padding: var(--spacing-unit) 2 * var(--spacing-unit);
+    }
+}
