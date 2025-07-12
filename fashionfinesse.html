@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Finesse Boutique - La Familia Chambers</title>
+    <meta name="description" content="Fashion Finesse Boutique: Trendy and elegant apparel for the modern Kenyan fashionista, part of La Familia Chambers.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Inline styles for Fashion Finesse specific elements to ensure basic layout -->
+    <style>
+        /* General layout for the subheader */
+        .ff-subheader {
+            background-color: var(--card-bg); /* Inherit from main styles */
+            padding: var(--spacing-unit);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .ff-subheader-left, .ff-subheader-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ff-subheader-logo img {
+            height: 50px; /* Adjust as needed */
+            width: auto;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .ff-search-bar {
+            display: flex;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .ff-search-bar input {
+            flex-grow: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .ff-search-bar button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .ff-search-bar button:hover {
+            background-color: #c4644a;
+        }
+
+        .ff-categories-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .ff-categories-nav li {
+            position: relative;
+        }
+
+        .ff-categories-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .ff-categories-nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .ff-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 0.5rem 0;
+            top: 100%; /* Position below the parent link */
+            left: 0;
+            border: 1px solid var(--border-color);
+        }
+
+            .ff-dropdown-content a {
+                color: var(--text-color);
+                padding: 8px 16px;
+                text-decoration: none;
+                display: block;
+                white-space: nowrap;
+                font-weight: normal;
+            }
+
+            .ff-dropdown-content a:hover {
+                background-color: var(--hover-bg);
+                color: var(--primary-color);
+            }
+
+            /* Show dropdown on hover (JS will handle toggle for touch) */
+            .ff-categories-nav li:hover .ff-dropdown-content {
+                display: block;
+            }
+
+            .ff-cart-icon {
+                position: relative;
+                font-size: 1.8rem;
+                color: var(--primary-color);
+                cursor: pointer;
+            }
+
+            .ff-cart-count {
+                position: absolute;
+                top: -5px;
+                right: -10px;
+                background-color: var(--secondary-color);
+                color: white;
+                border-radius: 50%;
+                padding: 0.2em 0.5em;
+                font-size: 0.7rem;
+                min-width: 20px;
+                text-align: center;
+                line-height: 1;
+            }
+
+            /* Main content sections */
+            main {
+                padding: var(--spacing-unit);
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+
+            /* Custom Message Container Styles */
+    .ff-message-container {
+        padding: 1rem;
+        margin: 1rem auto;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        max-width: 600px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        display: none; /* Hidden by default, shown by JS */
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        position: relative;
+        z-index: 1000; /* Ensure it's on top */
+    }
+
+    .ff-message-container.ff-message-success {
+        background-color: #d4edda; /* Light green */
+        color: #155724; /* Dark green */
+        border: 1px solid #c3e6cb;
+    }
+
+    .ff-message-container.ff-message-error {
+        background-color: #f8d7da; /* Light red */
+        color: #721c24; /* Dark red */
+        border: 1px solid #f5c6cb;
+    }
+
+    .ff-message-container.ff-message-info {
+        background-color: #d1ecf1; /* Light blue */
+        color: #0c5460; /* Dark blue */
+        border: 1px solid #bee5eb;
+    }
+
+    /* For showing the message with opacity transition */
+    .ff-message-container[style*="display: block"] {
+        opacity: 1;
+    }
+
+
+        .ff-section {
+            background-color: var(--card-bg);
+            padding: var(--spacing-unit-lg);
+            margin-bottom: var(--spacing-unit-lg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--card-shadow);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ff-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: var(--spacing-unit);
+            text-align: center;
+        }
+
+        /* Hero Slider */
+        .ff-hero-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: var(--light-bg);
+            min-height: 400px; /* Placeholder height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 1.5rem;
+        }
+
+        .ff-slider-item {
+            display: none; /* Managed by JS */
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            padding: var(--spacing-unit);
+            gap: 1rem;
+        }
+
+        .ff-slider-item.active {
+            display: flex;
+        }
+
+        .ff-product-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+            padding: 1rem;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            max-width: 30%;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            position: relative; /* For favorite icon positioning */
+        }
+
+        .ff-product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ff-product-card img {
+            max-width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 0.8rem;
+            background-color: var(--light-bg); /* For placeholder */
+        }
+
+        .ff-product-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ff-product-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem; /* Adjusted for new info */
+        }
+
+        .ff-product-card .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: 0.8rem; /* Added margin */
+        }
+
+        .ff-product-card .cta-button:hover {
+            background-color: #c4644a;
+        }
+
+        .ff-product-card .cta-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .ff-product-meta {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ff-product-meta .rating {
+            color: gold;
+        }
+
+        .ff-product-meta .stock-status.in-stock {
+            color: green;
+            font-weight: bold;
+        }
+
+        .ff-product-meta .stock-status.out-of-stock {
+            color: red;
+            font-weight: bold;
+        }
+
+        .ff-favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .ff-favorite-icon.favorited {
+            color: red; /* Or a distinct color when favorited */
+        }
+
+        /* Top Brands */
+        .ff-brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            justify-items: center;
+        }
+
+        .ff-brand-item {
+            text-align: center;
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .ff-brand-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .ff-brand-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 50%;
+            background-color: var(--light-bg); /* Solid color placeholder */
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .ff-brand-item p {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Top Picks */
+        .ff-top-picks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ff-explore-all-btn {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .ff-explore-all-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        /* About Us / Why Choose Us */
+        .ff-text-content {
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .ff-text-content h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .ff-text-content ul {
+            list-style: disc inside;
+            margin-left: 1rem;
+        }
+
+        .ff-text-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Why Choose Us - Horizontal with Icons */
+        .ff-why-choose-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .ff-reason-item {
+            flex: 1 1 calc(33% - 2rem); /* Approx 3 items per row, responsive */
+            min-width: 200px;
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .ff-reason-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .ff-reason-item i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .ff-reason-item h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .ff-reason-item p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        /* Contact Form - Two Column Layout */
+        .ff-contact-grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .ff-contact-info {
+            flex: 1;
+            min-width: 280px; /* Ensure it doesn't get too small */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribute content vertically */
+            padding: 1rem 0; /* Add some vertical padding */
+        }
+
+        .ff-contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem; /* Space between links */
+            color: var(--text-color);
+        }
+
+        .ff-contact-info p i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .ff-contact-form {
+            flex: 2; /* Form takes more space */
+            min-width: 300px;
+            max-width: 600px; /* Limit form width */
+            margin: 0 1rem; /* Left and right margin */
+        }
+
+        .ff-contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%; /* Fill its container */
+        }
+
+        .ff-contact-form label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .ff-contact-form input,
+        .ff-contact-form textarea,
+        .ff-contact-form select {
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .ff-contact-form input:focus,
+        .ff-contact-form textarea:focus,
+        .ff-contact-form select:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .ff-contact-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .ff-contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ff-subheader {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .ff-subheader-left, .ff-subheader-right {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+            .ff-search-bar {
+                width: 100%;
+                max-width: 100%;
+                margin-top: 0.5rem;
+            }
+            .ff-categories-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-top: 1rem;
+            }
+            .ff-slider-item {
+                flex-direction: column;
+            }
+            .ff-product-card {
+                max-width: 100%;
+            }
+            .ff-brands-grid, .ff-top-picks-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .ff-why-choose-grid {
+                flex-direction: column; /* Stack reasons vertically on small screens */
+                align-items: center;
+            }
+            .ff-reason-item {
+                flex: 1 1 90%; /* Take more width on small screens */
+            }
+            .ff-contact-grid-container {
+                flex-direction: column; /* Stack contact info and form vertically */
+                align-items: center;
+            }
+            .ff-contact-info, .ff-contact-form {
+                width: 90%; /* Adjust width for stacked elements */
+                margin: 0; /* Remove side margins when stacked */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ff-subheader-logo img {
+                height: 40px;
+            }
+            .ff-categories-nav ul {
+                gap: 0.5rem;
+            }
+            .ff-categories-nav a {
+                font-size: 0.9rem;
+            }
+            .ff-cart-icon {
+                font-size: 1.5rem;
+            }
+            .ff-cart-count {
+                font-size: 0.6rem;
+                min-width: 16px;
+            }
+            .ff-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header (from provided skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Fashion Finesse Subheader -->
+<div class="ff-subheader">
+    <div class="ff-subheader-left">
+        <a href="fashionfinesse.html" class="ff-subheader-logo">
+            <img src="https://placehold.co/150x50/ff7f50/ffffff?text=Fashion+Finesse" alt="Fashion Finesse Logo">
+        </a>
+        <div class="ff-search-bar">
+            <input type="search" id="ff-product-search" placeholder="Search products, brands..." aria-label="Fashion Finesse Product Search">
+            <button id="ff-search-submit-btn" aria-label="Search Products"><i class="fas fa-search"></i></button>
+            <div id="ff-search-suggestions" class="ff-search-suggestions"></div> <!-- For JS suggestions -->
+        </div>
+    </div>
+    <div class="ff-subheader-right">
+    <nav class="ff-categories-nav">
+        <ul id="ff-categories-list">
+            <!--
+                IMPORTANT: The 'Clothes', 'Shoes', 'Belts', 'Bags' categories
+                are dynamically populated by scripts/fashionfinesse.js.
+                Do NOT hardcode them here, otherwise they will appear duplicated.
+            -->
+            <li><a href="fashionfinesse-products.html?filter=new-arrivals">New Arrivals</a></li>
+        </ul>
+    </nav>
+    <div class="ff-cart-icon">
+        <a href="fashionfinesse-my-activity.html?tab=cart" aria-label="Shopping Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="ff-cart-count" id="ff-cart-count">0</span>
+        </a>
+    </div>
+</div>
+
+
+<!-- Main Content for Fashion Finesse -->
+<main>
+    <!-- Custom message container -->
+    <div id="ff-message-container" class="ff-message-container" style="display: none;"></div>
+
+    <section class="ff-section ff-hero-slider" id="ff-hero-slider">
+        <h2>Hot Deals & New Arrivals</h2>
+        <!-- Slider content will be dynamically loaded by JS -->
+        <div class="ff-slider-item active">
+            <div class="ff-product-card">
+                <i class="far fa-heart ff-favorite-icon" data-product-id="1"></i>
+                <img src="https://placehold.co/300x180/ffd700/ffffff?text=Product+1" alt="Product 1">
+                <h3>Product Name 1</h3>
+                <p>Short description of product 1.</p>
+                <div class="ff-product-meta">
+                    <span class="rating">★★★★☆</span> (4.5/5) | Sold: 120 <br>
+                    <span class="stock-status in-stock">In Stock</span>
+                </div>
+                <a href="fashionfinesse-products-details.html?id=1" class="cta-button">Shop Now</a>
+            </div>
+            <div class="ff-product-card">
+                <i class="far fa-heart ff-favorite-icon" data-product-id="2"></i>
+                <img src="https://placehold.co/300x180/add8e6/ffffff?text=Product+2" alt="Product 2">
+                <h3>Product Name 2</h3>
+                <p>Short description of product 2.</p>
+                <div class="ff-product-meta">
+                    <span class="rating">★★★★★</span> (5/5) | Sold: 85 <br>
+                    <span class="stock-status in-stock">In Stock</span>
+                </div>
+                <a href="fashionfinesse-products-details.html?id=2" class="cta-button">Shop Now</a>
+            </div>
+            <div class="ff-product-card">
+                <i class="far fa-heart ff-favorite-icon" data-product-id="3"></i>
+                <img src="https://placehold.co/300x180/90ee90/ffffff?text=Product+3" alt="Product 3">
+                <h3>Product Name 3</h3>
+                <p>Short description of product 3.</p>
+                <div class="ff-product-meta">
+                    <span class="rating">★★★☆☆</span> (3.8/5) | Sold: 200 <br>
+                    <span class="stock-status out-of-stock">Out of Stock</span>
+                </div>
+                <a href="fashionfinesse-products-details.html?id=3" class="cta-button" disabled>Shop Now</a>
+            </div>
+        </div>
+        <!-- More slider items will be added by JS -->
+    </section>
+
+    <section class="ff-section ff-top-brands">
+        <h2>Top Brands</h2>
+        <div class="ff-brands-grid" id="ff-brands-grid">
+            <!-- Brand logos will be dynamically loaded by JS -->
+            <div class="ff-brand-item">
+                <img src="https://placehold.co/80x80/ff0000/ffffff?text=Gucci+Logo" alt="Gucci Logo">
+                <p>Gucci</p>
+            </div>
+            <div class="ff-brand-item">
+                <img src="https://placehold.co/80x80/0000ff/ffffff?text=Adidas+Logo" alt="Adidas Logo">
+                <p>Adidas</p>
+            </div>
+            <div class="ff-brand-item">
+                <img src="https://placehold.co/80x80/008000/ffffff?text=Nike+Logo" alt="Nike Logo">
+                <p>Nike</p>
+            </div>
+            <div class="ff-brand-item">
+                <img src="https://placehold.co/80x80/800080/ffffff?text=Prada+Logo" alt="Prada Logo">
+                <p>Prada</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="ff-section ff-top-picks">
+        <h2>Our Top Picks</h2>
+        <div class="ff-top-picks-grid" id="ff-top-picks-grid">
+            <!-- Top 8 products will be dynamically loaded by JS -->
+            <div class="ff-product-card">
+                <i class="far fa-heart ff-favorite-icon" data-product-id="A"></i>
+                <img src="https://placehold.co/220x180/cccccc/333333?text=Product+A" alt="Product A">
+                <h3>Product A Name</h3>
+                <p>Ksh 4,500</p>
+                <div class="ff-product-meta">
+                    <span class="rating">★★★★☆</span> (4.2/5) | Sold: 90 <br>
+                    <span class="stock-status in-stock">In Stock</span>
+                </div>
+                <button class="cta-button ff-add-to-cart" data-product-id="A">Add to Cart</button>
+            </div>
+            <div class="ff-product-card">
+                <i class="far fa-heart ff-favorite-icon" data-product-id="B"></i>
+                <img src="https://placehold.co/220x180/cccccc/333333?text=Product+B" alt="Product B">
+                <h3>Product B Name</h3>
+                <p>Ksh 7,200</p>
+                <div class="ff-product-meta">
+                    <span class="rating">★★★★★</span> (4.9/5) | Sold: 150 <br>
+                    <span class="stock-status in-stock">In Stock</span>
+                </div>
+                <button class="cta-button ff-add-to-cart" data-product-id="B">Add to Cart</button>
+            </div>
+        </div>
+        <a href="fashionfinesse-products.html" class="ff-explore-all-btn">Explore All Fashions</a>
+    </section>
+
+    <section class="ff-section ff-why-choose-us">
+        <h2>Why Choose Fashion Finesse?</h2>
+        <div class="ff-why-choose-grid">
+            <div class="ff-reason-item">
+                <i class="fas fa-gem"></i>
+                <h4>Curated Selection</h4>
+                <p>Hand-picked items ensuring quality and style for every occasion.</p>
+            </div>
+            <div class="ff-reason-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>Latest Trends</h4>
+                <p>Stay ahead of the curve with our constantly updated collections.</p>
+            </div>
+            <div class="ff-reason-item">
+                <i class="fas fa-award"></i>
+                <h4>Exceptional Quality</h4>
+                <p>We prioritize durable fabrics and superior craftsmanship.</p>
+            </div>
+            <div class="ff-reason-item">
+                <i class="fas fa-headset"></i>
+                <h4>Customer-Centric Service</h4>
+                <p>Your satisfaction is our top priority, with dedicated support.</p>
+            </div>
+            <div class="ff-reason-item">
+                <i class="fas fa-hands-helping"></i>
+                <h4>Community Focused</h4>
+                <p>Proudly serving the vibrant fashion community of Nairobi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="ff-section ff-about-us">
+        <h2>About Fashion Finesse Boutique</h2>
+        <div class="ff-text-content">
+            <p>Fashion Finesse Boutique is Nairobi's premier destination for the latest trends and timeless elegance in apparel. We curate an exquisite collection for the modern Kenyan fashionista, offering unique styles that embody sophistication and flair. Discover your next statement piece with us, where quality craftsmanship meets contemporary design, empowering you to express your individuality with confidence and grace.</p>
+            <h3>Our Branches in Nairobi:</h3>
+            <ul>
+                <li><strong>Nairobi CBD Branch:</strong> Tom Mboya Street, Nairobi CBD. Contact: +254 707 176 595</li>
+                <li><strong>Westlands Branch:</strong> Sarit Centre, Westlands, Nairobi. Contact: +254 707 176 595</li>
+                <li><strong>Karen Branch:</strong> Karen Crossroads, Karen, Nairobi. Contact: +254 707 176 595</li>
+                <li><strong>Upper Hill Branch:</strong> Britam Tower, Upper Hill, Nairobi. Contact: +254 707 176 595</li>
+                <li><strong>Thika Road Mall (TRM) Branch:</strong> Thika Road, Roysambu, Nairobi. Contact: +254 707 176 595</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="ff-section ff-contact-us">
+        <h2>Contact Fashion Finesse</h2>
+        <div class="ff-contact-grid-container">
+            <div class="ff-contact-info">
+                <p>Have a question or need assistance? Reach out to us!</p>
+                <p><i class="fas fa-envelope"></i> info@fashionfinesse.co.ke</p>
+                <p><i class="fas fa-phone-alt"></i> +254 707 176 595</p>
+            </div>
+            <div class="ff-contact-form">
+                <form id="ff-contact-form">
+                    <label for="ff-contact-name">Your Name:</label>
+                    <input type="text" id="ff-contact-name" name="name" required>
+
+                    <label for="ff-contact-email">Your Email:</label>
+                    <input type="email" id="ff-contact-email" name="email" required>
+
+                    <label for="ff-contact-subject">Subject:</label>
+                    <select id="ff-contact-subject" name="subject" required>
+                        <option value="">Select a reason</option>
+                        <option value="enquire">General Enquiry</option>
+                        <option value="order-cancel">Order Cancellation</option>
+                        <option value="refund">Refund Request</option>
+                        <option value="dispute">Dispute / Complaint</option>
+                        <option value="product-info">Product Information</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="ff-contact-message">Your Message:</label>
+                    <textarea id="ff-contact-message" name="message" rows="6" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+                <div id="ff-contact-status-message" style="margin-top: 1rem; text-align: center; color: var(--primary-color);"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Unified Footer (from provided skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+<!-- Fashion Finesse Specific JavaScript -->
+<script src="scripts/fashionfinesse.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taste of Africa Catering | La Familia Chambers - Authentic African Cuisine</title>
+    <meta name="description" content="Experience authentic African and international cuisine catering for your events. Discover our menus and learn our free and premium recipes.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Catering Page */
+        :root {
+            --catering-primary: #C33B32; /* Deep Red */
+            --catering-secondary: #0A8754; /* Forest Green */
+            --catering-accent: #FFD700; /* Gold */
+            --catering-text: #333333;
+            --catering-bg: #FFFFFF;
+            --catering-card-bg: #F8F8F8;
+            --catering-border: #EEEEEE;
+            --catering-shadow: rgba(0, 0, 0, 0.1);
+
+            /* Recipe specific colors, consistent with La Familia's main theme if possible */
+            --recipe-primary: var(--primary-color);
+            --recipe-secondary: var(--secondary-color);
+            --recipe-accent: var(--accent-color);
+            --recipe-text: var(--text-color);
+            --recipe-bg: var(--bg-color);
+            --recipe-card-bg: var(--card-bg);
+            --recipe-border: var(--border-color);
+            --recipe-shadow: var(--card-shadow);
+        }
+
+        body.dark-mode {
+            --catering-primary: #FF6B6B; /* Lighter Red for dark mode */
+            --catering-secondary: #6BFF6B; /* Lighter Green for dark mode */
+            --catering-accent: #FFEA00; /* Brighter Gold */
+            --catering-text: #E0E0E0;
+            --catering-bg: #1A1A1A;
+            --catering-card-bg: #2C2C2C;
+            --catering-border: #444444;
+            --catering-shadow: rgba(255, 255, 255, 0.1);
+
+            --recipe-primary: var(--primary-color-dark);
+            --recipe-secondary: var(--secondary-color-dark);
+            --recipe-accent: var(--accent-color-dark);
+            --recipe-text: var(--text-color-dark);
+            --recipe-bg: var(--bg-color-dark);
+            --recipe-card-bg: var(--card-bg-dark);
+            --recipe-border: var(--border-color-dark);
+            --recipe-shadow: var(--card-shadow-dark);
+        }
+
+        /* General sections */
+        .section-catering {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--catering-text);
+            background-color: var(--catering-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-catering {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--catering-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-catering::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--catering-accent);
+            border-radius: 3px;
+        }
+
+        /* Hero section */
+        .hero-catering {
+            background-image: url('images/tasteofafrica_hero.webp');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            /* Adjust padding-top dynamically with JS to clear sticky header */
+            padding-top: 0;
+        }
+
+        .hero-catering::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .hero-catering h1 {
+            font-size: 3.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+
+        .hero-catering p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        .hero-catering .cta-button {
+            background-color: var(--catering-accent);
+            color: var(--catering-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .hero-catering .cta-button:hover {
+            background-color: #FFEB3B; /* Slightly lighter gold */
+            transform: translateY(-2px);
+        }
+
+        /* Catering cards */
+        .catering-card {
+            background-color: var(--catering-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px var(--catering-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .catering-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--catering-shadow);
+        }
+
+        .catering-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+
+        .catering-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--catering-primary);
+            margin: 1.5rem 1.5rem 0.75rem 1.5rem;
+        }
+
+        .catering-card p {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--catering-text);
+            line-height: 1.7;
+        }
+
+        /* Menu Item Cards */
+        .menu-item-card {
+            background-color: var(--catering-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px var(--catering-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .menu-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--catering-shadow);
+        }
+
+        .menu-item-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+
+        .menu-item-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .menu-item-card-content h4 {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: var(--catering-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-card-content p {
+            color: var(--catering-text);
+            line-height: 1.6;
+        }
+
+        /* Contact Form */
+        .contact-form-catering {
+            background-color: var(--catering-card-bg);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px var(--catering-shadow);
+        }
+
+        .contact-form-catering label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--catering-text);
+        }
+
+        .contact-form-catering input[type="text"],
+        .contact-form-catering input[type="email"],
+        .contact-form-catering input[type="number"],
+        .contact-form-catering input[type="date"],
+        .contact-form-catering select,
+        .contact-form-catering textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--catering-border);
+            border-radius: 0.5rem;
+            background-color: var(--catering-bg);
+            color: var(--catering-text);
+            transition: border-color 0.3s ease;
+        }
+        .contact-form-catering input:focus,
+        .contact-form-catering select:focus,
+        .contact-form-catering textarea:focus {
+            border-color: var(--catering-primary);
+            outline: none;
+        }
+        body.dark-mode .contact-form-catering input,
+        body.dark-mode .contact-form-catering select,
+        body.dark-mode .contact-form-catering textarea {
+            background-color: var(--catering-bg);
+            border: 1px solid var(--catering-border);
+        }
+
+        .contact-form-catering button[type="submit"] {
+            background-color: var(--catering-secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .contact-form-catering button[type="submit"]:hover {
+            background-color: #086F45; /* Darker green */
+            transform: translateY(-2px);
+        }
+
+
+        /* Recipe Page specific styles (Moved from previous recipes.html) */
+        .hero-recipes {
+            background-image: url('images/hero_recipes.webp'); /* Placeholder, replace with actual image */
+            background-size: cover;
+            background-position: center;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            padding-top: 0; /* Will be adjusted by JS */
+        }
+        .hero-recipes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: -1;
+        }
+        .hero-recipes h1 {
+            font-size: 3.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .hero-recipes p {
+            font-size: 1.3rem;
+            max-width: 700px;
+        }
+
+        .section-recipes {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--recipe-bg);
+            color: var(--recipe-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .section-title-recipes {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--recipe-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .section-title-recipes::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--recipe-accent);
+            border-radius: 2px;
+        }
+
+        .recipe-card {
+            background-color: var(--recipe-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--recipe-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--recipe-shadow);
+        }
+
+        .recipe-image-container {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--recipe-border);
+        }
+
+        .recipe-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #4A90E2; /* Blue color for placeholder */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 1rem;
+            box-sizing: border-box;
+            display: none; /* Hidden by default, shown by JS on error */
+        }
+
+        .recipe-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .recipe-card h3 {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: var(--recipe-primary);
+            margin-bottom: 0.75rem;
+        }
+        .recipe-card p.description {
+            color: var(--recipe-text);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .recipe-card .details-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .recipe-card .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--recipe-accent);
+        }
+        .recipe-card .view-button {
+            background-color: var(--catering-secondary); /* Changed for visibility */
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            align-self: flex-end;
+        }
+        .recipe-card .view-button:hover {
+            background-color: #086F45; /* Darker green for hover */
+        }
+        .recipe-card .free-label {
+            background-color: #22C55E; /* Green for Free */
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Sub-navigation for Catering/Recipes */
+        .sub-nav {
+            background-color: var(--recipe-card-bg); /* Use a neutral background or adjust */
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--recipe-border);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-top: -2px; /* Pull it slightly up to meet the header */
+            transition: background-color 0.3s ease;
+        }
+
+        .sub-nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sub-nav-list a {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--recipe-text);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sub-nav-list a:hover {
+            background-color: var(--recipe-border);
+        }
+
+        .sub-nav-list a.active {
+            background-color: var(--recipe-primary);
+            color: white;
+        }
+        body.dark-mode .sub-nav-list a.active {
+            background-color: var(--recipe-accent); /* Brighter for dark mode active */
+            color: var(--recipe-primary); /* Dark text for contrast */
+        }
+
+
+        /* Recipe Detail Modal */
+        .recipe-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .recipe-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .recipe-modal-content {
+            background-color: var(--recipe-bg);
+            color: var(--recipe-text);
+            border-radius: 0.75rem;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .recipe-modal-overlay.active .recipe-modal-content {
+            transform: translateY(0);
+        }
+
+        .recipe-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--catering-primary); /* Changed for visibility */
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .recipe-modal-close:hover {
+            color: var(--recipe-accent);
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        .modal-recipe-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .modal-image-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #4A90E2; /* Blue color for placeholder */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 1rem;
+            box-sizing: border-box;
+            display: none; /* Hidden by default */
+        }
+
+
+        .recipe-modal-content h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--recipe-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .recipe-modal-content .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--recipe-text);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .recipe-modal-content .meta-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .recipe-modal-content .meta-info i {
+            color: var(--recipe-accent);
+        }
+        .recipe-modal-content h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--recipe-secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .recipe-modal-content ul, .recipe-modal-content ol {
+            list-style-position: inside;
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+        .recipe-modal-content ul li, .recipe-modal-content ol li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--recipe-text);
+            margin-bottom: 0.5rem;
+        }
+        .recipe-modal-content ol li {
+            list-style-type: decimal;
+            margin-left: 1.5rem; /* Indent for ordered list */
+        }
+        .recipe-modal-content .premium-notice {
+            background-color: #FEF3C7; /* Yellow background */
+            color: #D97706; /* Darker yellow text */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 2rem;
+            border: 1px solid #FCD34D;
+        }
+        body.dark-mode .recipe-modal-content .premium-notice {
+            background-color: #A16207; /* Darker yellow for dark mode */
+            color: #FFF;
+            border: 1px solid #FCD34D;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero-catering h1 {
+                font-size: 3rem;
+            }
+            .hero-catering p {
+                font-size: 1.3rem;
+            }
+            .section-title-catering {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-catering {
+                height: 350px;
+            }
+            .hero-catering h1 {
+                font-size: 2.2rem;
+            }
+            .hero-catering p {
+                font-size: 1rem;
+            }
+            .section-title-catering {
+                font-size: 1.8rem;
+            }
+            .catering-card h3 {
+                font-size: 1.5rem;
+            }
+            .menu-item-card-content h4 {
+                font-size: 1.4rem;
+            }
+            .contact-form-catering {
+                padding: 1.5rem;
+            }
+
+            /* Recipe responsive */
+            .hero-recipes {
+                height: 300px;
+            }
+            .hero-recipes h1 {
+                font-size: 2.2rem;
+            }
+            .hero-recipes p {
+                font-size: 1rem;
+            }
+            .section-title-recipes {
+                font-size: 2rem;
+            }
+            .recipe-card h3 {
+                font-size: 1.4rem;
+            }
+            .recipe-modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            .recipe-modal-content h2 {
+                font-size: 2rem;
+            }
+            .recipe-modal-content .meta-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .recipe-modal-content h3 {
+                font-size: 1.6rem;
+            }
+            .modal-image-container {
+                height: 200px;
+            }
+            .sub-nav-list {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .sub-nav-list a {
+                width: 80%;
+                text-align: center;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="awards.html" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="clubs.html" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="reviews.html" class="nav-link">Member Reviews</a></li>
+                <li><a href="board.html" class="nav-link">Board of Directors</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+<main>
+    <nav class="sub-nav">
+        <ul class="sub-nav-list">
+            <li><a href="#catering-content" id="nav-catering" class="active">Catering Services</a></li>
+            <li><a href="#recipes-content" id="nav-recipes">Our Recipes</a></li>
+        </ul>
+    </nav>
+
+    <div id="catering-content">
+        <section class="hero-catering" id="catering-hero">
+            <div>
+                <h1>Experience the Authentic Taste of Africa</h1>
+                <p>Gourmet African and International Cuisine Catering for Every Occasion, Big or Small.</p>
+                <a href="#contact" class="cta-button">Request a Quote</a>
+            </div>
+        </section>
+
+        <section id="about" class="section-catering">
+            <h2 class="section-title-catering">Our Culinary Journey</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <img src="images/tasteofafrica_about.webp" alt="Taste of Africa kitchen" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-lg leading-relaxed mb-4">
+                        At Taste of Africa Catering, we bring the vibrant flavors and rich culinary traditions of Africa and beyond directly to your event. Founded with a passion for authentic cuisine and impeccable service, we specialize in creating unforgettable dining experiences tailored to your needs.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        From intimate family gatherings to grand corporate events, our expert chefs craft diverse menus using the freshest local ingredients, ensuring every bite is a celebration of taste and culture. We pride ourselves on attention to detail, presentation, and making your event truly special.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-catering bg-gray-50">
+            <h2 class="section-title-catering">Catering Services Tailored For You</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="catering-card">
+                    <img src="images/tasteofafrica_corporate.webp" alt="Corporate Catering">
+                    <h3>Corporate Events</h3>
+                    <p>Impress your clients and colleagues with our professional catering services for meetings, conferences, product launches, and office parties.</p>
+                </div>
+                <div class="catering-card">
+                    <img src="images/tasteofafrica_wedding.webp" alt="Wedding Catering">
+                    <h3>Weddings & Receptions</h3>
+                    <p>Make your special day deliciously memorable with bespoke menus, elegant presentation, and seamless service that reflects your unique style.</p>
+                </div>
+                <div class="catering-card">
+                    <img src="images/tasteofafrica_private.webp" alt="Private Party Catering">
+                    <h3>Private Parties & Celebrations</h3>
+                    <p>From birthdays to anniversaries, enjoy your celebration while we handle the culinary delights, from casual buffets to multi-course plated dinners.</p>
+                </div>
+                <div class="catering-card">
+                    <img src="images/tasteofafrica_custom.webp" alt="Custom Menu Design">
+                    <h3>Custom Menu Design</h3>
+                    <p>Have a specific vision? Our chefs will work with you to create a personalized menu that caters to dietary needs, cultural preferences, and unique themes.</p>
+                </div>
+                <div class="catering-card">
+                    <img src="images/tasteofafrica_buffet.webp" alt="Buffet Catering">
+                    <h3>Buffet & Plated Service</h3>
+                    <p>Choose from our versatile buffet setups or sophisticated plated service, ensuring your guests enjoy a premium dining experience.</p>
+                </div>
+                <div class="catering-card">
+                    <img src="images/tasteofafrica_dessert.webp" alt="Dessert & Beverage Bar">
+                    <h3>Dessert & Beverage Bar</h3>
+                    <p>Complete your feast with our exquisite array of desserts, fresh juices, and specialty beverages, designed to delight every palate.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu-highlights" class="section-catering">
+            <h2 class="section-title-catering">Signature Dishes & Menu Highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="menu-item-card">
+                    <img src="images/dish_pilau.webp" alt="Authentic Kenyan Pilau">
+                    <div class="menu-item-card-content">
+                        <h4>Authentic Kenyan Pilau</h4>
+                        <p>Fragrant rice dish cooked with tender beef or chicken, aromatic spices, and fresh herbs, a true East African classic.</p>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="images/dish_chapati.webp" alt="Soft Layered Chapatis">
+                    <div class="menu-item-card-content">
+                        <h4>Soft Layered Chapatis</h4>
+                        <p>Hand-rolled, flaky flatbreads perfect for scooping up curries or as a delightful snack on their own.</p>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="images/dish_matoke.webp" alt="Matoke (Green Banana Stew)">
+                    <div class="menu-item-card-content">
+                        <h4>Matoke (Green Banana Stew)</h4>
+                        <p>A comforting Ugandan stew of green bananas cooked with tender meat, vegetables, and rich peanut sauce.</p>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="images/dish_jollof.webp" alt="Spicy Jollof Rice">
+                    <div class="menu-item-card-content">
+                        <h4>Spicy Jollof Rice</h4>
+                        <p>The iconic West African rice dish, richly flavored with tomatoes, peppers, and savory spices, available with chicken or fish.</p>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="images/dish_samosa.webp" alt="Crispy Vegetarian Samosas">
+                    <div class="menu-item-card-content">
+                        <h4>Crispy Vegetarian Samosas</h4>
+                        <p>Golden fried pastry pockets filled with spiced potatoes and peas, a perfect appetizer.</p>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="images/dish_kuku.webp" alt="Kuku Paka (Coconut Chicken Curry)">
+                    <div class="menu-item-card-content">
+                        <h4>Kuku Paka (Coconut Chicken Curry)</h4>
+                        <p>A creamy and flavorful coastal Kenyan chicken curry, slow-cooked in coconut milk with traditional spices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section-catering bg-gray-50">
+            <h2 class="section-title-catering">What Our Clients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="catering-card">
+                    <p class="text-lg italic mb-4">"Taste of Africa Catering truly outdid themselves for our wedding! The food was absolutely incredible, and the service was flawless. Our guests are still talking about the pilau!"</p>
+                    <p class="font-semibold">- Sarah & David M., Nairobi</p>
+                </div>
+                <div class="catering-card">
+                    <p class="text-lg italic mb-4">"We hired them for our annual corporate gala, and everything was perfect. The international buffet was diverse and delicious, and their team was highly professional and accommodating."</p>
+                    <p class="font-semibold">- John K., CEO, Tech Solutions Ltd.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-catering">
+            <h2 class="section-title-catering">Plan Your Event with Us</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="contact-form-catering">
+                    <h3 class="text-2xl font-bold mb-6 text-center" style="color: var(--catering-primary);">Request a Catering Quote</h3>
+                    <form action="#" method="POST">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="fullName">Your Full Name</label>
+                                <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label for="email">Your Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="eventType">Type of Event</label>
+                                <select id="eventType" name="eventType" required>
+                                    <option value="">Select Event Type</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="private-party">Private Party</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="eventDate">Preferred Event Date</label>
+                                <input type="date" id="eventDate" name="eventDate" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="guestCount">Number of Guests</label>
+                                <input type="number" id="guestCount" name="guestCount" placeholder="e.g., 50" min="1" required>
+                            </div>
+                            <div>
+                                <label for="budget">Approx. Budget (KES)</label>
+                                <input type="text" id="budget" name="budget" placeholder="e.g., 100,000">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="message">Tell Us About Your Vision</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Any specific cuisines, dietary needs, or special requests?"></textarea>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button type="submit">Get Your Custom Quote</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="text-center lg:text-left">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--catering-primary);">Contact Details</h3>
+                    <p class="text-lg mb-2"><i class="fas fa-phone-alt mr-2" style="color: var(--catering-secondary);"></i> +254 7XX XXX XXX</p>
+                    <p class="text-lg mb-2"><i class="fas fa-envelope mr-2" style="color: var(--catering-secondary);"></i> catering@tasteofafrica.co.ke</p>
+                    <p class="text-lg mb-4"><i class="fas fa-map-marker-alt mr-2" style="color: var(--catering-secondary);"></i> Associated with La Familia Chambers, Westlands, Nairobi</p>
+                    <p class="text-md leading-relaxed"> We're here to help you plan the perfect culinary experience for your next event. Reach out to us for a personalized consultation. </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="recipes-content" style="display: none;">
+        <section class="hero-recipes" id="recipes-hero">
+            <div>
+                <h1>Savor the Flavors of Africa and Beyond</h1>
+                <p>Explore our curated collection of delicious recipes. Learn for free or order premium guides!</p>
+            </div>
+        </section>
+
+        <section id="recipes-list-section" class="section-recipes">
+            <h2 class="section-title-recipes">Our Recipe Collection</h2>
+            <div class="flex justify-center gap-4 mb-8">
+                <button class="px-6 py-2 rounded-md bg-green-500 text-white font-semibold transition-colors duration-200 hover:bg-green-600" id="filter-all-recipes">All Recipes</button>
+                <button class="px-6 py-2 rounded-md bg-blue-500 text-white font-semibold transition-colors duration-200 hover:bg-blue-600" id="filter-free-recipes">Free Recipes</button>
+                <button class="px-6 py-2 rounded-md bg-purple-500 text-white font-semibold transition-colors duration-200 hover:bg-purple-600" id="filter-premium-recipes">Premium Recipes</button>
+            </div>
+            <div id="recipes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+    </div>
+</main>
+
+<div class="recipe-modal-overlay" id="recipe-detail-modal">
+    <div class="recipe-modal-content">
+        <button class="recipe-modal-close" id="recipe-modal-close">&times;</button>
+        <div class="modal-image-container">
+            <img src="" alt="Recipe Image" class="modal-recipe-image" id="modal-recipe-image">
+            <div class="modal-image-placeholder" id="modal-image-placeholder"></div>
+        </div>
+        <h2 id="modal-recipe-name"></h2>
+        <div class="meta-info">
+            <span><i class="fas fa-hourglass-start"></i> Prep: <span id="modal-prep-time"></span></span>
+            <span><i class="fas fa-hourglass-half"></i> Cook: <span id="modal-cook-time"></span></span>
+            <span><i class="fas fa-users"></i> Servings: <span id="modal-servings"></span></span>
+        </div>
+        <p class="mb-4" id="modal-recipe-description"></p>
+        <h3>Ingredients</h3>
+        <ul id="modal-ingredients-list">
+        </ul>
+        <h3>Instructions</h3>
+        <ol id="modal-instructions-list">
+        </ol>
+        <div class="premium-notice mt-4 hidden" id="modal-premium-notice">
+            This is a premium recipe! To access full details or print the recipe, please contact us at +254 7XX XXX XXX to order. Price: <span id="modal-premium-price"></span>.
+        </div>
+    </div>
+</div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('.sticky-header');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBarContainer = document.getElementById('search-bar-container');
+        const siteSearchInput = document.getElementById('site-search');
+        const searchSubmitBtn = document.getElementById('search-submit-btn');
+        const searchClearBtn = document.getElementById('search-clear-btn');
+        const searchMicBtn = document.getElementById('search-mic-btn');
+        const searchSuggestions = document.getElementById('search-suggestions');
+        const searchHistory = document.getElementById('search-history');
+        const searchTypeFilter = document.getElementById('search-type-filter');
+        const searchLocationFilter = document.getElementById('search-location-filter');
+
+        // Dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // --- Sticky Header & Hero Padding Adjustment ---
+        const adjustHeroPadding = () => {
+            const headerHeight = header.offsetHeight;
+            const cateringHero = document.getElementById('catering-hero');
+            const recipesHero = document.getElementById('recipes-hero');
+
+            if (cateringHero) {
+                cateringHero.style.paddingTop = `${headerHeight}px`;
+            }
+            if (recipesHero) {
+                recipesHero.style.paddingTop = `${headerHeight}px`;
+            }
+        };
+
+        // Adjust on load and resize
+        window.addEventListener('load', adjustHeroPadding);
+        window.addEventListener('resize', adjustHeroPadding);
+        // Also adjust when main nav opens/closes as it affects header height
+        hamburgerMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('main-nav-closed');
+            mainNav.classList.toggle('main-nav-open');
+            adjustHeroPadding();
+        });
+
+        // --- Dark Mode Toggle ---
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            modeToggle.querySelector('i').classList.replace(
+                isDarkMode ? 'fa-moon' : 'fa-sun',
+                isDarkMode ? 'fa-sun' : 'fa-moon'
+            );
+        });
+
+        // --- Search Bar Functionality ---
+        searchToggle.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('search-bar-hidden');
+            searchBarContainer.classList.toggle('search-bar-active');
+            if (searchBarContainer.classList.contains('search-bar-active')) {
+                siteSearchInput.focus();
+            }
+        });
+
+        searchClearBtn.addEventListener('click', () => {
+            siteSearchInput.value = '';
+            searchSuggestions.innerHTML = '';
+            searchHistory.innerHTML = '';
+        });
+
+        // Placeholder for search functionality
+        searchSubmitBtn.addEventListener('click', () => {
+            performSearch(siteSearchInput.value, searchTypeFilter.value, searchLocationFilter.value);
+        });
+        siteSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(siteSearchInput.value, searchTypeFilter.value, searchLocationFilter.value);
+            }
+        });
+
+        function performSearch(query, type, location) {
+            console.log(`Searching for "${query}" in "${type}" at "${location}"`);
+            // In a real application, this would redirect to a search results page or filter content
+            alert(`Searching for "${query}" (${type}, ${location}).`);
+            // For now, just clear suggestions/history after a "search"
+            searchSuggestions.innerHTML = '';
+            searchHistory.innerHTML = '';
+        }
+
+        searchMicBtn.addEventListener('click', () => {
+            alert('Voice search not implemented yet. Please type your query.');
+        });
+
+        // --- Tab Switching Logic (Catering vs Recipes) ---
+        const cateringContent = document.getElementById('catering-content');
+        const recipesContent = document.getElementById('recipes-content');
+        const navCatering = document.getElementById('nav-catering');
+        const navRecipes = document.getElementById('nav-recipes');
+
+        const showSection = (sectionId) => {
+            if (sectionId === 'catering-content') {
+                cateringContent.style.display = 'block';
+                recipesContent.style.display = 'none';
+                navCatering.classList.add('active');
+                navRecipes.classList.remove('active');
+                window.location.hash = '#catering-content';
+            } else if (sectionId === 'recipes-content') {
+                cateringContent.style.display = 'none';
+                recipesContent.style.display = 'block';
+                navRecipes.classList.add('active');
+                navCatering.classList.remove('active');
+                window.location.hash = '#recipes-content';
+                loadRecipes('all'); // Load all recipes when switching to recipe tab
+            }
+            adjustHeroPadding(); // Adjust hero padding after showing/hiding sections
+        };
+
+        navCatering.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('catering-content');
+        });
+
+        navRecipes.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('recipes-content');
+        });
+
+        // --- Recipe Data (Moved from previous recipes.js) ---
+        const recipes = [
+            {
+                id: 'pilau',
+                name: 'Authentic Kenyan Pilau',
+                image: 'images/dish_pilau.webp',
+                description: 'Fragrant rice dish cooked with tender beef or chicken, aromatic spices, and fresh herbs, a true East African classic.',
+                prepTime: '20 min',
+                cookTime: '45 min',
+                servings: '6',
+                isFree: true,
+                ingredients: [
+                    '500g beef or chicken, cubed',
+                    '2 cups basmati rice, rinsed',
+                    '1 large onion, sliced',
+                    '3 cloves garlic, minced',
+                    '1-inch ginger, grated',
+                    '2 tomatoes, chopped',
+                    '1/2 cup tomato paste',
+                    '1 tbsp pilau masala',
+                    '1 tsp cumin powder',
+                    '1 tsp coriander powder',
+                    '1/2 tsp turmeric powder',
+                    '4 cups beef/chicken broth',
+                    '2 tbsp cooking oil',
+                    'Salt to taste',
+                    'Fresh cilantro for garnish'
+                ],
+                instructions: [
+                    'Heat oil in a large pot over medium heat. Add sliced onions and cook until deeply browned, almost caramelized. This is key for pilau color.',
+                    'Add beef/chicken and brown on all sides. Stir in minced garlic and grated ginger, cook for 1 minute until fragrant.',
+                    'Add chopped tomatoes, tomato paste, pilau masala, cumin, coriander, and turmeric. Cook, stirring occasionally, for 5-7 minutes until tomatoes soften and spices are fragrant.',
+                    'Pour in the beef/chicken broth and bring to a boil. Reduce heat, cover, and simmer for 15-20 minutes for chicken, or 30-40 minutes for beef until meat is tender.',
+                    'Stir in the rinsed basmati rice. Ensure rice is submerged. Bring back to a gentle simmer.',
+                    'Cover tightly and cook on low heat for 15-20 minutes, or until all liquid is absorbed and rice is cooked. Do not lift the lid during cooking.',
+                    'Once cooked, remove from heat and let it rest, covered, for 5-10 minutes. Fluff with a fork.',
+                    'Garnish with fresh cilantro and serve hot.'
+                ]
+            },
+            {
+                id: 'chapati',
+                name: 'Soft Layered Chapatis',
+                image: 'images/dish_chapati.webp',
+                description: 'Hand-rolled, flaky flatbreads perfect for scooping up curries or as a delightful snack on their own.',
+                prepTime: '30 min',
+                cookTime: '3 min per chapati',
+                servings: '8 chapatis',
+                isFree: true,
+                ingredients: [
+                    '3 cups all-purpose flour',
+                    '1 tsp salt',
+                    '1 tbsp sugar (optional)',
+                    '2 tbsp cooking oil/ghee, plus more for cooking',
+                    '1 to 1.25 cups warm water'
+                ],
+                instructions: [
+                    'In a large bowl, whisk together flour, salt, and sugar (if using).',
+                    'Add 2 tbsp oil/ghee and gradually add warm water, mixing until a shaggy dough forms.',
+                    'Knead the dough on a lightly floured surface for 10-15 minutes until smooth, elastic, and not sticky. Add a tiny bit more flour if too sticky, or water if too dry. Cover with a damp cloth and let rest for 30 minutes.',
+                    'Divide the dough into 8 equal balls. Roll each ball into a thin circle.',
+                    'Lightly brush the circle with oil/ghee. Starting from one end, roll the circle tightly into a log. Then coil the log into a spiral ("snail" shape) and tuck the end underneath.',
+                    'Press each spiral down and roll it out again into a thin, round chapati (about 7-8 inches in diameter).',
+                    'Heat a non-stick pan or griddle over medium-high heat. Place one chapati on the hot pan.',
+                    'Cook for about 30 seconds until bubbles appear. Flip and cook for another minute until brown spots appear. Brush a little oil on the top side, flip again, and brush oil on the other side. Cook each side for another 30 seconds until golden brown and puffed.',
+                    'Remove and keep warm in a clean cloth or foil while you cook the remaining chapatis.'
+                ]
+            },
+            {
+                id: 'kuku-paka',
+                name: 'Kuku Paka (Coconut Chicken Curry)',
+                image: 'images/dish_kuku.webp',
+                description: 'A creamy and flavorful coastal Kenyan chicken curry, slow-cooked in coconut milk with traditional spices.',
+                prepTime: '25 min',
+                cookTime: '50 min',
+                servings: '4-5',
+                isFree: true,
+                ingredients: [
+                    '1 kg chicken, cut into pieces',
+                    '1 large onion, chopped',
+                    '3 cloves garlic, minced',
+                    '1-inch ginger, grated',
+                    '2 green chilies, slit (optional)',
+                    '1 tsp turmeric powder',
+                    '1 tsp cumin powder',
+                    '1 tsp coriander powder',
+                    '1/2 tsp black pepper',
+                    '400ml (1 can) thick coconut milk',
+                    '200ml thin coconut milk/water',
+                    '2 tbsp cooking oil',
+                    'Salt to taste',
+                    'Fresh cilantro for garnish',
+                    'Juice of 1/2 lime'
+                ],
+                instructions: [
+                    'Heat oil in a large pot. Add chicken pieces and brown them lightly on all sides. Remove chicken and set aside.',
+                    'In the same pot, add chopped onions and sauté until translucent. Add minced garlic, grated ginger, and green chilies (if using). Cook for 2 minutes until fragrant.',
+                    'Stir in turmeric, cumin, coriander, and black pepper. Cook for 1 minute, stirring constantly.',
+                    'Return the chicken to the pot. Add the thin coconut milk (or water) and salt to taste. Bring to a boil, then reduce heat, cover, and simmer for 20-25 minutes, or until chicken is nearly cooked through.',
+                    'Pour in the thick coconut milk. Stir gently and simmer uncovered for another 15-20 minutes, or until the sauce thickens to your desired consistency and chicken is fully cooked.',
+                    'Stir in fresh cilantro and lime juice just before serving. Serve hot with rice or chapati.'
+                ]
+            },
+            {
+                id: 'nyama-choma',
+                name: 'Classic Nyama Choma (Grilled Meat)',
+                image: 'images/image_13191a.jpg', /* Placeholder image */
+                description: 'Kenya\'s beloved grilled meat, typically goat or beef, seasoned simply and cooked to smoky perfection. A must-try!',
+                prepTime: '15 min',
+                cookTime: '1.5 - 2 hrs (for goat)',
+                servings: '4',
+                isFree: false,
+                price: 'KES 500',
+                ingredients: [], // Placeholder for premium recipe
+                instructions: []  // Placeholder for premium recipe
+            },
+            {
+                id: 'mukimo',
+                name: 'Hearty Mukimo (Mashed Potatoes & Greens)',
+                image: 'images/image_139ffb.png', /* Placeholder image */
+                description: 'A staple Kenyan dish made from mashed potatoes, maize, beans, and greens like pumpkin leaves or spinach. Comfort food at its best.',
+                prepTime: '30 min',
+                cookTime: '40 min',
+                servings: '6',
+                isFree: false,
+                price: 'KES 450',
+                ingredients: [], // Placeholder for premium recipe
+                instructions: []  // Placeholder for premium recipe
+            }
+        ];
+
+        const recipesContainer = document.getElementById('recipes-container');
+        const filterAllButton = document.getElementById('filter-all-recipes');
+        const filterFreeButton = document.getElementById('filter-free-recipes');
+        const filterPremiumButton = document.getElementById('filter-premium-recipes');
+
+        const recipeDetailModal = document.getElementById('recipe-detail-modal');
+        const recipeModalCloseButton = document.getElementById('recipe-modal-close');
+        const modalRecipeName = document.getElementById('modal-recipe-name');
+        const modalRecipeImage = document.getElementById('modal-recipe-image');
+        const modalImagePlaceholder = document.getElementById('modal-image-placeholder');
+        const modalPrepTime = document.getElementById('modal-prep-time');
+        const modalCookTime = document.getElementById('modal-cook-time');
+        const modalServings = document.getElementById('modal-servings');
+        const modalRecipeDescription = document.getElementById('modal-recipe-description');
+        const modalIngredientsList = document.getElementById('modal-ingredients-list');
+        const modalInstructionsList = document.getElementById('modal-instructions-list');
+        const modalPremiumNotice = document.getElementById('modal-premium-notice');
+        const modalPremiumPrice = document.getElementById('modal-premium-price');
+
+
+        /**
+         * Loads and displays recipes based on the filter.
+         * @param {string} filter 'all', 'free', or 'premium'
+         */
+        function loadRecipes(filter) {
+            recipesContainer.innerHTML = ''; // Clear previous recipes
+            const filteredRecipes = recipes.filter(recipe => {
+                if (filter === 'all') return true;
+                if (filter === 'free') return recipe.isFree;
+                if (filter === 'premium') return !recipe.isFree;
+            });
+
+            filteredRecipes.forEach(recipe => {
+                const recipeCard = document.createElement('div');
+                recipeCard.classList.add('recipe-card');
+
+                let priceHtml = '';
+                let freeLabelHtml = '';
+                if (recipe.isFree) {
+                    freeLabelHtml = '<span class="free-label">FREE</span>';
+                } else {
+                    priceHtml = `<span class="price">${recipe.price}</span>`;
+                }
+
+                recipeCard.innerHTML = `
+                    <div class="recipe-image-container">
+                        <img src="${recipe.image}" alt="${recipe.name}" class="recipe-thumbnail" onerror="this.onerror=null;this.src='placeholder.webp'; this.nextElementSibling.style.display=\'flex\';" loading="lazy">
+                        <div class="image-placeholder">${recipe.name}</div>
+                    </div>
+                    <div class="recipe-card-content">
+                        <h3>${recipe.name}</h3>
+                        <p class="description">${recipe.description}</p>
+                        <div class="details-row">
+                            ${priceHtml}
+                            ${freeLabelHtml}
+                            <button class="view-button" data-recipe-id="${recipe.id}">View Recipe</button>
+                        </div>
+                    </div>
+                `;
+                recipesContainer.appendChild(recipeCard);
+            });
+
+            // Add event listeners to the new "View Recipe" buttons
+            document.querySelectorAll('.view-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent card click from triggering as well
+                    const recipeId = event.target.dataset.recipeId;
+                    showRecipeDetails(recipeId);
+                });
+            });
+
+            // Update active filter button styling
+            filterAllButton.classList.remove('active-filter');
+            filterFreeButton.classList.remove('active-filter');
+            filterPremiumButton.classList.remove('active-filter');
+
+            if (filter === 'all') {
+                filterAllButton.classList.add('active-filter');
+            } else if (filter === 'free') {
+                filterFreeButton.classList.add('active-filter');
+            } else {
+                filterPremiumButton.classList.add('active-filter');
+            }
+        }
+
+        // Add event listeners for filter buttons
+        filterAllButton.addEventListener('click', () => loadRecipes('all'));
+        filterFreeButton.addEventListener('click', () => loadRecipes('free'));
+        filterPremiumButton.addEventListener('click', () => loadRecipes('premium'));
+
+        /**
+         * Displays the detailed view of a recipe in a modal.
+         * @param {string} recipeId The ID of the recipe to display.
+         */
+        function showRecipeDetails(recipeId) {
+            const recipe = recipes.find(r => r.id === recipeId);
+            if (!recipe) return;
+
+            modalRecipeName.textContent = recipe.name;
+            modalRecipeDescription.textContent = recipe.description;
+            modalPrepTime.textContent = recipe.prepTime || 'N/A';
+            modalCookTime.textContent = recipe.cookTime || 'N/A';
+            modalServings.textContent = recipe.servings || 'N/A';
+
+            // Handle image loading and placeholder
+            modalRecipeImage.src = recipe.image;
+            modalRecipeImage.alt = recipe.name;
+            modalImagePlaceholder.textContent = recipe.name;
+            modalRecipeImage.onload = () => {
+                modalRecipeImage.style.display = 'block';
+                modalImagePlaceholder.style.display = 'none';
+            };
+            modalRecipeImage.onerror = () => {
+                modalRecipeImage.style.display = 'none';
+                modalImagePlaceholder.style.display = 'flex';
+            };
+
+            // Clear previous lists
+            modalIngredientsList.innerHTML = '';
+            modalInstructionsList.innerHTML = '';
+
+            // Populate ingredients and instructions
+            if (recipe.isFree) {
+                recipe.ingredients.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    modalIngredientsList.appendChild(li);
+                });
+                recipe.instructions.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    modalInstructionsList.appendChild(li);
+                });
+                modalPremiumNotice.classList.add('hidden'); // Hide premium notice for free recipes
+            } else {
+                // For premium recipes, display a message
+                modalIngredientsList.innerHTML = '<li>Detailed ingredients available upon ordering the premium recipe.</li>';
+                modalInstructionsList.innerHTML = '<li>Detailed instructions available upon ordering the premium recipe.</li>';
+                modalPremiumPrice.textContent = recipe.price;
+                modalPremiumNotice.classList.remove('hidden');
+            }
+
+            // Show the modal
+            recipeDetailModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        }
+
+        /**
+         * Hides the recipe detail modal.
+         */
+        function hideRecipeDetails() {
+            recipeDetailModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // --- Event Listeners for Recipe Detail Modal ---
+        recipeModalCloseButton.addEventListener('click', hideRecipeDetails);
+
+        // Also close modal if clicking outside the content
+        recipeDetailModal.addEventListener('click', (e) => {
+            if (e.target === recipeDetailModal) {
+                hideRecipeDetails();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && recipeDetailModal.classList.contains('active')) {
+                hideRecipeDetails();
+            }
+        });
+
+        // Initial load for active tab (catering is default)
+        // If the URL contains a hash for recipes, switch to recipes tab on load
+        if (window.location.hash === '#recipes-content') {
+            showSection('recipes-content');
+        } else {
+            showSection('catering-content');
+        }
+    });
+</script>
+</body>
+</html>

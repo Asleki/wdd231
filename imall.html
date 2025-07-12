@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMall - La Familia Chambers</title>
+    <meta name="description" content="Welcome to iMall, your one-stop shop within La Familia Chambers. Discover great deals, top brands, and featured products.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS CDN for iMall specific styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/imall.css">
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Notification message animation */
+        .notification-fade-out {
+            animation: fadeOut 3s forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+
+        /* Hero Carousel specific styles */
+        .carousel-item {
+            display: none;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        .carousel-dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-dots span.active {
+            background-color: white;
+        }
+
+        /* Styles for sticky headers and main content offset */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 50; /* Ensure main header is on top */
+        }
+        /* Adjusted top value for imall-subheader to sit below main header - now handled by JS */
+        #imall-subheader {
+            position: sticky;
+            top: 0; /* Will be set by JavaScript dynamically */
+            z-index: 40; /* Ensure iMall subheader is below main header but above content */
+        }
+        /* Add padding to main content to prevent overlap with sticky headers - now handled by JS */
+        #imall-main-content {
+            padding-top: 0; /* Will be set by JavaScript dynamically */
+        }
+
+        /* Categories Dropdown Styles */
+        .categories-dropdown {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 12px 0;
+            border-radius: 8px;
+            top: 100%; /* Position below the link */
+            left: 0;
+            opacity: 0; /* For fade effect */
+            visibility: hidden; /* For screen readers and initial state */
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .categories-dropdown.show {
+            display: block; /* Show when 'show' class is present */
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 antialiased">
+
+<header id="main-header" class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" onerror="this.onerror=null; this.src='https://placehold.co/40x40/FF0000/FFFFFF?text=Logo';" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- iMall Subheader (Integrated) -->
+<nav id="imall-subheader" class="bg-white shadow-md py-3 px-6 rounded-b-lg">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <!-- iMall Logo and Name -->
+        <a href="/imall.html" class="flex items-center space-x-2 flex-shrink-0">
+            <img src="images/imall-logo.webp" onerror="this.onerror=null; this.src='https://placehold.co/40x40/FF0000/FFFFFF?text=Logo';" alt="iMall Logo" class="h-10 w-10 rounded-full">
+            <span class="text-2xl font-extrabold text-gray-800">iMall</span>
+        </a>
+
+        <!-- Search Bar with Suggestions -->
+        <div class="relative w-full md:w-auto flex-grow md:flex-grow-0 max-w-lg flex">
+            <input type="text" id="imall-search-input" placeholder="Search products or brands..." class="w-full pl-10 pr-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700">
+            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <button id="imall-search-button" class="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                Search
+            </button>
+            <div id="imall-search-suggestions" class="search-suggestions-container">
+                <!-- Suggestions will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Horizontal Navigation Links -->
+        <div class="flex items-center space-x-6 text-lg font-medium">
+            <!-- Categories Dropdown -->
+            <div class="relative group">
+                <a href="#" id="categories-nav-link" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 block py-1">Categories</a>
+                <div id="categories-dropdown" class="categories-dropdown">
+                    <a href="./imall-category.html?category=all" class="font-bold">All Categories</a>
+                    <!-- Dynamic categories will be inserted here -->
+                </div>
+            </div>
+
+            <a href="./imall-category.html?section=brands" id="brands-nav-link" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 block py-1">Brands</a>
+            <a href="./imall-category.html?section=deals" id="deals-nav-link" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 block py-1">Deals</a>
+            <a href="./imall-category.html?section=new-arrivals" id="new-arrivals-nav-link" class="text-gray-700 hover:text-blue-600 transition-colors duration-200 block py-1">New Arrivals</a>
+
+            <!-- Profile Icon -->
+            <a href="./imall-my-activity.html" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </a>
+
+            <!-- Cart Icon with Count -->
+            <a href="./imall-my-activity.html" class="relative text-gray-600 hover:text-gray-900 focus:outline-none">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-7 w-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H1m4 8v.01M17 13v.01M17 18H9.01M17 18l-2.68-2.68c-.29-.29-.77-.29-1.06 0L10 18m-4 0h8"
+                    />
+                </svg>
+                <span id="cart-item-count" class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">
+                    0
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Notification Message (for Add to Cart feedback) -->
+<div id="notification-message" class="fixed top-32 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-300">
+    <!-- Message will be inserted here by JavaScript -->
+</div>
+
+<main id="imall-main-content" class="container mx-auto p-6">
+    <!-- Hero Section with Rotating Banners -->
+    <section id="hero-section" class="relative bg-blue-700 text-white rounded-lg shadow-xl overflow-hidden mb-12 h-96 flex items-center justify-center">
+        <div id="carousel-container" class="relative w-full h-full overflow-hidden">
+            <!-- Carousel items will be dynamically inserted here -->
+        </div>
+        <div id="carousel-dots" class="absolute bottom-4 flex space-x-2">
+            <!-- Dots will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Why Choose iMall Section -->
+    <section id="why-choose-imall" class="mb-12">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Why Choose iMall?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                <i class="fas fa-truck-fast text-blue-600 text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Fast & Reliable Delivery</h3>
+                <p class="text-gray-600">Get your products delivered quickly and safely to your doorstep.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                <i class="fas fa-shield-alt text-green-600 text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Secure Payments</h3>
+                <p class="text-gray-600">Shop with confidence using our encrypted and secure payment gateways.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                <i class="fas fa-headset text-purple-600 text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">24/7 Customer Support</h3>
+                <p class="text-gray-600">Our dedicated support team is always here to assist you.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Brands Section -->
+    <section id="top-brands-section" class="mb-12">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Top Brands</h2>
+        <div id="top-brands-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            <p class="col-span-full text-center text-gray-600">Loading top brands...</p>
+        </div>
+        <div class="flex justify-center mt-8">
+            <a href="./imall-category.html?section=brands" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                Explore All Brands
+            </a>
+        </div>
+    </section>
+
+    <!-- Today's Hot Picks Section -->
+    <section id="hot-picks-section" class="mb-12">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Today's Hot Picks</h2>
+        <div id="hot-picks-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <p class="col-span-full text-center text-gray-600">Loading hot picks...</p>
+        </div>
+        <div class="flex justify-center mt-8">
+            <a href="./imall-category.html?category=all" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                View All Products
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="featured-products-section" class="mb-12">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Featured Products</h2>
+        <div id="featured-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <p class="col-span-full text-center text-gray-600">Loading featured products...</p>
+        </div>
+        <div class="flex justify-center mt-8">
+            <a href="./imall-category.html?category=all" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                Explore More Products
+            </a>
+        </div>
+    </section>
+
+</main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+<script>
+    // --- Data Definitions (Embedded - copied from imall-category-page for consistency) ---
+    const ALL_PRODUCTS = [
+        {
+            id: 'prod149',
+            name: 'Classic Mattel Game',
+            description: 'Discover the Classic Mattel Game, a Toys & Games essential from Mattel. This product boasts 2 unique features and a sleek design. Perfect for toys & games enthusiasts.',
+            category: 'Toys & Games',
+            subCategory: 'Board Games',
+            brand: 'Mattel',
+            price: 2000.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['images/products/classic-mattel-game.webp', 'images/products/image2.webp', 'images/products/image3.webp'],
+            rating: 4.1,
+            reviewsCount: 110,
+            inStock: 280,
+            sku: 'MAT-TOY-PROD149',
+            features: ['Multi-functional', 'Durable Construction'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 20,
+            availableColors: ['Multi-color'],
+            color: 'Multi-color',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod150',
+            name: 'Ergonomic Office Chair',
+            description: 'Boost your productivity with this ergonomic office chair. Designed for comfort and support during long working hours.',
+            category: 'Office & Stationery',
+            subCategory: 'Office Furniture',
+            brand: 'Logitech', // Example brand
+            price: 350.00,
+            originalPrice: 400.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/F0F0F0/333333?text=Office+Chair'],
+            rating: 4.5,
+            reviewsCount: 250,
+            inStock: 150,
+            sku: 'LOG-OFF-CHAIR-150',
+            features: ['Adjustable Height', 'Lumbar Support'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Black', 'Grey'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod151',
+            name: 'High-Performance Laptop',
+            description: 'Experience blazing fast performance with this high-end laptop, perfect for gaming and professional work.',
+            category: 'Electronics',
+            subCategory: 'Laptops',
+            brand: 'HP',
+            price: 1200.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/D0D0D0/333333?text=Laptop'],
+            rating: 4.8,
+            reviewsCount: 500,
+            inStock: 80,
+            sku: 'HP-LAP-PRO151',
+            features: ['16GB RAM', '1TB SSD', 'RTX 3060'],
+            shipping: 'local',
+            waitingPeriod: '1-2 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 3,
+            availableColors: ['Silver'],
+            color: 'Silver',
+            storage: '1TB',
+            size: '15.6 inch'
+        },
+        {
+            id: 'prod152',
+            name: 'Wireless Bluetooth Speaker',
+            description: 'Portable and powerful wireless speaker with deep bass and clear highs. Perfect for parties or personal use.',
+            category: 'Electronics',
+            subCategory: 'Audio',
+            brand: 'Sony',
+            price: 99.99,
+            originalPrice: 120.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/C0C0C0/333333?text=Speaker'],
+            rating: 4.3,
+            reviewsCount: 180,
+            inStock: 300,
+            sku: 'SONY-AUD-SPK152',
+            features: ['Waterproof', '20-hour Battery Life'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['Black', 'Blue', 'Red'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod153',
+            name: 'Smartwatch with Heart Rate Monitor',
+            description: 'Stay fit and connected with this stylish smartwatch. Tracks your activity, heart rate, and notifications.',
+            category: 'Electronics',
+            subCategory: 'Wearables',
+            brand: 'Samsung',
+            price: 180.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/B0B0B0/333333?text=Smartwatch'],
+            rating: 4.6,
+            reviewsCount: 320,
+            inStock: 120,
+            sku: 'SAM-WEAR-SMW153',
+            features: ['GPS', 'Water Resistant'],
+            shipping: 'local',
+            waitingPeriod: '1-2 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Black', 'Rose Gold'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod154',
+            name: 'Digital SLR Camera',
+            description: 'Capture stunning photos and videos with this professional-grade DSLR camera. Perfect for enthusiasts and pros.',
+            category: 'Electronics',
+            subCategory: 'Cameras',
+            brand: 'Canon',
+            price: 750.00,
+            originalPrice: 850.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/A0A0A0/333333?text=DSLR+Camera'],
+            rating: 4.7,
+            reviewsCount: 400,
+            inStock: 70,
+            sku: 'CAN-CAM-DSLR154',
+            features: ['24MP Sensor', '4K Video'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod155',
+            name: 'Men\'s Casual T-Shirt',
+            description: 'Comfortable and stylish casual t-shirt for men. Made from breathable cotton.',
+            category: 'Fashion & Apparel',
+            subCategory: "Men's Clothing",
+            brand: 'H&M',
+            price: 15.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/909090/333333?text=Mens+T-Shirt'],
+            rating: 4.0,
+            reviewsCount: 90,
+            inStock: 500,
+            sku: 'HM-MEN-TSHIRT155',
+            features: ['Soft Fabric', 'Regular Fit'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 50,
+            availableColors: ['White', 'Black', 'Blue'],
+            color: 'White',
+            storage: null,
+            size: 'M'
+        },
+        {
+            id: 'prod156',
+            name: 'Women\'s Summer Dress',
+            description: 'Light and airy summer dress, perfect for a casual day out or a beach vacation.',
+            category: 'Fashion & Apparel',
+            subCategory: "Women's Clothing",
+            brand: 'Zara',
+            price: 45.00,
+            originalPrice: 60.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/808080/333333?text=Womens+Dress'],
+            rating: 4.2,
+            reviewsCount: 150,
+            inStock: 200,
+            sku: 'ZAR-WOM-DRESS156',
+            features: ['Breathable', 'Floral Print'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['Floral', 'Red'],
+            color: 'Floral',
+            storage: null,
+            size: 'S'
+        },
+        {
+            id: 'prod157',
+            name: 'Kids\' Play Tent',
+            description: 'A fun and colorful play tent for kids, perfect for indoor and outdoor adventures.',
+            category: 'Baby & Kids',
+            subCategory: "Kid's Toys", // Changed from Apparel as per product type
+            brand: 'Fisher-Price',
+            price: 70.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/707070/333333?text=Kids+Tent'],
+            rating: 4.4,
+            reviewsCount: 80,
+            inStock: 100,
+            sku: 'FPR-KID-TENT157',
+            features: ['Easy Setup', 'Durable Fabric'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Multi-color'],
+            color: 'Multi-color',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod158',
+            name: 'Running Shoes',
+            description: 'Lightweight and supportive running shoes for optimal performance and comfort.',
+            category: 'Fashion & Apparel',
+            subCategory: 'Shoes',
+            brand: 'Nike',
+            price: 90.00,
+            originalPrice: 110.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/606060/333333?text=Running+Shoes'],
+            rating: 4.7,
+            reviewsCount: 300,
+            inStock: 250,
+            sku: 'NIK-RUN-SHOE158',
+            features: ['Breathable Mesh', 'Cushioned Sole'],
+            shipping: 'local',
+            waitingPeriod: '1-2 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Black', 'White', 'Red'],
+            color: 'Black',
+            storage: null,
+            size: 'US 10'
+        },
+        {
+            id: 'prod159',
+            name: 'Leather Handbag',
+            description: 'Elegant genuine leather handbag, perfect for daily use or special occasions. Spacious and stylish.',
+            category: 'Fashion & Apparel',
+            subCategory: 'Accessories',
+            brand: 'Zara', // Example brand
+            price: 120.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/505050/333333?text=Handbag'],
+            rating: 4.5,
+            reviewsCount: 100,
+            inStock: 80,
+            sku: 'ZAR-ACC-HANDBAG159',
+            features: ['Genuine Leather', 'Multiple Compartments'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 3,
+            availableColors: ['Brown', 'Black'],
+            color: 'Brown',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod160',
+            name: 'Non-Stick Cookware Set',
+            description: 'Complete non-stick cookware set for all your cooking needs. Durable and easy to clean.',
+            category: 'Home & Kitchen',
+            subCategory: 'Cookware',
+            brand: 'Tefal',
+            price: 150.00,
+            originalPrice: 180.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/404040/333333?text=Cookware'],
+            rating: 4.6,
+            reviewsCount: 200,
+            inStock: 110,
+            sku: 'TEF-HOM-COOK160',
+            features: ['Dishwasher Safe', 'Even Heat Distribution'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod161',
+            name: 'Smart Home Lighting Kit',
+            description: 'Control your home lighting from your smartphone with this easy-to-install smart lighting kit.',
+            category: 'Home & Kitchen',
+            subCategory: 'Decor', // Assuming decor for smart home integration
+            brand: 'Philips',
+            price: 80.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/303030/333333?text=Smart+Light'],
+            rating: 4.3,
+            reviewsCount: 120,
+            inStock: 90,
+            sku: 'PHI-HOM-LIGHT161',
+            features: ['Voice Control', 'Dimmable'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['White'],
+            color: 'White',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod162',
+            name: 'Luxury Bedding Set',
+            description: 'Indulge in ultimate comfort with this soft and luxurious bedding set. Made from premium materials.',
+            category: 'Home & Kitchen',
+            subCategory: 'Bedding',
+            brand: 'Dyson', // Example brand, though Dyson is usually appliances
+            price: 250.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/202020/333333?text=Bedding'],
+            rating: 4.8,
+            reviewsCount: 60,
+            inStock: 40,
+            sku: 'DYS-HOM-BED162',
+            features: ['Hypoallergenic', 'Machine Washable'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['White', 'Grey', 'Navy'],
+            color: 'White',
+            storage: null,
+            size: 'King'
+        },
+        {
+            id: 'prod163',
+            name: 'Organic Skincare Set',
+            description: 'Nourish your skin with this organic skincare set. Gentle formulas for all skin types.',
+            category: 'Beauty & Personal Care',
+            subCategory: 'Skincare',
+            brand: 'Nivea',
+            price: 60.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/101010/333333?text=Skincare'],
+            rating: 4.5,
+            reviewsCount: 180,
+            inStock: 150,
+            sku: 'NIV-BEA-SKIN163',
+            features: ['Natural Ingredients', 'Dermatologist Tested'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod164',
+            name: 'Professional Hair Dryer',
+            description: 'Achieve salon-quality blowouts at home with this powerful and lightweight hair dryer.',
+            category: 'Beauty & Personal Care',
+            subCategory: 'Haircare',
+            brand: 'Dyson',
+            price: 399.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/000000/FFFFFF?text=Hair+Dryer'],
+            rating: 4.9,
+            reviewsCount: 250,
+            inStock: 60,
+            sku: 'DYS-BEA-HAIR164',
+            features: ['Fast Drying', 'Heat Control'],
+            shipping: 'local',
+            waitingPeriod: '1-2 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['Pink', 'Silver'],
+            color: 'Pink',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod165',
+            name: 'Waterproof Mascara',
+            description: 'Long-lasting waterproof mascara for voluminous lashes that stay put all day.',
+            category: 'Beauty & Personal Care',
+            subCategory: 'Makeup',
+            brand: 'L\'Oreal',
+            price: 18.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/555555/FFFFFF?text=Mascara'],
+            rating: 4.0,
+            reviewsCount: 90,
+            inStock: 300,
+            sku: 'LOR-BEA-MASC165',
+            features: ['Smudge-proof', 'Volumizing'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 20,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod166',
+            name: 'Unisex Eau de Parfum',
+            description: 'A captivating unisex fragrance with notes of citrus, wood, and musk. Long-lasting and versatile.',
+            category: 'Beauty & Personal Care',
+            subCategory: 'Fragrances',
+            brand: 'Garnier', // Example brand
+            price: 75.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/666666/FFFFFF?text=Perfume'],
+            rating: 4.6,
+            reviewsCount: 110,
+            inStock: 70,
+            sku: 'GAR-BEA-FRAG166',
+            features: ['Long-lasting', 'Unique Scent'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: '100ml'
+        },
+        {
+            id: 'prod167',
+            name: 'Beard Trimmer Kit',
+            description: 'All-in-one beard trimmer kit for precise grooming. Includes multiple attachments.',
+            category: 'Beauty & Personal Care',
+            subCategory: 'Grooming',
+            brand: 'Philips',
+            price: 50.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/777777/FFFFFF?text=Trimmer'],
+            rating: 4.3,
+            reviewsCount: 130,
+            inStock: 180,
+            sku: 'PHI-BEA-GROOM167',
+            features: ['Cordless', 'Waterproof'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod168',
+            name: 'Home Gym Multi-Station',
+            description: 'Build strength and muscle with this versatile home gym multi-station. Perfect for full-body workouts.',
+            category: 'Sports & Outdoors',
+            subCategory: 'Fitness',
+            brand: 'Adidas', // Example brand
+            price: 450.00,
+            originalPrice: 550.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/888888/FFFFFF?text=Home+Gym'],
+            rating: 4.7,
+            reviewsCount: 70,
+            inStock: 30,
+            sku: 'ADI-SPO-GYM168',
+            features: ['Multiple Exercises', 'Durable Construction'],
+            shipping: 'local',
+            waitingPeriod: '5-7 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 1,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod169',
+            name: 'Camping Tent 4-Person',
+            description: 'Spacious and easy-to-setup camping tent for up to 4 people. Ideal for family camping trips.',
+            category: 'Sports & Outdoors',
+            subCategory: 'Camping',
+            brand: 'GoPro', // Example brand
+            price: 180.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/999999/FFFFFF?text=Camping+Tent'],
+            rating: 4.4,
+            reviewsCount: 90,
+            inStock: 100,
+            sku: 'GOP-SPO-TENT169',
+            features: ['Waterproof', 'Ventilated'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 3,
+            availableColors: ['Green', 'Blue'],
+            color: 'Green',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod170',
+            name: 'Mountain Bike 29er',
+            description: 'Conquer any trail with this rugged 29-inch mountain bike. Features durable frame and responsive suspension.',
+            category: 'Sports & Outdoors',
+            subCategory: 'Cycling',
+            brand: 'Garmin', // Example brand
+            price: 600.00,
+            originalPrice: 700.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/AAAAAA/FFFFFF?text=Mountain+Bike'],
+            rating: 4.6,
+            reviewsCount: 110,
+            inStock: 40,
+            sku: 'GAR-SPO-BIKE170',
+            features: ['Aluminum Frame', 'Disc Brakes'],
+            shipping: 'local',
+            waitingPeriod: '5-7 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 1,
+            availableColors: ['Black', 'Red'],
+            color: 'Black',
+            storage: null,
+            size: '29 inch'
+        },
+        {
+            id: 'prod171',
+            name: 'Basketball Hoop Portable',
+            description: 'Enjoy basketball anywhere with this portable hoop. Adjustable height for all ages.',
+            category: 'Sports & Outdoors',
+            subCategory: 'Team Sports',
+            brand: 'Puma', // Example brand
+            price: 220.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/BBBBBB/FFFFFF?text=Basketball+Hoop'],
+            rating: 4.2,
+            reviewsCount: 50,
+            inStock: 60,
+            sku: 'PUM-SPO-HOOP171',
+            features: ['Adjustable Height', 'Wheels for Portability'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod172',
+            name: 'Hiking Backpack 60L',
+            description: 'Large capacity hiking backpack, perfect for multi-day treks. Comfortable and durable.',
+            category: 'Sports & Outdoors',
+            subCategory: 'Outdoor Gear',
+            brand: 'North Face', // Example brand
+            price: 130.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/CCCCCC/FFFFFF?text=Hiking+Pack'],
+            rating: 4.5,
+            reviewsCount: 80,
+            inStock: 90,
+            sku: 'TNF-SPO-BPK172',
+            features: ['Water Resistant', 'Multiple Pockets'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Green', 'Blue'],
+            color: 'Green',
+            storage: null,
+            size: '60L'
+        },
+        {
+            id: 'prod173',
+            name: 'Bestselling Novel',
+            description: 'A gripping tale of mystery and adventure that will keep you on the edge of your seat.',
+            category: 'Books, Movies & Music',
+            subCategory: 'Books',
+            brand: 'Penguin Random House', // Example brand
+            price: 20.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/DDDDDD/333333?text=Book'],
+            rating: 4.1,
+            reviewsCount: 200,
+            inStock: 400,
+            sku: 'PRH-BMM-BOOK173',
+            features: ['Paperback', 'Fiction'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod174',
+            name: '4K Ultra HD Blu-ray Player',
+            description: 'Experience stunning visuals and immersive audio with this 4K Blu-ray player.',
+            category: 'Books, Movies & Music',
+            subCategory: 'Movies',
+            brand: 'Sony',
+            price: 250.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/EEEEEE/333333?text=Blu-ray+Player'],
+            rating: 4.5,
+            reviewsCount: 70,
+            inStock: 50,
+            sku: 'SONY-BMM-BLURAY174',
+            features: ['HDR Support', 'Dolby Atmos'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod175',
+            name: 'Vinyl Record Player',
+            description: 'Rediscover your favorite music with this retro-style vinyl record player. Built-in speakers.',
+            category: 'Books, Movies & Music',
+            subCategory: 'Music',
+            brand: 'Audio-Technica', // Example brand
+            price: 150.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/FFFFFF/333333?text=Vinyl+Player'],
+            rating: 4.2,
+            reviewsCount: 60,
+            inStock: 80,
+            sku: 'AUD-BMM-VINYL175',
+            features: ['Bluetooth Connectivity', '3-Speed'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Brown', 'Black'],
+            color: 'Brown',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod176',
+            name: 'Latest Gaming Console',
+            description: 'Dive into next-gen gaming with the latest console. Stunning graphics and immersive gameplay.',
+            category: 'Books, Movies & Music',
+            subCategory: 'Video Games',
+            brand: 'Nintendo',
+            price: 499.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/F0F0F0/333333?text=Gaming+Console'],
+            rating: 4.9,
+            reviewsCount: 600,
+            inStock: 50,
+            sku: 'NIN-BMM-CON176',
+            features: ['4K Gaming', 'Fast Loading'],
+            shipping: 'local',
+            waitingPeriod: '1-2 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 1,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: '1TB',
+            size: null
+        },
+        {
+            id: 'prod177',
+            name: 'Educational Building Blocks',
+            description: 'Inspire creativity and learning with these colorful educational building blocks for toddlers.',
+            category: 'Toys & Games',
+            subCategory: "Kid's Toys",
+            brand: 'Lego',
+            price: 30.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/D0D0D0/333333?text=Building+Blocks'],
+            rating: 4.5,
+            reviewsCount: 150,
+            inStock: 250,
+            sku: 'LEG-TOY-BLOCK177',
+            features: ['Non-toxic', 'Easy to Assemble'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['Multi-color'],
+            color: 'Multi-color',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod178',
+            name: 'Strategy Board Game',
+            description: 'Engage in epic battles of strategy and wit with this complex and rewarding board game.',
+            category: 'Toys & Games',
+            subCategory: 'Board Games',
+            brand: 'Mattel',
+            price: 40.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/C0C0C0/333333?text=Strategy+Game'],
+            rating: 4.6,
+            reviewsCount: 100,
+            inStock: 120,
+            sku: 'MAT-TOY-STRAT178',
+            features: ['2-4 Players', 'Ages 10+'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod179',
+            name: 'Jigsaw Puzzle 1000 Pieces',
+            description: 'Challenge your mind with this beautiful 1000-piece jigsaw puzzle featuring a scenic landscape.',
+            category: 'Toys & Games',
+            subCategory: 'Puzzles',
+            brand: '3M', // Example brand
+            price: 25.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/B0B0B0/333333?text=Jigsaw+Puzzle'],
+            rating: 4.0,
+            reviewsCount: 70,
+            inStock: 150,
+            sku: '3M-TOY-PUZZLE179',
+            features: ['High Quality Print', 'Challenging'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod180',
+            name: 'Collectible Action Figure',
+            description: 'Highly detailed collectible action figure from a popular movie franchise. Limited edition.',
+            category: 'Toys & Games',
+            subCategory: 'Action Figures',
+            brand: 'Barbie', // Example brand
+            price: 55.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/A0A0A0/333333?text=Action+Figure'],
+            rating: 4.7,
+            reviewsCount: 40,
+            inStock: 30,
+            sku: 'BAR-TOY-FIG180',
+            features: ['Articulated Joints', 'Collector\'s Item'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 2,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod181',
+            name: 'Baby Stroller',
+            description: 'Lightweight and compact baby stroller, perfect for city strolls and travel. Easy to fold.',
+            category: 'Baby & Kids',
+            subCategory: 'Baby Gear',
+            brand: 'Medela', // Example brand
+            price: 280.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/909090/333333?text=Baby+Stroller'],
+            rating: 4.4,
+            reviewsCount: 80,
+            inStock: 50,
+            sku: 'MED-BAB-STR181',
+            features: ['One-hand Fold', 'Large Canopy'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 1,
+            availableColors: ['Grey', 'Blue'],
+            color: 'Grey',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod182',
+            name: 'Disposable Diapers Jumbo Pack',
+            description: 'Ultra-absorbent disposable diapers for maximum protection and comfort for your baby.',
+            category: 'Baby & Kids',
+            subCategory: 'Diapers',
+            brand: 'Pampers', // Example brand
+            price: 35.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/808080/333333?text=Diapers'],
+            rating: 4.6,
+            reviewsCount: 300,
+            inStock: 500,
+            sku: 'PAM-BAB-DIAP182',
+            features: ['Wetness Indicator', 'Soft Liner'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: 'Size 4'
+        },
+        {
+            id: 'prod183',
+            name: 'Baby Bottle Set',
+            description: 'Complete baby bottle set with anti-colic design. BPA-free and easy to clean.',
+            category: 'Baby & Kids',
+            subCategory: 'Feeding',
+            brand: 'Philips',
+            price: 25.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/707070/333333?text=Baby+Bottles'],
+            rating: 4.3,
+            reviewsCount: 180,
+            inStock: 200,
+            sku: 'PHI-BAB-BOTTLE183',
+            features: ['Anti-colic', 'BPA-Free'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['Clear'],
+            color: 'Clear',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod184',
+            name: 'Nursery Crib',
+            description: 'Stylish and safe nursery crib for your baby. Adjustable mattress height.',
+            category: 'Baby & Kids',
+            subCategory: 'Nursery',
+            brand: 'Fisher-Price',
+            price: 180.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/606060/333333?text=Baby+Crib'],
+            rating: 4.5,
+            reviewsCount: 60,
+            inStock: 40,
+            sku: 'FPR-BAB-CRIB184',
+            features: ['Adjustable Height', 'Solid Wood'],
+            shipping: 'local',
+            waitingPeriod: '5-7 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 1,
+            availableColors: ['White', 'Espresso'],
+            color: 'White',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod185',
+            name: 'Kids\' Study Desk',
+            description: 'Ergonomic study desk for kids, perfect for homework and creative activities. Durable and easy to clean.',
+            category: 'Baby & Kids',
+            subCategory: 'Kids Furniture',
+            brand: 'IKEA', // Example brand
+            price: 90.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/505050/333333?text=Kids+Desk'],
+            rating: 4.2,
+            reviewsCount: 70,
+            inStock: 80,
+            sku: 'IKE-BAB-DESK185',
+            features: ['Adjustable Height', 'Storage Drawers'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 3,
+            availableColors: ['White', 'Blue'],
+            color: 'White',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod186',
+            name: 'Car Stereo System',
+            description: 'Upgrade your car audio with this powerful stereo system. Features Bluetooth and USB connectivity.',
+            category: 'Automotive & Tools',
+            subCategory: 'Car Parts',
+            brand: 'Sony',
+            price: 150.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/404040/333333?text=Car+Stereo'],
+            rating: 4.1,
+            reviewsCount: 90,
+            inStock: 100,
+            sku: 'SONY-AUT-STEREO186',
+            features: ['Bluetooth', 'USB Port'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod187',
+            name: 'Car Phone Mount',
+            description: 'Securely mount your smartphone in your car for navigation and hands-free calls. Universal fit.',
+            category: 'Automotive & Tools',
+            subCategory: 'Auto Accessories',
+            brand: 'Logitech',
+            price: 20.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/303030/333333?text=Phone+Mount'],
+            rating: 4.0,
+            reviewsCount: 150,
+            inStock: 300,
+            sku: 'LOG-AUT-MOUNT187',
+            features: ['360 Rotation', 'Strong Grip'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 20,
+            availableColors: ['Black'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod188',
+            name: 'Cordless Drill Set',
+            description: 'Powerful cordless drill set for all your DIY projects. Includes multiple drill bits and battery.',
+            category: 'Automotive & Tools',
+            subCategory: 'Power Tools',
+            brand: 'Bosch',
+            price: 120.00,
+            originalPrice: 150.00,
+            isDiscounted: true,
+            images: ['https://placehold.co/300x200/202020/333333?text=Cordless+Drill'],
+            rating: 4.7,
+            reviewsCount: 200,
+            inStock: 90,
+            sku: 'BOS-AUT-DRILL188',
+            features: ['High Torque', 'Long Battery Life'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Blue'],
+            color: 'Blue',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod189',
+            name: 'Adjustable Wrench Set',
+            description: 'Durable adjustable wrench set for various tasks. Essential for every toolbox.',
+            category: 'Automotive & Tools',
+            subCategory: 'Hand Tools',
+            brand: 'Stanley',
+            price: 40.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/101010/333333?text=Wrench+Set'],
+            rating: 4.3,
+            reviewsCount: 110,
+            inStock: 200,
+            sku: 'STA-AUT-WRENCH189',
+            features: ['Chrome Vanadium Steel', 'Comfort Grip'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['Silver'],
+            color: 'Silver',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod190',
+            name: 'Multivitamin Supplements',
+            description: 'Comprehensive multivitamin supplements to support overall health and well-being.',
+            category: 'Health & Wellness',
+            subCategory: 'Vitamins',
+            brand: 'Purina', // Example brand
+            price: 25.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/000000/FFFFFF?text=Multivitamin'],
+            rating: 4.5,
+            reviewsCount: 150,
+            inStock: 300,
+            sku: 'PUR-HEA-VIT190',
+            features: ['Essential Nutrients', 'Easy to Swallow'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod191',
+            name: 'Blood Pressure Monitor',
+            description: 'Accurate and easy-to-use digital blood pressure monitor for home use. Large display.',
+            category: 'Health & Wellness',
+            subCategory: 'Medical Devices',
+            brand: 'Oral-B', // Example brand
+            price: 60.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/555555/FFFFFF?text=BP+Monitor'],
+            rating: 4.4,
+            reviewsCount: 90,
+            inStock: 120,
+            sku: 'ORB-HEA-BPM191',
+            features: ['Irregular Heartbeat Detection', 'Memory Function'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['White'],
+            color: 'White',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod192',
+            name: 'Smart Fitness Tracker',
+            description: 'Track your daily activity, sleep, and workouts with this sleek smart fitness tracker.',
+            category: 'Health & Wellness',
+            subCategory: 'Fitness Trackers',
+            brand: 'Garmin',
+            price: 90.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/666666/FFFFFF?text=Fitness+Tracker'],
+            rating: 4.6,
+            reviewsCount: 200,
+            inStock: 100,
+            sku: 'GAR-HEA-FIT192',
+            features: ['Heart Rate', 'Sleep Tracking'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['Black', 'Pink'],
+            color: 'Black',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod193',
+            name: 'Dog Food Premium Blend',
+            description: 'Nutrient-rich premium dog food for adult dogs. Supports healthy digestion and coat.',
+            category: 'Pet Supplies',
+            subCategory: 'Dog Food',
+            brand: 'Royal Canin',
+            price: 50.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/777777/FFFFFF?text=Dog+Food'],
+            rating: 4.7,
+            reviewsCount: 180,
+            inStock: 250,
+            sku: 'RCA-PET-DOGF193',
+            features: ['High Protein', 'No Artificial Flavors'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: '15kg'
+        },
+        {
+            id: 'prod194',
+            name: 'Cat Food Wet Variety Pack',
+            description: 'Delicious wet cat food variety pack. Provides essential hydration and nutrients for cats.',
+            category: 'Pet Supplies',
+            subCategory: 'Cat Food',
+            brand: 'Purina',
+            price: 20.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/888888/FFFFFF?text=Cat+Food'],
+            rating: 4.5,
+            reviewsCount: 120,
+            inStock: 300,
+            sku: 'PUR-PET-CATF194',
+            features: ['Grain-Free', 'Rich in Protein'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: '12-pack'
+        },
+        {
+            id: 'prod195',
+            name: 'Interactive Pet Toy',
+            description: 'Keep your pet entertained for hours with this durable and interactive toy. Great for mental stimulation.',
+            category: 'Pet Supplies',
+            subCategory: 'Pet Toys',
+            brand: 'Mattel', // Example brand
+            price: 15.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/999999/FFFFFF?text=Pet+Toy'],
+            rating: 4.2,
+            reviewsCount: 80,
+            inStock: 200,
+            sku: 'MAT-PET-TOY195',
+            features: ['Durable', 'Treat Dispensing'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 15,
+            availableColors: ['Multi-color'],
+            color: 'Multi-color',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod196',
+            name: 'Pet Grooming Brush',
+            description: 'Gently remove loose fur and tangles with this effective pet grooming brush. Suitable for all coat types.',
+            category: 'Pet Supplies',
+            subCategory: 'Grooming',
+            brand: 'Dyson', // Example brand
+            price: 25.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/AAAAAA/FFFFFF?text=Grooming+Brush'],
+            rating: 4.0,
+            reviewsCount: 70,
+            inStock: 150,
+            sku: 'DYS-PET-BRUSH196',
+            features: ['Self-Cleaning', 'Comfort Grip'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 10,
+            availableColors: ['N/A'],
+            color: 'N/A',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod197',
+            name: 'Pet Bed Orthopedic',
+            description: 'Provide ultimate comfort for your pet with this orthopedic pet bed. Supports joints and promotes restful sleep.',
+            category: 'Pet Supplies',
+            subCategory: 'Beds',
+            brand: 'Royal Canin', // Example brand
+            price: 70.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/BBBBBB/FFFFFF?text=Pet+Bed'],
+            rating: 4.8,
+            reviewsCount: 50,
+            inStock: 80,
+            sku: 'RCA-PET-BED197',
+            features: ['Memory Foam', 'Removable Cover'],
+            shipping: 'local',
+            waitingPeriod: '3-5 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 3,
+            availableColors: ['Grey', 'Brown'],
+            color: 'Grey',
+            storage: null,
+            size: 'Large'
+        },
+        {
+            id: 'prod198',
+            name: 'Office Laser Printer',
+            description: 'High-speed laser printer for efficient office use. Produces crisp, clear documents.',
+            category: 'Office & Stationery',
+            subCategory: 'Printers',
+            brand: 'Brother',
+            price: 200.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/CCCCCC/FFFFFF?text=Laser+Printer'],
+            rating: 4.3,
+            reviewsCount: 100,
+            inStock: 70,
+            sku: 'BRO-OFF-PRINT198',
+            features: ['Wireless Connectivity', 'Duplex Printing'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['White'],
+            color: 'White',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod199',
+            name: 'Premium Notebooks 5-Pack',
+            description: 'High-quality notebooks for all your writing needs. Smooth paper and durable covers.',
+            category: 'Office & Stationery',
+            subCategory: 'Stationery',
+            brand: '3M', // Example brand
+            price: 12.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/DDDDDD/333333?text=Notebooks'],
+            rating: 4.0,
+            reviewsCount: 150,
+            inStock: 400,
+            sku: '3M-OFF-NOTE199',
+            features: ['Lined Pages', 'A5 Size'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 20,
+            availableColors: ['Multi-color'],
+            color: 'Multi-color',
+            storage: null,
+            size: null
+        },
+        {
+            id: 'prod200',
+            name: 'Home Security Camera System',
+            description: 'Monitor your home with this comprehensive security camera system. Remote viewing via app.',
+            category: 'Security & Protection',
+            subCategory: 'Home Security',
+            brand: 'Xiaomi',
+            price: 180.00,
+            originalPrice: null,
+            isDiscounted: false,
+            images: ['https://placehold.co/300x200/EEEEEE/333333?text=Security+Camera'],
+            rating: 4.5,
+            reviewsCount: 100,
+            inStock: 80,
+            sku: 'XIA-SEC-CAM200',
+            features: ['1080p HD', 'Night Vision'],
+            shipping: 'local',
+            waitingPeriod: '2-3 business days',
+            minOrderQuantity: 1,
+            maxOrderQuantity: 5,
+            availableColors: ['White'],
+            color: 'White',
+            storage: null,
+            size: null
+        }
+    ];
+
+    const TOP_BRANDS = [
+        { id: 'brd-samsung', name: 'Samsung', logo: 'images/brandlogos/samsunglogo.webp', description: 'Global leader in electronics, known for innovative smartphones, TVs, and appliances.' },
+        { id: 'brd-apple', name: 'Apple', logo: 'images/brandlogos/applelogo.webp', description: 'Pioneering technology company famous for iPhones, MacBooks, and intuitive software.' },
+        { id: 'brd-sony', name: 'Sony', logo: 'images/brandlogos/sonylogo.webp', description: 'Japanese multinational conglomerate known for electronics, gaming, and entertainment.' },
+        { id: 'brd-hp', name: 'HP', logo: 'images/brandlogos/hplogo.webp', description: 'Leading provider of personal computers, printers, and related solutions worldwide.' },
+        { id: 'brd-dell', name: 'Dell', logo: 'images/brandlogos/delllogo.webp', description: 'American multinational computer technology company that develops, sells, repairs, and supports computers and related products and services.' },
+        { id: 'brd-lg', name: 'LG', logo: 'images/brandlogos/lglogo.webp', description: 'South Korean multinational electronics company known for home appliances, electronics, and mobile communications.' },
+        { id: 'brd-philips', name: 'Philips', logo: 'images/brandlogos/philipslogo.webp', description: 'Dutch multinational conglomerate corporation, known for electronics, healthcare, and lighting products.' },
+        { id: 'brd-nike', name: 'Nike', logo: 'images/brandlogos/nikelogo.webp', description: 'American multinational corporation that is engaged in the design, development, manufacturing, and worldwide marketing and sales of footwear, apparel, equipment, accessories, and services.' },
+        { id: 'brd-adidas', name: 'Adidas', logo: 'images/brandlogos/adidaslogo.webp', description: 'German multinational corporation, designing and manufacturing athletic and casual footwear, apparel, and accessories.' },
+        { id: 'brd-puma', name: 'Puma', logo: 'images/brandlogos/pumalogo.webp', description: 'German multinational corporation that designs and manufactures athletic and casual footwear, apparel and accessories.' },
+        { id: 'brd-dyson', name: 'Dyson', logo: 'images/brandlogos/dysonlogo.webp', description: 'British technology company known for innovative vacuum cleaners, air purifiers, and hair care products.' },
+        { id: 'brd-bosch', name: 'Bosch', logo: 'images/brandlogos/boschlogo.webp', description: 'German multinational engineering and technology company, also a major manufacturer of home appliances.' },
+        { id: 'brd-logitech', name: 'Logitech', logo: 'images/brandlogos/logitechlogo.webp', description: 'Swiss-American manufacturer of computer peripherals and software, specializing in input and interface devices.' },
+        { id: 'brd-canon', name: 'Canon', logo: 'images/brandlogos/canonlogo.webp', description: 'Japanese multinational corporation specializing in optical, imaging, and industrial products, such as cameras, printers, and medical equipment.' },
+        { id: 'brd-xiaomi', name: 'Xiaomi', logo: 'images/brandlogos/xiaomilogo.webp', description: 'Chinese multinational electronics company known for smartphones, smart hardware, and IoT platform products.' },
+        { id: 'brd-hm', name: 'H&M', logo: 'images/brandlogos/hmlogo.webp', description: 'Swedish multinational retail-clothing company, known for its fast-fashion clothing for men, women, teenagers, and children.' },
+        { id: 'brd-durex', name: 'Durex', logo: 'images/brandlogos/durexlogo.webp', description: 'British brand of condoms and personal lubricants owned by Reckitt Benckiser.' },
+        { id: 'brd-barbie', name: 'Barbie', logo: 'images/brandlogos/barbielogo.webp', description: 'Fashion doll manufactured by American toy company Mattel, Inc.' },
+        { id: 'brd-microsoft', name: 'Microsoft', logo: 'images/brandlogos/microsoftlogo.webp', description: 'American multinational technology corporation producing computer software, consumer electronics, personal computers, and related services.' },
+        { id: 'brd-huawei', name: 'Huawei', logo: 'images/brandlogos/huaweilogo.webp', description: 'Chinese multinational technology company providing telecommunications equipment and selling consumer electronics, smartphones, and smart devices.' },
+        { id: 'brd-zara', name: 'Zara', logo: 'images/brandlogos/zaralogo.webp', description: 'Spanish apparel retailer based in Arteixo, Galicia, Spain. The main brand of the Inditex group, the world\'s largest apparel retailer.' },
+        { id: 'brd-royal-canin', name: 'Royal Canin', logo: 'images/brandlogos/royalcaninlogo.webp', description: 'French manufacturer of cat and dog food. A subsidiary of Mars, Incorporated.' },
+        { id: 'brd-oral-b', name: 'Oral-B', logo: 'images/brandlogos/oralblogo.webp', description: 'American brand of oral hygiene products, including toothbrushes, toothpastes, mouthwashes, and dental floss.' },
+        { id: 'brd-brother', name: 'Brother', logo: 'images/brandlogos/brotherlogo.webp', description: 'Japanese multinational electronics and electrical equipment company that produces a wide range of products including printers, multifunction printers, desktop computers, and other computer-related electronics.' },
+        { id: 'brd-seiko', name: 'Seiko', logo: 'images/brandlogos/seikologo.webp', description: 'Japanese manufacturer of watches, clocks, electronic devices, semiconductors, and optical products.' },
+        { id: 'brd-nintendo', name: 'Nintendo', logo: 'images/brandlogos/nintendologo.webp', description: 'Japanese multinational consumer electronics and video game company. One of the world\'s largest video game companies by market capitalization.' },
+        { id: 'brd-fisher-price', name: 'Fisher-Price', logo: 'images/brandlogos/fisherpricelogo.webp', description: 'American company that manufactures toys for infants, toddlers, and preschool-aged children, headquartered in East Aurora, New York.' },
+        { id: 'brd-3m', name: '3M', logo: 'images/brandlogos/3mlogo.webp', description: 'American multinational conglomerate corporation operating in the fields of industry, worker safety, health care, and consumer goods.' },
+        { id: 'brd-medela', name: 'Medela', logo: 'images/brandlogos/medelalogo.webp', description: 'Swiss medical technology company specializing in breastfeeding products and medical vacuum technology.' },
+        { id: 'brd-nivea', name: 'Nivea', logo: 'images/brandlogos/nivealogo.webp', description: 'German personal care brand that specializes in skin and body-care products.' },
+        { id: 'brd-tefal', name: 'Tefal', logo: 'images/brandlogos/tefallogo.webp', description: 'French cookware and small appliance manufacturer, owned by Groupe SEB (a global manufacturer of small appliances).' },
+        { id: 'brd-gopro', name: 'GoPro', logo: 'images/brandlogos/goprolog.webp', description: 'American technology company that manufactures action cameras and develops its own mobile apps and video-editing software.' },
+        { id: 'brd-garmin', name: 'Garmin', logo: 'images/brandlogos/garminlogo.webp', description: 'American multinational technology company that develops, manufactures, and markets GPS technology for automotive, aviation, marine, outdoor, and sport activities.' },
+        { id: 'brd-mattel', name: 'Mattel', logo: 'images/brandlogos/mattellogo.webp', description: 'American multinational toy manufacturing and entertainment company. The world\'s second-largest toy maker in terms of revenue.' },
+        { id: 'brd-lego', name: 'Lego', logo: 'images/brandlogos/legologo.webp', description: 'Danish toy production company best known for manufacturing Lego-brand toys, consisting mostly of interlocking plastic bricks.' },
+        { id: 'brd-loreal', name: 'L\'Oreal', logo: 'images/brandlogos/loreallogo.webp', description: 'French personal care company, the largest cosmetics company in the world.' },
+        { id: 'brd-garnier', name: 'Garnier', logo: 'images/brandlogos/garnierlogo.webp', description: 'French cosmetics brand of L\'Oréal. It produces hair care and skin care products.' },
+        { id: 'brd-stanley', name: 'Stanley', logo: 'images/brandlogos/stanleylogo.webp', description: 'American manufacturer of tools and household hardware, a brand of Stanley Black & Decker.' },
+        { id: 'brd-purina', name: 'Purina', logo: 'images/brandlogos/purinalogo.webp', description: 'American company that produces pet food, animal feed, and pet care products. A subsidiary of Nestlé.' }
+    ];
+
+    const CATEGORY_DATA = [
+        { name: 'Electronics', displayName: 'Electronics', subCategories: ['Smartphones', 'Laptops', 'TVs', 'Audio', 'Wearables', 'Cameras'] },
+        { name: 'Fashion & Apparel', displayName: 'Fashion & Apparel', subCategories: ["Men's Clothing", "Women's Clothing", "Kid's Apparel", 'Shoes', 'Accessories'] },
+        { name: 'Home & Kitchen', displayName: 'Home & Kitchen', subCategories: ['Appliances', 'Furniture', 'Cookware', 'Decor', 'Bedding'] },
+        { name: 'Beauty & Personal Care', displayName: 'Beauty & Personal Care', subCategories: ['Skincare', 'Haircare', 'Makeup', 'Fragrances', 'Grooming'] },
+        { name: 'Sports & Outdoors', displayName: 'Sports & Outdoors', subCategories: ['Fitness', 'Camping', 'Cycling', 'Team Sports', 'Outdoor Gear'] },
+        { name: 'Books, Movies & Music', displayName: 'Books, Movies & Music', subCategories: ['Books', 'Movies', 'Music', 'Video Games'] },
+        { name: 'Toys & Games', displayName: 'Toys & Games', subCategories: ["Kid's Toys", 'Board Games', 'Puzzles', 'Action Figures'] },
+        { name: 'Baby & Kids', displayName: 'Baby & Kids', subCategories: ['Baby Gear', 'Diapers', 'Feeding', 'Nursery', 'Kids Furniture'] },
+        { name: 'Automotive & Tools', displayName: 'Automotive & Tools', subCategories: ['Car Parts', 'Auto Accessories', 'Hand Tools', 'Power Tools'] },
+        { name: 'Health & Wellness', displayName: 'Health & Wellness', subCategories: ['Vitamins', 'Medical Devices', 'Personal Health', 'Fitness Trackers'] },
+        { name: 'Pet Supplies', displayName: 'Pet Supplies', subCategories: ['Dog Food', 'Cat Food', 'Pet Toys', 'Grooming', 'Beds'] },
+        { name: 'Office & Stationery', displayName: 'Office & Stationery', subCategories: ['Office Furniture', 'Desk Accessories', 'Printers', 'Stationery'] },
+        { name: 'Security & Protection', displayName: 'Security & Protection', subCategories: ['Home Security', 'Personal Safety', 'CCTV', 'Alarms'] },
+        { name: 'Lingerie & Loungewear', displayName: 'Lingerie & Loungewear', subCategories: ['Lingerie Sets', 'Pajamas', 'Robes', 'Underwear'] },
+        { name: 'Special Occasion Costume', displayName: 'Special Occasion Costume', subCategories: ['Halloween', 'Cosplay', 'Party', 'Historical'] }
+    ];
+
+    // --- Global Constants ---
+    const PLACEHOLDER_IMAGE_PATH = 'https://placehold.co/300x200/FF0000/FFFFFF?text=Image+Error';
+
+    // --- DOM Element References ---
+    const imallSearchInput = document.getElementById('imall-search-input');
+    const imallSearchButton = document.getElementById('imall-search-button');
+    const imallSearchSuggestions = document.getElementById('imall-search-suggestions');
+    const categoriesNavLink = document.getElementById('categories-nav-link');
+    const categoriesDropdown = document.getElementById('categories-dropdown');
+    const cartItemCountSpan = document.getElementById('cart-item-count');
+    const notificationMessageDiv = document.getElementById('notification-message');
+    const currentYearSpan = document.getElementById('current-year');
+
+    // iMall Main Page Specific Elements
+    const carouselContainer = document.getElementById('carousel-container');
+    const carouselDotsContainer = document.getElementById('carousel-dots');
+    const topBrandsGrid = document.getElementById('top-brands-grid');
+    const hotPicksGrid = document.getElementById('hot-picks-grid');
+    const featuredProductsGrid = document.getElementById('featured-products-grid');
+
+    // Added for dynamic header positioning
+    const mainHeader = document.getElementById('main-header');
+    const imallSubheader = document.getElementById('imall-subheader');
+    const imallMainContent = document.getElementById('imall-main-content');
+
+
+    // --- State Variables ---
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || []; // Load cart from localStorage
+    let currentSlide = 0;
+    let carouselInterval;
+
+    // --- Utility Functions (Embedded) ---
+
+    /**
+     * Handles image loading errors by replacing the src with a placeholder.
+     * @param {HTMLImageElement} imageElement - The image element that failed to load.
+     */
+    function handleImageError(imageElement) {
+        imageElement.onerror = null; // Prevent infinite loop
+        imageElement.src = PLACEHOLDER_IMAGE_PATH;
+    }
+
+    /**
+     * Generates HTML for a single product card.
+     * @param {object} product - The product object.
+     * @returns {string} HTML string for the product card.
+     */
+    function createProductCardHTML(product) {
+        const isDiscountedBadge = product.isDiscounted ? `<span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">Sale!</span>` : '';
+        const originalPriceDisplay = product.originalPrice ? `<span class="text-gray-400 line-through text-sm ml-2">$${product.originalPrice.toFixed(2)}</span>` : '';
+
+        return `
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl relative product-card" data-product-id="${product.id}">
+                ${isDiscountedBadge}
+                <img
+                    src="${product.images[0] || PLACEHOLDER_IMAGE_PATH}"
+                    alt="${product.name}"
+                    class="w-full h-48 object-cover rounded-t-xl"
+                    onerror="handleImageError(this);"
+                />
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2 line-clamp-1">${product.name}</h3>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-blue-600">$${product.price.toFixed(2)}</span>
+                        ${originalPriceDisplay}
+                        <button
+                            class="add-to-cart-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                            data-product-id="${product.id}"
+                            onclick="event.stopPropagation(); addToCart(ALL_PRODUCTS.find(p => p.id === '${product.id}'));"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Generates HTML for a single brand card.
+     * @param {object} brand - The brand object.
+     * @returns {string} HTML string for the brand card.
+     */
+    function createBrandCardHTML(brand) {
+        return `
+            <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center justify-center text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl brand-card" data-brand-name="${brand.name}">
+                <img src="${brand.logo}" alt="${brand.name} Logo" class="h-20 w-20 object-contain mb-3" onerror="handleImageError(this);">
+                <h3 class="text-lg font-semibold text-gray-800">${brand.name}</h3>
+            </div>
+        `;
+    }
+
+    /**
+     * Displays a temporary notification message.
+     * @param {string} messageText - The message to display.
+     */
+    function displayNotification(messageText) {
+        if (notificationMessageDiv) {
+            notificationMessageDiv.textContent = messageText;
+            notificationMessageDiv.classList.remove('opacity-0', 'notification-fade-out');
+            notificationMessageDiv.classList.add('opacity-100');
+
+            setTimeout(() => {
+                notificationMessageDiv.classList.remove('opacity-100');
+                notificationMessageDiv.classList.add('opacity-0', 'notification-fade-out');
+            }, 3000);
+        }
+    }
+
+    /**
+     * Adds a product to the cart or increments its quantity if already present.
+     * Updates localStorage and the cart count display.
+     * @param {object} product - The product object to add.
+     * @param {number} quantity - The quantity to add (defaults to 1).
+     */
+    function addToCart(product, quantity = 1) {
+        const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
+
+        if (existingItemIndex > -1) {
+            cartItems[existingItemIndex].quantity += quantity;
+        } else {
+            cartItems.push({ ...product, quantity: quantity });
+        }
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateCartCount();
+        displayNotification(`${quantity}x ${product.name} added to cart!`);
+    }
+
+    /**
+     * Updates the displayed count of items in the shopping cart icon.
+     */
+    function updateCartCount() {
+        if (cartItemCountSpan) {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            cartItemCountSpan.textContent = totalItems;
+            if (totalItems > 0) {
+                cartItemCountSpan.classList.remove('hidden');
+            } else {
+                cartItemCountSpan.classList.add('hidden');
+            }
+        }
+    }
+
+    /**
+     * Populates the iMall categories dropdown.
+     */
+    function populateCategoriesDropdown() {
+        const allCategoriesLink = categoriesDropdown.querySelector('a[href="./imall-category.html?category=all"]');
+        categoriesDropdown.innerHTML = '';
+        if (allCategoriesLink) {
+            categoriesDropdown.appendChild(allCategoriesLink);
+        } else {
+            const newAllCategoriesLink = document.createElement('a');
+            newAllCategoriesLink.href = './imall-category.html?category=all';
+            newAllCategoriesLink.className = 'font-bold';
+            newAllCategoriesLink.textContent = 'All Categories';
+            categoriesDropdown.appendChild(newAllCategoriesLink);
+        }
+
+        CATEGORY_DATA.forEach(cat => {
+            const categoryLink = document.createElement('a');
+            categoryLink.href = `./imall-category.html?category=${encodeURIComponent(cat.name)}`;
+            categoryLink.textContent = cat.displayName;
+            categoriesDropdown.appendChild(categoryLink);
+
+            if (cat.subCategories && cat.subCategories.length > 0) {
+                cat.subCategories.forEach(subCat => {
+                    const subCategoryLink = document.createElement('a');
+                    subCategoryLink.href = `./imall-category.html?category=${encodeURIComponent(cat.name)}&subCategory=${encodeURIComponent(subCat)}`;
+                    subCategoryLink.textContent = `— ${subCat}`; // Indent subcategories
+                    subCategoryLink.classList.add('pl-6', 'text-sm'); // Add padding for visual hierarchy
+                    categoriesDropdown.appendChild(subCategoryLink);
+                });
+            }
+        });
+    }
+
+    /**
+     * Shows search suggestions for the iMall search bar.
+     * @param {string} query - The search query.
+     */
+    function showSearchSuggestions(query) {
+        imallSearchSuggestions.innerHTML = '';
+        imallSearchSuggestions.classList.remove('show');
+
+        if (query.length < 2) {
+            return;
+        }
+
+        const lowerCaseQuery = query.toLowerCase();
+        const suggestions = new Set();
+
+        ALL_PRODUCTS.forEach(product => {
+            if (product.name.toLowerCase().includes(lowerCaseQuery)) {
+                suggestions.add(product.name);
+            }
+            if (product.brand.toLowerCase().includes(lowerCaseQuery)) {
+                suggestions.add(product.brand);
+            }
+            if (product.category.toLowerCase().includes(lowerCaseQuery)) {
+                suggestions.add(product.category);
+            }
+            if (product.subCategory && product.subCategory.toLowerCase().includes(lowerCaseQuery)) {
+                suggestions.add(product.subCategory);
+            }
+        });
+
+        TOP_BRANDS.forEach(brand => {
+            if (brand.name.toLowerCase().includes(lowerCaseQuery)) {
+                suggestions.add(brand.name);
+            }
+        });
+
+        const sortedSuggestions = Array.from(suggestions).sort();
+
+        if (sortedSuggestions.length > 0) {
+            sortedSuggestions.slice(0, 10).forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.textContent = suggestion;
+                suggestionItem.addEventListener('click', () => {
+                    imallSearchInput.value = suggestion;
+                    handleSearch();
+                });
+                imallSearchSuggestions.appendChild(suggestionItem);
+            });
+            imallSearchSuggestions.classList.add('show');
+        }
+    }
+
+    /**
+     * Hides the iMall search suggestions dropdown.
+     */
+    function hideSearchSuggestions() {
+        imallSearchSuggestions.classList.remove('show');
+    }
+
+    /**
+     * Handles the iMall search.
+     */
+    function handleSearch() {
+        const query = imallSearchInput.value.trim();
+        if (!query) {
+            // If empty, navigate to imall-category.html showing all products
+            window.location.href = './imall-category.html?category=all';
+            return;
+        }
+        // Navigate to imall-category.html with search query
+        window.location.href = `./imall-category.html?search=${encodeURIComponent(query)}`;
+    }
+
+    // --- iMall Main Page Specific Functions ---
+
+    /**
+     * Renders the hero carousel.
+     */
+    function renderHeroCarousel() {
+        const heroProducts = ALL_PRODUCTS.filter(p => p.isDiscounted || p.rating >= 4.5).slice(0, 3); // Get some discounted or highly-rated products for hero
+        if (heroProducts.length === 0) {
+            // Fallback if no discounted/highly-rated products
+            heroProducts.push(...ALL_PRODUCTS.slice(0, 3));
+        }
+
+        carouselContainer.innerHTML = '';
+        carouselDotsContainer.innerHTML = '';
+
+        heroProducts.forEach((product, index) => {
+            const carouselItem = document.createElement('div');
+            carouselItem.classList.add('carousel-item', 'absolute', 'inset-0', 'flex', 'flex-col', 'items-center', 'justify-center', 'p-8', 'text-center', 'transition-opacity', 'duration-1000', 'ease-in-out');
+            // Removed initial 'active' class here; showSlide will handle it
+            const originalPriceDisplay = product.originalPrice ? `<span class="text-white text-opacity-75 line-through text-lg ml-2">$${product.originalPrice.toFixed(2)}</span>` : '';
+
+            carouselItem.innerHTML = `
+                <h2 class="text-5xl font-extrabold mb-4">${product.name}</h2>
+                <p class="text-xl mb-6 max-w-2xl">${product.description}</p>
+                <div class="flex items-baseline mb-6">
+                    <span class="text-5xl font-bold text-yellow-300">$${product.price.toFixed(2)}</span>
+                    ${originalPriceDisplay}
+                </div>
+                <a href="./imall-category.html?productId=${product.id}" class="bg-white text-blue-700 hover:bg-gray-200 font-bold py-3 px-8 rounded-full shadow-lg transition-colors duration-300">
+                    Shop Now
+                </a>
+            `;
+            carouselContainer.appendChild(carouselItem);
+
+            const dot = document.createElement('span');
+            dot.dataset.slideIndex = index;
+            // Removed initial 'active' class here; showSlide will handle it
+            dot.addEventListener('click', () => showSlide(index));
+            carouselDotsContainer.appendChild(dot);
+        });
+
+        // Explicitly show the first slide immediately after creation
+        showSlide(0);
+        startCarousel();
+    }
+
+    /**
+     * Shows a specific slide in the carousel.
+     * @param {number} index - The index of the slide to show.
+     */
+    function showSlide(index) {
+        const items = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.carousel-dots span');
+
+        if (items.length === 0) return; // Prevent errors if no items are rendered
+
+        if (index >= items.length) currentSlide = 0;
+        else if (index < 0) currentSlide = items.length - 1;
+        else currentSlide = index;
+
+        items.forEach((item, i) => {
+            item.classList.remove('active', 'opacity-100');
+            item.classList.add('opacity-0');
+            if (i === currentSlide) {
+                item.classList.add('active');
+                setTimeout(() => item.classList.remove('opacity-0'), 10); // Small delay for fade-in effect
+                setTimeout(() => item.classList.add('opacity-100'), 20);
+            }
+        });
+
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+            if (i === currentSlide) {
+                dot.classList.add('active');
+            }
+        });
+    }
+
+    /**
+     * Starts the automatic carousel rotation.
+     */
+    function startCarousel() {
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
+        carouselInterval = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000); // Change slide every 5 seconds
+    }
+
+    /**
+     * Renders the top 6 brands.
+     */
+    function renderTopBrands() {
+        topBrandsGrid.innerHTML = '';
+        const brandsToShow = TOP_BRANDS.slice(0, 6); // Get the first 6 brands
+
+        if (brandsToShow.length === 0) {
+            topBrandsGrid.innerHTML = '<p class="col-span-full text-center text-gray-600">No top brands available.</p>';
+            return;
+        }
+
+        brandsToShow.forEach(brand => {
+            topBrandsGrid.insertAdjacentHTML('beforeend', `
+                <a href="./imall-category.html?brand=${encodeURIComponent(brand.name)}" class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center justify-center text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl brand-card">
+                    <img src="${brand.logo}" alt="${brand.name} Logo" class="h-20 w-20 object-contain mb-3" onerror="handleImageError(this);">
+                    <h3 class="text-lg font-semibold text-gray-800">${brand.name}</h3>
+                </a>
+            `);
+        });
+    }
+
+    /**
+     * Renders today's hot picks (best 8 products).
+     */
+    function renderHotPicks() {
+        hotPicksGrid.innerHTML = '';
+        // For demonstration, pick products with high ratings or discounts
+        const hotPicks = ALL_PRODUCTS.filter(p => p.isDiscounted || p.rating >= 4.3).sort((a, b) => b.rating - a.rating).slice(0, 8);
+
+        if (hotPicks.length === 0) {
+            hotPicksGrid.innerHTML = '<p class="col-span-full text-center text-gray-600">No hot picks available right now.</p>';
+            return;
+        }
+
+        hotPicks.forEach(product => {
+            hotPicksGrid.insertAdjacentHTML('beforeend', createProductCardHTML(product));
+        });
+    }
+
+    /**
+     * Renders featured products (12 products).
+     */
+    function renderFeaturedProducts() {
+        featuredProductsGrid.innerHTML = '';
+        // For demonstration, pick a diverse set of 12 products
+        const featuredProducts = ALL_PRODUCTS.slice(8, 20); // Example slice
+
+        if (featuredProducts.length === 0) {
+            featuredProductsGrid.innerHTML = '<p class="col-span-full text-center text-gray-600">No featured products to display.</p>';
+            return;
+        }
+
+        featuredProducts.forEach(product => {
+            featuredProductsGrid.insertAdjacentHTML('beforeend', createProductCardHTML(product));
+        });
+    }
+
+    /**
+     * Updates the position of the iMall subheader and the main content padding.
+     */
+    function updateLayoutPositions() {
+        if (mainHeader && imallSubheader && imallMainContent) {
+            const mainHeaderHeight = mainHeader.offsetHeight;
+            imallSubheader.style.top = `${mainHeaderHeight}px`;
+            // Calculate total sticky height for main content padding
+            const totalStickyHeight = mainHeaderHeight + imallSubheader.offsetHeight;
+            imallMainContent.style.paddingTop = `${totalStickyHeight + 20}px`; // Add a little extra padding for visual separation
+        }
+    }
+
+    // --- Event Listeners and Initial Setup ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Set current year in footer
+        currentYearSpan.textContent = new Date().getFullYear();
+
+        // Initialize cart count
+        updateCartCount();
+
+        // Populate iMall categories dropdown
+        populateCategoriesDropdown();
+
+        // --- iMall Subheader Event Listeners ---
+        // Categories Dropdown Toggle
+        categoriesNavLink.addEventListener('mouseenter', () => categoriesDropdown.classList.add('show'));
+        categoriesNavLink.addEventListener('mouseleave', (e) => {
+            if (!categoriesDropdown.contains(e.relatedTarget)) {
+                categoriesDropdown.classList.remove('show');
+            }
+        });
+        categoriesDropdown.addEventListener('mouseleave', () => categoriesDropdown.classList.remove('show'));
+
+        // iMall Search input for suggestions
+        imallSearchInput.addEventListener('input', (event) => showSearchSuggestions(event.target.value));
+        imallSearchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        imallSearchButton.addEventListener('click', handleSearch);
+
+        // Hide iMall suggestions when clicking outside search bar/suggestions
+        document.addEventListener('click', (event) => {
+            if (!imallSearchInput.contains(event.target) && !imallSearchSuggestions.contains(event.target) && !imallSearchButton.contains(event.target)) {
+                hideSearchSuggestions();
+            }
+        });
+
+        // Initial rendering of sections
+        renderHeroCarousel();
+        renderTopBrands();
+        renderHotPicks();
+        renderFeaturedProducts();
+
+        // Dynamically update header and content positions on load and resize
+        updateLayoutPositions();
+        window.addEventListener('resize', updateLayoutPositions);
+
+        // Observe mainHeader for height changes (e.g., when search bar expands/collapses)
+        const observer = new MutationObserver(updateLayoutPositions);
+        if (mainHeader) {
+            observer.observe(mainHeader, { attributes: true, childList: true, subtree: true });
+        }
+
+
+        // Delegated event listener for product card clicks on any product grid
+        document.addEventListener('click', (event) => {
+            const productCard = event.target.closest('.product-card');
+            if (productCard && !event.target.classList.contains('add-to-cart-btn')) {
+                const productId = productCard.dataset.productId;
+                window.location.href = `./imall-category.html?productId=${productId}`;
+            }
+        });
+
+        // Delegated event listener for brand card clicks on any brand grid
+        document.addEventListener('click', (event) => {
+            const brandCard = event.target.closest('.brand-card');
+            if (brandCard) {
+                const brandName = brandCard.dataset.brandName;
+                window.location.href = `./imall-category.html?brand=${encodeURIComponent(brandName)}`;
+            }
+        });
+
+        // Add to Cart button delegation (for dynamically added product cards)
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('add-to-cart-btn')) {
+                const productId = event.target.dataset.productId;
+                const productToAdd = ALL_PRODUCTS.find(p => p.id === productId);
+                if (productToAdd) {
+                    addToCart(productToAdd, 1);
+                }
+            }
+        });
+
+        // Assuming main.js handles the main site header's search toggle, mode toggle, and hamburger menu.
+        // No changes are made to these as per the request.
+    });
+</script>
+<!-- Existing Chamber Scripts (main.js is expected to handle global header functionality) -->
+<script src ="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission - La Familia Chambers</title>
+    <meta name="description" content="Discover the mission, vision, and core values that drive La Familia Chambers.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Mission page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mission-hero {
+            background: url('https://placehold.co/1200x400/800080/ffffff?text=Our+Mission+Vision') no-repeat center center / cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            border-radius: 8px;
+        }
+
+        .mission-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mission-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .mission-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .mission-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .mission-section h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .mission-section p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-section ul li {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .mission-section ul li i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .value-card h4 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .value-card p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mission-hero {
+                padding: 4rem 1rem;
+            }
+            .mission-hero h1 {
+                font-size: 2.8rem;
+            }
+            .mission-hero p {
+                font-size: 1.2rem;
+            }
+            .mission-section {
+                padding: 1.5rem;
+            }
+            .mission-section h3 {
+                font-size: 1.8rem;
+            }
+            .mission-section p, .mission-section ul li {
+                font-size: 1rem;
+            }
+            .values-grid {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+            .value-card {
+                padding: 1rem;
+            }
+            .value-card h4 {
+                font-size: 1.2rem;
+            }
+            .value-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mission-hero {
+                padding: 3rem 0.5rem;
+            }
+            .mission-hero h1 {
+                font-size: 2.2rem;
+            }
+            .mission-hero p {
+                font-size: 0.95rem;
+            }
+            .mission-section {
+                padding: 1rem;
+            }
+            .mission-section h3 {
+                font-size: 1.5rem;
+            }
+            .mission-section ul li {
+                padding-left: 1.5rem;
+            }
+            .mission-section ul li i {
+                font-size: 1rem;
+                top: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li class="active-nav-link"><a href="about.html">About Us</a></li> <!-- About Us is parent for Mission -->
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Mission Page -->
+<main>
+    <section class="mission-hero">
+        <div class="mission-hero-content">
+            <h1>Our Mission, Vision & Values</h1>
+            <p>Driving economic growth and fostering a thriving business community in Nairobi and beyond.</p>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <h3>Our Mission</h3>
+        <p>To empower businesses and professionals in Kenya by providing unparalleled networking opportunities, advocating for a favorable business environment, and offering resources for continuous growth and innovation. We strive to be the leading voice for commerce and industry, fostering collaboration and prosperity for all our members.</p>
+    </section>
+
+    <section class="mission-section">
+        <h3>Our Vision</h3>
+        <p>To be the most dynamic and influential business chamber in East Africa, recognized for our commitment to sustainable economic development, ethical business practices, and creating a vibrant, interconnected community where every member can achieve their full potential.</p>
+    </section>
+
+    <section class="mission-section">
+        <h3>Our Core Values</h3>
+        <div class="values-grid">
+            <div class="value-card">
+                <i class="fas fa-handshake"></i>
+                <h4>Collaboration</h4>
+                <p>We believe in the power of working together, fostering partnerships, and building strong relationships within our diverse community.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-lightbulb"></i>
+                <h4>Innovation</h4>
+                <p>We embrace new ideas, technologies, and approaches to drive progress and help our members stay competitive in a rapidly evolving market.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-chart-line"></i>
+                <h4>Growth</h4>
+                <p>We are dedicated to supporting the continuous development and expansion of our members' businesses and professional capabilities.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-gavel"></i>
+                <h4>Integrity</h4>
+                <p>We uphold the highest standards of honesty, transparency, and ethical conduct in all our operations and interactions.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-users"></i>
+                <h4>Community</h4>
+                <p>We foster a sense of belonging and mutual support, recognizing that our collective strength comes from our interconnectedness.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-balance-scale"></i>
+                <h4>Advocacy</h4>
+                <p>We actively champion policies and initiatives that promote a fair, equitable, and prosperous business environment for all.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<script>
+    // JavaScript for dynamic year in footer (if not already in main.js)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set active navigation link for Mission (under About Us)
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('#main-nav .nav-list a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'about.html') {
+                link.closest('li').classList.add('active-nav-link');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+

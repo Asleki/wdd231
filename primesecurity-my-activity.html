@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Activity | Prime Security Solutions - Shopping Cart</title>
+    <meta name="description" content="View and manage your shopping cart for Prime Security Solutions.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Re-using security page styles for consistency */
+        :root {
+            --security-primary: #1A202C; /* Dark Charcoal - primary for text/headings */
+            --security-secondary: #2C5282; /* Dark Blue - accents/buttons */
+            --security-accent: #ECC94B; /* Yellow Gold - highlights */
+            --security-text: #2D3748; /* Dark Gray */
+            --security-bg: #F7FAFC; /* Light Gray Background */
+            --security-card-bg: #FFFFFF; /* White Cards */
+            --security-border: #EDF2F7; /* Light Border */
+            --security-shadow: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+        }
+
+        body.dark-mode {
+            --security-primary: #E2E8F0; /* Light Gray - primary for text/headings */
+            --security-secondary: #63B3ED; /* Lighter Blue - accents/buttons */
+            --security-accent: #F6E05E; /* Brighter Yellow Gold - highlights */
+            --security-text: #CBD5E0; /* Light Gray */
+            --security-bg: #1A202C; /* Dark Charcoal Background */
+            --security-card-bg: #2D3748; /* Darker Gray Cards */
+            --security-border: #4A5568; /* Darker Border */
+            --security-shadow: rgba(255, 255, 255, 0.1); /* Subtle Shadow */
+        }
+
+        /* General sections */
+        .section-security {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--security-text);
+            background-color: var(--security-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 70vh; /* Ensure content pushes footer down */
+        }
+
+        .section-title-security {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--security-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-security::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--security-accent);
+            border-radius: 3px;
+        }
+
+        /* Cart specific styles */
+        .cart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .cart-items {
+            flex: 2 1 600px; /* Cart items section, grows and shrinks, min-width 600px */
+            background-color: var(--security-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+            padding: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--security-border);
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            background-color: #e0e7f2;
+        }
+        body.dark-mode .cart-item-image {
+            background-color: #4A5568;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-item-details h4 {
+            font-size: 1.3rem;
+            color: var(--security-primary);
+            margin-bottom: 0.5rem;
+        }
+        .cart-item-details p {
+            font-size: 0.95rem;
+            color: var(--security-text);
+        }
+        .cart-item-details .item-price {
+            font-weight: bold;
+            color: var(--security-secondary);
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .cart-item-quantity button {
+            background-color: var(--security-secondary);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            font-size: 1rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .cart-item-quantity button:hover {
+            background-color: #244368;
+        }
+        .cart-item-quantity input {
+            width: 50px;
+            padding: 0.3rem;
+            text-align: center;
+            border: 1px solid var(--security-border);
+            border-radius: 0.3rem;
+            background-color: var(--security-bg);
+            color: var(--security-text);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #d9534f; /* Red for remove */
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .cart-item-remove:hover {
+            color: #c9302c;
+        }
+
+        .cart-summary {
+            flex: 1 1 300px; /* Cart summary section, grows and shrinks, min-width 300px */
+            background-color: var(--security-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.8rem;
+            color: var(--security-primary);
+            margin-bottom: 1rem;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            color: var(--security-text);
+        }
+        .summary-line.total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--security-primary);
+            border-top: 1px dashed var(--security-border);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cart-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .cart-actions button {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .cart-actions .btn-checkout {
+            background-color: var(--security-accent);
+            color: var(--security-primary);
+        }
+        .cart-actions .btn-checkout:hover {
+            background-color: #EBC93A;
+        }
+        .cart-actions .btn-clear-cart {
+            background-color: #f0ad4e; /* Orange for warning */
+            color: white;
+        }
+        .cart-actions .btn-clear-cart:hover {
+            background-color: #ec971f;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--security-text);
+            padding: 3rem;
+            background-color: var(--security-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+        }
+        .empty-cart-message a {
+            color: var(--security-secondary);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* Cart Icon in Header - Copied from primesecurity.html for consistency */
+        .cart-icon-container {
+            position: relative;
+            margin-left: 1rem;
+        }
+        .cart-icon-container a {
+            color: var(--header-text-color); /* Inherit from main styles */
+            font-size: 1.5rem;
+            text-decoration: none;
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--security-accent);
+            color: var(--security-primary);
+            border-radius: 50%;
+            padding: 0.2em 0.5em;
+            font-size: 0.75rem;
+            font-weight: bold;
+            line-height: 1;
+            min-width: 20px;
+            text-align: center;
+            pointer-events: none; /* Allow clicks to pass through to icon */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .section-title-security {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .section-title-security {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .cart-items, .cart-summary {
+                flex-basis: 100%; /* Stack columns on small screens */
+            }
+            .cart-item {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .cart-item-image {
+                flex-basis: 60px;
+                width: 60px;
+                height: 60px;
+            }
+            .cart-item-details {
+                flex-basis: calc(100% - 80px); /* Adjust for image width */
+            }
+            .cart-item-quantity {
+                flex-basis: 100%;
+                justify-content: flex-end;
+                margin-top: 10px;
+            }
+            .cart-item-remove {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="cart-icon-container">
+                <a href="primesecurity-my-activity.html" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-item-count">0</span>
+                </a>
+            </div>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="tasteofafrica.html">Taste of Africa Catering</a></li>
+            <li><a href="afyacare-clinic.html">AfyaCare Clinic</a></li>
+            <li><a href="sokoproperties.html">SokoProperties</a></li>
+            <li><a href="techsolutions.html">TechSolutions Africa</a></li>
+            <li><a href="primesecurity.html">Prime Security Solutions</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="my-activity" class="section-security">
+        <h2 class="section-title-security">My Shopping Cart</h2>
+        <div class="cart-container">
+            <div class="cart-items" id="cart-items-container">
+                </div>
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-line">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">KES 0</span>
+                </div>
+                <div class="summary-line">
+                    <span>Shipping:</span>
+                    <span>Calculated at checkout</span>
+                </div>
+                <div class="summary-line">
+                    <span>Taxes:</span>
+                    <span>KES 0</span>
+                </div>
+                <div class="summary-line total">
+                    <span>Grand Total:</span>
+                    <span id="cart-grand-total">KES 0</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn-checkout" id="btn-proceed-to-checkout">Proceed to Checkout</button>
+                    <button class="btn-clear-cart" id="btn-clear-cart">Clear Cart</button>
+                </div>
+            </div>
+        </div>
+        <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+            Your cart is empty. <a href="primesecurity.html#products-prime">Start shopping now!</a>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+
+<script src="scripts/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Global Elements & Utility Functions (from La Familia template) ---
+        const header = document.querySelector('.sticky-header');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const siteSearchInput = document.getElementById('site-search'); // Global search
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBarContainer = document.getElementById('search-bar-container');
+
+        // Dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Adjust main padding (adapted for business pages)
+        const adjustMainPadding = () => {
+            const headerHeight = header.offsetHeight;
+            const mainContent = document.querySelector('main');
+            if (mainContent) {
+                mainContent.style.paddingTop = `${headerHeight}px`;
+            }
+        };
+        window.addEventListener('load', adjustMainPadding);
+        window.addEventListener('resize', adjustMainPadding);
+        hamburgerMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('main-nav-closed');
+            mainNav.classList.toggle('main-nav-open');
+            adjustMainPadding();
+        });
+
+        // Dark Mode Toggle
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            modeToggle.querySelector('i').classList.replace(
+                isDarkMode ? 'fa-moon' : 'fa-sun',
+                isDarkMode ? 'fa-sun' : 'fa-moon'
+            );
+        });
+
+        // Global Search Bar Toggle
+        searchToggle.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('search-bar-hidden');
+            searchBarContainer.classList.toggle('search-bar-active');
+            if (searchBarContainer.classList.contains('search-bar-active')) {
+                siteSearchInput.focus();
+            }
+        });
+
+        // Placeholder for global search functionality
+        document.getElementById('search-submit-btn').addEventListener('click', () => {
+            alert(`Global search for: ${siteSearchInput.value}`);
+        });
+        document.getElementById('search-clear-btn').addEventListener('click', () => {
+            siteSearchInput.value = '';
+        });
+        document.getElementById('search-mic-btn').addEventListener('click', () => {
+            alert('Voice search not implemented.');
+        });
+        siteSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                alert(`Global search for: ${siteSearchInput.value}`);
+            }
+        });
+
+        // --- Cart Specific Elements ---
+        const cartItemCountElem = document.getElementById('cart-item-count');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartSubtotalElem = document.getElementById('cart-subtotal');
+        const cartGrandTotalElem = document.getElementById('cart-grand-total');
+        const btnProceedToCheckout = document.getElementById('btn-proceed-to-checkout');
+        const btnClearCart = document.getElementById('btn-clear-cart');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+
+        // --- Utility Functions for Cart ---
+
+        /**
+         * Loads cart items from localStorage.
+         * @returns {Array} An array of cart items.
+         */
+        function getCartItems() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('primeSecurityCart')) || [];
+                // Ensure each item has a quantity, default to 1 if missing
+                return cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
+            } catch (e) {
+                console.error("Error parsing cart from localStorage:", e);
+                return [];
+            }
+        }
+
+        /**
+         * Saves cart items to localStorage.
+         * @param {Array} cart - The array of cart items to save.
+         */
+        function saveCartItems(cart) {
+            localStorage.setItem('primeSecurityCart', JSON.stringify(cart));
+            updateCartCount(); // Update count whenever cart changes
+            renderCart();      // Re-render cart whenever it changes
+        }
+
+        /**
+         * Updates the cart item count in the header.
+         */
+        function updateCartCount() {
+            const cart = getCartItems();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (cartItemCountElem) {
+                cartItemCountElem.textContent = totalItems;
+            }
+        }
+
+        /**
+         * Updates the quantity of a specific item in the cart.
+         * @param {string} uniqueId - The unique ID of the item (productId-color or just productId).
+         * @param {number} newQuantity - The new quantity for the item.
+         */
+        function updateCartItemQuantity(uniqueId, newQuantity) {
+            let cart = getCartItems();
+            const itemIndex = cart.findIndex(item => item.uniqueId === uniqueId);
+
+            if (itemIndex > -1) {
+                // Ensure quantity is at least 1
+                cart[itemIndex].quantity = Math.max(1, newQuantity);
+                saveCartItems(cart);
+            }
+        }
+
+        /**
+         * Removes an item from the cart.
+         * @param {string} uniqueId - The unique ID of the item to remove.
+         */
+        function removeCartItem(uniqueId) {
+            let cart = getCartItems();
+            cart = cart.filter(item => item.uniqueId !== uniqueId);
+            saveCartItems(cart);
+        }
+
+        /**
+         * Clears all items from the cart.
+         */
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your entire cart?')) {
+                saveCartItems([]);
+            }
+        }
+
+        /**
+         * Renders the cart items and summary.
+         */
+        function renderCart() {
+            const cart = getCartItems();
+            cartItemsContainer.innerHTML = ''; // Clear existing items
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartItemsContainer.style.display = 'none';
+                document.querySelector('.cart-summary').style.display = 'none';
+                return;
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cartItemsContainer.style.display = 'block';
+                document.querySelector('.cart-summary').style.display = 'flex'; // Restore flex display for summary
+            }
+
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4>${item.name} ${item.color ? `(${item.color})` : ''}</h4>
+                        <p class="item-price">${item.currency} ${(item.price).toLocaleString()}</p>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-minus" data-unique-id="${item.uniqueId}">-</button>
+                        <input type="number" value="${item.quantity}" min="1" readonly>
+                        <button class="quantity-plus" data-unique-id="${item.uniqueId}">+</button>
+                    </div>
+                    <button class="cart-item-remove" data-unique-id="${item.uniqueId}"><i class="fas fa-trash-alt"></i></button>
+                `;
+                cartItemsContainer.appendChild(cartItemDiv);
+            });
+
+            // Update summary
+            cartSubtotalElem.textContent = `KES ${subtotal.toLocaleString()}`;
+            // For simplicity, taxes are 0. In a real app, calculate based on subtotal.
+            // const taxes = subtotal * 0.16; // Example 16% VAT
+            // cartTaxesElem.textContent = `KES ${taxes.toLocaleString()}`;
+            // cartGrandTotalElem.textContent = `KES ${(subtotal + taxes).toLocaleString()}`;
+            cartGrandTotalElem.textContent = `KES ${subtotal.toLocaleString()}`;
+
+
+            // Attach event listeners for quantity buttons and remove buttons
+            document.querySelectorAll('.quantity-minus').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const uniqueId = e.target.dataset.uniqueId;
+                    const input = e.target.nextElementSibling;
+                    const currentQty = parseInt(input.value);
+                    updateCartItemQuantity(uniqueId, currentQty - 1);
+                });
+            });
+
+            document.querySelectorAll('.quantity-plus').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const uniqueId = e.target.dataset.uniqueId;
+                    const input = e.target.previousElementSibling;
+                    const currentQty = parseInt(input.value);
+                    updateCartItemQuantity(uniqueId, currentQty + 1);
+                });
+            });
+
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const uniqueId = e.target.closest('button').dataset.uniqueId; // Use closest to get data-unique-id from button
+                    removeCartItem(uniqueId);
+                });
+            });
+        }
+
+        // --- Event Listeners & Initial Loads ---
+
+        // Global La Familia Footer year update
+        const currentYearElem = document.getElementById('current-year');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // Initial render of the cart on page load
+        renderCart();
+        updateCartCount(); // Ensure header cart count is correct on load
+
+        // Event listener for "Proceed to Checkout"
+        if (btnProceedToCheckout) {
+            btnProceedToCheckout.addEventListener('click', () => {
+                const cart = getCartItems();
+                if (cart.length > 0) {
+                    alert('Proceeding to checkout! (This is a placeholder action)');
+                    // In a real application, you would navigate to a checkout page
+                    // window.location.href = 'checkout.html';
+                } else {
+                    alert('Your cart is empty. Please add items before proceeding to checkout.');
+                }
+            });
+        }
+
+        // Event listener for "Clear Cart"
+        if (btnClearCart) {
+            btnClearCart.addEventListener('click', clearCart);
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Nairobi - La Familia Chambers</title>
+    <meta name="description" content="Explore the vibrant and diverse business landscape of Nairobi, from tech and finance to tourism and agriculture.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Discover page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .discover-hero {
+            background: url('https://placehold.co/1200x400/32CD32/ffffff?text=Nairobi+Business+Hub') no-repeat center center / cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discover-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            border-radius: 8px;
+        }
+
+        .discover-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .discover-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .discover-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .discover-hero .cta-button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 50px; /* Pill shape */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .discover-hero .cta-button:hover {
+            background-color: #c4644a; /* Darker secondary */
+            transform: translateY(-3px);
+        }
+
+        .business-sector-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .business-sector-section h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sector-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .sector-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sector-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sector-card-content h4 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+
+        .sector-card-content p {
+            font-size: 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1; /* Allows description to take up available space */
+        }
+
+        .sector-card .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: 1rem; /* Space from content above */
+            align-self: flex-start; /* Align button to the left */
+        }
+
+        .sector-card .cta-button:hover {
+            background-color: #4a5a6a; /* Darker primary */
+        }
+
+        .discover-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .discover-cta h4 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .discover-cta p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .discover-cta .cta-button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .discover-cta .cta-button:hover {
+            background-color: #c4644a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .discover-hero {
+                padding: 4rem 1rem;
+            }
+            .discover-hero h1 {
+                font-size: 2.8rem;
+            }
+            .discover-hero p {
+                font-size: 1.2rem;
+            }
+            .business-sector-section {
+                padding: 1.5rem;
+            }
+            .business-sector-section h3 {
+                font-size: 1.8rem;
+            }
+            .sector-grid {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+            .sector-card-content h4 {
+                font-size: 1.3rem;
+            }
+            .sector-card-content p {
+                font-size: 0.95rem;
+            }
+            .discover-cta h4 {
+                font-size: 1.5rem;
+            }
+            .discover-cta p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .discover-hero {
+                padding: 3rem 0.5rem;
+            }
+            .discover-hero h1 {
+                font-size: 2.2rem;
+            }
+            .discover-hero p {
+                font-size: 0.95rem;
+            }
+            .business-sector-section {
+                padding: 1rem;
+            }
+            .business-sector-section h3 {
+                font-size: 1.5rem;
+            }
+            .sector-card-content h4 {
+                font-size: 1.2rem;
+            }
+            .sector-card .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .discover-cta h4 {
+                font-size: 1.3rem;
+            }
+            .discover-cta p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li class="active-nav-link"><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Discover Page -->
+<main>
+    <section class="discover-hero">
+        <div class="discover-hero-content">
+            <h1>Discover the Vibrant Business Landscape of Nairobi</h1>
+            <p>Nairobi is a hub of innovation, culture, and commerce. Explore the diverse sectors driving its economy and growth.</p>
+            <a href="#business-sectors" class="cta-button">Explore Sectors</a>
+        </div>
+    </section>
+
+    <section class="business-sector-section" id="business-sectors">
+        <h3>Key Business Sectors in Nairobi</h3>
+        <div class="sector-grid" id="sector-grid">
+            <div class="sector-card">
+                <img src="https://placehold.co/400x200/4CAF50/ffffff?text=Technology+%26+Innovation" alt="Technology & Innovation">
+                <div class="sector-card-content">
+                    <h4>Technology & Innovation</h4>
+                    <p>Nairobi, often dubbed 'Silicon Savannah', is a thriving tech hub with numerous startups, incubators, and established IT firms driving digital transformation across Africa.</p>
+                    <a href="directory.html?category=technology" class="cta-button">View Tech Businesses</a>
+                </div>
+            </div>
+            <div class="sector-card">
+                <img src="https://placehold.co/400x200/2196F3/ffffff?text=Finance+%26+Banking" alt="Finance & Banking">
+                <div class="sector-card-content">
+                    <h4>Finance & Banking</h4>
+                    <p>As East Africa's financial capital, Nairobi hosts major banks, investment firms, and financial institutions, serving as a gateway for regional and international finance.</p>
+                    <a href="directory.html?category=finance" class="cta-button">View Finance Businesses</a>
+                </div>
+            </div>
+            <div class="sector-card">
+                <img src="https://placehold.co/400x200/FFC107/ffffff?text=Tourism+%26+Hospitality" alt="Tourism & Hospitality">
+                <div class="sector-card-content">
+                    <h4>Tourism & Hospitality</h4>
+                    <p>From safari adventures to luxury hotels, Nairobi's tourism sector is booming, attracting visitors globally and offering a rich blend of culture, wildlife, and urban experiences.</p>
+                    <a href="directory.html?category=tourism" class="cta-button">View Tourism Businesses</a>
+                </div>
+            </div>
+            <div class="sector-card">
+                <img src="https://placehold.co/400x200/9C27B0/ffffff?text=Manufacturing+%26+Industry" alt="Manufacturing & Industry">
+                <div class="sector-card-content">
+                    <h4>Manufacturing & Industry</h4>
+                    <p>A growing manufacturing base contributes significantly to Nairobi's economy, producing goods for local consumption and export, from textiles to processed foods.</p>
+                    <a href="directory.html?category=manufacturing" class="cta-button">View Manufacturing Businesses</a>
+                </div>
+            </div>
+            <div class="sector-card">
+                <img src="https://placehold.co/400x200/E91E63/ffffff?text=Retail+%26+Commerce" alt="Retail & Commerce">
+                <div class="sector-card-content">
+                    <h4>Retail & Commerce</h4>
+                    <p>Nairobi's bustling markets and modern shopping malls showcase a dynamic retail sector, offering everything from local crafts to international brands.</p>
+                    <a href="directory.html?category=retail" class="cta-button">View Retail Businesses</a>
+                </div>
+            </div>
+            <div class="sector-card">
+                <img src="https://placehold.co/400x200/00BCD4/ffffff?text=Agriculture+%26+Agribusiness" alt="Agriculture & Agribusiness">
+                <div class="sector-card-content">
+                    <h4>Agriculture & Agribusiness</h4>
+                    <p>Surrounded by fertile lands, Nairobi serves as a key hub for agribusiness, connecting farmers with markets and driving innovation in agricultural practices.</p>
+                    <a href="directory.html?category=agriculture" class="cta-button">View Agribusinesses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="discover-cta">
+        <h4>Want to Learn More About Nairobi's Business Ecosystem?</h4>
+        <p>Dive deeper into specific industries or find businesses that align with your interests in our comprehensive member directory.</p>
+        <a href="directory.html" class="cta-button">Explore Member Directory</a>
+    </section>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<script>
+    // JavaScript for dynamic year in footer (if not already in main.js)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set active navigation link for Discover
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('#main-nav .nav-list a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'discover.html') {
+                link.closest('li').classList.add('active-nav-link');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

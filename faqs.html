@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - La Familia Chambers</title>
+    <meta name="description" content="Find answers to common questions about La Familia Chambers, membership, events, and services.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the FAQs page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faqs-header {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-lg);
+            padding: var(--spacing-unit);
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+        }
+
+        .faqs-header h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .faqs-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .faqs-content-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faqs-content-wrapper h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden; /* Ensures border-radius applies to content */
+        }
+
+        .faq-item summary {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            outline: none; /* Remove outline on focus */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-item summary:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none; /* Hide default arrow */
+        }
+
+        .faq-item summary::after {
+            content: '\f078'; /* Font Awesome chevron-down icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(180deg); /* Rotate arrow when open */
+        }
+
+        .faq-item-content {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-item-content p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-item-content ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-item-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-contact-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .faq-contact-cta h4 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-contact-cta p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-contact-cta .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-contact-cta .cta-button:hover {
+            background-color: #c4644a; /* Darker secondary */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .faqs-header h2 {
+                font-size: 2rem;
+            }
+            .faqs-content-wrapper {
+                padding: 1.5rem;
+            }
+            .faqs-content-wrapper h3 {
+                font-size: 1.8rem;
+            }
+            .faq-item summary {
+                font-size: 1.1rem;
+                padding: 0.8rem 1rem;
+            }
+            .faq-item-content {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            .faq-contact-cta h4 {
+                font-size: 1.5rem;
+            }
+            .faq-contact-cta p {
+                font-size: 1rem;
+            }
+            .faq-contact-cta .cta-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faqs-header h2 {
+                font-size: 1.6rem;
+            }
+            .faqs-header p {
+                font-size: 1rem;
+            }
+            .faqs-content-wrapper {
+                padding: 1rem;
+            }
+            .faqs-content-wrapper h3 {
+                font-size: 1.5rem;
+            }
+            .faq-item summary {
+                font-size: 1rem;
+                padding: 0.7rem 0.8rem;
+            }
+            .faq-item-content {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+            .faq-contact-cta h4 {
+                font-size: 1.3rem;
+            }
+            .faq-contact-cta p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li class="active-nav-link"><a href="about.html">About Us</a></li> <!-- Assuming FAQs is under About Us -->
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for FAQs Page -->
+<main>
+    <section class="faqs-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about La Familia Chambers, membership, events, and services.</p>
+        <p><strong>Last Updated: July 11, 2025</strong></p>
+    </section>
+
+    <section class="faqs-content-wrapper">
+        <h3>General Questions</h3>
+        <div class="faq-item">
+            <details>
+                <summary>What is La Familia Chambers?</summary>
+                <div class="faq-item-content">
+                    <p>La Familia Chambers is a dynamic business association dedicated to fostering economic growth, promoting local businesses, and building a strong, interconnected community in Nairobi and its environs. We provide networking opportunities, resources, advocacy, and support to our members.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Who can join La Familia Chambers?</summary>
+                <div class="faq-item-content">
+                    <p>Membership is open to businesses of all sizes, entrepreneurs, and professionals operating within Nairobi and the surrounding regions. Whether you're a startup, a small business, or a large corporation, we welcome you to join our growing family.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>What are the benefits of membership?</summary>
+                <div class="faq-item-content">
+                    <p>Membership offers a wide range of benefits, including:</p>
+                    <ul>
+                        <li>Networking opportunities with other local businesses.</li>
+                        <li>Access to exclusive workshops, seminars, and training.</li>
+                        <li>Advocacy and representation on business issues.</li>
+                        <li>Marketing and promotional opportunities through our directory and events.</li>
+                        <li>Access to business resources and mentorship programs.</li>
+                        <li>Discounts on services from fellow members.</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <h3>Membership Questions</h3>
+        <div class="faq-item">
+            <details>
+                <summary>How do I become a member?</summary>
+                <div class="faq-item-content">
+                    <p>You can become a member by visiting our <a href="join.html">Join La Familia</a> page, filling out the online application form, and submitting the required membership fees. Our team will review your application and get in touch with you shortly.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>What are the membership fees?</summary>
+                <div class="faq-item-content">
+                    <p>Membership fees vary based on the type and size of your business. Please refer to the detailed breakdown on our <a href="join.html">Join La Familia</a> page or contact our membership department for specific pricing.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>How do I update my member profile or business listing?</summary>
+                <div class="faq-item-content">
+                    <p>Members can log in to their dedicated member portal to update their business information, contact details, and service offerings. If you require assistance, please contact our support team.</p>
+                </div>
+            </details>
+        </div>
+
+        <h3>Events & Programs</h3>
+        <div class="faq-item">
+            <details>
+                <summary>How do I register for an event?</summary>
+                <div class="faq-item-content">
+                    <p>You can view all upcoming events on our <a href="events.html">Events Calendar</a>. Click on the event you're interested in, and follow the registration instructions provided on the event details page.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Can non-members attend events?</summary>
+                <div class="faq-item-content">
+                    <p>Some of our events are open to non-members, often at a different registration fee. Member-exclusive events will be clearly indicated. We encourage non-members to attend open events to experience the value of La Familia Chambers.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>How can I propose an event or workshop?</summary>
+                <div class="faq-item-content">
+                    <p>We welcome suggestions for new events and workshops that benefit our community. Please reach out to our events coordination team via email with your proposal, and we'll review it.</p>
+                </div>
+            </details>
+        </div>
+
+        <h3>Website & Technical Questions</h3>
+        <div class="faq-item">
+            <details>
+                <summary>How do I search the Member Directory?</summary>
+                <div class="faq-item-content">
+                    <p>Visit our <a href="directory.html">Member Directory</a> page. You can use the search bar to look for specific business names or keywords, and apply filters by category, location, and other criteria to narrow down your search results.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Is my personal information secure?</summary>
+                <div class="faq-item-content">
+                    <p>Yes, we take data security seriously. We implement various technical and organizational measures to protect your personal information. For more details, please refer to our comprehensive <a href="privacy.html">Privacy Policy</a>.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>I'm having trouble logging in, what should I do?</summary>
+                <div class="faq-item-content">
+                    <p>If you're experiencing login issues, please try the "Forgot Password" link on the login page. If the problem persists, contact our technical support team at <a href="mailto:support@lafamiliachambers.co.ke">support@lafamiliachambers.co.ke</a> for assistance.</p>
+                </div>
+            </details>
+        </div>
+
+        <h3>Contact & Support</h3>
+        <div class="faq-item">
+            <details>
+                <summary>How can I contact La Familia Chambers?</summary>
+                <div class="faq-item-content">
+                    <p>You can reach us via:</p>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mailto:info@lafamiliachambers.co.ke">info@lafamiliachambers.co.ke</a></li>
+                        <li><strong>Phone:</strong> +254 707 176 595</li>
+                        <li><strong>Physical Address:</strong> 123 Chambers Lane, Westlands, Nairobi, Kenya</li>
+                    </ul>
+                    <p>You can also visit our <a href="about.html">About Us</a> page for more contact options.</p>
+                </div>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Where is La Familia Chambers located?</summary>
+                <div class="faq-item-content">
+                    <p>Our main offices are located at 123 Chambers Lane, Westlands, Nairobi, Kenya.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <section class="faq-contact-cta">
+        <h4>Still Have Questions?</h4>
+        <p>If you couldn't find the answer you were looking for, please don't hesitate to reach out to our team. We're here to help!</p>
+        <a href="mailto:info@lafamiliachambers.co.ke" class="cta-button">Contact Us Directly</a>
+    </section>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<script>
+    // JavaScript for dynamic year in footer (if not already in main.js)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set active navigation link for FAQs (assuming it's under About Us)
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('#main-nav .nav-list a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'faqs.html') {
+                link.closest('li').classList.add('active-nav-link');
+                // Also ensure the parent 'About Us' is active if FAQs is a sub-page
+                const aboutUsLink = document.querySelector('#main-nav .nav-list a[href="about.html"]');
+                if (aboutUsLink) {
+                    aboutUsLink.closest('li').classList.add('active-nav-link');
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

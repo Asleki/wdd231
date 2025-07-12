@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals & Offers - iMall</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        /* Basic inline styles for demo, move to main.css */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .deal-category {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .deal-category h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #007bff;
+            font-size: 1.8em;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Styles for product-card are assumed to be in main.css (from homepage styling) */
+        /* You might want specific styles for deal badges, larger discount display etc. */
+    </style>
+</head>
+<body id="deals-page"> <header>
+        </header>
+
+    <main>
+        <h1>Today's Best Deals & Offers</h1>
+
+        <div class="deal-category">
+            <h2>Today's Top Deals</h2>
+            <div id="todays-deals-container" class="product-grid">
+                </div>
+            </div>
+
+        <div class="deal-category">
+            <h2>SuperDeals</h2>
+            <div id="super-deals-container" class="product-grid">
+                </div>
+        </div>
+
+        <div class="deal-category">
+            <h2>Bundle Deals</h2>
+            <div id="bundle-deals-container" class="product-grid">
+                </div>
+        </div>
+
+        <div class="deal-category">
+            <h2>Big Save!</h2>
+            <div id="big-save-container" class="product-grid">
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script src="scripts/products.js"></script>
+    <script src="scripts/brands.js"></script>
+    <script src="scripts/common-imall.js"></script> <script src="scripts/imall-cart.js"></script> <script src="scripts/imall-deals.js"></script> <script src="scripts/main.js"></script> </body>
+</html>

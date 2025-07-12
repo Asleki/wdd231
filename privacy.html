@@ -8,6 +8,193 @@
     <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Privacy Policy page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-lg);
+            padding: var(--spacing-unit);
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--card-shadow);
+        }
+
+        .privacy-header h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .privacy-content-wrapper {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .privacy-content-wrapper h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .privacy-content-wrapper h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .privacy-content-wrapper p,
+        .privacy-content-wrapper ul,
+        .privacy-content-wrapper ol {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .privacy-content-wrapper ul,
+        .privacy-content-wrapper ol {
+            margin-left: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .privacy-content-wrapper ul li,
+        .privacy-content-wrapper ol li {
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-content-wrapper a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .privacy-content-wrapper a:hover {
+            text-decoration: underline;
+        }
+
+        .privacy-table-of-contents {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px; /* Adjust based on header height */
+            z-index: 50;
+        }
+
+        .privacy-table-of-contents h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .privacy-table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .privacy-table-of-contents li {
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-table-of-contents a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            display: block;
+            padding: 0.3rem 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .privacy-table-of-contents a:hover {
+            background-color: var(--hover-bg);
+            color: var(--primary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .privacy-header h2 {
+                font-size: 2rem;
+            }
+            .privacy-content-wrapper, .privacy-table-of-contents {
+                padding: 1.5rem;
+            }
+            .privacy-content-wrapper h3 {
+                font-size: 1.8rem;
+            }
+            .privacy-content-wrapper h4 {
+                font-size: 1.3rem;
+            }
+            .privacy-content-wrapper p,
+            .privacy-content-wrapper ul,
+            .privacy-content-wrapper ol {
+                font-size: 1rem;
+            }
+            .privacy-table-of-contents {
+                position: static; /* Remove sticky on smaller screens */
+                top: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .privacy-header h2 {
+                font-size: 1.6rem;
+            }
+            .privacy-header p {
+                font-size: 1rem;
+            }
+            .privacy-content-wrapper, .privacy-table-of-contents {
+                padding: 1rem;
+            }
+            .privacy-content-wrapper h3 {
+                font-size: 1.5rem;
+            }
+            .privacy-content-wrapper h4 {
+                font-size: 1.2rem;
+            }
+            .privacy-content-wrapper p,
+            .privacy-content-wrapper ul,
+            .privacy-content-wrapper ol {
+                font-size: 0.95rem;
+            }
+            .privacy-table-of-contents h4 {
+                font-size: 1.1rem;
+            }
+            .privacy-table-of-contents a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -48,7 +235,6 @@
                 <option value="businesses">Businesses</option>
                 <option value="events">Events</option>
                 <option value="news">News</option>
-                <option value="blog-posts">Blog Posts</option>
             </select>
             <select id="search-location-filter" aria-label="Filter by Location">
                 <option value="all">All Locations</option>
@@ -71,7 +257,7 @@
             <li><a href="news.html">News & Announcements</a></li>
             <li><a href="reviews.html">Member Reviews</a></li>
             <li><a href="board.html">Board of Directors</a></li>
-            <li><a href="about.html">About Us</a></li>
+            <li class="active-nav-link"><a href="about.html">About Us</a></li> <!-- Assuming Privacy is under About -->
         </ul>
     </nav>
 </header>
@@ -190,45 +376,45 @@
 </main>
 
 <!-- Unified Footer -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-contact">
-            <h4>Contact La Familia</h4>
-            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
-            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
-            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
-        </div>
-        <div class="footer-links">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="privacy.html">Privacy Notice</a></li>
-                <li><a href="terms.html">Terms of Service</a></li>
-                <li><a href="faqs.html">FAQs</a></li>
-                <li><a href="sitemap.html">Sitemap</a></li>
-            </ul>
-        </div>
-        <div class="footer-about">
-            <h4>About</h4>
-            <ul>
-                <li><a href="about.html">About La Familia</a></li>
-                <li><a href="developer.html">About the Developer</a></li>
-                <li><a href="mission.html">Our Mission</a></li>
-            </ul>
-        </div>
-        <div class="footer-social">
-            <h4>Connect With Us</h4>
-            <div class="social-icons">
-                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
-    </div>
-</footer>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
 
 <!-- Main La Familia Chambers JavaScript -->
 <script src="scripts/main.js"></script>
@@ -255,5 +441,3 @@
 
 </body>
 </html>
-<!-- This is the end of the privacy.html file. -->
-<!-- Ensure this file is saved as privacy.html in your project directory. -->

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoGiant Motors - Your Journey Starts Here</title>
+    <meta name="description" content="Discover new and pre-owned vehicles at AutoGiant Motors, a trusted dealer in Mlolongo, Machakos County.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/autogiant-motors.css">
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Category">
+                    <option value="all">All Categories</option>
+                    <option value="businesses">Businesses</option>
+                    <option value="events">Events</option>
+                    <option value="news">News</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="all">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="mlolongo">Mlolongo</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+        <nav id="main-nav" class="main-nav-closed">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="discover.html">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="active">Member Directory</a></li> <li><a href="awards.html">Awards & Recognition</a></li>
+                <li><a href="blog.html">Business Blog</a></li>
+                <li><a href="clubs.html">Member Clubs</a></li>
+                <li><a href="events.html">Events Calendar</a></li>
+                <li><a href="reviews.html">Member Reviews</a></li>
+                <li><a href="board.html">Board of Directors</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<nav class="autogiant-subheader">
+        <div class="dealership-info">
+            <div class="logo">
+                <img src="images/autogiantmotorslogo.webp" alt="AutoGiant Motors Logo">
+            </div>
+            <h2>AutoGiant Motors</h2>
+        </div>
+        <div class="dealership-nav">
+            <ul>
+                <!-- Updated links to include autogiant-motors.html for proper navigation from other pages -->
+                <li><a href="autogiant-motors.html#hero-section">Home</a></li>
+                <li><a href="autogiant-motors.html#featured-inventory">Featured</a></li>
+                <li><a href="autogiant-motors.html#full-inventory">Inventory</a></li>
+                <li><a href="autogiant-motors.html#about-us">About Us</a></li>
+                <li><a href="autogiant-motors.html#services">Services</a></li>
+                <li><a href="autogiant-motors.html#financing">Financing</a></li>
+                <li><a href="autogiant-motors.html#testimonials">Testimonials</a></li>
+                <li><a href="autogiant-motors-contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero-section" class="hero-section">
+            <img src="images/AutoGiant Motors/autofull.png" alt="Dealership Showroom" class="hero-banner">
+            <div class="hero-overlay">
+                <h1>Your Journey Starts Here</h1>
+                <p>Discover the perfect car that fits your lifestyle. Quality and service guaranteed.</p>
+                <a href="autogiant-motors.html#full-inventory" class="btn btn-primary">View Current Inventory</a>
+                <div class="quick-contact">
+                    <span>Call Us: <a href="tel:+254712345678">+254 7XX XXX XXX</a></span>
+                    <span>Email: <a href="mailto:info@autogiantmotors.co.ke">info@autogiantmotors.co.ke</a></span>
+                    <span>Visit Us: Mlolongo, Machakos County</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="featured-inventory">
+            <div class="container">
+                <h2 class="section-title">Featured Vehicles</h2>
+                <!-- Added id for JS to target and populate -->
+                <div id="featured-vehicles-container" class="carousel-container">
+                    <!-- Featured vehicle cards will be injected here by JavaScript -->
+                </div>
+                <!-- Removed carousel-nav buttons as per previous CSS update that changed it to a static grid -->
+            </div>
+        </section>
+
+        <section id="full-inventory">
+            <div class="container">
+                <h2 class="section-title">Our Full Inventory</h2>
+                <div class="inventory-controls">
+                    <input type="text" id="inventory-search-input" placeholder="Search by Make, Model...">
+                    <select id="make-filter" aria-label="Filter by Make">
+                        <option value="">All Makes</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                    <select id="model-filter" aria-label="Filter by Model">
+                        <option value="">All Models</option>
+                        <!-- Options will be populated by JS based on make -->
+                    </select>
+                    <select id="price-filter" aria-label="Filter by Price Range">
+                        <option value="">Price Range</option>
+                        <option value="0-5000000">Below KSh 5M</option>
+                        <option value="5000000-10000000">KSh 5M - KSh 10M</option>
+                        <option value="10000000-20000000">KSh 10M - KSh 20M</option>
+                        <option value="20000000-above">Above KSh 20M</option>
+                    </select>
+                    <button id="apply-filters-btn" class="btn btn-primary">Apply Filters</button>
+                    <button id="clear-filters-btn" class="btn btn-outline">Clear Filters</button>
+                </div>
+                <!-- This is the main container for all vehicle listings, populated by JS -->
+                <div id="vehicle-grid" class="vehicle-grid">
+                    <!-- Vehicle cards will be injected here by JavaScript -->
+                </div>
+                <div class="load-more-container">
+                    <!-- Added id for JS to target -->
+                    <button id="load-more-btn" class="btn btn-outline">Load More Vehicles</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-us" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About AutoGiant Motors</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Welcome to AutoGiant Motors, your premier destination for quality new and pre-owned vehicles in Kenya. With years of experience in the automotive industry, we are dedicated to providing our customers with an exceptional car buying experience.</p>
+                        <p>Our commitment extends beyond just sales. We pride pride ourselves on transparent dealings, competitive pricing, and a customer service philosophy that puts your needs first. Our extensive inventory ensures you'll find the perfect vehicle to fit your lifestyle and budget.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Wide selection of quality vehicles</li>
+                            <li><i class="fas fa-check-circle"></i> Transparent pricing and no hidden fees</li>
+                            <li><i class="fas fa-check-circle"></i> Experienced and friendly sales team</li>
+                            <li><i class="fas fa-check-circle"></i> Excellent after-sales support</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/AutoGiant Motors/acouple.png" alt="About AutoGiant Motors">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="service-section">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="service-content">
+                    <div class="service-description">
+                        <p>At AutoGiant Motors, we offer a comprehensive range of services designed to make your car ownership experience hassle-free and enjoyable.</p>
+                        <h3>Vehicle Maintenance & Repair</h3>
+                        <ul>
+                            <li><i class="fas fa-wrench"></i> Routine Servicing & Oil Changes</li>
+                            <li><i class="fas fa-car-battery"></i> Battery Check & Replacement</li>
+                            <li><i class="fas fa-tire"></i> Tire Sales & Rotation</li>
+                            <li><i class="fas fa-brake-wheel"></i> Brake System Inspection & Repair</li>
+                            <li><i class="fas fa-air-conditioner"></i> A/C System Diagnostics & Repair</li>
+                            <li><i class="fas fa-engine"></i> Engine Diagnostics & Overhauls</li>
+                        </ul>
+                        <p>Our certified technicians use the latest diagnostic tools and genuine parts to ensure your vehicle runs smoothly and safely.</p>
+                        <button class="btn btn-primary">Schedule Service</button>
+                    </div>
+                    <div class="service-image">
+                        <img src="images/AutoGiant Motors/ChatGPT Image Jul 4, 2025, 03_59_47 PM.png" alt="Vehicle Service">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="financing" class="financing-section">
+            <div class="container">
+                <h2 class="section-title">Financing Made Easy</h2>
+                <div class="finance-content">
+                    <div class="finance-text">
+                        <p>Securing financing for your new vehicle can be daunting, but at AutoGiant Motors, we make it simple and straightforward. Our finance experts work with a network of lenders to find you the best rates and terms possible.</p>
+                        <p>Whether you have excellent credit, or are working to rebuild it, we have solutions tailored to your needs. Get pre-approved online or visit our dealership to discuss your options.</p>
+                        <ul>
+                            <li><i class="fas fa-clipboard-list"></i> Quick & Easy Application Process</li>
+                            <li><i class="fas fa-handshake"></i> Partnerships with Reputable Lenders</li>
+                            <li><i class="fas fa-calculator"></i> Flexible Loan & Lease Options</li>
+                            <li><i class="fas fa-credit-card"></i> Competitive Interest Rates</li>
+                        </ul>
+                        <button class="btn btn-secondary">Get Pre-Approved</button>
+                    </div>
+                    <div class="finance-calculator">
+                        <h3>Loan Calculator</h3>
+                        <label for="car-price">Car Price (KSh)</label>
+                        <input type="number" id="car-price" value="5000000" min="0">
+
+                        <label for="down-payment">Down Payment (KSh)</label>
+                        <input type="number" id="down-payment" value="1000000" min="0">
+
+                        <label for="loan-term">Loan Term (Months)</label>
+                        <input type="number" id="loan-term" value="60" min="12">
+
+                        <label for="interest-rate">Annual Interest Rate (%)</label>
+                        <input type="number" id="interest-rate" value="10" min="0" step="0.1">
+
+                        <button type="button" id="calculate-payment-btn" class="btn btn-primary">Calculate Payment</button>
+                        <p>Estimated Monthly Payment: <strong id="monthly-payment-display">KSh 0.00</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials-section">
+            <div class="container">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Buying my new car from AutoGiant Motors was an absolute pleasure. The staff was friendly, knowledgeable, and made the entire process seamless. Highly recommend!"</p>
+                        <span class="customer-name">- Jane Doe</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Excellent service and a fantastic selection of vehicles. I found exactly what I was looking for, and the financing options were clear and fair. Thank you!"</p>
+                        <span class="customer-name">- John Smith</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"The best car dealership experience I've ever had! No pressure, great advice, and they genuinely cared about finding the right car for me."</p>
+                        <span class="customer-name">- Emily White</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="bottom-spacer"></div>
+
+    </main>
+
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- IMPORTANT: vehicles-data.js MUST load BEFORE autogiant-motors.js -->
+    <script src="scripts/vehicles-data.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/autogiant-motors.js"></script>
+</body>
+</html>

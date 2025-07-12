@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Cuisine Hub | La Familia Chambers - Authentic Nigerian Dishes</title>
+    <meta name="description" content="Naija Cuisine Hub offers authentic Nigerian dishes in the heart of Nairobi. Experience a burst of flavors!">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Embedded styles for Naija Cuisine Hub page content (main section only) */
+        /* These styles are specific to this page and do not modify the main header/footer */
+
+        :root {
+            /* Custom colors for Naija Cuisine Hub, vibrant and warm */
+            --naija-primary: #008000; /* Deep Green (from Nigerian flag) */
+            --naija-secondary: #FFD700; /* Gold/Yellow (from Nigerian flag & food) */
+            --naija-accent: #E74C3C; /* Red/Orange for highlights (spices) */
+            --naija-text: #333333; /* Dark Gray for body text */
+            --naija-bg: #FDFDFD; /* Off-white / Cream background */
+            --naija-card-bg: #FFFFFF; /* White Cards */
+            --naija-border: #EEEEEE; /* Light Gray Border */
+            --naija-shadow: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+        }
+
+        body.dark-mode {
+            /* Dark mode adjustments for Naija Cuisine Hub specific colors */
+            --naija-primary: #66BB6A; /* Lighter Green */
+            --naija-secondary: #FFEB3B; /* Brighter Yellow */
+            --naija-accent: #FF8A80; /* Lighter Red/Orange */
+            --naija-text: #E0E0E0; /* Light Gray for body text */
+            --naija-bg: #212121; /* Dark Gray Background */
+            --naija-card-bg: #303030; /* Darker Gray Cards */
+            --naija-border: #424242; /* Darker Border */
+            --naija-shadow: rgba(255, 255, 255, 0.1); /* Subtle Shadow */
+        }
+
+        /* General section styling for business pages */
+        .business-section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--naija-text);
+            background-color: var(--naija-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-business {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--naija-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-business::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--naija-secondary);
+            border-radius: 3px;
+        }
+
+        /* Hero Section - Specific to Naija Cuisine Hub */
+        .hero-naija {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1500x600/008000/FFFFFF?text=Naija+Cuisine+Hub') no-repeat center center/cover;
+            color: white;
+            padding: 8rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+        .hero-naija h1 {
+            font-family: 'Georgia', serif; /* More traditional/culinary feel */
+            font-size: 4.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+            letter-spacing: -1px;
+        }
+        .hero-naija p {
+            font-size: 1.8rem;
+            max-width: 900px;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 300;
+        }
+        .hero-naija .cta-button {
+            background-color: var(--naija-secondary);
+            color: var(--naija-primary);
+            padding: 1.2rem 3rem;
+            border-radius: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .hero-naija .cta-button:hover {
+            background-color: #FDD835; /* Slightly darker yellow */
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about-naija {
+            padding: 4rem 1rem;
+            background-color: var(--naija-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px var(--naija-shadow);
+            margin: 2rem auto;
+            max-width: 1000px;
+            text-align: center;
+        }
+        .about-naija p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--naija-text);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .menu-item-card {
+            background-color: var(--naija-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px var(--naija-shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .menu-item-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px var(--naija-shadow);
+        }
+        .menu-item-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .menu-item-card h4 {
+            font-size: 1.9rem;
+            color: var(--naija-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .menu-item-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--naija-text);
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+        .menu-item-card .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--naija-accent);
+            margin-top: 1rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            background-color: var(--naija-card-bg);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--naija-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px var(--naija-shadow);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item-title {
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--naija-primary);
+            text-align: center;
+        }
+
+        /* Testimonials Section */
+        .testimonials-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 1.5rem;
+            gap: 1.5rem;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+        .testimonial-card {
+            flex: 0 0 auto;
+            width: 90%;
+            max-width: 400px;
+            scroll-snap-align: start;
+            background-color: var(--naija-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--naija-shadow);
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--naija-text);
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-card .author {
+            font-weight: bold;
+            color: var(--naija-primary);
+            font-size: 1.1rem;
+        }
+        .testimonial-card .rating {
+            color: var(--naija-secondary);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info, .contact-form-container {
+            background-color: var(--naija-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--naija-shadow);
+            padding: 2.5rem;
+        }
+
+        .contact-info h3, .contact-form-container h3 {
+            font-size: 2rem;
+            color: var(--naija-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--naija-text);
+            display: flex;
+            align-items: center;
+        }
+        .contact-info p i {
+            margin-right: 10px;
+            color: var(--naija-secondary);
+            font-size: 1.3rem;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            font-size: 1rem;
+            color: var(--naija-primary);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 12px 10px;
+            border: 1px solid var(--naija-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--naija-text);
+            background-color: var(--naija-bg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--naija-secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2); /* light yellow shadow */
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--naija-primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button[type="submit"]:hover {
+            background-color: #006400; /* Darker green */
+        }
+
+        .form-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .form-message.success {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .form-message.error {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (min-width: 769px) {
+            .contact-content-wrapper {
+                grid-template-columns: 1fr 1.5fr; /* Info on left, form on right */
+            }
+            .contact-info {
+                text-align: left; /* Align contact info text left on larger screens */
+            }
+            .contact-info h3, .contact-form-container h3 {
+                text-align: left; /* Align section titles left on larger screens */
+            }
+        }
+        @media (max-width: 1024px) {
+            .hero-naija h1 {
+                font-size: 3.8rem;
+            }
+            .hero-naija p {
+                font-size: 1.5rem;
+            }
+            .section-title-business {
+                font-size: 2.2rem;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-naija {
+                padding: 6rem 1rem;
+                min-height: 350px;
+            }
+            .hero-naija h1 {
+                font-size: 2.8rem;
+            }
+            .hero-naija p {
+                font-size: 1.1rem;
+            }
+            .hero-naija .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+            }
+            .section-title-business {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .menu-grid, .gallery-grid, .contact-content-wrapper {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+            .menu-item-card, .gallery-item, .about-naija,
+            .contact-info, .contact-form-container {
+                padding: 1.5rem;
+            }
+            .contact-info h3, .contact-form-container h3 {
+                text-align: center; /* Center section titles on small screens */
+            }
+            .testimonials-container {
+                flex-wrap: nowrap; /* Keep cards in a row for horizontal scroll */
+            }
+            .testimonial-card {
+                width: 100%; /* Take full width of parent on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="awards.html" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="clubs.html" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="reviews.html" class="nav-link">Member Reviews</a></li>
+                <li><a href="board.html" class="nav-link">Board of Directors</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+<main>
+    <section class="hero-naija">
+        <h1>Naija Cuisine Hub</h1>
+        <p>Authentic Nigerian dishes in the heart of Nairobi. Experience a burst of flavors!</p>
+        <a href="#menu-naija" class="cta-button">View Our Menu</a>
+    </section>
+
+    <section id="about-naija" class="business-section">
+        <div class="about-naija">
+            <h2 class="section-title-business">About Naija Cuisine Hub</h2>
+            <p>Naija Cuisine Hub brings the vibrant and rich culinary traditions of Nigeria directly to Nairobi. Our chefs prepare authentic dishes like Jollof Rice, Egusi Soup, and Suya with fresh, high-quality ingredients, ensuring every bite is a journey to West Africa. Come and savor the true taste of Nigerian hospitality and flavor in a cozy, welcoming atmosphere.</p>
+            <p>We are passionate about sharing the diverse and delicious world of Nigerian food, from hearty stews to spicy grilled meats. Whether you're a connoisseur of African cuisine or looking to try something new, Naija Cuisine Hub promises an unforgettable dining experience.</p>
+        </div>
+    </section>
+
+    <section id="menu-naija" class="business-section">
+        <h2 class="section-title-business">Our Authentic Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item-card">
+                <img src="https://via.placeholder.com/400x200/FFD700/008000?text=Jollof+Rice" alt="Jollof Rice">
+                <h4>Jollof Rice</h4>
+                <p>Our signature smoky Jollof Rice, cooked to perfection with your choice of chicken, beef, or fish.</p>
+                <span class="price">Ksh 1,200</span>
+            </div>
+            <div class="menu-item-card">
+                <img src="https://via.placeholder.com/400x200/008000/FFD700?text=Egusi+Soup" alt="Egusi Soup">
+                <h4>Egusi Soup</h4>
+                <p>Rich and flavorful Egusi (melon seed) soup served with pounded yam, fufu, or eba.</p>
+                <span class="price">Ksh 1,500</span>
+            </div>
+            <div class="menu-item-card">
+                <img src="https://via.placeholder.com/400x200/E74C3C/FFFFFF?text=Suya" alt="Suya">
+                <h4>Suya</h4>
+                <p>Spicy grilled meat skewers, a popular Nigerian street food, served with onions and tomatoes.</p>
+                <span class="price">Ksh 900</span>
+            </div>
+            <div class="menu-item-card">
+                <img src="https://via.placeholder.com/400x200/FFD700/008000?text=Pounded+Yam" alt="Pounded Yam">
+                <h4>Pounded Yam</h4>
+                <p>Traditional staple, soft and smooth, perfect accompaniment for any soup or stew.</p>
+                <span class="price">Ksh 500</span>
+            </div>
+            <div class="menu-item-card">
+                <img src="https://via.placeholder.com/400x200/008000/FFD700?text=Fried+Plantain" alt="Fried Plantain">
+                <h4>Fried Plantain (Dodo)</h4>
+                <p>Sweet and savory fried plantain, a delicious side dish or snack.</p>
+                <span class="price">Ksh 400</span>
+            </div>
+            <div class="menu-item-card">
+                <img src="https://via.placeholder.com/400x200/E74C3C/FFFFFF?text=Oha+Soup" alt="Oha Soup">
+                <h4>Oha Soup</h4>
+                <p>A classic Nigerian soup made with Oha leaves, cocoyam, and assorted meats.</p>
+                <span class="price">Ksh 1,600</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery-naija" class="business-section">
+        <h2 class="section-title-business">Our Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/F4D03F/6C3483?text=Restaurant+Interior" alt="Naija Cuisine Hub Interior">
+                <div class="gallery-item-title">Cozy Dining Space</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/2ECC71/FFFFFF?text=Assorted+Meats" alt="Assorted Meats">
+                <div class="gallery-item-title">Assorted Meats Platter</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/C0392B/FFFFFF?text=Serving+Dish" alt="Serving Dish">
+                <div class="gallery-item-title">Freshly Prepared</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/FFD700/008000?text=Nigerian+Drink" alt="Nigerian Drink">
+                <div class="gallery-item-title">Traditional Drinks</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/008000/FFD700?text=Busy+Kitchen" alt="Busy Kitchen">
+                <div class="gallery-item-title">Our Dedicated Chefs</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/E74C3C/FFFFFF?text=Spicy+Snacks" alt="Spicy Snacks">
+                <div class="gallery-item-title">Delicious Snacks</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials-naija" class="business-section">
+        <h2 class="section-title-business">What Our Diners Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p>"The Jollof Rice at Naija Cuisine Hub is simply the best I've had outside of Nigeria. Absolutely authentic and delicious!"</p>
+                <div class="author">- David M., Nairobi</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"A hidden gem! The Egusi soup was incredibly rich and comforting. Felt like I was back home. Great atmosphere too."</p>
+                <div class="author">- Blessing A., Langata</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The Suya here is a must-try! Perfectly grilled and seasoned. It's my new favorite spot for Nigerian food in Nairobi."</p>
+                <div class="author">- Kevin C., Karen</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The staff are so friendly, and the food is consistently amazing. Every dish reminds me of home cooking. Highly recommend for an authentic taste."</p>
+                <div class="author">- Chika E., Mombasa Road</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-naija" class="business-section">
+        <h2 class="section-title-business">Visit Us or Get in Touch</h2>
+        <div class="contact-content-wrapper">
+            <div class="contact-info">
+                <h3>Our Details</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Ground Floor, Flavor Fusion Plaza, Moi Ave, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 7XX XXX XXX (Call/WhatsApp)</p>
+                <p><i class="fas fa-envelope"></i> info@naijacuisinehub.co.ke</p>
+                <p><i class="fas fa-clock"></i> Open Daily: 11:00 AM - 10:00 PM</p>
+                <p><i class="fas fa-utensils"></i> Dine-in, Takeaway & Delivery Available</p>
+            </div>
+            <div class="contact-form-container">
+                <h3>Send Us a Message</h3>
+                <form id="naija-cuisine-contact-form" class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="naija-contact-name">Name:</label>
+                        <input type="text" id="naija-contact-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="naija-contact-email">Email:</label>
+                        <input type="email" id="naija-contact-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="naija-contact-subject">Subject:</label>
+                        <input type="text" id="naija-contact-subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="naija-contact-message">Message:</label>
+                        <textarea id="naija-contact-message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                    <div id="naija-form-message" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+<script src="scripts/main.js"></script>
+<script>
+    // Embedded JavaScript for specific page functionalities (main section only)
+    document.addEventListener('DOMContentLoaded', () => {
+        // Update the current year in the footer (common function, can be in main.js or here)
+        const currentYearElem = document.getElementById('current-year');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // --- Contact Form Handling for Naija Cuisine Hub ---
+        const contactForm = document.getElementById('naija-cuisine-contact-form');
+        const formMessage = document.getElementById('naija-form-message');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get form data
+                const name = document.getElementById('naija-contact-name').value.trim();
+                const email = document.getElementById('naija-contact-email').value.trim();
+                const subject = document.getElementById('naija-contact-subject').value.trim();
+                const message = document.getElementById('naija-contact-message').value.trim();
+
+                // Basic validation
+                if (!name || !email || !subject || !message) {
+                    displayFormMessage('Please fill in all fields.', 'error');
+                    return;
+                }
+
+                // Simple email format validation
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    displayFormMessage('Please enter a valid email address.', 'error');
+                    return;
+                }
+
+                // Simulate form submission (in a real scenario, this would be an AJAX call)
+                console.log('Naija Cuisine Hub Form Submitted:');
+                console.log('Name:', name);
+                console.log('Email:', email);
+                console.log('Subject:', subject);
+                console.log('Message:', message);
+
+                // Display success message
+                displayFormMessage('Thank you for your message! We will get back to you shortly.', 'success');
+
+                // Clear the form (optional)
+                contactForm.reset();
+
+                // Store last contact info in localStorage (optional)
+                localStorage.setItem('naijaCuisineLastContactName', name);
+                localStorage.setItem('naijaCuisineLastContactEmail', email);
+            });
+        }
+
+        function displayFormMessage(msg, type) {
+            formMessage.textContent = msg;
+            formMessage.className = `form-message ${type}`; // Reset classes and add new type
+            formMessage.style.display = 'block'; // Make it visible
+        }
+
+        // Populate form fields from local storage on load (if available)
+        function populateFormFields() {
+            document.getElementById('naija-contact-name').value = localStorage.getItem('naijaCuisineLastContactName') || '';
+            document.getElementById('naija-contact-email').value = localStorage.getItem('naijaCuisineLastContactEmail') || '';
+        }
+        populateFormFields(); // Call on DOMContentLoaded
+    });
+</script>
+</body>
+</html>

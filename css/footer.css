@@ -1,0 +1,171 @@
+/* --- Footer Styles (Updated to mimic wireframes) --- */
+
+/* Recommended CSS Variables (ensure these are at the top of your styles.css) */
+:root {
+    /* Colors based on your provided image */
+    --primary-color: #1A2B4C; /* Dark Navy/Blue for footer background */
+    --secondary-color: #ADD8E6; /* Light Blue for headings and icons (mimics wireframe) */
+    --dark-text: #F0F0F0; /* Very light grey/white for general text on dark background */
+    --light-color: #FFFFFF; /* Pure white, used for social icons for clarity */
+
+    /* Spacing variables (adjust as needed if not already defined) */
+    --spacing-unit: 1rem; /* Base spacing unit, e.g., 16px */
+    /* Add other spacing units if you use them, e.g., --spacing-unit-half: 0.5rem; */
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--dark-text); /* General text color for the footer */
+    padding: 2rem var(--spacing-unit);
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.footer-grid {
+    display: grid;
+    /* Desktop: 4 columns as seen in the latest image */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-fit for 4 columns */
+    gap: 2rem; /* Using your current gap */
+    max-width: 1200px;
+    margin: 0 auto 1.5rem; /* Keep original margin-bottom for spacing above footer-bottom */
+    /* align-items: start; */ /* Align items to the start of their grid cell */
+}
+
+/* Ensure all sections are displayed */
+.footer-links,
+.footer-about {
+    display: block; /* Override previous display: none */
+}
+
+.footer-contact {
+    text-align: left; /* Align contact info to the left as per wireframe */
+}
+
+.footer-contact h4 {
+    color: var(--secondary-color); /* Light blue for headings */
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-contact p {
+    font-size: 0.95rem;
+    margin: 0; /* Reset default paragraph margin */
+    padding: 0;
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+}
+
+.footer-contact p i {
+    margin-right: 0.5rem;
+    color: var(--secondary-color); /* Light blue for icons */
+}
+
+.footer-links h4,
+.footer-about h4 {
+    color: var(--secondary-color); /* Light blue for headings */
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-links ul,
+.footer-about ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.footer-links ul li,
+.footer-about ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a,
+.footer-about ul li a {
+    color: var(--dark-text); /* Link color */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links ul li a:hover,
+.footer-about ul li a:hover {
+    color: var(--secondary-color); /* Light blue on hover */
+    text-decoration: underline;
+}
+
+.footer-social {
+    text-align: center; /* Center social icons in their column */
+}
+
+.footer-social h4 {
+    display: block; /* Ensure 'Connect With Us' heading is visible */
+    color: var(--secondary-color); /* Light blue for heading */
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem; /* Keep original margin-top for spacing below heading */
+    justify-content: center; /* Ensure icons are centered */
+}
+
+.social-icons a {
+    color: var(--light-color); /* Pure white for social icons */
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: var(--secondary-color); /* Light blue on hover */
+}
+
+.footer-bottom {
+    text-align: center; /* Align project info to the center as per the image */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Keep border as per your original CSS */
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7); /* Keep original color, which is a muted white */
+}
+
+/* --- Responsive Adjustments for Footer (mimicking mobile wireframe) --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stack all columns on small screens */
+        text-align: center; /* Center all grid content */
+        margin-bottom: 0; /* Adjust margin for stacking */
+        gap: 1.5rem; /* Reduce gap for stacked layout */
+    }
+
+    /* Ensure all sections are displayed on mobile too */
+    .footer-links,
+    .footer-about {
+        display: block;
+    }
+
+    .footer-contact,
+    .footer-links,
+    .footer-about,
+    .footer-social,
+    .footer-bottom {
+        text-align: center; /* Ensure all sections are centered when stacked */
+        margin-bottom: 0; /* Reset margin-bottom as gap handles spacing */
+    }
+
+    .footer-contact p {
+        justify-content: center; /* Center icons and text for contact info */
+    }
+
+    .social-icons {
+        justify-content: center; /* Center social icons */
+        margin-top: 1rem; /* Add some space above social icons when stacked */
+        margin-bottom: 1rem; /* Add some space below social icons when stacked */
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.2);
+        padding-top: 1rem;
+        margin-top: 0; /* Reset margin-top as gap handles spacing */
+    }
+}

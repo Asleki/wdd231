@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSolutions Africa | La Familia Chambers - IT Consulting & Software Development</title>
+    <meta name="description" content="TechSolutions Africa offers comprehensive IT consulting, innovative software development, and robust network solutions for businesses of all sizes.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for TechSolutions Africa Page */
+        :root {
+            --tech-primary: #007BFF; /* Blue */
+            --tech-secondary: #28A745; /* Green */
+            --tech-accent: #FFC107; /* Yellow */
+            --tech-text: #333333;
+            --tech-bg: #F8F9FA; /* Light Gray */
+            --tech-card-bg: #FFFFFF;
+            --tech-border: #E9ECEF;
+            --tech-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --tech-primary: #66B3FF; /* Lighter Blue */
+            --tech-secondary: #66CC99; /* Lighter Green */
+            --tech-accent: #FFDB58; /* Brighter Yellow */
+            --tech-text: #E0E0E0;
+            --tech-bg: #1A1A1A;
+            --tech-card-bg: #2C2C2C;
+            --tech-border: #444444;
+            --tech-shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        /* General sections */
+        .section-tech {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--tech-text);
+            background-color: var(--tech-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-tech {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--tech-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-tech::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--tech-accent);
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero-tech {
+            position: relative;
+            background: linear-gradient(rgba(0, 123, 255, 0.7), rgba(0, 123, 255, 0.7)), url('https://placehold.co/1920x600/007bff/ffffff?text=Tech+Background') center/cover no-repeat;
+            color: white;
+            padding: 8rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px; /* Ensure a decent height */
+        }
+        body.dark-mode .hero-tech {
+             background: linear-gradient(rgba(102, 179, 255, 0.7), rgba(102, 179, 255, 0.7)), url('https://placehold.co/1920x600/66B3FF/333333?text=Tech+Dark+Background') center/cover no-repeat;
+        }
+
+        .hero-tech h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .hero-tech p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        .hero-tech .btn-primary {
+            background-color: var(--tech-secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .hero-tech .btn-primary:hover {
+            background-color: #1e7e34;
+        }
+
+        /* About Us Section */
+        #about-us-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+        #about-us-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+            text-align: center;
+        }
+        #about-us-content img.about-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--tech-shadow);
+        }
+
+        /* Our Team Section */
+        #our-team-section .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+        .team-member-card {
+            background-color: var(--tech-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--tech-shadow);
+            overflow: hidden;
+            text-align: center;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--tech-shadow);
+        }
+        .team-member-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem auto;
+            border: 4px solid var(--tech-primary);
+        }
+        .team-member-card h4 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--tech-primary);
+            margin-bottom: 0.5rem;
+        }
+        .team-member-card p {
+            color: var(--tech-text);
+            font-size: 1rem;
+        }
+
+        /* Services Section */
+        #services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .service-card {
+            background-color: var(--tech-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--tech-shadow);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--tech-shadow);
+        }
+        .service-card i {
+            font-size: 3rem;
+            color: var(--tech-primary);
+            margin-bottom: 1rem;
+        }
+        .service-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--tech-primary);
+            margin-bottom: 1rem;
+        }
+        .service-card p {
+            color: var(--tech-text);
+            margin-bottom: 1.5rem;
+        }
+        .service-card .learn-more-btn {
+            background-color: var(--tech-secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            display: inline-block;
+        }
+        .service-card .learn-more-btn:hover {
+            background-color: #1e7e34;
+        }
+        .service-card .full-description {
+            display: none; /* Hidden by default */
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--tech-text);
+            text-align: left;
+        }
+        .service-card .full-description.active {
+            display: block;
+        }
+
+        #load-more-services-btn {
+            display: block;
+            margin: 2rem auto 0 auto;
+            background-color: var(--tech-primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        #load-more-services-btn:hover {
+            background-color: #0056b3;
+        }
+
+
+        /* Portfolio/Case Studies Section */
+        #portfolio-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .portfolio-item {
+            background-color: var(--tech-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--tech-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--tech-shadow);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--tech-border);
+        }
+        .portfolio-item-content {
+            padding: 1.5rem;
+        }
+        .portfolio-item-content h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--tech-primary);
+            margin-bottom: 0.75rem;
+        }
+        .portfolio-item-content p {
+            color: var(--tech-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .portfolio-item-content .btn-secondary {
+            display: inline-block;
+            margin-top: 1rem;
+            background-color: var(--tech-accent);
+            color: var(--tech-text);
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .portfolio-item-content .btn-secondary:hover {
+            background-color: #e0a800;
+        }
+
+        /* Contact Section */
+        #contact-section .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media (min-width: 768px) {
+            #contact-section .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        #contact-section .contact-info {
+            background-color: var(--tech-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--tech-shadow);
+            padding: 2.5rem;
+        }
+        #contact-section .contact-info h3 {
+            font-size: 2rem;
+            color: var(--tech-primary);
+            margin-bottom: 1.5rem;
+        }
+        #contact-section .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--tech-text);
+        }
+        #contact-section .contact-info i {
+            margin-right: 0.75rem;
+            color: var(--tech-secondary);
+        }
+        #contact-section .contact-form-container {
+            background-color: var(--tech-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--tech-shadow);
+            padding: 2.5rem;
+        }
+        #contact-section .contact-form-container h3 {
+            font-size: 2rem;
+            color: var(--tech-primary);
+            margin-bottom: 1.5rem;
+        }
+        #contact-form div {
+            margin-bottom: 1.2rem;
+        }
+        #contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--tech-text);
+        }
+        #contact-form input[type="text"],
+        #contact-form input[type="email"],
+        #contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--tech-border);
+            border-radius: 0.5rem;
+            background-color: var(--tech-bg);
+            color: var(--tech-text);
+            transition: border-color 0.3s ease;
+        }
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            border-color: var(--tech-primary);
+            outline: none;
+        }
+        #contact-form button {
+            background-color: var(--tech-secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        #contact-form button:hover {
+            background-color: #1e7e34;
+        }
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .section-title-tech {
+                font-size: 2.2rem;
+            }
+            .hero-tech h1 {
+                font-size: 2.8rem;
+            }
+            .hero-tech p {
+                font-size: 1.3rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .section-title-tech {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .hero-tech {
+                padding: 6rem 1rem;
+                min-height: 350px;
+            }
+            .hero-tech h1 {
+                font-size: 2.2rem;
+            }
+            .hero-tech p {
+                font-size: 1.1rem;
+            }
+            #about-us-content {
+                text-align: center;
+            }
+            #our-team-section .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            #services-list {
+                grid-template-columns: 1fr;
+            }
+            #portfolio-list {
+                grid-template-columns: 1fr;
+            }
+            #contact-section .contact-info,
+            #contact-section .contact-form-container {
+                padding: 1.5rem;
+            }
+            #contact-section .contact-info h3,
+            #contact-section .contact-form-container h3 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="awards.html" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="clubs.html" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="reviews.html" class="nav-link">Member Reviews</a></li>
+                <li><a href="board.html" class="nav-link">Board of Directors</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+<main>
+    <section class="hero-tech" id="hero-section">
+        <h1 id="business-name"></h1>
+        <p id="business-tagline"></p>
+        <a href="#contact-section" class="btn-primary">Get a Free Consultation</a>
+    </section>
+
+    <section id="about-us-section" class="section-tech">
+        <h2 class="section-title-tech">About TechSolutions Africa</h2>
+        <div id="about-us-content">
+            <p id="about-full-description"></p>
+            <img src="https://placehold.co/800x400/28a745/ffffff?text=TechSolutions+Team" alt="TechSolutions Africa Team" class="about-image">
+        </div>
+    </section>
+
+    <section id="our-team-section" class="section-tech">
+        <h2 class="section-title-tech">Our Expert Team</h2>
+        <div class="team-grid" id="team-members-container">
+            </div>
+    </section>
+
+    <section id="services-section" class="section-tech">
+        <h2 class="section-title-tech">Our Services</h2>
+        <div id="services-list">
+            </div>
+        <button id="load-more-services-btn" style="display: none;">Load More Services</button>
+    </section>
+
+    <section id="portfolio-section" class="section-tech">
+        <h2 class="section-title-tech">Our Work & Case Studies</h2>
+        <div id="portfolio-list">
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/007bff/ffffff?text=Project+Alpha" alt="Project Alpha">
+                <div class="portfolio-item-content">
+                    <h3>Enterprise Software Integration</h3>
+                    <p>Successfully integrated a complex ERP system for a large manufacturing client, streamlining their operations and improving data accuracy.</p>
+                    <a href="#" class="btn-secondary">View Case Study</a>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/28a745/ffffff?text=Project+Beta" alt="Project Beta">
+                <div class="portfolio-item-content">
+                    <h3>Secure Network Deployment</h3>
+                    <p>Designed and deployed a highly secure and scalable network infrastructure for a financial institution, ensuring robust data protection.</p>
+                    <a href="#" class="btn-secondary">View Case Study</a>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://placehold.co/400x200/ffc107/333333?text=Project+Gamma" alt="Project Gamma">
+                <div class="portfolio-item-content">
+                    <h3>Custom Mobile App Development</h3>
+                    <p>Developed a user-friendly mobile application for a local startup, significantly enhancing their customer engagement and market reach.</p>
+                    <a href="#" class="btn-secondary">View Case Study</a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <a href="#" class="btn-primary">View All Case Studies</a>
+        </div>
+    </section>
+
+    <section id="contact-section" class="section-tech">
+        <h2 class="section-title-tech">Get In Touch With Us</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p id="contact-address-p"><i class="fas fa-map-marker-alt"></i> Mlolongo, Machakos County, Kenya</p>
+                <p id="contact-phone-p"><i class="fas fa-phone"></i> +254 7XX XXX XXX</p>
+                <p id="contact-email-p"><i class="fas fa-envelope"></i> info@techsolutionsafrica.co.ke</p>
+                <div class="mt-8">
+                    <iframe id="contact-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.91901768853!2d36.98595565!3d-1.42861295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f09915e45c47f%3A0x6b7b0c9a0b9e2c62!2sMlolongo%2C%20Machakos%20County!5e0!3m2!1sen!2ske!4v1701540000000!5m2!1sen!2ske" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <h3>Send Us a Message</h3>
+                <form id="contact-form">
+                    <div>
+                        <label for="contact-name">Name</label>
+                        <input type="text" id="contact-name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                    <div id="form-message" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+<script src="scripts/main.js"></script> <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Global Elements & Utility Functions (from La Familia template) ---
+        const header = document.querySelector('.sticky-header');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const siteSearchInput = document.getElementById('site-search'); // Global search
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBarContainer = document.getElementById('search-bar-container');
+
+        // Dark mode preference (from La Familia template)
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Adjust hero padding (from La Familia template, adapted for business heroes)
+        const adjustHeroPadding = () => {
+            const headerHeight = header.offsetHeight;
+            const techHero = document.querySelector('.hero-tech');
+            if (techHero) {
+                techHero.style.paddingTop = `${headerHeight}px`;
+            }
+        };
+        window.addEventListener('load', adjustHeroPadding);
+        window.addEventListener('resize', adjustHeroPadding);
+        hamburgerMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('main-nav-closed');
+            mainNav.classList.toggle('main-nav-open');
+            adjustHeroPadding();
+        });
+
+        // Dark Mode Toggle (from La Familia template)
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            modeToggle.querySelector('i').classList.replace(
+                isDarkMode ? 'fa-moon' : 'fa-sun',
+                isDarkMode ? 'fa-sun' : 'fa-moon'
+            );
+        });
+
+        // Global Search Bar Toggle (from La Familia template)
+        searchToggle.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('search-bar-hidden');
+            searchBarContainer.classList.toggle('search-bar-active');
+            if (searchBarContainer.classList.contains('search-bar-active')) {
+                siteSearchInput.focus();
+            }
+        });
+
+        // Placeholder for global search functionality (from La Familia template)
+        document.getElementById('search-submit-btn').addEventListener('click', () => {
+            alert(`Global search for: ${siteSearchInput.value}`);
+        });
+        document.getElementById('search-clear-btn').addEventListener('click', () => {
+            siteSearchInput.value = '';
+        });
+        document.getElementById('search-mic-btn').addEventListener('click', () => {
+            alert('Voice search not implemented.');
+        });
+        siteSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                alert(`Global search for: ${siteSearchInput.value}`);
+            }
+        });
+
+        // --- TechSolutions Africa Specific Data ---
+        const techSolutionsData = {
+            id: 'techsolutions-africa',
+            name: 'TechSolutions Africa',
+            tagline: 'Your Partner in Digital Transformation',
+            shortDescription: 'IT consulting, software development, and network solutions for businesses of all sizes.',
+            fullDescription: 'TechSolutions Africa is a leading provider of comprehensive IT consulting, innovative software development, and robust network solutions tailored for businesses across the continent. We empower organizations to leverage technology for efficiency, growth, and competitive advantage. Our expert team delivers bespoke solutions, from custom applications to secure infrastructure, ensuring your digital landscape is optimized and future-ready.',
+            logo: 'images/techsolutions_logo.png', // Placeholder, replace with actual path if available
+            heroImage: 'https://placehold.co/1920x600/007bff/ffffff?text=Tech+Hero+Image',
+            contact: {
+                phone: '+254 7XX XXX XXX', // Replace with actual number
+                email: 'info@techsolutionsafrica.co.ke', // Replace with actual email
+                address: 'Mlolongo, Machakos County, Kenya',
+                mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.91901768853!2d36.98595565!3d-1.42861295!2m3%211f0%212f0%213f0%213m2%211i1024%212i768%214f13.1%213m3%211m2%211s0x182f09915e45c47f%3A0x6b7b0c9a0b9e2c62!2sMlolongo%2C%20Machakos%20County!5e0!3m2!1sen!2ske!4v1701540000000!5m2!1sen%212ske' // Example Mlolongo embed
+            },
+            teamMembers: [
+                {
+                    name: 'John Mwangi',
+                    role: 'Chief Executive Officer',
+                    photo: 'https://placehold.co/150x150/007bff/ffffff?text=John+M' // Placeholder
+                },
+                {
+                    name: 'Sarah Kimani',
+                    role: 'Head of Software Development',
+                    photo: 'https://placehold.co/150x150/28a745/ffffff?text=Sarah+K' // Placeholder
+                },
+                {
+                    name: 'David Ochieng',
+                    role: 'Lead IT Consultant',
+                    photo: 'https://placehold.co/150x150/ffc107/333333?text=David+O' // Placeholder
+                },
+                 {
+                    name: 'Mercy Wanjiku',
+                    role: 'Network Solutions Architect',
+                    photo: 'https://placehold.co/150x150/dc3545/ffffff?text=Mercy+W' // Placeholder
+                }
+            ],
+            services: [
+                {
+                    id: 'it-consulting',
+                    name: 'IT Consulting & Strategy',
+                    icon: 'fas fa-cogs',
+                    shortDescription: 'Guiding businesses through strategic technology decisions, digital transformation, and IT roadmap development.',
+                    fullDescription: 'Our IT consulting services provide expert guidance to align your technology strategy with your business goals. We offer assessments, IT roadmap planning, digital transformation strategies, and cloud migration consulting to ensure your IT infrastructure supports your growth and efficiency.'
+                },
+                {
+                    id: 'custom-software-dev',
+                    name: 'Custom Software Development',
+                    icon: 'fas fa-code',
+                    shortDescription: 'Building bespoke applications and scalable software solutions tailored to your unique business processes.',
+                    fullDescription: 'We develop custom software from scratch to fit your exact needs, including web applications, mobile apps, enterprise solutions, and CRM systems. Our agile development process ensures high-quality, scalable, and user-friendly software that drives productivity.'
+                },
+                {
+                    id: 'network-infra',
+                    name: 'Network Infrastructure & Security',
+                    icon: 'fas fa-network-wired',
+                    shortDescription: 'Designing, implementing, and securing robust and reliable network infrastructures for seamless connectivity.',
+                    fullDescription: 'From local area networks (LANs) to wide area networks (WANs), we design, deploy, and manage secure and high-performing network infrastructures. Our services include network audits, firewall configuration, VPN setup, and continuous monitoring to protect your data and ensure uptime.'
+                },
+                {
+                    id: 'cloud-solutions',
+                    name: 'Cloud Solutions & Migration',
+                    icon: 'fas fa-cloud',
+                    shortDescription: 'Helping businesses leverage cloud computing for scalability, flexibility, and cost efficiency.',
+                    fullDescription: 'We assist with cloud strategy, migration to public, private, or hybrid clouds (AWS, Azure, Google Cloud), and cloud infrastructure management. Our solutions enhance collaboration, reduce operational costs, and provide business continuity.'
+                },
+                {
+                    id: 'cybersecurity',
+                    name: 'Cybersecurity Services',
+                    icon: 'fas fa-shield-alt',
+                    shortDescription: 'Protecting your digital assets from evolving cyber threats with proactive security measures and incident response.',
+                    fullDescription: 'Our comprehensive cybersecurity services include vulnerability assessments, penetration testing, security audits, employee training, and incident response planning. We implement robust security protocols to safeguard your sensitive data and systems from breaches.'
+                },
+                {
+                    id: 'data-analytics',
+                    name: 'Data Analytics & BI',
+                    icon: 'fas fa-chart-line',
+                    shortDescription: 'Transforming raw data into actionable insights with business intelligence tools and analytics solutions.',
+                    fullDescription: 'Unlock the power of your data with our data analytics and business intelligence services. We help you collect, process, and visualize data to identify trends, predict outcomes, and make informed business decisions, utilizing tools like Tableau, Power BI, and more.'
+                },
+                {
+                    id: 'managed-it',
+                    name: 'Managed IT Services',
+                    icon: 'fas fa-headset',
+                    shortDescription: 'Proactive IT support and management to ensure your systems run smoothly, minimizing downtime.',
+                    fullDescription: 'Our managed IT services provide continuous monitoring, maintenance, and support for your IT systems. We proactively identify and resolve issues, manage updates, and offer helpdesk support, allowing you to focus on your core business.'
+                },
+                {
+                    id: 'it-auditing',
+                    name: 'IT Audit & Compliance',
+                    icon: 'fas fa-clipboard-check',
+                    shortDescription: 'Ensuring your IT systems comply with industry regulations and best practices.',
+                    fullDescription: 'We conduct thorough IT audits to assess your systems for efficiency, security, and compliance with industry standards (e.g., GDPR, ISO 27001). Our reports provide actionable recommendations to improve your IT governance and mitigate risks.'
+                },
+                {
+                    id: 'erp-crm',
+                    name: 'ERP & CRM Solutions',
+                    icon: 'fas fa-handshake',
+                    shortDescription: 'Implementing and customizing Enterprise Resource Planning (ERP) and Customer Relationship Management (CRM) systems.',
+                    fullDescription: 'We specialize in the implementation, customization, and integration of ERP systems (like SAP, Oracle) and CRM platforms (like Salesforce, Zoho CRM) to streamline your business operations, improve customer relationships and enhance data management.'
+                },
+                {
+                    id: 'web-dev',
+                    name: 'Web Development & Design',
+                    icon: 'fas fa-globe',
+                    shortDescription: 'Creating engaging, responsive, and high-performance websites and web applications.',
+                    fullDescription: 'Our web development team builds stunning and functional websites, e-commerce platforms, and web portals. We focus on responsive design, user experience (UX), and search engine optimization (SEO) to ensure your online presence stands out.'
+                },
+                {
+                    id: 'mobile-app-dev',
+                    name: 'Mobile App Development',
+                    icon: 'fas fa-mobile-alt',
+                    shortDescription: 'Developing native and cross-platform mobile applications for iOS and Android devices.',
+                    fullDescription: 'We design and develop innovative mobile applications that provide seamless user experiences. Whether you need a native iOS or Android app, or a cross-platform solution using frameworks like React Native or Flutter, we deliver robust and scalable mobile solutions.'
+                },
+                {
+                    id: 'devops',
+                    name: 'DevOps Implementation',
+                    icon: 'fas fa-server',
+                    shortDescription: 'Automating and streamlining software development and IT operations processes for faster delivery.',
+                    fullDescription: 'Our DevOps services help you achieve continuous integration and continuous delivery (CI/CD) by automating your development pipeline. We foster collaboration between development and operations teams to accelerate software releases and improve system reliability.'
+                },
+                 {
+                    id: 'ai-ml',
+                    name: 'AI & Machine Learning Solutions',
+                    icon: 'fas fa-robot',
+                    shortDescription: 'Leveraging Artificial Intelligence and Machine Learning to build intelligent solutions and automate tasks.',
+                    fullDescription: 'Explore the future with our AI and Machine Learning services. We develop intelligent systems for predictive analytics, natural language processing, computer vision, and automation, helping your business innovate and gain competitive edge.'
+                },
+                {
+                    id: 'it-staffing',
+                    name: 'IT Staffing & Recruitment',
+                    icon: 'fas fa-users-cog',
+                    shortDescription: 'Providing skilled IT professionals to fill your talent gaps on a temporary, contract, or permanent basis.',
+                    fullDescription: 'Struggling to find the right IT talent? We offer IT staffing and recruitment services to connect you with highly skilled professionals, including developers, network engineers, cybersecurity experts, and IT project managers, to meet your specific project or organizational needs.'
+                },
+                {
+                    id: 'digital-marketing-tech',
+                    name: 'Digital Marketing Tech Solutions',
+                    icon: 'fas fa-bullhorn',
+                    shortDescription: 'Implementing technology-driven strategies to enhance your online presence and reach your target audience.',
+                    fullDescription: 'We provide technical solutions for digital marketing, including SEO optimization, marketing automation setup, CRM integration for lead management, and analytics dashboard development, ensuring your marketing efforts are data-driven and effective.'
+                }
+            ]
+        };
+
+        // --- TechSolutions Africa Specific Elements ---
+        const businessNameElem = document.getElementById('business-name');
+        const businessTaglineElem = document.getElementById('business-tagline');
+        const aboutFullDescriptionElem = document.getElementById('about-full-description');
+        const teamMembersContainer = document.getElementById('team-members-container');
+        const servicesListContainer = document.getElementById('services-list');
+        const loadMoreServicesBtn = document.getElementById('load-more-services-btn');
+
+        // --- UPDATED JAVASCRIPT: Using getElementById for contact info elements ---
+        const contactAddressElem = document.getElementById('contact-address-p');
+        const contactPhoneElem = document.getElementById('contact-phone-p');
+        const contactEmailElem = document.getElementById('contact-email-p');
+        const contactMapIframe = document.getElementById('contact-map-iframe');
+
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        const initialServicesToShow = 5;
+        let servicesCurrentlyDisplayed = 0;
+
+        // --- Functions ---
+
+        /**
+         * Populates static content from techSolutionsData.
+         */
+        function populateStaticContent() {
+            // Check if elements exist before populating
+            if (businessNameElem) {
+                businessNameElem.textContent = techSolutionsData.name;
+            }
+            if (businessTaglineElem) {
+                businessTaglineElem.textContent = techSolutionsData.tagline;
+            }
+            if (aboutFullDescriptionElem) {
+                aboutFullDescriptionElem.textContent = techSolutionsData.fullDescription;
+            }
+
+            // Populate contact info
+            // The check for existence is added here for robustness, although with correct IDs it should not be null.
+            if (contactAddressElem) {
+                contactAddressElem.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${techSolutionsData.contact.address}`;
+            }
+            if (contactPhoneElem) {
+                contactPhoneElem.innerHTML = `<i class="fas fa-phone"></i> ${techSolutionsData.contact.phone}`;
+            }
+            if (contactEmailElem) {
+                contactEmailElem.innerHTML = `<i class="fas fa-envelope"></i> ${techSolutionsData.contact.email}`;
+            }
+            if (contactMapIframe) {
+                contactMapIframe.src = techSolutionsData.contact.mapEmbedUrl;
+            }
+        }
+
+        /**
+         * Populates team members.
+         */
+        function populateTeamMembers() {
+            if (!teamMembersContainer) {
+                console.error("Team members container not found.");
+                return;
+            }
+            teamMembersContainer.innerHTML = ''; // Clear existing
+            techSolutionsData.teamMembers.forEach(member => {
+                const memberCard = document.createElement('div');
+                memberCard.classList.add('team-member-card');
+                memberCard.innerHTML = `
+                    <img src="${member.photo}" alt="${member.name}">
+                    <h4>${member.name}</h4>
+                    <p>${member.role}</p>
+                `;
+                teamMembersContainer.appendChild(memberCard);
+            });
+        }
+
+        /**
+         * Loads a batch of services.
+         * @param {number} count - The number of services to load.
+         */
+        function loadServices(count) {
+            if (!servicesListContainer) {
+                console.error("Services list container not found.");
+                return;
+            }
+            const startIndex = servicesCurrentlyDisplayed;
+            const endIndex = startIndex + count;
+            const servicesToDisplay = techSolutionsData.services.slice(startIndex, endIndex);
+
+            servicesToDisplay.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.classList.add('service-card');
+                serviceCard.innerHTML = `
+                    <i class="${service.icon}"></i>
+                    <h3>${service.name}</h3>
+                    <p>${service.shortDescription}</p>
+                    <button class="learn-more-btn" data-service-id="${service.id}">Learn More</button>
+                    <div class="full-description" id="full-description-${service.id}">
+                        ${service.fullDescription}
+                    </div>
+                `;
+                servicesListContainer.appendChild(serviceCard);
+            });
+
+            servicesCurrentlyDisplayed = endIndex;
+
+            // Hide "Load More" button if all services are displayed
+            if (loadMoreServicesBtn) { // Check if button exists before trying to modify its style
+                if (servicesCurrentlyDisplayed >= techSolutionsData.services.length) {
+                    loadMoreServicesBtn.style.display = 'none';
+                } else {
+                    loadMoreServicesBtn.style.display = 'block';
+                }
+            }
+
+
+            // Add event listeners for new "Learn More" buttons
+            attachLearnMoreListeners();
+        }
+
+        /**
+         * Attaches click listeners to "Learn More" buttons.
+         */
+        function attachLearnMoreListeners() {
+            document.querySelectorAll('.learn-more-btn').forEach(button => {
+                // Ensure event listener is added only once per button
+                if (!button.dataset.listenerAdded) {
+                    button.addEventListener('click', (e) => {
+                        const serviceId = e.target.dataset.serviceId;
+                        const fullDescriptionDiv = document.getElementById(`full-description-${serviceId}`);
+                        if (fullDescriptionDiv) { // Check if element exists
+                            fullDescriptionDiv.classList.toggle('active');
+                            if (fullDescriptionDiv.classList.contains('active')) {
+                                e.target.textContent = 'Show Less';
+                            } else {
+                                e.target.textContent = 'Learn More';
+                            }
+                        }
+                    });
+                    button.dataset.listenerAdded = 'true'; // Mark as handled
+                }
+            });
+        }
+
+
+        /**
+         * Handles contact form submission.
+         * @param {Event} e - The form submission event.
+         */
+        function handleContactFormSubmit(e) {
+            e.preventDefault();
+            if (!formMessage || !contactForm) { // Check if elements exist
+                console.error("Contact form or message element not found.");
+                return;
+            }
+
+            formMessage.style.display = 'none'; // Hide previous messages
+
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+
+            // Basic validation
+            if (!name || !email || !message) {
+                formMessage.textContent = 'Please fill in all required fields.';
+                formMessage.classList.add('error');
+                formMessage.classList.remove('success');
+                formMessage.style.display = 'block';
+                return;
+            }
+
+            // Simulate form submission
+            console.log('Contact Form Submitted:');
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Message:', message);
+
+            // Store user's name/email in localStorage for convenience (optional)
+            localStorage.setItem('techSolutionsLastContactName', name);
+            localStorage.setItem('techSolutionsLastContactEmail', email);
+
+            formMessage.textContent = 'Thank you for your message! We will get back to you shortly.';
+            formMessage.classList.add('success');
+            formMessage.classList.remove('error');
+            formMessage.style.display = 'block';
+
+            contactForm.reset(); // Clear the form
+        }
+
+
+        // --- Event Listeners & Initial Loads ---
+
+        // Global La Familia Footer year update
+        const currentYearElem = document.getElementById('current-year');
+        if (currentYearElem) { // Add check for robustness
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+
+
+        // Initial population of static content
+        populateStaticContent();
+
+        // Populate team members
+        populateTeamMembers();
+
+        // Load initial batch of services
+        loadServices(initialServicesToShow);
+
+        // Event listener for "Load More Services" button
+        if (loadMoreServicesBtn) { // Check if button exists before adding listener
+            loadMoreServicesBtn.addEventListener('click', () => {
+                loadServices(5); // Load 5 more services at a time
+            });
+        }
+
+
+        // Event listener for contact form submission
+        if (contactForm) { // Check if form exists before adding listener
+            contactForm.addEventListener('submit', handleContactFormSubmit);
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Edge Barbershop & Spa | La Familia Chambers</title>
+    <meta name="description" content="Urban Edge Barbershop & Spa offers modern grooming and relaxation services for men and women.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Embedded styles for Urban Edge Barbershop & Spa page content (main section only) */
+        /* These styles are specific to this page and do not modify the main header/footer */
+
+        :root {
+            /* Custom colors for Urban Edge, sophisticated and calming */
+            --urban-primary: #2C3E50; /* Dark Blue-Gray for headings/main text */
+            --urban-secondary: #3498DB; /* Vibrant Blue for accents/buttons */
+            --urban-accent: #E74C3C; /* Muted Red for highlights/contrast */
+            --urban-text: #34495E; /* Medium Blue-Gray for body text */
+            --urban-bg: #ECF0F1; /* Light Gray Background */
+            --urban-card-bg: #FFFFFF; /* White Cards */
+            --urban-border: #BDC3C7; /* Light Gray Border */
+            --urban-shadow: rgba(0, 0, 0, 0.15); /* Subtle Shadow */
+        }
+
+        body.dark-mode {
+            /* Dark mode adjustments for Urban Edge specific colors */
+            --urban-primary: #ECF0F1; /* Light Gray for headings/main text */
+            --urban-secondary: #63B3ED; /* Lighter Blue for accents/buttons */
+            --urban-accent: #E98F81; /* Lighter Muted Red for highlights */
+            --urban-text: #BDC3C7; /* Light Gray for body text */
+            --urban-bg: #2C3E50; /* Dark Blue-Gray Background */
+            --urban-card-bg: #34495E; /* Darker Blue-Gray Cards */
+            --urban-border: #4A5568; /* Darker Border */
+            --urban-shadow: rgba(255, 255, 255, 0.1); /* Subtle Shadow */
+        }
+
+        /* General section styling for business pages */
+        .business-section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--urban-text);
+            background-color: var(--urban-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-business {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--urban-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-business::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--urban-accent);
+            border-radius: 3px;
+        }
+
+        /* Hero Section - Specific to Urban Edge */
+        .hero-urban {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://via.placeholder.com/1500x600/34495E/ECF0F1?text=Urban+Edge+Experience') no-repeat center center/cover;
+            color: white;
+            padding: 8rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+        .hero-urban h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+            letter-spacing: -1px;
+        }
+        .hero-urban p {
+            font-size: 1.8rem;
+            max-width: 900px;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 300;
+        }
+        .hero-urban .cta-button {
+            background-color: var(--urban-secondary);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .hero-urban .cta-button:hover {
+            background-color: #2980B9; /* Darker blue */
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about-urban {
+            padding: 4rem 1rem;
+            background-color: var(--urban-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px var(--urban-shadow);
+            margin: 2rem auto;
+            max-width: 1000px;
+            text-align: center;
+        }
+        .about-urban p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--urban-text);
+        }
+
+        /* Services Section */
+        .services-category {
+            margin-bottom: 3rem;
+        }
+        .services-category h3 {
+            font-size: 2.2rem;
+            color: var(--urban-primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .services-category h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--urban-accent);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .service-card-urban {
+            background-color: var(--urban-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px var(--urban-shadow);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card-urban:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px var(--urban-shadow);
+        }
+        .service-card-urban i {
+            font-size: 3.8rem;
+            color: var(--urban-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .service-card-urban h4 {
+            font-size: 1.9rem;
+            color: var(--urban-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .service-card-urban p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--urban-text);
+            flex-grow: 1; /* Allows paragraph to take available space */
+            margin-bottom: 1rem;
+        }
+        .service-card-urban .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--urban-accent);
+            margin-top: 1rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            background-color: var(--urban-card-bg);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--urban-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px var(--urban-shadow);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item-title {
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--urban-primary);
+            text-align: center;
+        }
+
+        /* Testimonials Section */
+        .testimonials-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 1.5rem; /* For scrollbar visibility */
+            gap: 1.5rem;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+        .testimonial-card {
+            flex: 0 0 auto; /* Do not grow, do not shrink, base size auto */
+            width: 90%; /* Adjust as needed */
+            max-width: 400px; /* Max width for each card */
+            scroll-snap-align: start;
+            background-color: var(--urban-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--urban-shadow);
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--urban-text);
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-card .author {
+            font-weight: bold;
+            color: var(--urban-primary);
+            font-size: 1.1rem;
+        }
+        .testimonial-card .rating {
+            color: var(--urban-accent);
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info, .contact-form-container {
+            background-color: var(--urban-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--urban-shadow);
+            padding: 2.5rem;
+        }
+
+        .contact-info h3, .contact-form-container h3 {
+            font-size: 2rem;
+            color: var(--urban-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--urban-text);
+            display: flex;
+            align-items: center;
+        }
+        .contact-info p i {
+            margin-right: 10px;
+            color: var(--urban-secondary);
+            font-size: 1.3rem;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            font-size: 1rem;
+            color: var(--urban-primary);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 12px 10px;
+            border: 1px solid var(--urban-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--urban-text);
+            background-color: var(--urban-bg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--urban-secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* light blue shadow */
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--urban-secondary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button[type="submit"]:hover {
+            background-color: #2980B9; /* Slightly darker blue */
+        }
+
+        .form-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .form-message.success {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .form-message.error {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (min-width: 769px) {
+            .contact-content-wrapper {
+                grid-template-columns: 1fr 1.5fr; /* Info on left, form on right */
+            }
+            .contact-info {
+                text-align: left; /* Align contact info text left on larger screens */
+            }
+            .contact-info h3, .contact-form-container h3 {
+                text-align: left; /* Align section titles left on larger screens */
+            }
+        }
+        @media (max-width: 1024px) {
+            .hero-urban h1 {
+                font-size: 3.5rem;
+            }
+            .hero-urban p {
+                font-size: 1.4rem;
+            }
+            .section-title-business {
+                font-size: 2.2rem;
+            }
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-urban {
+                padding: 6rem 1rem;
+                min-height: 350px;
+            }
+            .hero-urban h1 {
+                font-size: 2.8rem;
+            }
+            .hero-urban p {
+                font-size: 1.1rem;
+            }
+            .hero-urban .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+            }
+            .section-title-business {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .services-grid, .gallery-grid, .contact-content-wrapper {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+            .service-card-urban, .gallery-item, .about-urban,
+            .contact-info, .contact-form-container {
+                padding: 1.5rem;
+            }
+            .services-category h3 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+            .contact-info h3, .contact-form-container h3 {
+                text-align: center; /* Center section titles on small screens */
+            }
+            .testimonials-container {
+                flex-wrap: nowrap; /* Keep cards in a row for horizontal scroll */
+            }
+            .testimonial-card {
+                width: 100%; /* Take full width of parent on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="awards.html" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="clubs.html" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="reviews.html" class="nav-link">Member Reviews</a></li>
+                <li><a href="board.html" class="nav-link">Board of Directors</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+<main>
+    <section class="hero-urban">
+        <h1>Urban Edge Barbershop & Spa</h1>
+        <p>Modern grooming and relaxation services for men and women.</p>
+        <a href="#contact-urban" class="cta-button">Book an Appointment</a>
+    </section>
+
+    <section id="about-urban" class="business-section">
+        <div class="about-urban">
+            <h2 class="section-title-business">About Urban Edge</h2>
+            <p>Urban Edge Barbershop & Spa offers a contemporary sanctuary for both men and women seeking top-tier grooming and relaxation services. From precision haircuts and traditional shaves to rejuvenating spa treatments and holistic therapies, our skilled professionals are dedicated to providing an unparalleled experience. Step into Urban Edge for a transformative journey of style and serenity, where every detail is crafted for your ultimate comfort and satisfaction.</p>
+            <p>We pride ourselves on using premium products and the latest techniques to ensure every client leaves feeling refreshed, confident, and looking their absolute best. Our serene environment and personalized approach set us apart as a premier destination for modern grooming.</p>
+        </div>
+    </section>
+
+    <section id="services-urban" class="business-section">
+        <h2 class="section-title-business">Our Services</h2>
+
+        <div class="services-category">
+            <h3>Barbershop Services</h3>
+            <div class="services-grid">
+                <div class="service-card-urban">
+                    <i class="fas fa-cut"></i>
+                    <h4>Precision Haircuts</h4>
+                    <p>Expert haircuts for all hair types and styles, tailored to your preferences.</p>
+                    <span class="price">Ksh 1,500</span>
+                </div>
+                <div class="service-card-urban">
+                    <i class="fas fa-scissors"></i>
+                    <h4>Traditional Wet Shave</h4>
+                    <p>A classic, relaxing hot towel shave experience with premium products.</p>
+                    <span class="price">Ksh 1,200</span>
+                </div>
+                <div class="service-card-urban">
+                    <i class="fas fa-beard"></i>
+                    <h4>Beard Grooming</h4>
+                    <p>Professional beard trims, shaping, and conditioning for the perfect look.</p>
+                    <span class="price">Ksh 800</span>
+                </div>
+                <div class="service-card-urban">
+                    <i class="fas fa-head-side-mask"></i>
+                    <h4>Hair Coloring</h4>
+                    <p>Subtle highlights or full color transformations by our experienced colorists.</p>
+                    <span class="price">Ksh 3,000+</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-category" style="margin-top: 4rem;">
+            <h3>Spa & Relaxation</h3>
+            <div class="services-grid">
+                <div class="service-card-urban">
+                    <i class="fas fa-spa"></i>
+                    <h4>Rejuvenating Facials</h4>
+                    <p>Customized facial treatments for all skin types, deep cleansing and hydration.</p>
+                    <span class="price">Ksh 2,500</span>
+                </div>
+                <div class="service-card-urban">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Relaxation Massages</h4>
+                    <p>Full body massages to relieve tension and promote deep relaxation.</p>
+                    <span class="price">Ksh 3,500</span>
+                </div>
+                <div class="service-card-urban">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Manicures & Pedicures</h4>
+                    <p>Pamper your hands and feet with our professional nail care services.</p>
+                    <span class="price">Ksh 1,000</span>
+                </div>
+                <div class="service-card-urban">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Holistic Therapies</h4>
+                    <p>Explore specialized treatments for mind-body balance and wellness.</p>
+                    <span class="price">Ksh 4,000+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery-urban" class="business-section">
+        <h2 class="section-title-business">Our Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/5D6D7E/FDFEFE?text=Precision+Cut" alt="Precision Haircut Example">
+                <div class="gallery-item-title">Precision Cut</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/7F8C8D/FDFEFE?text=Spa+Relaxation" alt="Spa Relaxation Scene">
+                <div class="gallery-item-title">Spa Relaxation</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/94A7B2/FDFEFE?text=Modern+Interior" alt="Barbershop Interior">
+                <div class="gallery-item-title">Modern Interior</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/34495E/FDFEFE?text=Beard+Styling" alt="Beard Styling Service">
+                <div class="gallery-item-title">Beard Styling</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/2C3E50/FDFEFE?text=Facial+Treatment" alt="Facial Treatment Service">
+                <div class="gallery-item-title">Facial Treatment</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x250/616A6B/FDFEFE?text=Manicure+Pedicure" alt="Manicure Pedicure Service">
+                <div class="gallery-item-title">Nail Care</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials-urban" class="business-section">
+        <h2 class="section-title-business">What Our Clients Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p>"Urban Edge is my go-to for a perfect haircut. The attention to detail is unparalleled, and the atmosphere is incredibly relaxing. Highly recommended!"</p>
+                <div class="author">- John D., Nairobi</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The spa treatments here are heavenly. I feel completely refreshed and rejuvenated after every visit. A true sanctuary in the city."</p>
+                <div class="author">- Sarah K., Westlands</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"Finally found a place that understands modern grooming. Their beard grooming service is top-notch. Always leave looking sharp."</p>
+                <div class="author">- Michael O., Lavington</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p>"The staff are so friendly and professional. I always feel welcomed and leave feeling fantastic. Their facials are a must-try!"</p>
+                <div class="author">- Emily W., Kilimani</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-urban" class="business-section">
+        <h2 class="section-title-business">Book Your Experience</h2>
+        <div class="contact-content-wrapper">
+            <div class="contact-info">
+                <h3>Our Location & Hours</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Urban Edge Plaza, Ground Floor, Biashara St, Nairobi</p>
+                <p><i class="fas fa-phone"></i> +254 7XX XXX XXX (Call/WhatsApp)</p>
+                <p><i class="fas fa-envelope"></i> info@urbanedge.co.ke</p>
+                <p><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 7:00 PM</p>
+                <p><i class="fas fa-calendar-alt"></i> Walk-ins welcome, appointments preferred.</p>
+            </div>
+            <div class="contact-form-container">
+                <h3>Send Us an Inquiry</h3>
+                <form id="urban-edge-contact-form" class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="urban-contact-name">Name:</label>
+                        <input type="text" id="urban-contact-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="urban-contact-email">Email:</label>
+                        <input type="email" id="urban-contact-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="urban-contact-subject">Subject:</label>
+                        <input type="text" id="urban-contact-subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="urban-contact-message">Message:</label>
+                        <textarea id="urban-contact-message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Submit Inquiry</button>
+                    <div id="urban-form-message" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+<script src="scripts/main.js"></script>
+<script>
+    // Embedded JavaScript for specific page functionalities (main section only)
+    document.addEventListener('DOMContentLoaded', () => {
+        // Update the current year in the footer (common function, can be in main.js or here)
+        const currentYearElem = document.getElementById('current-year');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // --- Contact Form Handling for Urban Edge Barbershop & Spa ---
+        const contactForm = document.getElementById('urban-edge-contact-form');
+        const formMessage = document.getElementById('urban-form-message');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get form data
+                const name = document.getElementById('urban-contact-name').value.trim();
+                const email = document.getElementById('urban-contact-email').value.trim();
+                const subject = document.getElementById('urban-contact-subject').value.trim();
+                const message = document.getElementById('urban-contact-message').value.trim();
+
+                // Basic validation
+                if (!name || !email || !subject || !message) {
+                    displayFormMessage('Please fill in all fields.', 'error');
+                    return;
+                }
+
+                // Simple email format validation
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    displayFormMessage('Please enter a valid email address.', 'error');
+                    return;
+                }
+
+                // Simulate form submission (in a real scenario, this would be an AJAX call)
+                console.log('Urban Edge Form Submitted:');
+                console.log('Name:', name);
+                console.log('Email:', email);
+                console.log('Subject:', subject);
+                console.log('Message:', message);
+
+                // Display success message
+                displayFormMessage('Thank you for your inquiry! We will respond shortly.', 'success');
+
+                // Clear the form (optional)
+                contactForm.reset();
+
+                // Store last contact info in localStorage (optional)
+                localStorage.setItem('urbanEdgeLastContactName', name);
+                localStorage.setItem('urbanEdgeLastContactEmail', email);
+            });
+        }
+
+        function displayFormMessage(msg, type) {
+            formMessage.textContent = msg;
+            formMessage.className = `form-message ${type}`; // Reset classes and add new type
+            formMessage.style.display = 'block'; // Make it visible
+        }
+
+        // Populate form fields from local storage on load (if available)
+        function populateFormFields() {
+            document.getElementById('urban-contact-name').value = localStorage.getItem('urbanEdgeLastContactName') || '';
+            document.getElementById('urban-contact-email').value = localStorage.getItem('urbanEdgeLastContactEmail') || '';
+        }
+        populateFormFields(); // Call on DOMContentLoaded
+    });
+</script>
+</body>
+</html>

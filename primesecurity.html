@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Security Solutions | La Familia Chambers - Advanced Security Systems</title>
+    <meta name="description" content="Prime Security Solutions offers cutting-edge security systems and highly trained personnel for homes and businesses.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Prime Security Solutions Page */
+        :root {
+            --security-primary: #1A202C; /* Dark Charcoal - primary for text/headings */
+            --security-secondary: #2C5282; /* Dark Blue - accents/buttons */
+            --security-accent: #ECC94B; /* Yellow Gold - highlights */
+            --security-text: #2D3748; /* Dark Gray */
+            --security-bg: #F7FAFC; /* Light Gray Background */
+            --security-card-bg: #FFFFFF; /* White Cards */
+            --security-border: #EDF2F7; /* Light Border */
+            --security-shadow: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+        }
+
+        body.dark-mode {
+            --security-primary: #E2E8F0; /* Light Gray - primary for text/headings */
+            --security-secondary: #63B3ED; /* Lighter Blue - accents/buttons */
+            --security-accent: #F6E05E; /* Brighter Yellow Gold - highlights */
+            --security-text: #CBD5E0; /* Light Gray */
+            --security-bg: #1A202C; /* Dark Charcoal Background */
+            --security-card-bg: #2D3748; /* Darker Gray Cards */
+            --security-border: #4A5568; /* Darker Border */
+            --security-shadow: rgba(255, 255, 255, 0.1); /* Subtle Shadow */
+        }
+
+        /* General sections */
+        .section-security {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--security-text);
+            background-color: var(--security-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-title-security {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--security-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title-security::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--security-accent);
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero-security {
+            position: relative;
+            background: linear-gradient(rgba(26, 32, 44, 0.7), rgba(26, 32, 44, 0.7)), url('https://placehold.co/1920x600/1A202C/FFFFFF?text=Security+Background') center/cover no-repeat;
+            color: white;
+            padding: 8rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px; /* Ensure a decent height */
+        }
+        body.dark-mode .hero-security {
+             background: linear-gradient(rgba(45, 55, 72, 0.7), rgba(45, 55, 72, 0.7)), url('https://placehold.co/1920x600/2D3748/E2E8F0?text=Security+Dark+Background') center/cover no-repeat;
+        }
+
+        .hero-security h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .hero-security p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        .hero-security .btn-primary {
+            background-color: var(--security-secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .hero-security .btn-primary:hover {
+            background-color: #244368;
+        }
+
+        /* About Us Section */
+        #about-us-content-prime {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+        #about-us-content-prime p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+            text-align: center;
+        }
+        #about-us-content-prime img.about-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+        }
+
+        /* Services, Features, Products Grids */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .security-card {
+            background-color: var(--security-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* To push button to bottom */
+        }
+        .security-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--security-shadow);
+        }
+        .security-card i {
+            font-size: 3rem;
+            color: var(--security-secondary);
+            margin-bottom: 1rem;
+        }
+        .security-card h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--security-primary);
+            margin-bottom: 1rem;
+        }
+        .security-card p {
+            color: var(--security-text);
+            margin-bottom: 1.5rem;
+        }
+        .security-card img.product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain; /* Use contain to prevent cropping and show full product */
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            background-color: #e0e7f2; /* Light background for product images */
+        }
+        body.dark-mode .security-card img.product-image {
+            background-color: #4A5568;
+        }
+
+
+        .security-card .learn-more-btn,
+        .security-card .view-details-btn,
+        .security-card .add-to-cart-btn {
+            background-color: var(--security-secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            display: inline-block;
+            margin-top: auto; /* Push button to bottom */
+        }
+        .security-card .learn-more-btn:hover,
+        .security-card .view-details-btn:hover,
+        .security-card .add-to-cart-btn:hover {
+            background-color: #244368;
+        }
+        .security-card .full-description {
+            display: none; /* Hidden by default */
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--security-text);
+            text-align: left;
+        }
+        .security-card .full-description.active {
+            display: block;
+        }
+        .security-card .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--security-primary);
+            margin-bottom: 1rem;
+        }
+
+
+        /* Why Choose Us */
+        #why-choose-prime .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        #why-choose-prime .benefit-item i {
+            font-size: 2.5rem;
+            color: var(--security-accent);
+        }
+        #why-choose-prime .benefit-item div {
+            flex: 1;
+        }
+        #why-choose-prime .benefit-item h4 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--security-primary);
+            margin-bottom: 0.5rem;
+        }
+        #why-choose-prime .benefit-item p {
+            color: var(--security-text);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        #testimonials-prime .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background-color: var(--security-card-bg);
+            border-left: 5px solid var(--security-secondary);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--security-shadow);
+        }
+        .testimonial-card p.quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--security-text);
+            margin-bottom: 1rem;
+        }
+        .testimonial-card p.author {
+            font-weight: bold;
+            color: var(--security-primary);
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        /* Contact Section */
+        #contact-prime .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media (min-width: 768px) {
+            #contact-prime .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        #contact-prime .contact-info {
+            background-color: var(--security-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+            padding: 2.5rem;
+        }
+        #contact-prime .contact-info h3 {
+            font-size: 2rem;
+            color: var(--security-primary);
+            margin-bottom: 1.5rem;
+        }
+        #contact-prime .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--security-text);
+        }
+        #contact-prime .contact-info i {
+            margin-right: 0.75rem;
+            color: var(--security-secondary);
+        }
+        #contact-prime .contact-form-container {
+            background-color: var(--security-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--security-shadow);
+            padding: 2.5rem;
+        }
+        #contact-prime .contact-form-container h3 {
+            font-size: 2rem;
+            color: var(--security-primary);
+            margin-bottom: 1.5rem;
+        }
+        #contact-form-prime div {
+            margin-bottom: 1.2rem;
+        }
+        #contact-form-prime label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--security-text);
+        }
+        #contact-form-prime input[type="text"],
+        #contact-form-prime input[type="email"],
+        #contact-form-prime textarea,
+        #contact-form-prime select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--security-border);
+            border-radius: 0.5rem;
+            background-color: var(--security-bg);
+            color: var(--security-text);
+            transition: border-color 0.3s ease;
+        }
+        #contact-form-prime input:focus,
+        #contact-form-prime textarea:focus,
+        #contact-form-prime select:focus {
+            border-color: var(--security-primary);
+            outline: none;
+        }
+        #contact-form-prime button {
+            background-color: var(--security-secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        #contact-form-prime button:hover {
+            background-color: #244368;
+        }
+        .form-message-prime {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+        .form-message-prime.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .form-message-prime.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Cart Icon in Header */
+        .cart-icon-container {
+            position: relative;
+            margin-left: 1rem;
+        }
+        .cart-icon-container a {
+            color: var(--header-text-color); /* Inherit from main styles */
+            font-size: 1.5rem;
+            text-decoration: none;
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--security-accent);
+            color: var(--security-primary);
+            border-radius: 50%;
+            padding: 0.2em 0.5em;
+            font-size: 0.75rem;
+            font-weight: bold;
+            line-height: 1;
+            min-width: 20px;
+            text-align: center;
+            pointer-events: none; /* Allow clicks to pass through to icon */
+        }
+
+        /* --- Product Detail Modal --- */
+        .product-modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .product-modal-overlay.active {
+            display: flex;
+        }
+        .product-modal-content {
+            background-color: var(--security-card-bg);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        body.dark-mode .product-modal-content {
+            background-color: var(--security-card-bg);
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--security-primary);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .product-modal-close:hover {
+            color: #d9534f;
+        }
+        .product-modal-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .product-modal-image {
+            flex: 1 1 300px; /* Allows image to grow/shrink, min width 300px */
+            max-width: 45%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            background-color: #e0e7f2;
+        }
+        body.dark-mode .product-modal-image {
+            background-color: #4A5568;
+        }
+
+        .product-modal-details {
+            flex: 1 1 400px; /* Allows details to grow/shrink, min width 400px */
+        }
+        .product-modal-details h2 {
+            font-size: 2.5rem;
+            color: var(--security-primary);
+            margin-bottom: 1rem;
+        }
+        .product-modal-details .product-modal-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--security-secondary);
+            margin-bottom: 1rem;
+        }
+        .product-modal-details p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--security-text);
+            margin-bottom: 1rem;
+        }
+        .product-modal-options div {
+            margin-bottom: 1rem;
+        }
+        .product-modal-options label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--security-primary);
+        }
+        .product-modal-options select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--security-border);
+            border-radius: 0.5rem;
+            background-color: var(--security-bg);
+            color: var(--security-text);
+        }
+
+        .product-modal-quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .product-modal-quantity-selector button {
+            background-color: var(--security-secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .product-modal-quantity-selector button:hover {
+            background-color: #244368;
+        }
+        .product-modal-quantity-selector input {
+            width: 60px;
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid var(--security-border);
+            border-radius: 0.3rem;
+            background-color: var(--security-bg);
+            color: var(--security-text);
+        }
+
+        .product-modal-add-to-cart {
+            background-color: var(--security-accent);
+            color: var(--security-primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .product-modal-add-to-cart:hover {
+            background-color: #EBC93A;
+        }
+        .product-modal-info-text {
+            font-size: 0.95rem;
+            color: var(--security-text);
+            margin-top: 0.5rem;
+        }
+
+        /* --- Add to Cart Notification --- */
+        .cart-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--security-secondary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateY(20px);
+            min-width: 250px;
+            text-align: center;
+        }
+        .cart-notification.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .cart-notification .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .cart-notification p {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .section-title-security {
+                font-size: 2.2rem;
+            }
+            .hero-security h1 {
+                font-size: 2.8rem;
+            }
+            .hero-security p {
+                font-size: 1.3rem;
+            }
+            .product-modal-content {
+                max-width: 90%;
+            }
+            .product-modal-body {
+                flex-direction: column;
+            }
+            .product-modal-image {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 768px) {
+            .section-title-security {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .hero-security {
+                padding: 6rem 1rem;
+                min-height: 350px;
+            }
+            .hero-security h1 {
+                font-size: 2.2rem;
+            }
+            .hero-security p {
+                font-size: 1.1rem;
+            }
+            #about-us-content-prime {
+                text-align: center;
+            }
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+            #contact-prime .contact-info,
+            #contact-prime .contact-form-container {
+                padding: 1.5rem;
+            }
+            #contact-prime .contact-info h3,
+            #contact-prime .contact-form-container h3 {
+                font-size: 1.6rem;
+            }
+            .product-modal-content {
+                padding: 1.5rem;
+            }
+            .product-modal-details h2 {
+                font-size: 2rem;
+            }
+            .product-modal-details .product-modal-price {
+                font-size: 1.8rem;
+            }
+            .cart-notification {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+             <div class="cart-icon-container">
+                <a href="primesecurity-my-activity.html" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-item-count">0</span>
+                </a>
+            </div>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="tasteofafrica.html">Taste of Africa Catering</a></li>
+            <li><a href="afyacare-clinic.html">AfyaCare Clinic</a></li>
+            <li><a href="sokoproperties.html">SokoProperties</a></li>
+            <li><a href="techsolutions.html">TechSolutions Africa</a></li>
+            <li><a href="primesecurity.html">Prime Security Solutions</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section class="hero-security" id="hero-prime">
+        <h1 id="business-name-prime"></h1>
+        <p id="business-tagline-prime"></p>
+        <a href="#contact-prime" class="btn-primary">Request a Free Security Assessment</a>
+    </section>
+
+    <section id="about-prime" class="section-security">
+        <h2 class="section-title-security">About Prime Security Solutions</h2>
+        <div id="about-us-content-prime">
+            <p id="about-full-description-prime"></p>
+            <img src="https://placehold.co/800x400/2C5282/FFFFFF?text=Security+Team" alt="Prime Security Team" class="about-image">
+        </div>
+    </section>
+
+    <section id="services-prime" class="section-security">
+        <h2 class="section-title-security">Our Security Services</h2>
+        <div class="security-grid" id="services-list-prime">
+            </div>
+    </section>
+
+    <section id="features-prime" class="section-security">
+        <h2 class="section-title-security">Key Features & Technology</h2>
+        <div class="security-grid" id="features-list-prime">
+            </div>
+    </section>
+
+    <section id="why-choose-prime" class="section-security">
+        <h2 class="section-title-security">Why Choose Prime Security?</h2>
+        <div class="security-grid" id="why-choose-list-prime">
+            <div class="benefit-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h4>Unmatched Expertise</h4>
+                    <p>Our team comprises highly trained and experienced security professionals, ensuring top-tier protection.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-cogs"></i>
+                <div>
+                    <h4>Cutting-Edge Technology</h4>
+                    <p>We utilize the latest advancements in security systems, including AI-powered surveillance and smart access control.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-headset"></i>
+                <div>
+                    <h4>24/7 Rapid Response</h4>
+                    <p>Our monitoring center and response teams are active around the clock, ready to address any security incident immediately.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-handshake"></i>
+                <div>
+                    <h4>Tailored Security Solutions</h4>
+                    <p>Every solution is customized to meet your specific needs, threat assessment, and budget.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products-prime" class="section-security">
+        <h2 class="section-title-security">Security Devices for Purchase</h2>
+        <div class="security-grid" id="products-list-prime">
+            </div>
+    </section>
+
+    <section id="testimonials-prime" class="section-security">
+        <h2 class="section-title-security">What Our Clients Say</h2>
+        <div class="testimonial-grid" id="testimonials-list-prime">
+            </div>
+    </section>
+
+    <section id="contact-prime" class="section-security">
+        <h2 class="section-title-security">Get a Security Consultation</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p id="contact-address-prime"><i class="fas fa-map-marker-alt"></i> Mlolongo, Machakos County, Kenya</p>
+                <p id="contact-phone-prime"><i class="fas fa-phone"></i> +254 7XX XXX XXX</p>
+                <p id="contact-email-prime"><i class="fas fa-envelope"></i> security@primesecurity.co.ke</p>
+                <div class="mt-8">
+                    <iframe id="contact-map-prime" src="http://googleusercontent.com/maps.google.com/4" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <h3>Request a Quote</h3>
+                <form id="contact-form-prime">
+                    <div>
+                        <label for="contact-name-prime">Name</label>
+                        <input type="text" id="contact-name-prime" name="name" required>
+                    </div>
+                    <div>
+                        <label for="contact-email-prime">Email</label>
+                        <input type="email" id="contact-email-prime" name="email" required>
+                    </div>
+                    <div>
+                        <label for="contact-service-prime">Interested Service</label>
+                        <select id="contact-service-prime" name="service">
+                            <option value="">Select a service</option>
+                            <option value="CCTV Systems">CCTV Systems</option>
+                            <option value="Alarm Systems">Alarm Systems</option>
+                            <option value="Access Control">Access Control</option>
+                            <option value="Guard Services">Guard Services</option>
+                            <option value="Consultation">General Consultation</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="contact-message-prime">Message</label>
+                        <textarea id="contact-message-prime" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Request</button>
+                    <div id="form-message-prime" class="form-message-prime"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+
+<div class="product-modal-overlay" id="product-detail-modal">
+    <div class="product-modal-content">
+        <button class="product-modal-close" id="product-modal-close-btn">&times;</button>
+        <div class="product-modal-body">
+            <img src="" alt="Product Image" class="product-modal-image" id="modal-product-image">
+            <div class="product-modal-details">
+                <h2 id="modal-product-name"></h2>
+                <p class="product-modal-price" id="modal-product-price"></p>
+                <p id="modal-product-description"></p>
+
+                <div class="product-modal-options">
+                    <div id="modal-product-colors" style="display: none;">
+                        <label for="modal-color-select">Color:</label>
+                        <select id="modal-color-select"></select>
+                    </div>
+                </div>
+
+                <div class="product-modal-quantity-selector">
+                    <label for="modal-quantity">Quantity:</label>
+                    <button id="modal-quantity-minus">-</button>
+                    <input type="number" id="modal-quantity" value="1" min="1" max="100" readonly>
+                    <button id="modal-quantity-plus">+</button>
+                </div>
+
+                <p class="product-modal-info-text">Min Order: <span id="modal-min-order"></span></p>
+                <p class="product-modal-info-text">Max Order: <span id="modal-max-order"></span></p>
+                <p class="product-modal-info-text">Delivery: <span id="modal-delivery-time"></span></p>
+
+                <button class="product-modal-add-to-cart" id="modal-add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cart-notification" id="cart-notification">
+    <p id="notification-message"></p>
+    <button class="close-btn" id="notification-close-btn">&times;</button>
+</div>
+
+
+<script src="scripts/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Global Elements & Utility Functions (from La Familia template) ---
+        const header = document.querySelector('.sticky-header');
+        const mainNav = document.getElementById('main-nav');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const modeToggle = document.getElementById('mode-toggle');
+        const body = document.body;
+        const siteSearchInput = document.getElementById('site-search'); // Global search
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBarContainer = document.getElementById('search-bar-container');
+
+        // Dark mode preference (from La Familia template)
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Adjust hero padding (from La Familia template, adapted for business heroes)
+        const adjustHeroPadding = () => {
+            const headerHeight = header.offsetHeight;
+            const securityHero = document.querySelector('.hero-security');
+            if (securityHero) {
+                securityHero.style.paddingTop = `${headerHeight}px`;
+            }
+        };
+        window.addEventListener('load', adjustHeroPadding);
+        window.addEventListener('resize', adjustHeroPadding);
+        hamburgerMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('main-nav-closed');
+            mainNav.classList.toggle('main-nav-open');
+            adjustHeroPadding();
+        });
+
+        // Dark Mode Toggle (from La Familia template)
+        modeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+            modeToggle.querySelector('i').classList.replace(
+                isDarkMode ? 'fa-moon' : 'fa-sun',
+                isDarkMode ? 'fa-sun' : 'fa-moon'
+            );
+        });
+
+        // Global Search Bar Toggle (from La Familia template)
+        searchToggle.addEventListener('click', () => {
+            searchBarContainer.classList.toggle('search-bar-hidden');
+            searchBarContainer.classList.toggle('search-bar-active');
+            if (searchBarContainer.classList.contains('search-bar-active')) {
+                siteSearchInput.focus();
+            }
+        });
+
+        // Placeholder for global search functionality (from La Familia template)
+        document.getElementById('search-submit-btn').addEventListener('click', () => {
+            alert(`Global search for: ${siteSearchInput.value}`);
+        });
+        document.getElementById('search-clear-btn').addEventListener('click', () => {
+            siteSearchInput.value = '';
+        });
+        document.getElementById('search-mic-btn').addEventListener('click', () => {
+            alert('Voice search not implemented.');
+        });
+        siteSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                alert(`Global search for: ${siteSearchInput.value}`);
+            }
+        });
+
+        // --- Prime Security Solutions Specific Data ---
+        const primeSecurityData = {
+            id: 'prime-security-solutions',
+            name: 'Prime Security Solutions',
+            tagline: 'Your Partner in Comprehensive Protection',
+            shortDescription: 'Advanced security systems and personnel for homes and businesses.',
+            fullDescription: 'Prime Security Solutions offers cutting-edge security systems and highly trained personnel to protect your home and business. Our comprehensive services include CCTV surveillance, alarm systems, access control, and professional guard services, all designed to provide peace of mind. We utilize the latest technology to ensure maximum protection against potential threats, tailored to your specific needs.',
+            logo: 'images/primesecurity_logo.png', // Placeholder, replace with actual path if available
+            heroImage: 'https://placehold.co/1920x600/1A202C/FFFFFF?text=Prime+Security+Hero',
+            contact: {
+                phone: '+254 7XX XXX XXX', // Replace with actual number
+                email: 'security@primesecurity.co.ke', // Replace with actual email
+                address: 'Mlolongo, Machakos County, Kenya',
+                mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.822998083818!2d36.95379374999999!3d-1.42445895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f0c78a10787e7%3A0xc39525f2b8f36a32!2sMlolongo!5e0!3m2!1sen!2ske!4v1701389823901!5m2!1sen!2ske' // Mlolongo embed
+            },
+            services: [
+                {
+                    id: 'cctv-systems',
+                    name: 'CCTV Surveillance Systems',
+                    icon: 'fas fa-video',
+                    shortDescription: 'High-definition cameras for continuous monitoring and evidence capture.',
+                    fullDescription: 'We design and install state-of-the-art CCTV systems, including IP cameras, DVRs/NVRs, and remote viewing capabilities. Our solutions provide comprehensive coverage for both indoor and outdoor environments, crucial for deterring crime and providing valuable evidence.'
+                },
+                {
+                    id: 'alarm-systems',
+                    name: 'Intruder Alarm Systems',
+                    icon: 'fas fa-bell',
+                    shortDescription: 'Advanced alarm systems with motion sensors, door/window contacts, and instant alerts.',
+                    fullDescription: 'Protect your property with our reliable intruder alarm systems. We offer wired and wireless solutions, integrated with motion detectors, glass-break sensors, and door/window contacts, providing immediate alerts to you and our monitoring center upon unauthorized entry.'
+                },
+                {
+                    id: 'access-control',
+                    name: 'Access Control Solutions',
+                    icon: 'fas fa-fingerprint',
+                    shortDescription: 'Manage entry points with biometric, card, or keypad access for enhanced security.',
+                    fullDescription: 'Our access control systems provide granular control over who enters your premises and when. Solutions include biometric readers (fingerprint, facial recognition), RFID card systems, keypads, and interlinked door locks, suitable for offices, homes, and restricted areas.'
+                },
+                {
+                    id: 'guard-services',
+                    name: 'Professional Guard Services',
+                    icon: 'fas fa-user-shield',
+                    shortDescription: 'Highly trained security personnel for on-site protection and patrol.',
+                    fullDescription: 'We provide vetted and professionally trained security guards for static guarding, mobile patrols, event security, and executive protection. Our personnel are equipped to handle various security scenarios, ensuring a safe and secure environment.'
+                },
+                {
+                    id: 'intercom-systems',
+                    name: 'Video Intercom Systems',
+                    icon: 'fas fa-headset',
+                    shortDescription: 'Secure communication and visual verification at entry points.',
+                    fullDescription: 'Enhance your entry security with our video intercom systems. Identify visitors before granting access, communicate remotely, and record interactions. Ideal for residential complexes, offices, and gated communities.'
+                },
+                {
+                    id: 'security-audits',
+                    name: 'Security Audits & Consulting',
+                    icon: 'fas fa-magnifying-glass',
+                    shortDescription: 'Comprehensive assessments to identify vulnerabilities and recommend security enhancements.',
+                    fullDescription: 'Our expert consultants conduct thorough security audits of your property and existing systems, identifying weaknesses and potential threats. We provide detailed reports and actionable recommendations to fortify your defenses.'
+                }
+            ],
+            features: [
+                {
+                    name: '24/7 Monitoring',
+                    icon: 'fas fa-clock',
+                    description: 'Continuous surveillance and immediate response by our dedicated control center.'
+                },
+                {
+                    name: 'Smart Integration',
+                    icon: 'fas fa-link',
+                    description: 'Seamless integration with existing smart home or business automation systems.'
+                },
+                {
+                    name: 'Customized Solutions',
+                    icon: 'fas fa-sliders-h',
+                    description: 'Tailored security plans designed to meet your specific threats and budget.'
+                },
+                {
+                    name: 'Mobile Access',
+                    icon: 'fas fa-mobile-alt',
+                    description: 'Manage and monitor your security systems remotely from your smartphone or tablet.'
+                },
+                 {
+                    name: 'Expert Installation',
+                    icon: 'fas fa-tools',
+                    description: 'Professional and discreet installation by certified security technicians.'
+                },
+                {
+                    name: 'Rapid Response Teams',
+                    icon: 'fas fa-car-alt',
+                    description: 'Quick deployment of armed or unarmed response teams in emergency situations.'
+                }
+            ],
+            products: [
+                {
+                    id: 'ip-camera-pro',
+                    name: 'Pro-Grade IP Camera',
+                    image: 'https://placehold.co/300x200/2C5282/FFFFFF?text=IP+Camera+Pro',
+                    price: 8500,
+                    currency: 'KES',
+                    description: '4K Ultra HD outdoor IP camera with night vision and motion detection.',
+                    fullDescription: 'This professional-grade IP camera delivers crystal-clear 4K resolution, ensuring every detail is captured. It features advanced night vision (up to 30m), intelligent motion detection with customizable zones, and cloud storage compatibility. Built with a durable, weather-resistant casing for outdoor use. Easy to install and integrate with existing NVR systems, perfect for robust surveillance.',
+                    colors: ['Black', 'White'],
+                    minOrder: 1,
+                    maxOrder: 100,
+                    deliveryTime: '2-3 business days'
+                },
+                {
+                    id: 'smart-alarm-kit',
+                    name: 'Smart Home Alarm Kit',
+                    image: 'https://placehold.co/300x200/ECC94B/1A202C?text=Smart+Alarm+Kit',
+                    price: 12500,
+                    currency: 'KES',
+                    description: 'Wireless alarm system with central hub, door sensors, and remote control.',
+                    fullDescription: 'Secure your home with this easy-to-install wireless alarm kit. Includes a smart hub, two door/window sensors, one PIR motion sensor, and a remote key fob. Connects to your smartphone for instant alerts and remote arm/disarm. Expandable with additional sensors, offering comprehensive protection and peace of mind for your family.',
+                    colors: ['White'],
+                    minOrder: 1,
+                    maxOrder: 50,
+                    deliveryTime: '1-2 business days'
+                },
+                {
+                    id: 'biometric-lock',
+                    name: 'Biometric Smart Lock',
+                    image: 'https://placehold.co/300x200/1A202C/FFFFFF?text=Biometric+Lock',
+                    price: 18000,
+                    currency: 'KES',
+                    description: 'Fingerprint and keypad smart door lock for keyless entry and enhanced security.',
+                    fullDescription: 'Upgrade your entry security with this cutting-edge biometric smart lock. Features fingerprint recognition, touchscreen keypad, traditional key access, and smartphone app control. Durable construction and anti-tamper alarms provide superior protection for your home or office, making it a reliable and convenient access solution.',
+                    colors: ['Silver', 'Black'],
+                    minOrder: 1,
+                    maxOrder: 20,
+                    deliveryTime: '3-5 business days'
+                },
+                 {
+                    id: 'video-doorbell',
+                    name: 'Smart Video Doorbell',
+                    image: 'https://placehold.co/300x200/63B3ED/1A202C?text=Video+Doorbell',
+                    price: 7000,
+                    currency: 'KES',
+                    description: 'See, hear, and speak to visitors from anywhere with 1080p HD video.',
+                    fullDescription: 'Never miss a visitor with this smart video doorbell. It offers 1080p HD video, two-way talk, motion detection alerts to your phone, and night vision. Easy DIY installation and connects to your home Wi-Fi. Integrates seamlessly with other smart home devices, providing an extra layer of security and convenience.',
+                    colors: ['White', 'Grey'],
+                    minOrder: 1,
+                    maxOrder: 100,
+                    deliveryTime: '2-3 business days'
+                },
+                {
+                    id: 'solar-security-light',
+                    name: 'Solar Powered Security Light',
+                    image: 'https://placehold.co/300x200/2C5282/FFFFFF?text=Solar+Light',
+                    price: 4500,
+                    currency: 'KES',
+                    description: 'Bright LED security light with PIR motion sensor, powered by solar energy.',
+                    fullDescription: 'Environmentally friendly and highly effective, this solar-powered LED security light illuminates large areas upon detecting motion. Ideal for driveways, gardens, and pathways. No wiring required, simple to install, and provides reliable light when needed, making it a cost-effective security solution.',
+                    colors: ['Black'],
+                    minOrder: 1,
+                    maxOrder: 200,
+                    deliveryTime: '3-4 business days'
+                }
+            ],
+            testimonials: [
+                {
+                    quote: 'Prime Security Solutions installed our entire office security system, and we couldn\'t be happier. Professional, efficient, and truly knowledgeable.',
+                    author: 'Mercy A., Tech Startup CEO'
+                },
+                {
+                    quote: 'Their rapid response team gave us peace of mind during an attempted break-in. Truly a lifesaver!',
+                    author: 'David K., Homeowner'
+                },
+                {
+                    quote: 'The biometric access control they set up revolutionized our building\'s security. Highly recommend their tailored solutions.',
+                    author: 'Sarah M., Property Manager'
+                }
+            ]
+        };
+
+        // --- Prime Security Specific Elements ---
+        const businessNameElem = document.getElementById('business-name-prime');
+        const businessTaglineElem = document.getElementById('business-tagline-prime');
+        const aboutFullDescriptionElem = document.getElementById('about-full-description-prime');
+        const servicesListContainer = document.getElementById('services-list-prime');
+        const featuresListContainer = document.getElementById('features-list-prime');
+        const productsListContainer = document.getElementById('products-list-prime');
+        const testimonialsListContainer = document.getElementById('testimonials-list-prime');
+
+        // Contact Elements
+        const contactAddressElem = document.getElementById('contact-address-prime');
+        const contactPhoneElem = document.getElementById('contact-phone-prime');
+        const contactEmailElem = document.getElementById('contact-email-prime');
+        const contactMapIframe = document.getElementById('contact-map-prime');
+        const contactForm = document.getElementById('contact-form-prime');
+        const formMessage = document.getElementById('form-message-prime');
+
+        // Cart Elements
+        const cartItemCountElem = document.getElementById('cart-item-count');
+
+        // Product Modal Elements
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const modalCloseBtn = document.getElementById('product-modal-close-btn');
+        const modalProductName = document.getElementById('modal-product-name');
+        const modalProductImage = document.getElementById('modal-product-image');
+        const modalProductPrice = document.getElementById('modal-product-price');
+        const modalProductDescription = document.getElementById('modal-product-description');
+        const modalProductColors = document.getElementById('modal-product-colors');
+        const modalColorSelect = document.getElementById('modal-color-select');
+        const modalQuantityInput = document.getElementById('modal-quantity');
+        const modalQuantityMinus = document.getElementById('modal-quantity-minus');
+        const modalQuantityPlus = document.getElementById('modal-quantity-plus');
+        const modalMinOrder = document.getElementById('modal-min-order');
+        const modalMaxOrder = document.getElementById('modal-max-order');
+        const modalDeliveryTime = document.getElementById('modal-delivery-time');
+        const modalAddToCartBtn = document.getElementById('modal-add-to-cart-btn');
+
+        // Notification Element
+        const cartNotification = document.getElementById('cart-notification');
+        const notificationMessage = document.getElementById('notification-message');
+        const notificationCloseBtn = document.getElementById('notification-close-btn');
+
+        let currentProductInModal = null; // To keep track of the product currently viewed
+
+        // --- Utility Functions for Cart ---
+
+        /**
+         * Loads cart items from localStorage.
+         * @returns {Array} An array of cart items.
+         */
+        function getCartItems() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('primeSecurityCart')) || [];
+                // Ensure each item has a quantity, default to 1 if missing
+                return cart.map(item => ({ ...item, quantity: item.quantity || 1 }));
+            } catch (e) {
+                console.error("Error parsing cart from localStorage:", e);
+                return [];
+            }
+        }
+
+        /**
+         * Saves cart items to localStorage.
+         * @param {Array} cart - The array of cart items to save.
+         */
+        function saveCartItems(cart) {
+            localStorage.setItem('primeSecurityCart', JSON.stringify(cart));
+            updateCartCount(); // Update count whenever cart changes
+        }
+
+        /**
+         * Adds a product to the cart.
+         * @param {Object} product - The product object to add.
+         * @param {number} quantity - The quantity to add.
+         * @param {string} [color] - The selected color/variety.
+         */
+        function addToCart(product, quantity, color = null) {
+            let cart = getCartItems();
+            const uniqueId = color ? `${product.id}-${color}` : product.id;
+            const existingItem = cart.find(item => item.uniqueId === uniqueId);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    uniqueId: uniqueId,
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    currency: product.currency,
+                    image: product.image,
+                    quantity: quantity,
+                    color: color
+                });
+            }
+            saveCartItems(cart);
+            displayAddToCartNotification(`${quantity}x ${product.name}${color ? ` (${color})` : ''} added!`);
+        }
+
+        /**
+         * Updates the cart item count in the header.
+         */
+        function updateCartCount() {
+            const cart = getCartItems();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (cartItemCountElem) {
+                cartItemCountElem.textContent = totalItems;
+            }
+        }
+
+        /**
+         * Displays a temporary "Added to Cart" notification.
+         * @param {string} message - The message to display.
+         */
+        function displayAddToCartNotification(message) {
+            if (!cartNotification || !notificationMessage) return;
+
+            notificationMessage.textContent = message;
+            cartNotification.classList.add('show');
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                cartNotification.classList.remove('show');
+            }, 3000);
+        }
+
+        // --- Product Modal Functions ---
+
+        /**
+         * Shows the product detail modal with specific product data.
+         * @param {string} productId - The ID of the product to display.
+         */
+        function showProductDetails(productId) {
+            currentProductInModal = primeSecurityData.products.find(p => p.id === productId);
+
+            if (!currentProductInModal) {
+                console.error('Product not found:', productId);
+                return;
+            }
+
+            modalProductName.textContent = currentProductInModal.name;
+            modalProductImage.src = currentProductInModal.image;
+            modalProductImage.alt = currentProductInModal.name;
+            modalProductPrice.textContent = `${currentProductInModal.currency} ${currentProductInModal.price.toLocaleString()}`;
+            modalProductDescription.textContent = currentProductInModal.fullDescription || currentProductInModal.description;
+            modalMinOrder.textContent = currentProductInModal.minOrder;
+            modalMaxOrder.textContent = currentProductInModal.maxOrder;
+            modalDeliveryTime.textContent = currentProductInModal.deliveryTime;
+
+            // Populate colors if available
+            if (currentProductInModal.colors && currentProductInModal.colors.length > 0) {
+                modalProductColors.style.display = 'block';
+                modalColorSelect.innerHTML = ''; // Clear previous options
+                currentProductInModal.colors.forEach(color => {
+                    const option = document.createElement('option');
+                    option.value = color;
+                    option.textContent = color;
+                    modalColorSelect.appendChild(option);
+                });
+            } else {
+                modalProductColors.style.display = 'none';
+            }
+
+            // Reset quantity to minOrder or 1
+            modalQuantityInput.value = currentProductInModal.minOrder || 1;
+            modalQuantityInput.min = currentProductInModal.minOrder || 1;
+            modalQuantityInput.max = currentProductInModal.maxOrder || 999; // Set a high default max if not specified
+
+            productDetailModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        }
+
+        /**
+         * Hides the product detail modal.
+         */
+        function hideProductDetails() {
+            productDetailModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            currentProductInModal = null;
+        }
+
+        /**
+         * Handles quantity changes in the modal.
+         * @param {number} change - +1 for increment, -1 for decrement.
+         */
+        function handleModalQuantityChange(change) {
+            let currentQty = parseInt(modalQuantityInput.value);
+            let newQty = currentQty + change;
+            const min = parseInt(modalQuantityInput.min);
+            const max = parseInt(modalQuantityInput.max);
+
+            if (newQty >= min && newQty <= max) {
+                modalQuantityInput.value = newQty;
+            } else if (newQty < min) {
+                modalQuantityInput.value = min;
+            } else if (newQty > max) {
+                modalQuantityInput.value = max;
+            }
+        }
+
+
+        // --- Page Population Functions ---
+
+        /**
+         * Populates static content from primeSecurityData.
+         */
+        function populateStaticContent() {
+            if (businessNameElem) {
+                businessNameElem.textContent = primeSecurityData.name;
+            }
+            if (businessTaglineElem) {
+                businessTaglineElem.textContent = primeSecurityData.tagline;
+            }
+            if (aboutFullDescriptionElem) {
+                aboutFullDescriptionElem.textContent = primeSecurityData.fullDescription;
+            }
+
+            // Populate contact info
+            if (contactAddressElem) {
+                contactAddressElem.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${primeSecurityData.contact.address}`;
+            }
+            if (contactPhoneElem) {
+                contactPhoneElem.innerHTML = `<i class="fas fa-phone"></i> ${primeSecurityData.contact.phone}`;
+            }
+            if (contactEmailElem) {
+                contactEmailElem.innerHTML = `<i class="fas fa-envelope"></i> ${primeSecurityData.contact.email}`;
+            }
+            if (contactMapIframe) {
+                contactMapIframe.src = primeSecurityData.contact.mapEmbedUrl;
+            }
+        }
+
+        /**
+         * Populates services.
+         */
+        function populateServices() {
+            if (!servicesListContainer) return;
+            servicesListContainer.innerHTML = '';
+            primeSecurityData.services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.classList.add('security-card');
+                serviceCard.innerHTML = `
+                    <i class="${service.icon}"></i>
+                    <h3>${service.name}</h3>
+                    <p>${service.shortDescription}</p>
+                    <button class="learn-more-btn" data-service-id="${service.id}">Learn More</button>
+                    <div class="full-description" id="full-description-${service.id}">
+                        ${service.fullDescription}
+                    </div>
+                `;
+                servicesListContainer.appendChild(serviceCard);
+            });
+            attachLearnMoreListeners();
+        }
+
+        /**
+         * Attaches click listeners to "Learn More" buttons.
+         */
+        function attachLearnMoreListeners() {
+            document.querySelectorAll('.learn-more-btn').forEach(button => {
+                // Ensure event listener is added only once per button
+                if (!button.dataset.listenerAdded) {
+                    button.addEventListener('click', (e) => {
+                        const serviceId = e.target.dataset.serviceId;
+                        const fullDescriptionDiv = document.getElementById(`full-description-${serviceId}`);
+                        if (fullDescriptionDiv) {
+                            fullDescriptionDiv.classList.toggle('active');
+                            e.target.textContent = fullDescriptionDiv.classList.contains('active') ? 'Show Less' : 'Learn More';
+                        }
+                    });
+                    button.dataset.listenerAdded = 'true';
+                }
+            });
+        }
+
+        /**
+         * Populates features.
+         */
+        function populateFeatures() {
+            if (!featuresListContainer) return;
+            featuresListContainer.innerHTML = '';
+            primeSecurityData.features.forEach(feature => {
+                const featureCard = document.createElement('div');
+                featureCard.classList.add('security-card');
+                featureCard.innerHTML = `
+                    <i class="${feature.icon}"></i>
+                    <h3>${feature.name}</h3>
+                    <p>${feature.description}</p>
+                `;
+                featuresListContainer.appendChild(featureCard);
+            });
+        }
+
+        /**
+         * Populates products for online purchase.
+         */
+        function populateProducts() {
+            if (!productsListContainer) return;
+            productsListContainer.innerHTML = '';
+            primeSecurityData.products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('security-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p class="product-price">${product.currency} ${product.price.toLocaleString()}</p>
+                    <button class="view-details-btn" data-product-id="${product.id}">View Details</button>
+                `;
+                productsListContainer.appendChild(productCard);
+            });
+
+            // Add event listeners for "View Details" buttons
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = e.target.dataset.productId;
+                    showProductDetails(productId);
+                });
+            });
+        }
+
+
+        /**
+         * Populates testimonials.
+         */
+        function populateTestimonials() {
+            if (!testimonialsListContainer) return;
+            testimonialsListContainer.innerHTML = '';
+            primeSecurityData.testimonials.forEach(testimonial => {
+                const testimonialCard = document.createElement('div');
+                testimonialCard.classList.add('testimonial-card');
+                testimonialCard.innerHTML = `
+                    <p class="quote">"${testimonial.quote}"</p>
+                    <p class="author">- ${testimonial.author}</p>
+                `;
+                testimonialsListContainer.appendChild(testimonialCard);
+            });
+        }
+
+        /**
+         * Handles contact form submission.
+         */
+        function handleContactFormSubmit(e) {
+            e.preventDefault();
+            if (!formMessage || !contactForm) {
+                console.error("Contact form or message element not found.");
+                return;
+            }
+
+            formMessage.style.display = 'none';
+
+            const name = document.getElementById('contact-name-prime').value;
+            const email = document.getElementById('contact-email-prime').value;
+            const service = document.getElementById('contact-service-prime').value;
+            const message = document.getElementById('contact-message-prime').value;
+
+            // Basic validation
+            if (!name || !email || !message) {
+                formMessage.textContent = 'Please fill in all required fields.';
+                formMessage.classList.add('error');
+                formMessage.classList.remove('success');
+                formMessage.style.display = 'block';
+                return;
+            }
+
+            // Simulate form submission
+            console.log('Prime Security Contact Form Submitted:');
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Service:', service);
+            console.log('Message:', message);
+
+            formMessage.textContent = 'Thank you for your request! We will get back to you shortly.';
+            formMessage.classList.add('success');
+            formMessage.classList.remove('error');
+            formMessage.style.display = 'block';
+
+            contactForm.reset();
+        }
+
+        // --- Event Listeners & Initial Loads ---
+
+        // Global La Familia Footer year update
+        const currentYearElem = document.getElementById('current-year');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // Initial population of all Prime Security content
+        populateStaticContent();
+        populateServices();
+        populateFeatures();
+        populateProducts(); // Populate products
+        populateTestimonials();
+        updateCartCount(); // Update cart count on page load
+
+        // Event listener for contact form submission
+        if (contactForm) {
+            contactForm.addEventListener('submit', handleContactFormSubmit);
+        }
+
+        // Event listeners for Product Modal
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', hideProductDetails);
+        }
+        if (productDetailModal) {
+            // Close modal if clicking outside content
+            productDetailModal.addEventListener('click', (e) => {
+                if (e.target === productDetailModal) {
+                    hideProductDetails();
+                }
+            });
+        }
+        if (modalQuantityMinus) {
+            modalQuantityMinus.addEventListener('click', () => handleModalQuantityChange(-1));
+        }
+        if (modalQuantityPlus) {
+            modalQuantityPlus.addEventListener('click', () => handleModalQuantityChange(1));
+        }
+        if (modalAddToCartBtn) {
+            modalAddToCartBtn.addEventListener('click', () => {
+                if (currentProductInModal) {
+                    const quantity = parseInt(modalQuantityInput.value);
+                    const color = modalColorSelect.value !== '' ? modalColorSelect.value : null;
+                    addToCart(currentProductInModal, quantity, color);
+                    hideProductDetails(); // Close modal after adding
+                }
+            });
+        }
+
+        // Event listener for notification close button
+        if (notificationCloseBtn) {
+            notificationCloseBtn.addEventListener('click', () => {
+                cartNotification.classList.remove('show');
+            });
+        }
+
+    });
+</script>
+</body>
+</html>
