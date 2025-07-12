@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Clubs - La Familia Chambers</title>
+    <meta name="description" content="Explore and join exclusive member clubs at La Familia Chambers, fostering networking and shared interests.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Clubs page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .clubs-hero {
+            background: url('https://placehold.co/1200x400/8A2BE2/ffffff?text=Join+Our+Clubs') no-repeat center center / cover;
+            color: var(--light-color);
+            text-align: center;
+            padding: var(--spacing-unit) 0;
+            margin-bottom: var(--spacing-unit);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px; /* Ensure hero section has a decent height */
+        }
+
+        .clubs-hero h1 {
+            font-size: var(--font-size-xxl);
+            margin-bottom: var(--spacing-unit-half);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .clubs-hero p {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-unit);
+            max-width: 800px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Enhanced CTA Button Styling */
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+            padding: var(--spacing-unit-half) var(--spacing-unit);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--box-shadow);
+            border: none; /* Ensure no default button border */
+            cursor: pointer; /* Indicate it's clickable */
+            outline: none; /* Remove outline on focus */
+            display: inline-block; /* For proper padding and width in hero */
+            text-align: center; /* For proper text alignment */
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Specific styles for the Clubs page */
+        .clubs-section {
+            padding: var(--spacing-unit) 0;
+        }
+
+        .clubs-section h2 {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-double);
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .clubs-section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: var(--spacing-unit-half) auto 0;
+            border-radius: 2px;
+        }
+
+        #club-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-unit);
+        }
+
+        .club-card {
+            background-color: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .club-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .club-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .club-card-content {
+            padding: var(--spacing-unit);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .club-card-content h4 {
+            font-size: var(--font-size-lg);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit-half);
+        }
+
+        .club-card-content p {
+            font-size: var(--font-size-md);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-unit);
+            flex-grow: 1;
+        }
+
+        .club-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-unit-half);
+            font-size: var(--font-size-sm);
+            color: var(--secondary-color);
+            margin-top: auto; /* Pushes meta and button to the bottom */
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .club-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .club-meta i {
+            margin-right: 5px;
+            color: var(--accent-color);
+        }
+
+        .club-card-content .cta-button {
+            /* Inherits general .cta-button styles but can be overridden if needed */
+            background-color: var(--primary-color); /* Overridden to primary color */
+        }
+
+        .club-card-content .cta-button:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .clubs-hero h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .clubs-hero p {
+                font-size: var(--font-size-md);
+            }
+
+            #club-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="#" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="#" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="#" class="nav-link">Member Reviews</a></li>
+                <li><a href="#" class="nav-link">Board of Directors</a></li>
+                <li><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="clubs-hero">
+            <h1>Discover Our Member Clubs</h1>
+            <p>Connect with professionals, share interests, and grow your network through our diverse range of exclusive member clubs.</p>
+            <a href="join-clubs.html" class="cta-button">Explore Clubs</a>
+        </section>
+
+        <section class="clubs-section">
+            <h2>Our Vibrant Clubs</h2>
+            <div id="club-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+
+    <script src="scripts/main.js"></script>
+    <script>
+    const clubsData = [
+        {
+            id: 'entrepreneurs-alliance',
+            name: 'Entrepreneurs Alliance',
+            description: 'A dynamic club for aspiring and established entrepreneurs to share ideas, gain insights, and collaborate on ventures. Focuses on innovation, funding, and market strategies.',
+            members: 120,
+            frequency: 'Bi-Weekly Meetings',
+            location: 'Virtual & Nairobi CBD',
+            image: 'https://placehold.co/400x200/4CAF50/ffffff?text=Entrepreneurs+Alliance'
+        },
+        {
+            id: 'tech-innovators-hub',
+            name: 'Tech Innovators Hub',
+            description: 'Connecting tech enthusiasts, developers, and IT professionals. Discuss cutting-edge technologies, coding challenges, and digital transformation trends.',
+            members: 85,
+            frequency: 'Monthly Workshops',
+            location: 'Westlands Tech Hubs',
+            image: 'https://placehold.co/400x200/2196F3/ffffff?text=Tech+Innovators+Hub'
+        },
+        {
+            id: 'women-in-leadership',
+            name: 'Women in Leadership',
+            description: 'Empowering women professionals through mentorship, networking events, and discussions on leadership, career development, and work-life balance.',
+            members: 95,
+            frequency: 'Quarterly Seminars',
+            location: 'Various City Locations',
+            image: 'https://placehold.co/400x200/FFC107/ffffff?text=Women+in+Leadership'
+        },
+        {
+            id: 'creative-arts-guild',
+            name: 'Creative Arts Guild',
+            description: 'For artists, designers, writers, and performers. A space to collaborate, showcase work, and discuss trends in the creative industries.',
+            members: 60,
+            frequency: 'Monthly Meetups',
+            location: 'Karen & Gigiri Art Spaces',
+            image: 'https://placehold.co/400x200/9C27B0/ffffff?text=Creative+Arts+Guild'
+        },
+        {
+            id: 'health-wellness-circle',
+            name: 'Health & Wellness Circle',
+            description: 'Promoting holistic well-being among members. Organizes fitness challenges, wellness workshops, and discussions on mental health and nutrition.',
+            members: 70,
+            frequency: 'Weekly Activities',
+            location: 'Outdoor & Gym Facilities',
+            image: 'https://placehold.co/400x200/00BCD4/ffffff?text=Health+Wellness+Circle'
+        },
+        {
+            id: 'finance-investment-group',
+            name: 'Finance & Investment Group',
+            description: 'Dedicated to financial literacy, investment strategies, and market analysis. Ideal for finance professionals and anyone interested in growing their wealth.',
+            members: 110,
+            frequency: 'Bi-Monthly Webinars',
+            location: 'Virtual & Upper Hill',
+            image: 'https://placehold.co/400x200/FF5722/ffffff?text=Finance+Investment+Group'
+        },
+        {
+            id: 'sustainability-champions',
+            name: 'Sustainability Champions',
+            description: 'Focuses on environmental conservation, sustainable business practices, and green initiatives. Engages in community projects and policy advocacy.',
+            members: 45,
+            frequency: 'Project-Based',
+            location: 'Across Nairobi',
+            image: 'https://placehold.co/400x200/8BC34A/ffffff?text=Sustainability+Champions'
+        },
+        {
+            id: 'culinary-explorers',
+            name: 'Culinary Explorers',
+            description: 'A club for foodies and culinary professionals. Explores diverse cuisines, organises cooking classes, restaurant reviews, and food festivals.',
+            members: 50,
+            frequency: 'Monthly Dining Events',
+            location: 'Gourmet Restaurants & Kitchens',
+            image: 'https://placehold.co/400x200/CDDC39/ffffff?text=Culinary+Explorers'
+        },
+        {
+            id: 'real-estate-investors',
+            name: 'Real Estate Investors',
+            description: 'Connecting professionals and individuals interested in real estate. Discussions on market trends, property law, and investment development projects.',
+            members: 55,
+            frequency: 'Monthly Property Tours',
+            location: 'Nairobi & Environs',
+            image: 'https://placehold.co/400x200/A52A2A/ffffff?text=Real+Estate+Investors'
+        }
+    ];
+
+    function renderClubs() {
+        const clubGrid = document.getElementById('club-grid');
+        if (!clubGrid) return;
+
+        clubGrid.innerHTML = ''; // Clear existing content
+
+        clubsData.forEach(club => {
+            const clubCard = `
+                <div class="club-card">
+                    <img src="${club.image}" alt="${club.name}">
+                    <div class="club-card-content">
+                        <h4>${club.name}</h4>
+                        <p>${club.description}</p>
+                        <div class="club-meta">
+                            <span><i class="fas fa-users"></i> ${club.members} Members</span>
+                            <span><i class="fas fa-calendar-alt"></i> ${club.frequency}</span>
+                            <span><i class="fas fa-globe"></i> ${club.location}</span>
+                        </div>
+                        <a href="join-clubs.html?clubId=${club.id}" class="cta-button">Learn More & Join</a>
+                    </div>
+                </div>
+            `;
+            clubGrid.insertAdjacentHTML('beforeend', clubCard);
+        });
+    }
+
+    // Call renderClubs on page load
+    document.addEventListener('DOMContentLoaded', renderClubs);
+</script>
+
+</body>
+</html>

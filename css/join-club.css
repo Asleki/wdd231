@@ -1,0 +1,365 @@
+/* Ensure html and body allow scrolling */
+html, body {
+    min-height: 100vh; /* Ensure the page is at least viewport height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+}
+
+/* Specific styles for the Join a Club page */
+main {
+    padding: var(--spacing-unit);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.join-club-hero {
+    background: url('https://placehold.co/1200x400/5F9EA0/ffffff?text=Join+Our+Community') no-repeat center center / cover;
+    color: white;
+    text-align: center;
+    padding: 5rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.join-club-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    border-radius: 8px;
+}
+
+.join-club-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.join-club-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.join-club-hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.join-club-form-section {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px var(--card-shadow);
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.join-club-form-section h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.join-club-form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.form-group input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.form-group .radio-group label {
+    font-weight: normal;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.form-navigation button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.form-navigation .prev-button {
+    background-color: var(--light-bg);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.form-navigation .prev-button:hover {
+    background-color: var(--hover-bg);
+}
+
+.form-navigation .next-button,
+.form-navigation .submit-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+}
+
+.form-navigation .next-button:hover,
+.form-navigation .submit-button:hover {
+    background-color: #c4644a;
+}
+
+.form-step {
+    display: none; /* Hidden by default, shown by JS */
+}
+
+.form-step.active {
+    display: block;
+}
+
+.club-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.club-selection-item {
+    background-color: var(--light-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.club-selection-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.club-selection-item.selected {
+    border-color: var(--primary-color);
+    background-color: #e6f0ff; /* Light blue for selected */
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.3); /* Primary color glow */
+}
+
+.club-selection-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+}
+
+.club-selection-item h4 {
+    margin: 0.5rem 0 0.2rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.club-selection-item p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.3;
+}
+
+#selected-club-display {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .join-club-hero {
+    background: url('https://placehold.co/1200x400/3A506B/ffffff?text=Join+Our+Community+Dark') no-repeat center center / cover;
+}
+
+body.dark-mode .join-club-hero::before {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .join-club-hero h1,
+body.dark-mode .join-club-hero p {
+    color: var(--dark-text);
+}
+
+body.dark-mode .join-club-form-section {
+    background-color: var(--dark-bg);
+    box-shadow: var(--shadow-md-dark);
+}
+
+body.dark-mode .join-club-form-section h3 {
+    color: var(--secondary-color);
+    border-bottom-color: #555;
+}
+
+body.dark-mode .form-group label {
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-group input[type="text"],
+body.dark-mode .form-group input[type="email"],
+body.dark-mode .form-group input[type="tel"],
+body.dark-mode .form-group select {
+    background-color: #3a3a50;
+    color: var(--dark-text-light);
+    border-color: #555;
+}
+
+body.dark-mode .form-group input[type="text"]:focus,
+body.dark-mode .form-group input[type="email"]:focus,
+body.dark-mode .form-group input[type="tel"]:focus,
+body.dark-mode .form-group select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(224, 122, 95, 0.2);
+}
+
+body.dark-mode .form-group .radio-group label {
+    color: var(--dark-text-light);
+}
+
+body.dark-mode .form-navigation .prev-button {
+    background-color: #333;
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+body.dark-mode .form-navigation .prev-button:hover {
+    background-color: #444;
+}
+
+body.dark-mode .form-navigation .next-button,
+body.dark-mode .form-navigation .submit-button {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode .form-navigation .next-button:hover,
+body.dark-mode .form-navigation .submit-button:hover {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .club-selection-item {
+    background-color: #3a3a50;
+    border-color: #555;
+}
+
+body.dark-mode .club-selection-item:hover {
+    border-color: var(--secondary-color);
+}
+
+body.dark-mode .club-selection-item.selected {
+    border-color: var(--secondary-color);
+    background-color: #35354a;
+    box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.3);
+}
+
+body.dark-mode .club-selection-item h4 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .club-selection-item p {
+    color: var(--dark-text-light);
+}
+
+body.dark-mode #selected-club-display {
+    color: var(--secondary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .join-club-container {
+        padding: 1.5rem;
+    }
+    .join-club-hero {
+        padding: 3rem 1rem;
+    }
+    .join-club-hero h1 {
+        font-size: 2.5rem;
+    }
+    .join-club-hero p {
+        font-size: 1.2rem;
+    }
+    .join-club-form-section {
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+    .join-club-form-section h3 {
+        font-size: 1.8rem;
+    }
+    .club-selection-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .join-club-hero h1 {
+        font-size: 2rem;
+    }
+    .join-club-hero p {
+        font-size: 1rem;
+    }
+    .join-club-form-section h3 {
+        font-size: 1.5rem;
+    }
+    .form-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .form-navigation button {
+        width: 100%;
+    }
+    .club-selection-grid {
+        grid-template-columns: 1fr;
+    }
+}

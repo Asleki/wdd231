@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet the Developer - La Familia Chambers</title>
+    <meta name="description" content="Learn about Alex Malunda, the developer behind the La Familia Chambers website, his skills, and other projects.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Specific styles for the Developer page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .developer-hero {
+            background: url('https://placehold.co/1200x400/334455/ffffff?text=Developing+Digital+Futures') no-repeat center center / cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .developer-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay */
+            border-radius: 8px;
+        }
+
+        .developer-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .developer-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .developer-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .profile-container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .profile-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 1rem;
+        }
+
+        .profile-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a img {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.2s ease;
+        }
+
+        .social-links a:hover img {
+            transform: scale(1.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .content-block {
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+            text-align: justify;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: var(--text-color);
+        }
+
+        .content-block ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .content-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-card-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card-info h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .project-card-info p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .project-card-info h5 {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .project-card-info ul {
+            list-style: disc;
+            margin-left: 1.2rem;
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            margin-top: auto; /* Push links to the bottom */
+            text-align: center;
+        }
+
+        .project-links a {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .project-links a:hover {
+            background-color: #4a5a6a;
+        }
+
+        .dev-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .dev-section h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .dev-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-list li a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+        }
+
+        .contact-list li a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-list li a img {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .developer-hero {
+                padding: 4rem 1rem;
+            }
+            .developer-hero h1 {
+                font-size: 2.8rem;
+            }
+            .developer-hero p {
+                font-size: 1.2rem;
+            }
+            .profile-container, .dev-section {
+                padding: 1.5rem;
+            }
+            .profile-header h1 {
+                font-size: 2rem;
+            }
+            .profile-header p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .content-block, .project-card-info p {
+                font-size: 1rem;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            .project-card-info h4 {
+                font-size: 1.3rem;
+            }
+            .project-card-info h5 {
+                font-size: 1rem;
+            }
+            .project-card-info ul {
+                font-size: 0.85rem;
+            }
+            .dev-section h3 {
+                font-size: 1.8rem;
+            }
+            .dev-section p {
+                font-size: 1rem;
+            }
+            .contact-list li a {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .developer-hero {
+                padding: 3rem 0.5rem;
+            }
+            .developer-hero h1 {
+                font-size: 2.2rem;
+            }
+            .developer-hero p {
+                font-size: 0.95rem;
+            }
+            .profile-container, .dev-section {
+                padding: 1rem;
+            }
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+            .profile-header h1 {
+                font-size: 1.8rem;
+            }
+            .profile-header p {
+                font-size: 0.9rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .content-block, .project-card-info p {
+                font-size: 0.9rem;
+            }
+            .project-card-info h4 {
+                font-size: 1.2rem;
+            }
+            .project-links a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .dev-section h3 {
+                font-size: 1.5rem;
+            }
+            .dev-section p {
+                font-size: 0.95rem;
+            }
+            .contact-list li a {
+                font-size: 0.95rem;
+            }
+            .contact-list li a img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li class="active-nav-link"><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Developer Hero Section -->
+    <section class="developer-hero">
+        <div class="developer-hero-content">
+            <h1>Meet the Website Developer</h1>
+            <p>Bringing the La Familia Chambers digital vision to life with expertise and dedication.</p>
+        </div>
+    </section>
+
+    <div class="profile-container">
+      <div class="profile-header">
+        <img src="https://placehold.co/150x150/000080/FFFFFF?text=Developer+Photo" alt="Photo of the Site Developer, Alex Malunda" class="profile-photo" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000080/FFFFFF?text=Alex';">
+        <h1>Alex Malunda</h1>
+        <p>Architecting Digital Experiences for Community Growth</p>
+        <div class="social-links">
+          <a href="https://github.com/Asleki" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile of Alex Malunda">
+              <img src="https://placehold.co/24x24/000000/FFFFFF?text=GH" alt="GitHub Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/000000/FFFFFF?text=GH';">
+          </a>
+          <a href="https://www.linkedin.com/in/alexmalunda" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile of Alex Malunda">
+              <img src="https://placehold.co/24x24/0A66C2/FFFFFF?text=LI" alt="LinkedIn Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/0A66C2/FFFFFF?text=LI';">
+          </a>
+          <a href="https://x.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter) profile of Alex Malunda">
+              <img src="https://placehold.co/24x24/000000/FFFFFF?text=X" alt="X (formerly Twitter) Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/000000/FFFFFF?text=X';">
+          </a>
+        </div>
+      </div>
+
+      <h2 class="section-title">About Alex Malunda</h2>
+      <div class="content-block">
+        <p>Hello! I'm Alex Malunda, a passionate developer focused on building robust and user-friendly applications. My journey into programming is driven by a fascination for how digital products are built and a dedication to crafting impactful web solutions.</p>
+        <p>I specialize in **Website Frontend development**, where I leverage HTML, CSS, and JavaScript to create engaging, responsive, and intuitive user interfaces that bring designs to life. My proficiency in **C#** allows me to develop powerful backend solutions, create robust desktop applications, and handle complex business logic. Furthermore, my expertise in **Database management with MySQL** ensures that I can design, implement, and manage efficient and scalable data storage solutions for dynamic web applications and software systems. The La Familia Chambers website is a project I crafted with dedication, aiming to provide a robust and engaging platform for the business community and its members.</p>
+      </div>
+
+      <h2 class="section-title">My Journey in Web Development</h2>
+      <div class="content-block">
+        <p>My path to becoming a developer has been driven by continuous learning and hands-on experience. I believe in the power of code to solve real-world problems and enhance daily lives. Key milestones include:</p>
+        <ul>
+          <li><strong>Self-Taught Foundations:</strong> Began with online courses and tutorials, building a strong understanding of core web technologies.</li>
+          <li><strong>Project-Based Learning:</strong> Continuously working on personal and collaborative projects to apply theoretical knowledge and explore new frameworks.</li>
+          <li><strong>Focus on User Experience:</strong> Always striving to ensure that the applications I build are not just functional, but also delightful and easy to use.</li>
+          <li><strong>Adaptability:</strong> Committed to staying updated with the latest industry trends and evolving technologies to deliver cutting-edge solutions.</li>
+        </ul>
+      </div>
+
+      <h2 class="section-title">Key Projects & Contributions</h2>
+      <div class="content-block">
+        <p>Here are some of the projects I've developed, including my contribution to La Familia Chambers:</p>
+        <div class="project-grid">
+          <!-- CineWatch Project -->
+          <div class="project-card">
+            <img src="https://placehold.co/400x200/556B2F/FFFFFF?text=CineWatch+Project" alt="CineWatch Project Thumbnail">
+            <div class="project-card-info">
+              <h4>CineWatch</h4>
+              <p>CineWatch is a comprehensive movie and TV show streaming platform design, focusing on intuitive user experience and dynamic content display. Currently, I am actively implementing download and uploading features, and also developing a system for users to write reviews for shows.</p>
+              <h5>Key Features:</h5>
+              <ul>
+                  <li>Dynamic Hero Slideshow</li>
+                  <li>Categorized Show Listings with Carousels</li>
+                  <li>Interactive Search Functionality</li>
+                  <li>User Account Management (Login/Logout, Watchlist)</li>
+                  <li>Dark Mode Toggle</li>
+                  <li>Download and Upload Features (In Progress)</li>
+                  <li>User Review System (In Progress)</li>
+              </ul>
+            </div>
+          </div>
+          <!-- La Familia Chambers Website Project -->
+          <div class="project-card">
+            <img src="https://placehold.co/400x200/A0C0A0/FFFFFF?text=La+Familia+Chambers" alt="La Familia Chambers Website Project Thumbnail">
+            <div class="project-card-info">
+              <h4>La Familia Chambers Website</h4>
+              <p>This comprehensive platform for La Familia Chambers focuses on connecting businesses, providing resources, and fostering community growth. It features a dynamic member directory, event calendar, news updates, and dedicated pages for various member services.</p>
+              <h5>Key Features:</h5>
+              <ul>
+                  <li>Unified Header & Footer System</li>
+                  <li>Dynamic Member Directory with Search & Filter</li>
+                  <li>Events Calendar Integration</li>
+                  <li>News & Announcements Section</li>
+                  <li>Dedicated Member Profile Pages (e.g., Apex Innovations)</li>
+                  <li>Responsive Design for All Devices</li>
+                  <li>Dark Mode Toggle</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Whitewater Rafting Site Project -->
+          <div class="project-card">
+            <img src="https://placehold.co/400x200/4682B4/FFFFFF?text=Web+Design+Project" alt="Whitewater Rafting Site Thumbnail">
+            <div class="project-card-info">
+              <h4>Responsive Web Design Project</h4>
+              <p>A multi-page website designed for a hypothetical adventure company, showcasing responsive design principles, engaging user interface, and interactive elements.</p>
+              <p><strong>Technologies Used:</strong> HTML, CSS, JavaScript.</p>
+              <div class="project-links">
+                <a href="https://github.com/Asleki/wdd130" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+              </div>
+            </div>
+          </div>
+          <!-- Simulation App Project -->
+          <div class="project-card">
+            <img src="https://placehold.co/400x200/8A2BE2/FFFFFF?text=Python+App" alt="Simulation Bank App Thumbnail">
+            <div class="project-card-info">
+              <h4>Simulation Application with GUI</h4>
+              <p>A desktop application simulating core operations for a specific domain (e.g., banking, inventory management), featuring both command-line and graphical user interfaces for user interaction.</p>
+              <p><strong>Technologies Used:</strong> Python (with Tkinter for GUI).</p>
+              <div class="project-links">
+                <a href="https://github.com/Asleki/cse111" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connect with Me Section -->
+      <section id="connect-with-me" class="dev-section">
+          <h3>Connect with Alex Malunda</h3>
+          <p>I'd love to connect! Feel free to reach out through any of the channels below for collaborations, inquiries, or just to say hello:</p>
+          <ul class="contact-list">
+              <li>
+                  <a href="mailto:alexmalunda@aol.com" aria-label="Email Alex Malunda">
+                      <img src="https://placehold.co/24x24/FFC300/FFFFFF?text=Email" alt="Email Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FFC300/FFFFFF?text=Email';"> alexmalunda@aol.com
+                  </a>
+              </li>
+              <li>
+                  <a href="tel:+254707176595" aria-label="Call Alex Malunda on phone number +254 707 176595">
+                      <img src="https://placehold.co/24x24/4CAF50/FFFFFF?text=Phone" alt="Phone Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/4CAF50/FFFFFF?text=Phone';"> +254 707 176595
+                  </a>
+              </li>
+              <li>
+                  <a href="https://www.linkedin.com/in/alexmalunda" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile of Alex Malunda">
+                      <img src="https://placehold.co/24x24/0A66C2/FFFFFF?text=LI" alt="LinkedIn Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/0A66C2/FFFFFF?text=LI';"> linkedin.com/in/alexmalunda
+                  </a>
+              </li>
+              <li>
+                  <a href="https://github.com/Asleki" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile of Alex Malunda (Asleki)">
+                      <img src="https://placehold.co/24x24/000000/FFFFFF?text=GH" alt="GitHub Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/000000/FFFFFF?text=GH';"> github.com/Asleki
+                  </a>
+              </li>
+              <li>
+                  <a href="https://www.facebook.com/aslekiymastamynd" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile of Alex Malunda (aslekiymastamynd)">
+                      <img src="https://placehold.co/24x24/1877F2/FFFFFF?text=FB" alt="Facebook Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/1877F2/FFFFFF?text=FB';"> facebook.com/aslekiymastamynd
+                  </a>
+              </li>
+              <li>
+                  <a href="https://wa.me/254110029069" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp message to Alex Malunda">
+                      <img src="https://placehold.co/24x24/25D366/FFFFFF?text=WA" alt="WhatsApp Icon" width="24" height="24" onerror="this.onerror=null;this.src='https://placehold.co/24x24/25D366/FFFFFF?text=WA';"> Send me a message
+                  </a>
+              </li>
+          </ul>
+      </section>
+    </div>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<script>
+    // JavaScript for dynamic year in footer (if not already in main.js)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set active navigation link for Developer page (assuming it's under About Us)
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('#main-nav .nav-list a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'developer.html') {
+                link.closest('li').classList.add('active-nav-link');
+                // Also ensure the parent 'About Us' is active if Developer is a sub-page
+                const aboutUsLink = document.querySelector('#main-nav .nav-list a[href="about.html"]');
+                if (aboutUsLink) {
+                    aboutUsLink.closest('li').classList.add('active-nav-link');
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

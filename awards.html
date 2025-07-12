@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awards & Recognition - La Familia Chambers</title>
+    <meta name="description" content="Celebrating the achievements and excellence of La Familia Chambers members through prestigious awards and recognition.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Awards page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .awards-hero {
+            background: url('https://placehold.co/1200x400/8B4513/ffffff?text=Awards+Recognition') no-repeat center center / cover;
+            color: var(--light-color);
+            text-align: center;
+            padding: var(--spacing-unit) 0;
+            margin-bottom: var(--spacing-unit);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .awards-hero h1 {
+            font-size: var(--font-size-xxl);
+            margin-bottom: var(--spacing-unit-half);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .awards-hero p {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-unit);
+            max-width: 800px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Sticky Subheader - New Styles */
+        .subheader-sticky-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f9f9; /* Light background */
+            padding: 1rem;
+            border-radius: 1rem; /* Rounded corners */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            margin-bottom: 2rem; /* Spacing below */
+            gap: 1rem; /* Gap between elements */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            position: sticky; /* Make it sticky */
+            top: 0;
+            z-index: 900;
+        }
+        .subheader-sticky-container h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        .search-filter-group {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            position: relative; /* For positioning suggestions */
+        }
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 2rem; /* Pill shape */
+            padding: 0.25rem 1rem; /* Inner padding */
+            width: 100%; /* Take full width of its container */
+            position: relative; /* For positioning inner buttons */
+        }
+        .search-input-wrapper select {
+            border: none;
+            background: none;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+            color: #333;
+            outline: none;
+            cursor: pointer;
+        }
+        .search-input-wrapper input[type="text"] {
+            border: none;
+            outline: none;
+            flex: 1; /* Take remaining space */
+            font-size: 1rem;
+            background: none;
+            color: #333;
+            /* Padding for inner buttons */
+            padding-right: calc(3 * (0.5rem + 2rem)); /* 3 buttons * (gap + button width) */
+        }
+        /* Inner buttons within search bar */
+        .search-input-wrapper .control-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            color: #666;
+            margin: 0 0.25rem; /* Gap between buttons */
+            cursor: pointer;
+            transition: color 0.2s;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2rem; /* Fixed width for icon buttons */
+            height: 2rem; /* Fixed height for icon buttons */
+            padding: 0; /* Remove padding for icon buttons */
+            border-radius: 50%; /* Make them round */
+            display: flex; /* To center icon */
+            align-items: center;
+            justify-content: center;
+        }
+        .search-input-wrapper .control-btn:hover {
+            color: #000;
+        }
+
+        /* Positioning for inner buttons (from right to left) */
+        #awards-search-submit-btn { /* Search icon - rightmost */
+            right: 0.5rem;
+        }
+        #awards-mic-btn { /* Mic icon */
+            right: calc(0.5rem + 2rem + 0.5rem); /* Right of search button + search button width + gap */
+        }
+        #awards-clear-search-btn { /* Clear icon - leftmost of the group */
+            right: calc(2 * (0.5rem + 2rem) + 0.5rem); /* Right of mic button + mic button width + gap */
+            display: none; /* Hidden by default, shown by JS */
+        }
+
+        /* View Toggle Button */
+        .view-toggle-group .control-btn {
+            border: 1px solid #ccc;
+            background: #fff;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            color: var(--primary-color); /* Default color */
+        }
+        .view-toggle-group .control-btn:hover {
+            background: #eee;
+            color: var(--primary-color-dark);
+        }
+        /* No active state for toggle button, icon changes instead */
+
+
+        #awards-search-suggestions {
+            position: absolute;
+            background-color: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 950;
+            width: 100%; /* Match width of the search-input-wrapper */
+            left: 0;
+            top: calc(100% + 5px); /* Position below search input wrapper */
+            box-shadow: var(--box-shadow);
+            display: none; /* Hidden by default */
+        }
+
+        .suggestion-item {
+            padding: var(--spacing-unit-half);
+            cursor: pointer;
+            text-align: left;
+            color: var(--text-color);
+        }
+
+        .suggestion-item:hover {
+            background-color: var(--light-background);
+        }
+
+
+        .awards-section {
+            padding: var(--spacing-unit) 0;
+        }
+
+        .awards-section h2 {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-double);
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .awards-section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: var(--spacing-unit-half) auto 0;
+            border-radius: 2px;
+        }
+
+        #awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-unit);
+            transition: grid-template-columns 0.3s ease, flex-direction 0.3s ease;
+        }
+
+        /* List View Styles */
+        #awards-grid.list-view {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-unit);
+        }
+
+        #awards-grid.list-view .award-card {
+            flex-direction: row; /* Horizontal layout for list items */
+            text-align: left;
+            padding: var(--spacing-unit);
+            align-items: center;
+            gap: var(--spacing-unit);
+        }
+
+        #awards-grid.list-view .award-card .award-icon {
+            flex-shrink: 0; /* Prevent icon from shrinking */
+            margin-bottom: 0;
+            margin-right: var(--spacing-unit-half);
+        }
+        #awards-grid.list-view .award-card .award-content {
+            flex-grow: 1; /* Allow content to take available space */
+        }
+
+
+        .award-card {
+            background-color: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: var(--spacing-unit);
+        }
+
+        .award-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        /* Reverted Trophy Icon Style */
+        .award-card .award-icon {
+            font-size: 3rem; /* Original size */
+            color: var(--accent-color); /* Original color */
+            margin-bottom: var(--spacing-unit-half);
+            transition: transform 0.3s ease; /* Keep transition for general smoothness */
+        }
+
+        .award-card:hover .award-icon {
+            transform: scale(1.1); /* Simple scale on hover */
+        }
+
+        .award-card h4 {
+            font-size: var(--font-size-lg);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit-half);
+        }
+
+        .award-card p {
+            font-size: var(--font-size-md);
+            color: var(--text-color);
+            line-height: 1.5;
+            margin-bottom: var(--spacing-unit-half);
+        }
+
+        .award-card .award-year {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .award-card .award-issuer {
+            font-style: italic;
+            color: var(--text-color-light);
+            font-size: var(--font-size-sm);
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin-top: var(--spacing-unit-double);
+        }
+
+        .load-more-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: var(--spacing-unit-half) var(--spacing-unit);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--box-shadow);
+            border: none;
+            cursor: pointer;
+            outline: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .load-more-button:hover {
+            background-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .load-more-button:active {
+            transform: translateY(0);
+            box-shadow: var(--box-shadow);
+        }
+
+        .load-more-button:disabled {
+            background-color: var(--border-color);
+            color: var(--secondary-color);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.7;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .awards-hero h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .awards-hero p {
+                font-size: var(--font-size-md);
+            }
+
+            #awards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subheader-sticky-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .subheader-sticky-container .search-filter-group,
+            .subheader-sticky-container .view-toggle-group {
+                flex-direction: column;
+                gap: var(--spacing-unit-half);
+            }
+
+            .subheader-sticky-container .search-input-wrapper,
+            .subheader-sticky-container select,
+            .subheader-sticky-container .control-btn { /* Apply to all control buttons */
+                width: 100%;
+            }
+
+            .search-input-wrapper input[type="text"] {
+                padding-right: calc(3 * (0.5rem + 2rem)); /* Adjust padding for inner buttons */
+            }
+
+            .search-input-wrapper .control-btn {
+                position: static; /* Remove absolute positioning on mobile */
+                transform: none;
+                width: auto; /* Allow natural width */
+                height: auto;
+                border-radius: var(--border-radius-sm); /* Revert to square corners */
+                margin: 0.25rem 0; /* Add margin for vertical stacking */
+            }
+
+            #awards-search-submit-btn,
+            #awards-mic-btn,
+            #awards-clear-search-btn {
+                right: auto; /* Remove specific right positioning */
+            }
+
+            #awards-search-suggestions {
+                width: calc(100% - var(--spacing-unit-double)); /* Adjust width for full screen */
+                left: var(--spacing-unit);
+            }
+
+            #awards-grid.list-view .award-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            #awards-grid.list-view .award-card .award-icon {
+                margin-right: 0;
+                margin-bottom: var(--spacing-unit-half);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="#" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="#" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="#" class="nav-link">Member Reviews</a></li>
+                <li><a href="#" class="nav-link">Board of Directors</a></li>
+                <li><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="awards-hero">
+            <h1>Awards & Recognition</h1>
+            <p>Celebrating the outstanding achievements and contributions of our esteemed members to the business community.</p>
+        </section>
+
+        <!-- Updated Subheader Search Bar -->
+        <div class="subheader-sticky-container">
+            <h2>Search</h2>
+            <div class="search-filter-group">
+                <div class="search-input-wrapper">
+                    <label for="awards-filter-type" class="visually-hidden">Filter Awards By</label>
+                    <select id="awards-filter-type" title="Filter Awards By">
+                        <option value="all">All</option>
+                        <option value="awardName">Award Name</option>
+                        <option value="memberName">Member Name</option>
+                        <option value="issuer">Issuer</option>
+                        <option value="year">Year</option>
+                    </select>
+                    <input type="text" id="awards-search-input" placeholder="Search">
+                    <button id="awards-mic-btn" class="control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+                    <button id="awards-clear-search-btn" class="control-btn" aria-label="Clear Search"><i class="fas fa-times"></i></button>
+                    <button id="awards-search-submit-btn" class="control-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <div id="awards-search-suggestions"></div>
+            </div>
+            <div class="view-toggle-group">
+                <button id="awards-toggle-view-btn" class="control-btn" aria-label="Toggle View">
+                    <i class="fas fa-th-large"></i> <!-- Default to grid icon, implying current view is grid -->
+                </button>
+            </div>
+        </div>
+
+        <section class="awards-section">
+            <h2>Our Esteemed Awards</h2>
+            <div id="awards-grid" class="grid-view">
+                <!-- Awards will be dynamically loaded here -->
+                <p id="loading-message">Loading awards...</p>
+            </div>
+            <div id="error-message" style="display: none; color: var(--danger-color); text-align: center; margin-top: 20px;">
+                Failed to load awards. Please try again later.
+            </div>
+            <div class="load-more-container">
+                <button id="load-more-awards-btn" class="load-more-button" style="display: none;">Load More Awards</button>
+            </div>
+        </section>
+    </main>
+<footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+
+    <script src="scripts/main.js"></script>
+    <script>
+        let awardsPage_allAwardsRawData = []; // Store all fetched awards
+        let awardsPage_filteredAwardsData = []; // Store awards after applying search/filters
+        const awardsPage_initialAwardsCount = 6; // Number of awards to show initially
+        const awardsPage_awardsPerLoad = 3; // Number of awards to load each time "Load More" is clicked
+        let awardsPage_currentDisplayIndex = 0; // Keep track of how many awards are currently displayed from filteredAwardsData
+        let awardsPage_isGridView = true; // Track current view state, default to grid
+
+        // Function to render awards based on the currentAwardsDisplayed count
+        function awardsPage_renderAwardsPortion() {
+            const awardsGrid = document.getElementById('awards-grid');
+            const loadMoreBtn = document.getElementById('load-more-awards-btn');
+            
+            // Clear existing content only if starting fresh or re-rendering completely
+            if (awardsPage_currentDisplayIndex === 0) {
+                awardsGrid.innerHTML = ''; 
+            }
+
+            const awardsToRender = awardsPage_filteredAwardsData.slice(awardsPage_currentDisplayIndex, awardsPage_currentDisplayIndex + awardsPage_awardsPerLoad);
+
+            if (awardsToRender.length === 0 && awardsPage_currentDisplayIndex === 0) {
+                awardsGrid.innerHTML = '<p style="text-align: center; color: var(--secondary-color);">No awards found at this time matching your criteria.</p>';
+                loadMoreBtn.style.display = 'none';
+                return;
+            }
+
+            awardsToRender.forEach(award => {
+                const awardCard = `
+                    <div class="award-card">
+                        <i class="fas fa-trophy award-icon"></i>
+                        <div class="award-content">
+                            <h4>${award.name}</h4>
+                            <p class="award-year">Awarded in ${award.year}</p>
+                            <p class="award-issuer">by ${award.issuer}</p>
+                            ${award.member ? `<p class="award-member">Awarded to: <strong>${award.member}</strong></p>` : ''}
+                        </div>
+                    </div>
+                `;
+                awardsGrid.insertAdjacentHTML('beforeend', awardCard);
+            });
+
+            awardsPage_currentDisplayIndex += awardsToRender.length;
+
+            // Show/hide load more button
+            if (awardsPage_currentDisplayIndex < awardsPage_filteredAwardsData.length) {
+                loadMoreBtn.style.display = 'inline-block';
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+        // Function to apply filters and search
+        function awardsPage_applyFiltersAndSearch() {
+            const searchInput = document.getElementById('awards-search-input');
+            const searchTerm = searchInput.value.toLowerCase();
+            const filterType = document.getElementById('awards-filter-type').value;
+            const suggestionsContainer = document.getElementById('awards-search-suggestions');
+            const clearSearchBtn = document.getElementById('awards-clear-search-btn');
+
+            // Show/hide clear button based on search input content
+            if (searchTerm.length > 0) {
+                clearSearchBtn.style.display = 'flex'; // Use flex to center icon
+            } else {
+                clearSearchBtn.style.display = 'none';
+            }
+
+            awardsPage_filteredAwardsData = awardsPage_allAwardsRawData.filter(award => {
+                if (!searchTerm) return true; // If no search term, include all
+
+                let targetValue = '';
+                if (filterType === 'all') {
+                    targetValue = `${award.name} ${award.member || ''} ${award.issuer} ${award.year}`.toLowerCase();
+                } else if (filterType === 'awardName') {
+                    targetValue = award.name.toLowerCase();
+                } else if (filterType === 'memberName') {
+                    targetValue = (award.member || '').toLowerCase();
+                } else if (filterType === 'issuer') {
+                    targetValue = award.issuer.toLowerCase();
+                } else if (filterType === 'year') {
+                    targetValue = String(award.year).toLowerCase();
+                }
+                return targetValue.includes(searchTerm);
+            });
+
+            // Handle suggestions (only if search input is active)
+            if (searchTerm) {
+                const uniqueSuggestions = new Set();
+                awardsPage_filteredAwardsData.forEach(award => {
+                    if (filterType === 'all' || filterType === 'awardName') {
+                        if (award.name.toLowerCase().includes(searchTerm)) uniqueSuggestions.add(award.name);
+                    }
+                    if (filterType === 'all' || filterType === 'memberName') {
+                        if (award.member && award.member.toLowerCase().includes(searchTerm)) uniqueSuggestions.add(award.member);
+                    }
+                    if (filterType === 'all' || filterType === 'issuer') {
+                        if (award.issuer.toLowerCase().includes(searchTerm)) uniqueSuggestions.add(award.issuer);
+                    }
+                    if (filterType === 'all' || filterType === 'year') {
+                        if (String(award.year).toLowerCase().includes(searchTerm)) uniqueSuggestions.add(String(award.year));
+                    }
+                });
+
+                suggestionsContainer.innerHTML = '';
+                if (uniqueSuggestions.size > 0) {
+                    suggestionsContainer.style.display = 'block';
+                    Array.from(uniqueSuggestions).slice(0, 5).forEach(suggestion => { // Limit suggestions to 5
+                        const suggestionItem = document.createElement('div');
+                        suggestionItem.classList.add('suggestion-item');
+                        suggestionItem.textContent = suggestion;
+                        suggestionItem.addEventListener('click', () => {
+                            searchInput.value = suggestion; // Fill search bar with suggestion
+                            suggestionsContainer.style.display = 'none';
+                            awardsPage_applyFiltersAndSearch(); // Re-apply filter with selected suggestion
+                        });
+                        suggestionsContainer.appendChild(suggestionItem);
+                    });
+                } else {
+                    suggestionsContainer.style.display = 'none';
+                }
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+
+            awardsPage_currentDisplayIndex = 0; // Reset display index for new filter/search
+            awardsPage_renderAwardsPortion();
+        }
+
+        // Function to toggle between grid and list view
+        function awardsPage_toggleView() {
+            const awardsGrid = document.getElementById('awards-grid');
+            const toggleViewBtn = document.getElementById('awards-toggle-view-btn');
+            const icon = toggleViewBtn.querySelector('i');
+
+            if (awardsPage_isGridView) {
+                // Currently in grid view, switch to list view
+                awardsGrid.classList.remove('grid-view');
+                awardsGrid.classList.add('list-view');
+                icon.classList.remove('fa-th-large');
+                icon.classList.add('fa-list');
+                toggleViewBtn.setAttribute('aria-label', 'List View');
+            } else {
+                // Currently in list view, switch to grid view
+                awardsGrid.classList.remove('list-view');
+                awardsGrid.classList.add('grid-view');
+                icon.classList.remove('fa-list');
+                icon.classList.add('fa-th-large');
+                toggleViewBtn.setAttribute('aria-label', 'Grid View');
+            }
+            awardsPage_isGridView = !awardsPage_isGridView; // Toggle state
+        }
+
+        // Function to fetch and process member data for awards
+        async function awardsPage_fetchAndInitializeAwards() {
+            const awardsGrid = document.getElementById('awards-grid');
+            const loadingMessage = document.getElementById('loading-message');
+            const errorMessage = document.getElementById('error-message');
+            const loadMoreBtn = document.getElementById('load-more-awards-btn');
+
+            if (loadingMessage) loadingMessage.style.display = 'block'; // Show loading message
+            if (errorMessage) errorMessage.style.display = 'none'; // Hide error message initially
+            loadMoreBtn.style.display = 'none'; // Hide load more button initially
+
+            try {
+                // Assuming members.json is located in a 'data' directory
+                const response = await fetch('data/members.json'); 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const membersData = await response.json();
+
+                awardsPage_allAwardsRawData = []; // Reset global awards data
+                // Iterate through each member and collect their awards
+                membersData.forEach(member => {
+                    if (member.awards && Array.isArray(member.awards)) {
+                        member.awards.forEach(award => {
+                            // Add the member's name to the award object for display
+                            awardsPage_allAwardsRawData.push({ ...award, member: member.name });
+                        });
+                    }
+                });
+
+                // Sort awards by year in descending order (latest first)
+                awardsPage_allAwardsRawData.sort((a, b) => b.year - a.year);
+
+                if (loadingMessage) loadingMessage.style.display = 'none'; // Hide loading
+
+                // Initialize filtered data and render
+                awardsPage_applyFiltersAndSearch(); 
+
+            } catch (error) {
+                console.error('Error fetching or processing awards data:', error);
+                if (loadingMessage) loadingMessage.style.display = 'none'; // Hide loading
+                if (errorMessage) errorMessage.style.display = 'block'; // Show error message
+                awardsGrid.innerHTML = '<p style="text-align: center; color: var(--danger-color);">Could not load awards at this time. Please check the data source.</p>';
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            awardsPage_fetchAndInitializeAwards(); // Fetch and display initial awards
+
+            // Load More button
+            const loadMoreBtn = document.getElementById('load-more-awards-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', awardsPage_renderAwardsPortion);
+            }
+
+            // Search and Filter
+            const searchInput = document.getElementById('awards-search-input');
+            const filterTypeSelect = document.getElementById('awards-filter-type');
+            const searchSubmitBtn = document.getElementById('awards-search-submit-btn');
+            const micBtn = document.getElementById('awards-mic-btn');
+            const clearSearchBtn = document.getElementById('awards-clear-search-btn');
+            const suggestionsContainer = document.getElementById('awards-search-suggestions');
+
+            if (searchInput) {
+                // Trigger search on Enter key and manage clear button visibility
+                searchInput.addEventListener('keyup', (event) => {
+                    if (event.key === 'Enter') {
+                        awardsPage_applyFiltersAndSearch();
+                        suggestionsContainer.style.display = 'none'; // Hide suggestions on Enter
+                    } else {
+                        awardsPage_applyFiltersAndSearch(); // Still show suggestions on keyup
+                    }
+                });
+                searchInput.addEventListener('focus', () => { // Show suggestions on focus if there's text
+                    if (searchInput.value) {
+                        suggestionsContainer.style.display = 'block';
+                    }
+                });
+                // Prevent blur from hiding suggestions immediately on mousedown on suggestions
+                suggestionsContainer.addEventListener('mousedown', (event) => {
+                    event.preventDefault(); // Prevent default action (which might be blurring the input)
+                });
+
+                searchInput.addEventListener('blur', (event) => { // Hide suggestions on blur
+                    // Check if the related target of the blur is outside the suggestions container
+                    // This allows clicks on suggestions to register before hiding the dropdown
+                    if (!suggestionsContainer.contains(event.relatedTarget)) {
+                        suggestionsContainer.style.display = 'none';
+                    }
+                });
+            }
+            if (filterTypeSelect) {
+                filterTypeSelect.addEventListener('change', awardsPage_applyFiltersAndSearch);
+            }
+
+            // Search Submit Button Event Listener
+            if (searchSubmitBtn) {
+                searchSubmitBtn.addEventListener('click', () => {
+                    awardsPage_applyFiltersAndSearch();
+                    suggestionsContainer.style.display = 'none'; // Hide suggestions on click
+                });
+            }
+
+            // Microphone Button Event Listener (Placeholder)
+            if (micBtn) {
+                micBtn.addEventListener('click', () => {
+                    alert('Voice search is not yet implemented.'); // Placeholder for voice search functionality
+                });
+            }
+
+            // Clear Search Button Event Listener
+            if (clearSearchBtn) {
+                clearSearchBtn.addEventListener('click', () => {
+                    searchInput.value = ''; // Clear search input
+                    filterTypeSelect.value = 'all'; // Reset filter type
+                    suggestionsContainer.style.display = 'none'; // Hide suggestions
+                    awardsPage_applyFiltersAndSearch(); // Re-apply filters to show all awards (will also hide clear button)
+                });
+            }
+
+            // View Toggle Button
+            const toggleViewBtn = document.getElementById('awards-toggle-view-btn');
+            if (toggleViewBtn) {
+                toggleViewBtn.addEventListener('click', awardsPage_toggleView);
+                // Set initial icon for the toggle button (it should show the icon for the *current* view)
+                // If starting in grid view, button shows grid icon.
+                toggleViewBtn.querySelector('i').classList.add('fa-th-large');
+                toggleViewBtn.setAttribute('aria-label', 'Grid View');
+            }
+        });
+    </script>
+</body>
+</html>

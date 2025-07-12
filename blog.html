@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Blog - La Familia Chambers</title>
+    <meta name="description" content="Stay informed with expert insights, business tips, and industry trends from La Familia Chambers' Business Blog.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Blog page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .blog-hero {
+            background: url('https://placehold.co/1200x400/008080/ffffff?text=Business+Insights') no-repeat center center / cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+            border-radius: 8px;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .blog-hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .blog-hero .cta-button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 50px; /* Pill shape */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .blog-hero .cta-button:hover {
+            background-color: #c4644a; /* Darker secondary */
+            transform: translateY(-3px);
+        }
+
+        .blog-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .blog-section h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card-content h4 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+
+        .blog-card-content .blog-meta {
+            font-size: 0.95rem;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+        }
+
+        .blog-card-content .blog-meta span {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .blog-card-content .blog-meta i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .blog-card-content p {
+            font-size: 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1; /* Allows description to take up available space */
+        }
+
+        .blog-card .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+            margin-top: 1rem; /* Space from content above */
+            align-self: flex-start; /* Align button to the left */
+        }
+
+        .blog-card .cta-button:hover {
+            background-color: #4a5a6a; /* Darker primary */
+        }
+
+        .submit-blog-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .submit-blog-cta h4 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .submit-blog-cta p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .submit-blog-cta .cta-button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-blog-cta .cta-button:hover {
+            background-color: #c4644a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .blog-hero {
+                padding: 4rem 1rem;
+            }
+            .blog-hero h1 {
+                font-size: 2.8rem;
+            }
+            .blog-hero p {
+                font-size: 1.2rem;
+            }
+            .blog-section {
+                padding: 1.5rem;
+            }
+            .blog-section h3 {
+                font-size: 1.8rem;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+            .blog-card-content h4 {
+                font-size: 1.3rem;
+            }
+            .blog-card-content p {
+                font-size: 0.95rem;
+            }
+            .blog-card-content .blog-meta {
+                font-size: 0.9rem;
+            }
+            .submit-blog-cta h4 {
+                font-size: 1.5rem;
+            }
+            .submit-blog-cta p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-hero {
+                padding: 3rem 0.5rem;
+            }
+            .blog-hero h1 {
+                font-size: 2.2rem;
+            }
+            .blog-hero p {
+                font-size: 0.95rem;
+            }
+            .blog-section {
+                padding: 1rem;
+            }
+            .blog-section h3 {
+                font-size: 1.5rem;
+            }
+            .blog-card-content h4 {
+                font-size: 1.2rem;
+            }
+            .blog-card .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .submit-blog-cta h4 {
+                font-size: 1.3rem;
+            }
+            .submit-blog-cta p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li class="active-nav-link"><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Blog Page -->
+<main>
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1>La Familia Chambers Business Blog</h1>
+            <p>Gain valuable insights, expert advice, and stay updated on industry trends to help your business thrive.</p>
+            <a href="#latest-posts" class="cta-button">Read Our Latest Posts</a>
+        </div>
+    </section>
+
+    <section class="blog-section" id="latest-posts">
+        <h3>Latest Blog Posts</h3>
+        <div class="blog-grid" id="blog-posts-grid">
+            <!-- Blog posts will be dynamically loaded here by JavaScript -->
+            <div class="blog-card">
+                <img src="https://placehold.co/400x200/FF5733/ffffff?text=Digital+Marketing" alt="Digital Marketing Strategies">
+                <div class="blog-card-content">
+                    <h4>The Power of Digital Marketing for SMEs</h4>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar-alt"></i> July 1, 2025</span>
+                        <span><i class="fas fa-user"></i> By Jane Doe</span>
+                    </div>
+                    <p>Discover how small and medium-sized enterprises can leverage digital marketing tools to expand their reach, engage customers, and drive sales in today's competitive landscape.</p>
+                    <a href="blog-detail.html?id=digital-marketing" class="cta-button">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://placehold.co/400x200/33FF57/ffffff?text=Financial+Planning" alt="Financial Planning">
+                <div class="blog-card-content">
+                    <h4>Essential Financial Planning Tips for Startups</h4>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar-alt"></i> June 25, 2025</span>
+                        <span><i class="fas fa-user"></i> By John Smith</span>
+                    </div>
+                    <p>Starting a business is exciting, but solid financial planning is crucial for long-term success. Learn key strategies to manage your finances effectively from day one.</p>
+                    <a href="blog-detail.html?id=financial-planning" class="cta-button">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://placehold.co/400x200/3357FF/ffffff?text=Networking+Benefits" alt="Networking Benefits">
+                <div class="blog-card-content">
+                    <h4>Maximizing Your Network: Benefits of Chamber Membership</h4>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar-alt"></i> June 18, 2025</span>
+                        <span><i class="fas fa-user"></i> By Emily White</span>
+                    </div>
+                    <p>Networking is more than just exchanging business cards. Explore how active participation in a business chamber can unlock unparalleled opportunities for growth and collaboration.</p>
+                    <a href="blog-detail.html?id=networking-benefits" class="cta-button">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://placehold.co/400x200/FF33CC/ffffff?text=Leadership+Skills" alt="Leadership Skills">
+                <div class="blog-card-content">
+                    <h4>Developing Strong Leadership Skills for Business Success</h4>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar-alt"></i> June 10, 2025</span>
+                        <span><i class="fas fa-user"></i> By David Green</span>
+                    </div>
+                    <p>Effective leadership is the cornerstone of a successful business. This post delves into practical ways to cultivate and enhance your leadership abilities to inspire your team.</p>
+                    <a href="blog-detail.html?id=leadership-skills" class="cta-button">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="submit-blog-cta">
+        <h4>Have an Insight to Share?</h4>
+        <p>Are you a business expert or thought leader? We invite our members to contribute to our blog and share their knowledge with the community.</p>
+        <a href="mailto:blog@lafamiliachambers.co.ke" class="cta-button">Submit Your Blog Post</a>
+    </section>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-instagram"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+<script>
+    // JavaScript for dynamic year in footer (if not already in main.js)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set active navigation link for Blog
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('#main-nav .nav-list a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'blog.html') {
+                link.closest('li').classList.add('active-nav-link');
+            }
+        });
+    });
+
+    // Dummy data for blog posts (can be expanded or fetched from a backend)
+    const blogPostsData = [
+        {
+            id: 'digital-marketing',
+            title: 'The Power of Digital Marketing for SMEs',
+            date: 'July 1, 2025',
+            author: 'Jane Doe',
+            image: 'https://placehold.co/400x200/FF5733/ffffff?text=Digital+Marketing',
+            snippet: 'Discover how small and medium-sized enterprises can leverage digital marketing tools to expand their reach, engage customers, and drive sales in today\'s competitive landscape.',
+            fullContent: `
+                <p>Digital marketing is no longer an option but a necessity for Small and Medium-sized Enterprises (SMEs) looking to thrive in the modern business environment. The digital landscape offers a plethora of tools and strategies that, when utilized effectively, can level the playing field against larger corporations.</p>
+                <h4>Why Digital Marketing is Crucial for SMEs:</h4>
+                <ul>
+                    <li><strong>Increased Reach:</strong> Digital platforms allow SMEs to reach a global audience, breaking geographical barriers.</li>
+                    <li><strong>Cost-Effectiveness:</strong> Compared to traditional marketing, digital strategies often offer a higher ROI for a lower investment.</li>
+                    <li><strong>Targeted Advertising:</strong> Digital tools enable precise targeting of specific demographics, ensuring your message reaches the most relevant audience.</li>
+                    <li><strong>Measurable Results:</strong> Campaigns can be tracked in real-time, providing valuable data for optimization and informed decision-making.</li>
+                    <li><strong>Enhanced Customer Engagement:</strong> Social media, email marketing, and interactive content foster direct communication and build stronger customer relationships.</li>
+                </ul>
+                <p>Key strategies for SMEs include developing a strong online presence through a professional website, engaging on social media platforms relevant to your audience, implementing Search Engine Optimization (SEO) to improve visibility, and utilizing email marketing for customer retention.</p>
+                <p>By embracing digital marketing, SMEs can unlock significant growth opportunities, enhance brand visibility, and build a loyal customer base. It's an investment that yields substantial returns in the long run.</p>
+            `
+        },
+        {
+            id: 'financial-planning',
+            title: 'Essential Financial Planning Tips for Startups',
+            date: 'June 25, 2025',
+            author: 'John Smith',
+            image: 'https://placehold.co/400x200/33FF57/ffffff?text=Financial+Planning',
+            snippet: 'Starting a business is exciting, but solid financial planning is crucial for long-term success. Learn key strategies to manage your finances effectively from day one.',
+            fullContent: `
+                <p>For any startup, robust financial planning is the bedrock of sustainable growth. Without a clear financial roadmap, even the most innovative ideas can falter. Here are some essential tips to ensure your startup's financial health:</p>
+                <h4>Key Financial Strategies for Startups:</h4>
+                <ul>
+                    <li><strong>Create a Detailed Budget:</strong> Outline all anticipated income and expenses. This helps in tracking cash flow and identifying potential shortfalls.</li>
+                    <li><strong>Secure Funding Wisely:</strong> Whether it's bootstrapping, angel investors, or venture capital, understand the implications of each funding source.</li>
+                    <li><strong>Manage Cash Flow Aggressively:</strong> Cash is king for startups. Monitor your inflows and outflows diligently, and always have a contingency fund.</li>
+                    <li><strong>Separate Business and Personal Finances:</strong> This is a fundamental rule for legal, tax, and accounting clarity.</li>
+                    <li><strong>Understand Your Break-Even Point:</strong> Know how much revenue you need to generate to cover all your costs.</li>
+                    <li><strong>Invest in Accounting Software:</strong> Automate your bookkeeping to save time and reduce errors.</li>
+                    <li><strong>Regularly Review Financial Statements:</strong> Stay on top of your profit and loss, balance sheet, and cash flow statements to make informed decisions.</li>
+                </ul>
+                <p>Proactive financial management allows startups to navigate challenges, seize opportunities, and build a resilient foundation for future expansion. Seek professional advice when needed to ensure compliance and optimize your financial strategies.</p>
+            `
+        },
+        {
+            id: 'networking-benefits',
+            title: 'Maximizing Your Network: Benefits of Chamber Membership',
+            date: 'June 18, 2025',
+            author: 'Emily White',
+            image: 'https://placehold.co/400x200/3357FF/ffffff?text=Networking+Benefits',
+            snippet: 'Networking is more than just exchanging business cards. Explore how active participation in a business chamber can unlock unparalleled opportunities for growth and collaboration.',
+            fullContent: `
+                <p>Becoming a member of a business chamber, like La Familia Chambers, offers far more than just a listing in a directory. It provides a gateway to a vibrant ecosystem designed to foster business growth and professional development. Here’s how you can maximize your network through chamber membership:</p>
+                <h4>Benefits of Active Chamber Membership:</h4>
+                <ul>
+                    <li><strong>Unparalleled Networking:</strong> Regular events, workshops, and forums connect you directly with potential clients, partners, and mentors.</li>
+                    <li><strong>Credibility and Visibility:</strong> Membership enhances your business's reputation and increases its visibility within the local and regional business community.</li>
+                    <li><strong>Advocacy and Influence:</strong> Chambers advocate for policies that create a favorable business environment, giving members a collective voice.</li>
+                    <li><strong>Access to Resources:</strong> Gain access to exclusive market research, business development tools, training programs, and expert advice.</li>
+                    <li><strong>Learning and Development:</strong> Participate in seminars, webinars, and workshops on various business topics, keeping you updated on industry trends and best practices.</li>
+                    <li><strong>Community Engagement:</strong> Contribute to local economic development and corporate social responsibility initiatives, enhancing your brand's image.</li>
+                </ul>
+                <p>To truly benefit, don't just join – participate actively. Attend events, volunteer for committees, and engage with other members. The more you put into your membership, the greater the returns will be for your business.</p>
+            `
+        },
+        {
+            id: 'leadership-skills',
+            title: 'Developing Strong Leadership Skills for Business Success',
+            date: 'June 10, 2025',
+            author: 'David Green',
+            image: 'https://placehold.co/400x200/FF33CC/ffffff?text=Leadership+Skills',
+            snippet: 'Effective leadership is the cornerstone of a successful business. This post delves into practical ways to cultivate and enhance your leadership abilities to inspire your team.',
+            fullContent: `
+                <p>In the dynamic world of business, strong leadership is not just about giving orders; it's about inspiring, guiding, and empowering your team to achieve collective goals. Effective leaders are the driving force behind organizational success and resilience. Here's how to cultivate and enhance your leadership skills:</p>
+                <h4>Key Elements of Strong Leadership:</h4>
+                <ul>
+                    <li><strong>Clear Communication:</strong> Articulate your vision, goals, and expectations clearly and consistently. Listen actively to your team's feedback.</li>
+                    <li><strong>Delegation and Empowerment:</strong> Trust your team members by delegating tasks and empowering them to take ownership and make decisions.</li>
+                    <li><strong>Empathy and Emotional Intelligence:</strong> Understand and manage your own emotions, and recognize and influence the emotions of others.</li>
+                    <li><strong>Decision-Making:</strong> Be decisive, but also be open to gathering information and considering diverse perspectives before making critical choices.</li>
+                    <li><strong>Problem-Solving:</strong> Approach challenges with a strategic mindset, fostering a culture where solutions are sought collaboratively.</li>
+                    <li><strong>Motivation and Inspiration:</strong> Lead by example, celebrate successes, and provide constructive feedback to keep your team motivated and engaged.</li>
+                    <li><strong>Continuous Learning:</strong> The business landscape is constantly evolving. A great leader is committed to lifelong learning and adapting to new trends and technologies.</li>
+                </ul>
+                <p>Leadership is a journey of continuous improvement. By focusing on these core skills, you can build a high-performing team, foster a positive work environment, and steer your business towards sustained success.</p>
+            `
+        },
+        {
+            id: 'ai-business-growth',
+            title: 'How AI is Reshaping Business Growth in Kenya',
+            date: 'May 28, 2025',
+            author: 'Dr. Aisha Hassan',
+            image: 'https://placehold.co/400x200/00FFFF/ffffff?text=AI+Business',
+            snippet: 'Artificial Intelligence (AI) is rapidly transforming various sectors in Kenya, offering unprecedented opportunities for businesses to enhance efficiency, innovate, and achieve significant growth. Explore the impact of AI on the Kenyan business landscape.',
+            fullContent: `
+                <p>Artificial Intelligence (AI) is no longer a futuristic concept but a present reality that is actively reshaping the business landscape in Kenya. From automating routine tasks to providing predictive insights, AI offers unprecedented opportunities for businesses of all sizes to enhance efficiency, innovate, and achieve significant growth.</p>
+                <h4>Impact of AI on Kenyan Businesses:</h4>
+                <ul>
+                    <li><strong>Enhanced Efficiency:</strong> AI-powered tools can automate repetitive tasks, freeing up human capital for more strategic initiatives. This is evident in customer service chatbots, automated data entry, and supply chain optimization.</li>
+                    <li><strong>Data-Driven Decision Making:</strong> AI algorithms can process vast amounts of data to identify patterns, predict trends, and provide actionable insights, enabling businesses to make more informed and strategic decisions.</li>
+                    <li><strong>Personalized Customer Experiences:</strong> AI allows businesses to offer highly personalized services and product recommendations, leading to increased customer satisfaction and loyalty.</li>
+                    <li><strong>Innovation and New Business Models:</strong> AI is fostering the creation of entirely new products, services, and business models, particularly in sectors like fintech, agriculture, and healthcare.</li>
+                    <li><strong>Cost Reduction:</strong> By optimizing operations and reducing manual errors, AI can lead to substantial cost savings for businesses.</li>
+                    <li><strong>Competitive Advantage:</strong> Early adopters of AI in Kenya are gaining a significant competitive edge by being more agile, efficient, and customer-centric.</li>
+                </ul>
+                <p>While the adoption of AI presents challenges such as data privacy and the need for skilled talent, the benefits far outweigh them. Kenyan businesses that strategically integrate AI into their operations are poised for remarkable growth and a stronger position in the global market.</p>
+            `
+        }
+    ];
+
+    // Function to render blog posts
+    function renderBlogPosts() {
+        const blogPostsGrid = document.getElementById('blog-posts-grid');
+        if (!blogPostsGrid) return;
+
+        blogPostsGrid.innerHTML = ''; // Clear existing content
+
+        blogPostsData.forEach(post => {
+            const blogCard = `
+                <div class="blog-card">
+                    <img src="${post.image}" alt="${post.title}">
+                    <div class="blog-card-content">
+                        <h4>${post.title}</h4>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar-alt"></i> ${post.date}</span>
+                            <span><i class="fas fa-user"></i> By ${post.author}</span>
+                        </div>
+                        <p>${post.snippet}</p>
+                        <a href="blog-detail.html?id=${post.id}" class="cta-button">Read More</a>
+                    </div>
+                </div>
+            `;
+            blogPostsGrid.insertAdjacentHTML('beforeend', blogCard);
+        });
+    }
+
+    // Call renderBlogPosts on page load
+    document.addEventListener('DOMContentLoaded', renderBlogPosts);
+</script>
+
+</body>
+</html>

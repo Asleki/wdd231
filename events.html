@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Calendar - La Familia Chambers</title>
+    <meta name="description" content="Discover upcoming business events, workshops, and networking opportunities hosted by La Familia Chambers in Nairobi.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Inline styles will be moved to styles.css -->
+</head>
+<body>
+
+<!-- Unified Header (as per your skeleton) -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+                <option value="blog">Blog Posts</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="thika">Thika</option>
+                <option value="mombasa">Mombasa</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li class="active-nav-link"><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Events Page -->
+<main class="container"> <!-- Added container class here for consistent padding -->
+    <section class="events-hero">
+        <div class="events-hero-content">
+            <h1>La Familia Chambers Events Calendar</h1>
+            <p>Connect, learn, and grow with our vibrant community through exclusive workshops, networking mixers, and industry conferences.</p>
+            <a href="#upcoming-events" class="cta-button">View Upcoming Events</a>
+        </div>
+    </section>
+
+    <section class="events-section" id="upcoming-events">
+        <h3>Upcoming Events</h3>
+        <div class="event-grid">
+            <!-- Event cards will be dynamically loaded here by JavaScript -->
+            <p>Loading upcoming events...</p>
+        </div>
+    </section>
+
+    <section class="registration-form-section" id="event-registration-form-section">
+        <h3>Event Registration</h3>
+        <form id="event-registration-form">
+            <!-- Step 1: Membership Status -->
+            <div class="form-step active" id="step-1">
+                <h4>Are you a member of La Familia Chambers?</h4>
+                <div class="form-group radio-group">
+                    <label><input type="radio" name="member-status" value="yes" required> Yes, I am a member.</label>
+                    <label><input type="radio" name="member-status" value="no"> No, I am not a member.</label>
+                </div>
+                <div class="form-navigation">
+                    <button type="button" class="next-button" data-step="1">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2 (Conditional): Member Type or Non-Member Info -->
+            <div class="form-step" id="step-2">
+                <div id="member-type-section">
+                    <h4>Are you a Club Member, Directory Member, or Board of Director?</h4>
+                    <div class="form-group radio-group">
+                        <label><input type="radio" name="member-type" value="club-member"> Club Member</label>
+                        <label><input type="radio" name="member-type" value="directory-member"> Directory Member</label>
+                        <label><input type="radio" name="member-type" value="board-director"> Board of Director</label>
+                    </div>
+                    <div class="form-group" id="member-company-group" style="display:none;"> <!-- NEW: Group for company selection -->
+                        <label for="member-company-select">Select your Company/Organization:</label>
+                        <select id="member-company-select" required>
+                            <option value="">-- Select Company --</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="member-team-group" style="display:none;"> <!-- NEW: Group for team member selection -->
+                        <label for="member-team-select">Select your Name (or 'Other' if not listed):</label>
+                        <select id="member-team-select" required>
+                            <option value="">-- Select Name --</option>
+                        </select>
+                        <input type="text" id="other-team-member-name" placeholder="Enter your name if 'Other' selected" style="display:none; margin-top: 0.5rem;">
+                    </div>
+                </div>
+                <div id="non-member-info-section">
+                    <h4>Your Details</h4>
+                    <div class="form-group">
+                        <label for="non-member-name">Full Name:</label>
+                        <input type="text" id="non-member-name" placeholder="Your Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="non-member-address">Address:</label>
+                        <input type="text" id="non-member-address" placeholder="Your Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="non-member-phone">Phone Number:</label>
+                        <input type="tel" id="non-member-phone" placeholder="e.g., +2547XXXXXXXX">
+                    </div>
+                </div>
+                <div class="form-navigation">
+                    <button type="button" class="prev-button" data-step="2">Previous</button>
+                    <button type="button" class="next-button" data-step="2">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Transport & Snacks -->
+            <div class="form-step" id="step-3">
+                <h4>Additional Options</h4>
+                <div class="form-group">
+                    <label for="transport-option-select">Transport Option:</label> <!-- Changed to select dropdown -->
+                    <select id="transport-option-select">
+                        <!-- Options will be dynamically loaded here -->
+                    </select>
+                    <div id="pickup-point-group" style="display:none; margin-top: 1rem;">
+                        <label for="pickup-point-select">Select a Pickup Point:</label>
+                        <select id="pickup-point-select">
+                            <option value="">-- Select Pickup Point --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="wants-snacks"> I would like snacks during the event</label>
+                    <div id="snacks-selection-group" style="display:none; margin-top: 1rem;">
+                        <label>Select your snacks:</label>
+                        <div id="snacks-list" class="checkbox-group">
+                            <!-- Snacks will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-navigation">
+                    <button type="button" class="prev-button" data-step="3">Previous</button>
+                    <button type="submit" class="submit-button">Submit Registration</button>
+                </div>
+            </div>
+
+            <div class="fee-display">
+                Total Fee: Ksh <span id="total-fee">0</span>
+            </div>
+        </form>
+        <div id="registration-confirmation" class="registration-confirmation">
+            <!-- Confirmation message will appear here -->
+        </div>
+         <div id="custom-alert-message-box" class="custom-alert" style="display:none;">
+            <p id="custom-alert-text"></p>
+            <button class="custom-alert-close">OK</button>
+        </div>
+    </section>
+
+    <section class="event-submission-cta">
+        <h4>Have an Event to Propose?</h4>
+        <p>If you're a member and would like to propose an event or workshop that benefits our community, please reach out to our events coordination team.</p>
+        <a href="mailto:events@lafamiliachambers.co.ke" class="cta-button">Propose an Event</a>
+    </section>
+</main>
+
+<!-- Unified Footer (as per your skeleton) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript -->
+<!-- All inline scripts will be moved to main.js -->
+<script src="scripts/main.js"></script>

@@ -1,0 +1,633 @@
+/* css/clubs.css */
+
+/* ========================================= */
+/* Clubs Page Specific Styles (clubs.html)   */
+/* ========================================= */
+
+/* Clubs Hero Section */
+.clubs-hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: var(--light-bg); /* Use a light background from main styles */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.clubs-hero h1 {
+    font-size: 3.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.clubs-hero p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+}
+
+.clubs-hero .btn-primary {
+    background-color: var(--secondary-color); /* Use a vibrant accent color */
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.clubs-hero .btn-primary:hover {
+    background-color: var(--primary-color); /* Hover to primary color */
+}
+
+/* Clubs Section Content */
+.clubs-section-content {
+    padding: 2rem 1rem;
+    background-color: var(--card-bg); /* Or a slightly different background if desired */
+}
+
+.clubs-section-content .section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.clubs-section-content .section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Clubs Grid Layout */
+#clubs-page-grid.clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+/* Individual Club Card Styling */
+.club-page-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.club-page-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.club-page-card .club-page-image {
+    width: 100%;
+    height: 200px; /* Fixed height for consistent card size */
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    display: block;
+}
+
+.club-page-card .image-error-fallback {
+    /* Style for broken images */
+    background-color: var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
+    height: 200px; /* Maintain height */
+}
+
+.club-page-card .club-page-info {
+    padding: 1.5rem;
+    flex-grow: 1; /* Allows info section to expand and push button to bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.club-page-card .club-page-info h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+}
+
+.club-page-card .club-page-info p {
+    font-size: 1rem;
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.club-page-card .club-page-details {
+    margin-top: auto; /* Pushes details to the bottom if content above is short */
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.club-page-card .club-page-details p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.club-page-card .club-page-details span {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.club-page-card .join-club-page-btn {
+    display: block; /* Make button full width */
+    width: 100%;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem; /* Space from details */
+    transition: background-color 0.3s ease;
+}
+
+.club-page-card .join-club-page-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+
+/* ========================================= */
+/* Join Club Page Specific Styles (join-clubs.html) */
+/* ========================================= */
+
+#join-club-application-form {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+}
+
+#join-club-application-form h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+/* Form sections */
+#join-club-application-form .form-section {
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+#join-club-application-form .form-section h3 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Club Selection List */
+#club-selection-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    max-height: 400px; /* Limit height for scroll if many clubs */
+    overflow-y: auto;
+    padding-right: 10px; /* Prevent scrollbar from obscuring content */
+}
+
+/* Individual Club Application Item */
+.club-application-item {
+    background-color: var(--light-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.club-application-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.club-application-item.selected {
+    border-color: var(--primary-color);
+    background-color: #e6f0ff; /* Light blue background for selected */
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.3); /* Primary color glow */
+}
+
+.club-application-item .club-application-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.club-application-item .club-application-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.club-application-item .club-application-info p {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit description to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#selected-club-display {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Member Status Radios */
+.member-status-group label {
+    margin-right: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.member-status-group input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+/* Member Input Fields */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 0.8rem 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+}
+
+/* Conditional field display */
+#non-member-fields,
+#member-id-field {
+    display: none; /* Hidden by default, shown by JS */
+}
+
+/* Submit Button */
+#join-club-submit-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 2rem;
+}
+
+#join-club-submit-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Confirmation Message */
+#join-club-confirmation {
+    display: none; /* Hidden by default, shown by JS */
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #d4edda; /* Light green for success */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+
+/* ========================================= */
+/* Dark Mode Adjustments                     */
+/* ========================================= */
+
+body.dark-mode .clubs-hero {
+    background-color: var(--dark-bg);
+    border-bottom-color: #333;
+}
+
+body.dark-mode .clubs-hero h1 {
+    color: var(--secondary-color); /* Highlight with accent in dark mode */
+}
+
+body.dark-mode .clubs-hero p {
+    color: var(--dark-text);
+}
+
+body.dark-mode .clubs-section-content {
+    background-color: var(--dark-bg);
+}
+
+body.dark-mode .clubs-section-content .section-title {
+    color: var(--dark-text);
+}
+
+body.dark-mode .clubs-section-content .section-title::after {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode .club-page-card {
+    background-color: #2a2a40; /* Darker card background */
+    box-shadow: var(--shadow-md);
+}
+
+body.dark-mode .club-page-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .club-page-card .image-error-fallback {
+    background-color: #444;
+    color: var(--dark-text-light);
+}
+
+body.dark-mode .club-page-card .club-page-info h3 {
+    color: var(--secondary-color);
+}
+
+body.dark-mode .club-page-card .club-page-info p,
+body.dark-mode .club-page-card .club-page-details p {
+    color: var(--dark-text-light);
+}
+
+body.dark-mode .club-page-card .club-page-details {
+    border-top-color: #444;
+}
+
+body.dark-mode .club-page-card .club-page-details span {
+    color: var(--dark-text);
+}
+
+body.dark-mode .club-page-card .join-club-page-btn {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode .club-page-card .join-club-page-btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* Join Club Dark Mode */
+body.dark-mode #join-club-application-form {
+    background-color: #2a2a40;
+    box-shadow: var(--shadow-md);
+}
+
+body.dark-mode #join-club-application-form h2,
+body.dark-mode #join-club-application-form .form-section h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode #join-club-application-form .form-section {
+    border-color: #444;
+}
+
+body.dark-mode .club-application-item {
+    background-color: #3a3a50;
+    border-color: #555;
+}
+
+body.dark-mode .club-application-item:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+body.dark-mode .club-application-item.selected {
+    border-color: var(--secondary-color);
+    background-color: #35354a;
+    box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.3); /* Secondary color glow */
+}
+
+body.dark-mode .club-application-item .club-application-info h4 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .club-application-item .club-application-info p {
+    color: var(--dark-text-light);
+}
+
+body.dark-mode #selected-club-display {
+    color: var(--secondary-color);
+}
+
+body.dark-mode .member-status-group label {
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-group label {
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-group input[type="text"],
+body.dark-mode .form-group input[type="email"],
+body.dark-mode .form-group input[type="tel"] {
+    background-color: #4a4a60;
+    color: var(--dark-text);
+    border-color: #666;
+}
+
+body.dark-mode .form-group input[type="text"]:focus,
+body.dark-mode .form-mode .form-group input[type="email"]:focus,
+body.dark-mode .form-group input[type="tel"]:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(224, 122, 95, 0.2);
+}
+
+body.dark-mode #join-club-submit-btn {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode #join-club-submit-btn:hover {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode #join-club-confirmation {
+    background-color: #1b5e20; /* Darker green for dark mode success */
+    color: #c8e6c9; /* Lighter green text */
+    border-color: #2e7d32;
+}
+
+/* ========================================= */
+/* Responsive Adjustments                    */
+/* ========================================= */
+
+@media (max-width: 992px) {
+    .clubs-hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .clubs-section-content .section-title {
+        font-size: 2.4rem;
+    }
+
+    #clubs-page-grid.clubs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .clubs-hero {
+        padding: 2rem 1rem;
+    }
+
+    .clubs-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .clubs-hero p {
+        font-size: 1rem;
+    }
+
+    .clubs-section-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .clubs-section-content .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    #clubs-page-grid.clubs-grid {
+        grid-template-columns: 1fr; /* Stack cards on very small screens */
+    }
+
+    .club-page-card .club-page-image {
+        height: 180px;
+    }
+
+    .club-page-card .club-page-info {
+        padding: 1rem;
+    }
+
+    .club-page-card .club-page-info h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Join Clubs Form */
+    #join-club-application-form {
+        margin: 1rem auto;
+        padding: 1.5rem;
+    }
+
+    #join-club-application-form h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #join-club-application-form .form-section {
+        padding: 1rem;
+    }
+
+    #join-club-application-form .form-section h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    #club-selection-list {
+        grid-template-columns: 1fr;
+    }
+
+    .club-application-item {
+        flex-direction: column; /* Stack image and info vertically */
+        text-align: center;
+    }
+
+    .club-application-item .club-application-image {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .clubs-hero h1 {
+        font-size: 2rem;
+    }
+    .clubs-section-content .section-title {
+        font-size: 1.8rem;
+    }
+    .club-page-card .club-page-info h3 {
+        font-size: 1.3rem;
+    }
+    .club-page-card .club-page-details p {
+        font-size: 0.9rem;
+    }
+    .club-page-card .join-club-page-btn {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+    }
+    #join-club-application-form {
+        padding: 1rem;
+    }
+    #join-club-application-form h2 {
+        font-size: 1.8rem;
+    }
+    #join-club-submit-btn {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+}

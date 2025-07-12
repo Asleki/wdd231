@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Canvas Studios | La Familia Chambers</title>
+    <meta name="description" content="Discover Creative Canvas Studios: branding, graphic design, and web development services.">
+    <link rel="icon" href="images/lafamilia_favicon.png" type="image/png">
+    <!-- Removed: <link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic Reset & Variables (from styles.css) */
+        :root {
+            --primary-color: #0056b3; /* A deep blue for branding */
+            --secondary-color: #e07a5f; /* A warm accent color */
+            --text-color: #333; /* Dark text for light mode */
+            --light-bg: #f4f7f6; /* Light background for light mode */
+            --dark-bg: #1a1a2e; /* Dark background for dark mode */
+            --dark-text: #e0e0e0; /* Light text for dark mode */
+            --card-bg: #ffffff; /* Card background in light mode */
+            --card-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for cards */
+            --header-bg: #ffffff; /* Header background in light mode */
+            --nav-bg: #f8f8f8; /* Navigation background in light mode */
+            --border-color: #ddd; /* Light border color */
+            --primary-dark: #004080; /* Darker shade of primary for hover effects */
+            --spacing-unit: 1rem; /* Base spacing unit */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); /* Small shadow */
+            --shadow-md: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); /* Medium shadow */
+            --shadow-lg: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); /* Large shadow */
+            --accent-light: #f7e7e1; /* Lighter accent for backgrounds */
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --view-more-btn-color: #e07a5f; /* Specific color for View More/Load More buttons */
+        }
+
+        /* Dark mode specific variables (from styles.css) */
+        body.dark-mode {
+            --primary-color: #e07a5f; /* Primary becomes accent in dark mode */
+            --secondary-color: #0056b3; /* Accent becomes primary in dark mode */
+            --text-color: var(--dark-text); /* Text becomes light */
+            --light-bg: var(--dark-bg); /* Background becomes dark */
+            --card-bg: #2a2a4a; /* Darker card background */
+            --card-shadow: rgba(255, 255, 255, 0.05); /* Lighter shadow for dark mode */
+            --header-bg: #1a1a2e; /* Dark header background */
+            --nav-bg: #2a2a4a; /* Dark navigation background */
+            --border-color: #555; /* Darker border color */
+            --primary-dark: #004d9c; /* Darker accent for hover */
+            --accent-light: #3a3a5a; /* Darker light accent */
+            --view-more-btn-color: #0056b3; /* Dark mode color for View More/Load More buttons */
+        }
+
+        /* Basic Reset (from styles.css) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-unit);
+        }
+
+        /* Typography (from styles.css) */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit);
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.75rem; }
+        h4 { font-size: 1.5rem; }
+        p { margin-bottom: var(--spacing-unit); }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Buttons (from styles.css) */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+        }
+
+        /* View More / Load More Button Specific Style (from styles.css) */
+        .view-details-btn, #load-more-members {
+            background-color: var(--view-more-btn-color); /* Use the new variable */
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .view-details-btn:hover, #load-more-members:hover {
+            background-color: var(--primary-dark); /* A consistent hover effect */
+        }
+
+
+        /* Header (from styles.css) */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: var(--header-bg);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .site-branding {
+            display: flex;
+            align-items: center;
+        }
+
+        .site-branding a {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .site-branding .logo {
+            height: 50px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .site-branding h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .join-header-cta {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .join-header-cta:hover {
+            background-color: #c76b4d; /* Slightly darker secondary */
+            text-decoration: none;
+        }
+
+        .header-controls button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-color);
+            margin-left: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .header-controls button:hover {
+            background-color: var(--border-color);
+            color: var(--primary-color);
+        }
+
+        /* Navigation (from styles.css) */
+        .main-nav {
+            background-color: var(--nav-bg);
+            padding: 0.5rem var(--spacing-unit);
+            box-shadow: var(--shadow-sm);
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows navigation items to wrap on smaller screens */
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-list li {
+            margin: 0 0.75rem;
+        }
+
+        .nav-list li a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-list li a:hover,
+        .nav-list li a.active {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Mobile Navigation (Hamburger Menu) (from styles.css) */
+        #hamburger-menu {
+            display: none; /* Hidden by default on desktop */
+        }
+
+        @media (max-width: 768px) {
+            #hamburger-menu {
+                display: block; /* Show hamburger on smaller screens */
+            }
+
+            .main-nav {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+                box-shadow: none; /* Remove shadow when collapsed */
+            }
+
+            .main-nav.main-nav-open {
+                max-height: 500px; /* Adjust as needed for content */
+                box-shadow: var(--shadow-md); /* Add shadow when open */
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+
+            .nav-list li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-list li a {
+                padding: 0.75rem 1rem;
+                border-radius: 0.5rem;
+            }
+
+            .nav-list li a:hover {
+                background-color: var(--border-color);
+            }
+        }
+
+        /* Global Search Bar (from styles.css) */
+        .search-bar-hidden {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            background-color: var(--nav-bg);
+            box-shadow: var(--shadow-sm);
+            padding: 0 var(--spacing-unit);
+        }
+
+        .search-bar-hidden.show-search {
+            max-height: 200px; /* Adjust as needed to show content */
+            padding: 1rem var(--spacing-unit);
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        #site-search {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        #site-search:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+        }
+
+        .search-control-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-control-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .search-filters select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+            -webkit-appearance: none; /* Removes default dropdown arrow */
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230056b3%22%20d%3D%22M287%2C197.3L159.2%2C69.5c-3.6-3.6-8.2-5.4-12.9-5.4s-9.3%2C1.8-12.9%2C5.4L5.4%2C197.3c-7.2%2C7.2-7.2%2C18.9%2C0%2C26.1c3.6%2C3.6%2C8.2%2C5.4%2C12.9%2C5.4s9.3%2C1.8%2C12.9%2C5.4l118.8-118.8l118.8%2C118.8c3.6%2C3.6%2C8.2%2C5.4%2C12.9%2C5.4s9.3%2C1.8%2C12.9%2C5.4C294.2%2C216.2%2C294.2%2C204.5%2C287%2C197.3z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+            background-repeat: no-repeat;
+            background-position: right 0.7em top 50%, 0 0;
+            background-size: 0.65em auto, 100%;
+        }
+
+        .search-filters select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .search-suggestions, .search-history {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-sm);
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-suggestions ul, .search-history ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .search-suggestions li, .search-history li {
+            padding: 0.5rem 0;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .search-suggestions li:last-child, .search-history li:last-child {
+            border-bottom: none;
+        }
+
+        .search-suggestions li:hover, .search-history li:hover {
+            background-color: var(--accent-light);
+            color: var(--primary-color);
+        }
+
+        /* Footer (from styles.css) */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--dark-text);
+            padding: 2rem var(--spacing-unit);
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-grid h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-grid p, .footer-grid ul {
+            font-size: 0.95rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer-grid p i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-grid ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-grid ul li a {
+            color: var(--dark-text);
+            transition: color 0.2s ease;
+        }
+
+        .footer-grid ul li a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--dark-text);
+            font-size: 1.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Image Fallback Styling (from styles.css) */
+        .image-error-fallback {
+            background-color: #f0f0f0; /* Light grey background for broken images */
+            border: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            font-size: 0.8rem;
+            text-align: center;
+            overflow: hidden; /* Hide any broken image icon */
+        }
+
+        /* Animations (Original fadeIn is removed as fadeInCenter replaces it for modal) - from styles.css */
+        /* @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        } */
+
+
+        /* Embedded styles for Creative Canvas Studios page content (main section only) */
+        /* These styles are specific to this page and do not modify the main header/footer */
+
+        :root {
+            /* Custom colors for Creative Canvas, leaning towards modern/artistic */
+            --creative-primary: #1A202C; /* Dark Charcoal for headings/main text */
+            --creative-secondary: #4A90E2; /* Vibrant Blue for accents/buttons */
+            --creative-accent: #FFC107; /* Amber for highlights */
+            --creative-text: #2D3748; /* Dark Gray for body text */
+            --creative-bg: #F7FAFC; /* Light Gray Background */
+            --creative-card-bg: #FFFFFF; /* White Cards */
+            --creative-border: #EDF2F7; /* Light Border */
+            --creative-shadow: rgba(0, 0, 0, 0.1); /* Subtle Shadow */
+        }
+
+        body.dark-mode {
+            /* Dark mode adjustments for Creative Canvas specific colors */
+            --creative-primary: #E2E8F0; /* Light Gray for headings/main text */
+            --creative-secondary: #63B3ED; /* Lighter Blue for accents/buttons */
+            --creative-accent: #F6E05E; /* Brighter Amber for highlights */
+            --creative-text: #CBD5E0; /* Light Gray for body text */
+            --creative-bg: #1A202C; /* Dark Charcoal Background */
+            --creative-card-bg: #2D3748; /* Darker Gray Cards */
+            --creative-border: #4A5568; /* Darker Border */
+            --creative-shadow: rgba(255, 255, 255, 0.1); /* Subtle Shadow */
+        }
+
+        /* General section styling for business pages */
+        .creative-canvas-section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--creative-text);
+            background-color: var(--creative-bg);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .creative-canvas-section-title {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--creative-primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .creative-canvas-section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--creative-accent);
+            border-radius: 3px;
+        }
+
+        /* Hero Section - Specific to Creative Canvas */
+        .creative-canvas-hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1500x500/4A90E2/FFFFFF?text=Creative+Canvas+Studios') no-repeat center center/cover;
+            color: white;
+            padding: 8rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        .creative-canvas-hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .creative-canvas-hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        .creative-canvas-hero .creative-canvas-cta-button { /* Updated class name */
+            background-color: var(--creative-accent);
+            color: var(--creative-primary);
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .creative-canvas-hero .creative-canvas-cta-button:hover { /* Updated class name */
+            background-color: #FFDA47;
+        }
+
+        /* About Section */
+        .creative-canvas-about {
+            padding: 4rem 1rem;
+            background-color: var(--creative-card-bg); /* Use card background for this section */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--creative-shadow);
+            margin: 2rem auto;
+            max-width: 1000px; /* Slightly narrower than full width for content focus */
+        }
+        .creative-canvas-about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--creative-text);
+        }
+
+        /* Services Section */
+        .creative-canvas-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .creative-canvas-service-card {
+            background-color: var(--creative-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--creative-shadow);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .creative-canvas-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px var(--creative-shadow);
+        }
+        .creative-canvas-service-card i {
+            font-size: 3.5rem;
+            color: var(--creative-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .creative-canvas-service-card h3 {
+            font-size: 1.8rem;
+            color: var(--creative-primary);
+            margin-bottom: 1rem;
+        }
+        .creative-canvas-service-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--creative-text);
+        }
+
+        /* Portfolio Section */
+        .creative-canvas-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .creative-canvas-portfolio-item {
+            background-color: var(--creative-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--creative-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .creative-canvas-portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px var(--creative-shadow);
+        }
+        .creative-canvas-portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        .creative-canvas-portfolio-info {
+            padding: 1.5rem;
+        }
+        .creative-canvas-portfolio-info h4 {
+            font-size: 1.5rem;
+            color: var(--creative-primary);
+            margin-bottom: 0.5rem;
+        }
+        .creative-canvas-portfolio-info p {
+            font-size: 0.95rem;
+            color: var(--creative-text);
+        }
+
+        /* Contact Section */
+        .creative-canvas-contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .creative-canvas-contact-info, .creative-canvas-form-container {
+            background-color: var(--creative-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px var(--creative-shadow);
+            padding: 2.5rem;
+        }
+
+        .creative-canvas-contact-info h3, .creative-canvas-form-container h3 {
+            font-size: 2rem;
+            color: var(--creative-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .creative-canvas-contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--creative-text);
+            display: flex;
+            align-items: center;
+        }
+        .creative-canvas-contact-info p i {
+            margin-right: 10px;
+            color: var(--creative-secondary);
+            font-size: 1.3rem;
+        }
+
+        .creative-canvas-contact-form .creative-canvas-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .creative-canvas-contact-form label {
+            display: block;
+            font-size: 1rem;
+            color: var(--creative-primary);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .creative-canvas-contact-form input[type="text"],
+        .creative-canvas-contact-form input[type="email"],
+        .creative-canvas-contact-form textarea {
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 12px 10px;
+            border: 1px solid var(--creative-border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--creative-text);
+            background-color: var(--creative-bg);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .creative-canvas-contact-form input[type="text"]:focus,
+        .creative-canvas-contact-form input[type="email"]:focus,
+        .creative-canvas-contact-form textarea:focus {
+            border-color: var(--creative-secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* light blue shadow */
+        }
+
+        .creative-canvas-contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .creative-canvas-contact-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--creative-secondary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .creative-canvas-contact-form button[type="submit"]:hover {
+            background-color: #3C7DC2; /* Slightly darker blue */
+        }
+
+        .creative-canvas-form-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .creative-canvas-form-message.success {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .creative-canvas-form-message.error {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (min-width: 769px) {
+            .creative-canvas-contact-wrapper {
+                grid-template-columns: 1fr 1.5fr; /* Info on left, form on right */
+            }
+            .creative-canvas-contact-info {
+                text-align: left; /* Align contact info text left on larger screens */
+            }
+            .creative-canvas-contact-info h3, .creative-canvas-form-container h3 {
+                text-align: left; /* Align section titles left on larger screens */
+            }
+        }
+        @media (max-width: 1024px) {
+            .creative-canvas-hero h1 {
+                font-size: 3rem;
+            }
+            .creative-canvas-hero p {
+                font-size: 1.2rem;
+            }
+            .creative-canvas-section-title {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .creative-canvas-hero h1 {
+                font-size: 2.5rem;
+            }
+            .creative-canvas-hero p {
+                font-size: 1rem;
+            }
+            .creative-canvas-section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .creative-canvas-services-grid, .creative-canvas-portfolio-grid {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+            .creative-canvas-service-card, .creative-canvas-portfolio-item, .creative-canvas-about {
+                padding: 1.5rem;
+            }
+            /* .contact-cta-section h2 { This class was not in the provided HTML, removed } */
+            /* .contact-cta-section p { This class was not in the provided HTML, removed } */
+            .creative-canvas-contact-info h3, .creative-canvas-form-container h3 {
+                text-align: center; /* Center section titles on small screens */
+            }
+
+            /* Footer Media Queries (from styles.css) */
+            .footer-grid {
+                grid-template-columns: 1fr; /* Stack footer columns vertically */
+                text-align: center;
+            }
+
+            .footer-grid h4 {
+                margin-top: 1rem;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="#" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="#" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="#" class="nav-link">Member Reviews</a></li>
+                <li><a href="#" class="nav-link">Board of Directors</a></li>
+                <li><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+<main>
+    <section class="creative-canvas-hero">
+        <h1>Creative Canvas Studios</h1>
+        <p>Branding, graphic design, and web development services for businesses looking to make an impact.</p>
+        <a href="#creative-canvas-contact-section" class="creative-canvas-cta-button">Get a Quote</a>
+    </section>
+
+    <section id="creative-canvas-about-section" class="creative-canvas-section">
+        <div class="creative-canvas-about">
+            <h2 class="creative-canvas-section-title">About Creative Canvas Studios</h2>
+            <p>Creative Canvas Studios is a dynamic agency offering comprehensive branding, innovative graphic design, and cutting-edge web development services. We partner with businesses to craft compelling visual identities and robust online presences that truly resonate with their audience. Our goal is to transform your vision into impactful and memorable digital experiences that drive growth and engagement.</p>
+            <p>We believe that strong design is more than just aesthetics; it's about clear communication, strategic impact, and building lasting connections. Our team of passionate designers and developers works closely with clients from concept to completion, ensuring every project reflects their unique brand story and achieves their business objectives.</p>
+        </div>
+    </section>
+
+    <section id="creative-canvas-services-section" class="creative-canvas-section">
+        <h2 class="creative-canvas-section-title">Our Services</h2>
+        <div class="creative-canvas-services-grid">
+            <div class="creative-canvas-service-card">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Branding & Identity</h3>
+                <p>We craft unique brand identities that tell your story, including logo design, brand guidelines, and strategic positioning to make your business memorable.</p>
+            </div>
+            <div class="creative-canvas-service-card">
+                <i class="fas fa-palette"></i>
+                <h3>Graphic Design</h3>
+                <p>From stunning marketing collateral to engaging digital graphics, our designs capture attention and communicate your message effectively across all platforms.</p>
+            </div>
+            <div class="creative-canvas-service-card">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Building responsive, user-friendly, and powerful websites that not only look great but also perform seamlessly to convert visitors into customers.</p>
+            </div>
+            <div class="creative-canvas-service-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>UI/UX Design</h3>
+                <p>Creating intuitive and engaging user interfaces and experiences that ensure your digital products are both beautiful and easy to use.</p>
+            </div>
+            <div class="creative-canvas-service-card">
+                <i class="fas fa-video"></i>
+                <h3>Motion Graphics</h3>
+                <p>Bringing your brand to life with captivating animated logos, explainer videos, and dynamic visuals that enhance your online presence.</p>
+            </div>
+            <div class="creative-canvas-service-card">
+                <i class="fas fa-envelope-open-text"></i>
+                <h3>Print Design</h3>
+                <p>Expert design for all your print needs, including brochures, flyers, business cards, and packaging that make a lasting impression offline.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="creative-canvas-portfolio-section" class="creative-canvas-section">
+        <h2 class="creative-canvas-section-title">Our Work</h2>
+        <div class="creative-canvas-portfolio-grid">
+            <div class="creative-canvas-portfolio-item">
+                <img src="https://via.placeholder.com/400x250/A7C7E7/FFFFFF?text=Brand+Identity" alt="Brand Identity Project">
+                <div class="creative-canvas-portfolio-info">
+                    <h4>Brand Identity - EcoGrowth Co.</h4>
+                    <p>Complete brand system including logo, color palette, typography, and stationery design.</p>
+                </div>
+            </div>
+            <div class="creative-canvas-portfolio-item">
+                <img src="https://via.placeholder.com/400x250/89B0AE/FFFFFF?text=Website+Design" alt="Website Design Project">
+                <div class="creative-canvas-portfolio-info">
+                    <h4>Website Redesign - Foodie Hub</h4>
+                    <p>Modern, responsive website design with enhanced UX for a local restaurant guide.</p>
+                </div>
+            </div>
+            <div class="creative-canvas-portfolio-item">
+                <img src="https://via.placeholder.com/400x250/C6D8D2/FFFFFF?text=Marketing+Graphics" alt="Marketing Graphics Project">
+                <div class="creative-canvas-portfolio-info">
+                    <h4>Marketing Campaign - Health & Wellness</h4>
+                    <p>Series of social media graphics and digital ads for a health and wellness product launch.</p>
+                </div>
+            </div>
+             <div class="creative-canvas-portfolio-item">
+                <img src="https://via.placeholder.com/400x250/ADD8E6/FFFFFF?text=App+UI+Design" alt="App UI Design">
+                <div class="creative-canvas-portfolio-info">
+                    <h4>Mobile App UI - TaskFlow</h4>
+                    <p>Intuitive user interface design for a productivity and task management mobile application.</p>
+                </div>
+            </div>
+            <div class="creative-canvas-portfolio-item">
+                <img src="https://via.placeholder.com/400x250/E6B089/FFFFFF?text=Book+Cover" alt="Book Cover Design">
+                <div class="creative-canvas-portfolio-info">
+                    <h4>Book Cover Design - 'Digital Horizons'</h4>
+                    <p>Captivating book cover art and layout for a futuristic sci-fi novel.</p>
+                </div>
+            </div>
+            <div class="creative-canvas-portfolio-item">
+                <img src="https://via.placeholder.com/400x250/F0E68C/FFFFFF?text=Packaging+Design" alt="Packaging Design">
+                <div class="creative-canvas-portfolio-info">
+                    <h4>Product Packaging - Artisan Coffee</h4>
+                    <p>Eco-friendly and aesthetically pleasing packaging design for a premium coffee brand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="creative-canvas-contact-section" class="creative-canvas-section">
+        <h2 class="creative-canvas-section-title">Connect With Creative Canvas Studios</h2>
+        <div class="creative-canvas-contact-wrapper">
+            <div class="creative-canvas-contact-info">
+                <h3>Our Details</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 456 Creative Blvd, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 7XX XXX XXX</p>
+                <p><i class="fas fa-envelope"></i> info@creativecanvas.co.ke</p>
+                <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 5:00 PM</p>
+            </div>
+            <div class="creative-canvas-form-container">
+                <h3>Send Us a Message</h3>
+                <form id="creative-canvas-contact-form" class="creative-canvas-contact-form" action="#" method="POST">
+                    <div class="creative-canvas-form-group">
+                        <label for="creative-canvas-contact-name">Name:</label>
+                        <input type="text" id="creative-canvas-contact-name" name="name" required>
+                    </div>
+                    <div class="creative-canvas-form-group">
+                        <label for="creative-canvas-contact-email">Email:</label>
+                        <input type="email" id="creative-canvas-contact-email" name="email" required>
+                    </div>
+                    <div class="creative-canvas-form-group">
+                        <label for="creative-canvas-contact-subject">Subject:</label>
+                        <input type="text" id="creative-canvas-contact-subject" name="subject" required>
+                    </div>
+                    <div class="creative-canvas-form-group">
+                        <label for="creative-canvas-contact-message">Message:</label>
+                        <textarea id="creative-canvas-contact-message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                    <div id="creative-canvas-form-message" class="creative-canvas-form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+                <li><a href="partnerships.html">Partnerships</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="scripts/main.js"></script>
+<script>
+    // Embedded JavaScript for specific page functionalities (main section only)
+    document.addEventListener('DOMContentLoaded', () => {
+        // Update the current year in the footer (common function, can be in main.js or here)
+        const currentYearElem = document.getElementById('current-year');
+        if (currentYearElem) {
+            currentYearElem.textContent = new Date().getFullYear();
+        }
+
+        // --- Contact Form Handling for Creative Canvas Studios ---
+        const contactForm = document.getElementById('creative-canvas-contact-form');
+        const formMessage = document.getElementById('creative-canvas-form-message'); // Updated ID
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get form data (Updated IDs)
+                const name = document.getElementById('creative-canvas-contact-name').value.trim();
+                const email = document.getElementById('creative-canvas-contact-email').value.trim();
+                const subject = document.getElementById('creative-canvas-contact-subject').value.trim();
+                const message = document.getElementById('creative-canvas-contact-message').value.trim();
+
+                // Basic validation
+                if (!name || !email || !subject || !message) {
+                    creativeCanvasDisplayFormMessage('Please fill in all fields.', 'error'); // Updated function call
+                    return;
+                }
+
+                // Simple email format validation (more robust regex can be used)
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    creativeCanvasDisplayFormMessage('Please enter a valid email address.', 'error'); // Updated function call
+                    return;
+                }
+
+                // Simulate form submission (in a real scenario, this would be an AJAX call)
+                console.log('Form Submitted:');
+                console.log('Name:', name);
+                console.log('Email:', email);
+                console.log('Subject:', subject);
+                console.log('Message:', message);
+
+                // Display success message
+                creativeCanvasDisplayFormMessage('Thank you for your message! We will get back to you shortly.', 'success'); // Updated function call
+
+                // Clear the form (optional)
+                contactForm.reset();
+
+                // Store last contact info in localStorage (optional, for user convenience)
+                localStorage.setItem('creativeCanvasLastContactName', name);
+                localStorage.setItem('creativeCanvasLastContactEmail', email);
+            });
+        }
+
+        // Renamed to be unique to this page
+        function creativeCanvasDisplayFormMessage(msg, type) {
+            formMessage.textContent = msg;
+            formMessage.className = `creative-canvas-form-message ${type}`; // Reset classes and add new type
+            formMessage.style.display = 'block'; // Make it visible
+        }
+
+        // Populate form fields from local storage on load (if available) - Renamed to be unique
+        function creativeCanvasPopulateFormFields() {
+            document.getElementById('creative-canvas-contact-name').value = localStorage.getItem('creativeCanvasLastContactName') || '';
+            document.getElementById('creative-canvas-contact-email').value = localStorage.getItem('creativeCanvasLastContactEmail') || '';
+        }
+        creativeCanvasPopulateFormFields(); // Call on DOMContentLoaded
+    });
+</script>
+</body>
+</html>
