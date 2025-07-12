@@ -77,7 +77,7 @@
         },
         {
             "id": "afyacare-clinic",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/afyaclinic.webp",
             "imgAlt": "AfyaCare Clinic Logo",
             "name": "AfyaCare Clinic",
             "description": "Comprehensive healthcare services for the whole family, from general check-ups to specialized treatments.",
@@ -142,7 +142,7 @@
         },
         {
             "id": "imall-e-commerce",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/imalllogo.webp",
             "imgAlt": "iMall E-commerce Logo",
             "name": "iMall E-commerce",
             "description": "Nairobi's leading online marketplace for electronics, fashion, and home goods with fast delivery.",
@@ -207,7 +207,7 @@
         },
         {
             "id": "autogiant-motors",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/autogiantmotorslogo.webp",
             "imgAlt": "AutoGiant Motors Logo",
             "name": "AutoGiant Motors",
             "description": "New and pre-owned vehicles. Specializing in imports and local sales with financing options.",
@@ -272,7 +272,7 @@
         },
         {
             "id": "taste-of-africa-catering",
-            "imgSrc": "images/tac.png",
+            "imgSrc": "images/logos/toalogo.webp",
             "imgAlt": "Taste of Africa Catering Logo",
             "name": "Taste of Africa Catering",
             "description": "Authentic African and international cuisine catering for events of all sizes.",
@@ -337,7 +337,7 @@
         },
         {
             "id": "creative-canvas-studios",
-            "imgSrc": "https://placehold.co/600x200/1A2B4C/FFFFFF?text=La+Familia+Chambers",
+            "imgSrc": "images/logos/cca.webp",
             "imgAlt": "Creative Canvas Studios Logo",
             "name": "Creative Canvas Studios",
             "description": "Branding, graphic design, and web development services for businesses looking to make an impact.",
@@ -402,7 +402,7 @@
         },
         {
             "id": "soko-properties",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/sokopropertieslogo.webp",
             "imgAlt": "Soko Properties Logo",
             "name": "Soko Properties",
             "description": "Leading real estate agency in Nairobi, offering sales, rentals, and property management.",
@@ -467,7 +467,7 @@
         },
         {
             "id": "urban-edge-barbershop-spa",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/urbanedgelogo.jpg",
             "imgAlt": "Urban Edge Barbershop & Spa Logo",
             "name": "Urban Edge Barbershop & Spa",
             "description": "Modern grooming and relaxation services for men and women.",
@@ -532,7 +532,7 @@
         },
         {
             "id": "naija-cuisine-hub",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/naijacuisinelogo.webp",
             "imgAlt": "Naija Cuisine Hub Logo",
             "name": "Naija Cuisine Hub",
             "description": "Authentic Nigerian dishes in the heart of Nairobi. Experience a burst of flavors!",
@@ -597,7 +597,7 @@
         },
         {
             "id": "techsolutions-africa",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/tsalogo.webp",
             "imgAlt": "TechSolutions Africa Logo",
             "name": "TechSolutions Africa",
             "description": "IT consulting, software development, and network solutions for businesses of all sizes.",
@@ -662,7 +662,7 @@
         },
         {
             "id": "eco-clean-services",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/ecocleanlogo.webp",
             "imgAlt": "Eco Clean Services Logo",
             "name": "Eco Clean Services",
             "description": "Eco-friendly cleaning solutions for homes and offices in Nairobi.",
@@ -722,7 +722,7 @@
         },
         {
             "id": "fashion-finesse",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/fashionfinneselogo.webp",
             "imgAlt": "Fashion Finesse Boutique Logo",
             "name": "Fashion Finesse Boutique",
             "description": "Trendy and elegant apparel for the modern Kenyan fashionista.",
@@ -787,7 +787,7 @@
         },
         {
             "id": "apex-innovations",
-            "imgSrc": "https://placehold.co/200x150/4CAF50/ffffff?text=Apex+Logo",
+            "imgSrc": "images/logos/appexlogo.webp",
             "imgAlt": "Apex Innovations Logo",
             "name": "Apex Innovations",
             "description": "Leading the future with cutting-edge technology and innovative solutions.",
@@ -851,7 +851,7 @@
         },
         {
             "id": "green-thumb-landscaping",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/logos/greenthumblogo.webp",
             "imgAlt": "Green Thumb Landscaping Logo",
             "name": "Green Thumb Landscaping",
             "description": "Professional landscaping and garden maintenance services.",
