@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Familia Chambers - News Detail</title>
+    <meta name="description" content="Read the full news article from La Familia Chambers.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="https://placehold.co/250x90/aabbcc/ffffff?text=La+Familia+Logo" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+                <option value="blog-posts">Blog Posts</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li class="active-nav-link"><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for News Detail Page -->
+<main>
+    <section class="news-detail-container" id="news-article-detail">
+        <!-- News article details will be dynamically loaded here by JavaScript -->
+        <p style="text-align: center; color: var(--text-color);">Loading news article...</p>
+    </section>
+    <div style="text-align: center;">
+        <a href="news.html" class="back-to-news"><i class="fas fa-arrow-left"></i> Back to All News</a>
+    </div>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Main La Familia Chambers JavaScript (for header/footer functionality) -->
+<script src="scripts/main.js"></script>
+
+<!-- News Detail Page Specific JavaScript -->
+<script>
+    // Helper function to generate placeholder image URLs
+    function generatePlaceholderImage(width, height, text, bgColor = 'cccccc', textColor = '333333') {
+        return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
+    }
+
+    // Data for news articles (duplicated from news.html for self-containment)
+    const laFamiliaNewsArticles = [
+        {
+            id: 'summit-2025',
+            title: 'La Familia Chambers Hosts Successful Annual Business Summit',
+            date: 'July 10, 2025',
+            snippet: 'Nairobi, Kenya – La Familia Chambers proudly announces the successful conclusion of its Annual Business Summit, held from July 8-9, 2025. The event brought together over 500 entrepreneurs, industry leaders, and policymakers for two days of insightful discussions, networking opportunities, and strategic collaborations...',
+            fullContent: `
+                <p>Nairobi, Kenya – La Familia Chambers proudly announces the successful conclusion of its Annual Business Summit, held from July 8-9, 2025, at the Kenyatta International Convention Centre (KICC).</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'Summit Attendees', 'a0c0a0', 'ffffff')}" alt="Attendees at La Familia Chambers Business Summit" class="news-detail-image">
+                    <p class="news-detail-image-caption">Participants engaging during the Annual Business Summit.</p>
+                </div>
+                <p>The summit, themed "Innovating for a Resilient Economy," brought together over 500 entrepreneurs, industry leaders, government officials, and policymakers from across East Africa. Over two days, attendees participated in insightful discussions, engaging workshops, and strategic networking sessions aimed at fostering economic growth and resilience in the region.</p>
+                <p>Keynote speakers included Dr. Amina Mohamed, Cabinet Secretary for Sports, Culture & Heritage, who spoke on the role of creative industries in economic diversification, and Mr. James Mwangi, Group CEO of Equity Group Holdings, who shared insights on financial inclusion and sustainable business practices.</p>
+                <p>Highlights of the summit included:</p>
+                <ul>
+                    <li>Panel discussions on digital transformation, sustainable development, and regional trade.</li>
+                    <li>Breakout sessions focused on specific sectors such as agriculture, technology, and manufacturing.</li>
+                    <li>A vibrant exhibition floor showcasing innovative products and services from member businesses.</li>
+                    <li>Networking receptions that facilitated new partnerships and collaborations.</li>
+                </ul>
+                <p>"We are thrilled with the overwhelming success of this year's Business Summit," said Ms. Zawadi Mzuri, CEO of La Familia Chambers. "The level of engagement and the quality of discussions underscore the vibrant entrepreneurial spirit within our community. We believe the connections made and ideas shared here will contribute significantly to building a more resilient and prosperous economy."</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'Keynote Speaker', 'c0a0c0', 'ffffff')}" alt="Keynote speaker addressing the summit" class="news-detail-image">
+                    <p class="news-detail-image-caption">A keynote speaker delivering an address at the summit.</p>
+                </div>
+                <p>La Familia Chambers extends its gratitude to all sponsors, partners, speakers, and attendees for making the 2025 Annual Business Summit a resounding success. Plans for the next summit are already underway, promising even greater opportunities for growth and collaboration.</p>
+            `
+        },
+        {
+            id: 'sme-partnership',
+            title: 'New Partnership to Boost Local SMEs in Nairobi',
+            date: 'June 28, 2025',
+            snippet: 'La Familia Chambers has signed a landmark Memorandum of Understanding (MOU) with the Nairobi County Government to launch a new initiative aimed at empowering Small and Medium Enterprises (SMEs). This partnership will provide training, mentorship, and access to funding for local businesses...',
+            fullContent: `
+                <p>Nairobi, Kenya – In a significant move to bolster the local economy, La Familia Chambers has signed a landmark Memorandum of Understanding (MOU) with the Nairobi County Government. This partnership aims to launch a new comprehensive initiative focused on empowering Small and Medium Enterprises (SMEs) across the county.</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'MOU Signing', 'b0e0e0', 'ffffff')}" alt="MOU signing ceremony between La Familia Chambers and Nairobi County Government" class="news-detail-image">
+                    <p class="news-detail-image-caption">Officials from La Familia Chambers and Nairobi County Government signing the MOU.</p>
+                </div>
+                <p>The initiative, "Nairobi SME Growth Accelerator," will provide a multi-faceted support system for local businesses, including:</p>
+                <ul>
+                    <li><strong>Training Programs:</strong> Workshops and seminars on business management, financial literacy, marketing, and digital skills.</li>
+                    <li><strong>Mentorship Opportunities:</strong> Connecting emerging SMEs with experienced business leaders for guidance and strategic advice.</li>
+                    <li><strong>Access to Funding:</strong> Facilitating linkages between SMEs and financial institutions, as well as providing information on grants and investment opportunities.</li>
+                    <li><strong>Market Linkages:</strong> Creating platforms for SMEs to connect with larger corporations and expand their market reach.</li>
+                </ul>
+                <p>"SMEs are the backbone of our economy, and their growth is crucial for job creation and sustainable development," stated Governor Johnson Mwakazi during the signing ceremony. "This partnership with La Familia Chambers will provide our local businesses with the tools and resources they need to thrive in a competitive environment."</p>
+                <p>Ms. Zawadi Mzuri, CEO of La Familia Chambers, added, "We are excited to collaborate with the Nairobi County Government on this vital initiative. Our goal is to create a supportive ecosystem where SMEs can innovate, scale, and contribute more significantly to Nairobi's prosperity. This MOU marks a new chapter in our commitment to empowering local entrepreneurs."</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'SME Support', 'e0c0a0', 'ffffff')}" alt="Small business owner receiving mentorship" class="news-detail-image">
+                    <p class="news-detail-image-caption">A small business owner benefiting from the SME support program.</p>
+                </div>
+                <p>The "Nairobi SME Growth Accelerator" is expected to roll out its first programs in August 2025, with registration details to be announced soon on the La Familia Chambers website and official county channels.</p>
+            `
+        },
+        {
+            id: 'mlolongo-infrastructure',
+            title: 'Chamber Advocates for Improved Infrastructure in Mlolongo',
+            date: 'June 15, 2025',
+            snippet: 'In a recent meeting with local authorities, La Familia Chambers presented a comprehensive proposal advocating for significant improvements to infrastructure in the Mlolongo area. The proposal highlights the need for better road networks, reliable utilities, and public amenities to support business growth and community development...',
+            fullContent: `
+                <p>Mlolongo, Machakos County – La Familia Chambers has intensified its advocacy efforts for enhanced infrastructure in the rapidly growing Mlolongo area. In a recent high-level meeting with the Machakos County Government and representatives from the Ministry of Infrastructure, the Chamber presented a detailed proposal outlining critical development needs.</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'Mlolongo Meeting', 'c0c0e0', 'ffffff')}" alt="La Familia Chambers representatives meeting with Mlolongo local authorities" class="news-detail-image">
+                    <p class="news-detail-image-caption">La Familia Chambers discussing infrastructure improvements with local officials.</p>
+                </div>
+                <p>The proposal, titled "Mlolongo Infrastructure Development Plan 2025-2030," highlights several key areas requiring urgent attention:</p>
+                <ul>
+                    <li><strong>Road Network Expansion and Rehabilitation:</strong> Addressing traffic congestion and improving connectivity for businesses and residents.</li>
+                    <li><strong>Reliable Water and Electricity Supply:</strong> Ensuring consistent access to essential utilities to support industrial and commercial operations.</li>
+                    <li><strong>Waste Management Systems:</strong> Implementing sustainable waste collection and disposal solutions to improve sanitation and environmental health.</li>
+                    <li><strong>Public Amenities:</strong> Developing green spaces, recreational facilities, and improved public transport infrastructure.</li>
+                </ul>
+                <p>"Mlolongo is a vital economic hub, and its continued growth is heavily reliant on robust infrastructure," stated Mr. David Kimani, Head of Advocacy at La Familia Chambers. "Our proposal emphasizes that investing in these foundational elements will not only attract more businesses but also significantly improve the quality of life for residents."</p>
+                <p>The Chamber expressed optimism following the meeting, with county officials acknowledging the urgency of the issues raised and committing to a collaborative approach in addressing them. La Familia Chambers will continue to engage with relevant stakeholders to ensure the timely implementation of these crucial infrastructure projects.</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'Mlolongo Roads', 'e0e0a0', 'ffffff')}" alt="Improved road infrastructure in Mlolongo" class="news-detail-image">
+                    <p class="news-detail-image-caption">Proposed improvements for road networks in Mlolongo.</p>
+                </div>
+                <p>Local businesses and residents are encouraged to provide their feedback and support for the initiative as the Chamber moves forward with its advocacy.</p>
+            `
+        },
+        {
+            id: 'digital-marketing-workshop',
+            title: 'Upcoming Workshop: Digital Marketing for Small Businesses',
+            date: 'June 01, 2025',
+            snippet: 'Join La Familia Chambers for an interactive workshop on "Digital Marketing Strategies for Small Businesses" on July 20, 2025, at our Westlands branch. Learn how to leverage social media, SEO, and email marketing to grow your online presence and reach new customers...',
+            fullContent: `
+                <p>Nairobi, Kenya – La Familia Chambers is pleased to announce an upcoming interactive workshop designed to equip small business owners with essential digital marketing skills. The workshop, titled "Digital Marketing Strategies for Small Businesses," will be held on <strong>Saturday, July 20, 2025, from 9:00 AM to 4:00 PM</strong> at our Westlands branch conference hall.</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'Digital Marketing Workshop', 'a0e0e0', 'ffffff')}" alt="Attendees at a digital marketing workshop" class="news-detail-image">
+                    <p class="news-detail-image-caption">Participants learning about digital marketing strategies.</p>
+                </div>
+                <p>In today's competitive landscape, a strong online presence is no longer optional for small businesses. This workshop will cover practical strategies and tools to help entrepreneurs effectively market their products and services in the digital realm. Topics will include:</p>
+                <ul>
+                    <li>Understanding your target audience online.</li>
+                    <li>Effective social media marketing for engagement and sales.</li>
+                    <li>Search Engine Optimization (SEO) basics for improved visibility.</li>
+                    <li>Email marketing for customer retention and loyalty.</li>
+                    <li>Creating compelling online content.</li>
+                    <li>Measuring digital marketing success.</li>
+                </ul>
+                <p>The workshop will be led by renowned digital marketing expert, Ms. Emily Wanjiru, and will feature hands-on exercises and Q&A sessions. Participants are encouraged to bring their laptops for practical application.</p>
+                <p><strong>Registration Fee:</strong> Ksh 2,500 (includes workshop materials, lunch, and refreshments).</p>
+                <p><strong>Limited slots available!</strong> Register now to secure your spot and take your business's online presence to the next level.</p>
+                <div class="news-detail-image-container">
+                    <img src="${generatePlaceholderImage(600, 350, 'Workshop Speaker', 'e0a0e0', 'ffffff')}" alt="Expert speaker presenting at the workshop" class="news-detail-image">
+                    <p class="news-detail-image-caption">Expert speaker guiding participants through digital marketing concepts.</p>
+                </div>
+                <p>For registration and more information, please visit the events section of our website or contact us at info@lafamiliachambers.co.ke.</p>
+            `
+        }
+    ];
+
+    // Function to render a single news article detail
+    function renderNewsArticleDetail() {
+        const articleDetailContainer = document.getElementById('news-article-detail');
+        if (!articleDetailContainer) return;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+
+        if (!articleId) {
+            articleDetailContainer.innerHTML = '<p style="text-align: center; color: red;">News article ID not found in URL.</p>';
+            return;
+        }
+
+        const article = laFamiliaNewsArticles.find(a => a.id === articleId);
+
+        if (!article) {
+            articleDetailContainer.innerHTML = '<p style="text-align: center; color: red;">News article not found.</p>';
+            return;
+        }
+
+        articleDetailContainer.innerHTML = `
+            <h2>${article.title}</h2>
+            <div class="news-meta">
+                <i class="fas fa-calendar-alt"></i> <span>${article.date}</span>
+            </div>
+            <div class="news-detail-content">
+                ${article.fullContent}
+            </div>
+        `;
+    }
+
+    // Run rendering function when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', renderNewsArticleDetail);
+
+    // JavaScript for dynamic year in footer (if not already in main.js)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set active navigation link for News & Announcements
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('#main-nav .nav-list a');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'news.html') {
+                link.closest('li').classList.add('active-nav-link');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Reviews - La Familia Chambers</title>
+    <meta name="description" content="Read testimonials and reviews from satisfied members of La Familia Chambers.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Specific styles for the Reviews page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews-hero {
+            background: url('https://placehold.co/1200x400/0056b3/ffffff?text=Hear+From+Our+Members') no-repeat center center / cover;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .reviews-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: white; /* Ensure heading is white on dark background */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .reviews-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .reviews-section {
+            padding: 2rem 1rem;
+            background-color: var(--light-bg);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .reviews-section h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+            display: inline-block; /* To center the pseudo-element underline */
+        }
+
+        .reviews-section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background-color: var(--card-bg);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align content to the start */
+            text-align: left; /* Ensure text aligns left within card */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .review-member-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--border-color);
+        }
+
+        .review-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .review-source {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            margin-top: 0.2rem;
+        }
+
+        .review-source a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .review-source a:hover {
+            text-decoration: underline;
+        }
+
+        .star-rating {
+            color: #FFD700; /* Gold color for stars */
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .star-rating .far.fa-star {
+            color: #ccc; /* Lighter color for empty stars */
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1; /* Allows text to take available space */
+            color: var(--text-color);
+        }
+
+        .review-date {
+            font-size: 0.8rem;
+            color: #888;
+            align-self: flex-end; /* Align date to the bottom right */
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit-review-cta {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .submit-review-cta h4 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .submit-review-cta p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .submit-review-cta .cta-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-review-cta .cta-button:hover {
+            background-color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .reviews-hero h1 {
+                font-size: 2.2rem;
+            }
+            .reviews-hero p {
+                font-size: 1rem;
+            }
+            .reviews-section h3 {
+                font-size: 1.8rem;
+            }
+            .review-grid {
+                grid-template-columns: 1fr; /* Stack reviews on small screens */
+            }
+            .review-card {
+                padding: 1rem;
+            }
+            .submit-review-cta h4 {
+                font-size: 1.5rem;
+            }
+            .submit-review-cta p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Unified Header -->
+<header class="sticky-header">
+    <div class="header-top">
+        <div class="site-branding">
+            <a href="index.html">
+                <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                <h1>La Familia Chambers</h1>
+            </a>
+        </div>
+        <div class="header-controls">
+            <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+            <button id="search-toggle" aria-label="Toggle Search Bar">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="search-bar-container" class="search-bar-hidden">
+        <div class="search-input-wrapper">
+            <input type="search" id="site-search" placeholder="Search businesses, events, news..." aria-label="Site Search">
+            <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+            <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+            <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="search-filters">
+            <select id="search-type-filter" aria-label="Filter by Category">
+                <option value="all">All Categories</option>
+                <option value="businesses">Businesses</option>
+                <option value="events">Events</option>
+                <option value="news">News</option>
+                <option value="blog-posts">Blog Posts</option>
+            </select>
+            <select id="search-location-filter" aria-label="Filter by Location">
+                <option value="all">All Locations</option>
+                <option value="nairobi">Nairobi</option>
+                <option value="mlolongo">Mlolongo</option>
+            </select>
+        </div>
+        <div id="search-suggestions" class="search-suggestions"></div>
+        <div id="search-history" class="search-history"></div>
+    </div>
+    <nav id="main-nav" class="main-nav-closed">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="discover.html">Discover Nairobi</a></li>
+            <li><a href="directory.html">Member Directory</a></li>
+            <li><a href="awards.html">Awards & Recognition</a></li>
+            <li><a href="blog.html">Business Blog</a></li>
+            <li><a href="clubs.html">Member Clubs</a></li>
+            <li><a href="events.html">Events Calendar</a></li>
+            <li><a href="news.html">News & Announcements</a></li>
+            <li><a href="reviews.html">Member Reviews</a></li>
+            <li><a href="board.html">Board of Directors</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content for Reviews Page -->
+<main>
+    <section class="reviews-hero">
+        <div class="reviews-hero-content">
+            <h1>Hear From Our Valued Members</h1>
+            <p>Discover how La Familia Chambers is making a difference for businesses and professionals in Nairobi.</p>
+            <a href="#member-reviews" class="cta-button">Read Reviews</a>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="member-reviews">
+        <h3>What Our Members Say</h3>
+        <div class="review-grid" id="review-grid">
+            <!-- Reviews will be dynamically loaded here by JavaScript -->
+            <p style="text-align: center; color: var(--text-color);">Loading reviews...</p>
+        </div>
+        <div class="load-more-container">
+            <button id="load-more-reviews" class="btn btn-primary">Load More Reviews</button>
+        </div>
+    </section>
+
+    <section class="submit-review-cta">
+        <h4>Share Your Experience!</h4>
+        <p>Are you a La Familia Chambers member? We'd love to hear about your journey and how we've helped your business thrive.</p>
+        <a href="mailto:reviews@lafamiliachambers.co.ke" class="cta-button">Submit Your Review</a>
+    </section>
+</main>
+
+<!-- Unified Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-contact">
+            <h4>Contact La Familia</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+            <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+            <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="privacy.html">Privacy Notice</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="about.html">About La Familia</a></li>
+                <li><a href="developer.html">About the Developer</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+                <li><a href="partnerships.html">Partnerships</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+                <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- New: Reviews specific JS -->
+<script src="scripts/reviews.js"></script>
+<!-- Main La Familia Chambers JavaScript -->
+<script src="scripts/main.js"></script>
+
+</body>
+</html>

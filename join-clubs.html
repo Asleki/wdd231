@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join a Club - La Familia Chambers</title>
+    <meta name="description" content="Join an exclusive member club at La Familia Chambers. Connect with professionals sharing your interests.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensure html and body allow scrolling */
+        html, body {
+            min-height: 100vh; /* Ensure the page is at least viewport height */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            overflow-y: auto;   /* Allow vertical scrolling when content overflows */
+        }
+
+        /* Specific styles for the Join a Club page */
+        main {
+            padding: var(--spacing-unit);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .join-club-hero {
+            background: url('https://placehold.co/1200x400/5F9EA0/ffffff?text=Join+Our+Community') no-repeat center center / cover;
+            color: var(--light-color);
+            text-align: center;
+            padding: var(--spacing-unit) 0;
+            margin-bottom: var(--spacing-unit);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+        }
+
+        .join-club-hero h1 {
+            font-size: var(--font-size-xxl);
+            margin-bottom: var(--spacing-unit-half);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .join-club-hero p {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-unit);
+            max-width: 700px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .join-club-form-container {
+            background-color: var(--light-color);
+            padding: var(--spacing-unit-double);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--spacing-unit-double);
+        }
+
+        .form-header h2 {
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit-half);
+        }
+
+        .form-steps {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: var(--spacing-unit-double);
+            position: relative;
+        }
+
+        .form-step-indicator {
+            flex: 1;
+            text-align: center;
+            padding: var(--spacing-unit-half);
+            border-bottom: 3px solid var(--border-color);
+            color: var(--secondary-color);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-step-indicator.active {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .form-step-indicator span {
+            display: block;
+            margin-top: 5px;
+            font-size: var(--font-size-sm);
+        }
+        
+        .form-step-indicator .step-number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            color: var(--text-color);
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .form-step-indicator.active .step-number {
+            background-color: var(--accent-color);
+            color: var(--light-color);
+        }
+
+        .form-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 0;
+        }
+
+        .form-step {
+            display: none; /* Hidden by default */
+            padding: var(--spacing-unit) 0;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-unit-half);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            box-sizing: border-box; /* Include padding in width */
+            font-size: var(--font-size-md);
+            color: var(--text-color);
+        }
+
+        /* Input field error styling */
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: var(--danger-color); /* Assuming a --danger-color for errors */
+            box-shadow: 0 0 5px rgba(var(--danger-color-rgb), 0.5);
+        }
+        
+        .radio-group label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: var(--font-size-md);
+            color: var(--text-color);
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .club-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-unit);
+            margin-top: var(--spacing-unit);
+        }
+
+        .club-selection-item {
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-unit);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .club-selection-item:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .club-selection-item.selected {
+            border-color: var(--accent-color);
+            background-color: var(--accent-color-light);
+            box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5);
+            transform: translateY(-3px);
+        }
+
+        .club-selection-item img {
+            max-width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--spacing-unit-half);
+        }
+
+        .club-selection-item h4 {
+            font-size: var(--font-size-md);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-unit-half);
+        }
+
+        .club-selection-item p {
+            font-size: var(--font-size-sm);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-unit-half);
+            flex-grow: 1;
+        }
+        
+        .member-details-group {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-unit);
+            margin-top: var(--spacing-unit);
+            background-color: var(--light-background);
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-unit-triple); /* Increased margin-top for separation */
+        }
+
+        .form-navigation button {
+            padding: var(--spacing-unit) var(--spacing-unit-double); /* Increased padding for larger buttons */
+            border: none; /* Changed from 2px solid var(--border-color) to none */
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-md);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--box-shadow); /* Added shadow */
+            font-weight: bold; /* Made text bolder */
+            outline: none; /* Remove default focus outline */
+        }
+
+        .form-navigation .prev-button {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+        }
+
+        .form-navigation .prev-button:hover {
+            background-color: var(--secondary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        .form-navigation .prev-button:active {
+            transform: translateY(0);
+            box-shadow: var(--box-shadow);
+        }
+
+
+        .form-navigation .next-button,
+        .form-navigation .submit-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .form-navigation .next-button:hover,
+        .form-navigation .submit-button:hover {
+            background-color: var(--primary-color-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        .form-navigation .next-button:active,
+        .form-navigation .submit-button:active {
+            transform: translateY(0);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Disabled button state */
+        .form-navigation button:disabled {
+            background-color: var(--border-color); /* Lighter, less saturated color */
+            color: var(--secondary-color);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.7; /* Slightly transparent */
+        }
+
+
+        #joinClubConfirmation {
+            margin-top: var(--spacing-unit-double);
+            padding: var(--spacing-unit);
+            background-color: var(--accent-color-light);
+            border: 1px solid var(--accent-color);
+            border-radius: var(--border-radius);
+            color: var(--primary-color-dark);
+            font-weight: bold;
+            display: none; /* Hidden by default */
+            white-space: pre-wrap; /* Preserve newlines */
+        }
+
+        /* Custom Alert Modal Styles */
+        #custom-alert-modal {
+            display: none; /* Hidden by default initially */
+            position: fixed;
+            z-index: 1000; /* High z-index to be on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-alert-content {
+            background-color: var(--light-color); /* Use a suitable background variable */
+            margin: auto;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative; /* Needed for close button positioning */
+        }
+
+        .custom-alert-content h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .custom-alert-content p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .custom-alert-content button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .custom-alert-content button:hover {
+            background-color: var(--secondary-color-dark); /* Darker secondary */
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .join-club-hero h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .join-club-hero p {
+                font-size: var(--font-size-md);
+            }
+
+            .form-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .form-step-indicator {
+                width: 100%;
+                border-bottom: none;
+                border-left: 3px solid var(--border-color);
+                margin-bottom: 10px;
+                padding-left: 10px;
+                text-align: left;
+            }
+
+            .form-step-indicator.active {
+                border-color: var(--accent-color);
+            }
+
+            .form-progress-bar {
+                display: none; /* Hide vertical progress bar for simplicity */
+            }
+
+            .club-selection-grid {
+                grid-template-columns: 1fr;
+            }
+            .custom-alert-content {
+                width: 95%;
+                padding: 15px;
+            }
+            .custom-alert-content h4 {
+                font-size: 1.3rem;
+            }
+            .custom-alert-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="header-top">
+            <div class="site-branding">
+                <a href="index.html">
+                    <img src="images/lafamilialogo.webp" alt="La Familia Chambers Logo" class="logo">
+                    <h1>La Familia Chambers</h1>
+                </a>
+            </div>
+            <div class="header-controls">
+                <a href="join.html" class="join-header-cta">Join La Familia</a>
+
+                <button id="search-toggle" aria-label="Toggle Search Bar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="mode-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="hamburger-menu" aria-label="Open Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <nav id="main-nav" class="main-nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active">Home</a></li> <!-- Active class on Home -->
+                <li><a href="#" class="nav-link">Discover Nairobi</a></li>
+                <li><a href="directory.html" class="nav-link">Member Directory</a></li> <!-- Removed active class as this is index.html -->
+                <li><a href="#" class="nav-link">Awards & Recognition</a></li>
+                <li><a href="#" class="nav-link">Business Blog</a></li>
+                <li><a href="#" class="nav-link">Member Clubs</a></li>
+                <li><a href="events.html" class="nav-link">Events Calendar</a></li> <!-- Corrected link to events.html -->
+                <li><a href="#" class="nav-link">Member Reviews</a></li>
+                <li><a href="#" class="nav-link">Board of Directors</a></li>
+                <li><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+        <div id="search-bar-container" class="search-bar-hidden">
+            <div class="search-input-wrapper">
+                <input type="search" id="site-search" placeholder="Search members, events, news..." aria-label="Site Search">
+                <button id="search-submit-btn" class="search-control-btn" aria-label="Submit Global Search"><i class="fas fa-search"></i></button>
+                <button id="search-clear-btn" class="search-control-btn" aria-label="Clear Search Input"><i class="fas fa-times"></i></button>
+                <button id="search-mic-btn" class="search-control-btn" aria-label="Search with Voice"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="search-filters">
+                <select id="search-type-filter" aria-label="Filter by Type">
+                    <option value="">All Types</option>
+                    <option value="member">Members</option>
+                    <option value="event">Events</option>
+                    <option value="news">News</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+                <select id="search-location-filter" aria-label="Filter by Location">
+                    <option value="">All Locations</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="thika">Thika</option>
+                    <option value="mombasa">Mombasa</option>
+                </select>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
+            <div id="search-history" class="search-history"></div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="join-club-hero">
+            <h1>Join a La Familia Chambers Club</h1>
+            <p>Select a club that aligns with your interests and become part of a vibrant community of professionals.</p>
+        </section>
+
+        <section class="join-club-form-container">
+            <div class="form-header">
+                <h2>Club Application Form</h2>
+            </div>
+
+            <div class="form-steps">
+                <div class="form-step-indicator active" data-step="0">
+                    <span class="step-number">1</span>
+                    Choose Club
+                </div>
+                <div class="form-step-indicator" data-step="1">
+                    <span class="step-number">2</span>
+                    Membership Status
+                </div>
+                <div class="form-step-indicator" data-step="2">
+                    <span class="step-number">3</span>
+                    Personal Details
+                </div>
+                 <div class="form-step-indicator" data-step="3">
+                    <span class="step-number">4</span>
+                    Payment
+                </div>
+            </div>
+
+            <form id="joinClubForm">
+                <div id="step-1" class="form-step active">
+                    <h3>Select a Club to Join</h3>
+                    <div id="club-selection-grid" class="club-selection-grid">
+                        </div>
+                    <input type="hidden" id="selectedClubId" name="selectedClubId">
+                    <div class="form-navigation">
+                        <button type="button" class="next-button" data-step="1">Next</button>
+                    </div>
+                </div>
+
+                <div id="step-2" class="form-step">
+                    <h3>Are you a current La Familia Chambers member?</h3>
+                    <div class="form-group radio-group">
+                        <label>
+                            <input type="radio" name="isMember" value="yes" id="isMemberYes"> Yes, I am a member
+                        </label>
+                        <label>
+                            <input type="radio" name="isMember" value="no" id="isMemberNo"> No, I am not a member
+                        </label>
+                    </div>
+
+                    <div id="memberTypeSection" class="form-group" style="display: none;">
+                        <label for="memberCategory">Member Type:</label>
+                        <select id="memberCategory" name="memberCategory">
+                            <option value="">Select your member category</option>
+                            <option value="club-member">Club Member</option>
+                            <option value="directory-member">Directory Member (from all 11 La Familia Members)</option>
+                            <option value="board-director">Board of Director</option>
+                        </select>
+                    </div>
+
+                    <div id="memberSelectSection" class="form-group" style="display: none;">
+                        <label for="memberSelect">Select Your Name:</label>
+                        <select id="memberSelect" name="memberName">
+                            <option value="">Select your name</option>
+                        </select>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="prev-button" data-step="0">Previous</button>
+                        <button type="button" class="next-button" data-step="2">Next</button>
+                    </div>
+                </div>
+
+                <div id="step-3" class="form-step">
+                    <h3>Your Personal Details</h3>
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="reasonToJoin">Reason for Joining:</label>
+                        <textarea id="reasonToJoin" name="reasonToJoin" rows="4" placeholder="Tell us why you'd like to join this club..."></textarea>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-button" data-step="1">Previous</button>
+                        <button type="button" class="next-button" data-step="3">Next</button>
+                    </div>
+                </div>
+
+                <div id="step-4" class="form-step">
+                    <h3>Payment Information</h3>
+                    <div class="form-group">
+                        <label>Joining Fee: <span id="displayJoiningFee">KES 0</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Select Payment Method:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="paymentMethod" value="M-Pesa" required> M-Pesa</label>
+                            <label><input type="radio" name="paymentMethod" value="Bank Transfer"> Bank Transfer</label>
+                            <label><input type="radio" name="paymentMethod" value="Credit Card"> Credit Card</label>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-button" data-step="2">Previous</button>
+                        <button type="submit" class="submit-button">Submit Application</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="joinClubConfirmation" style="display: none;">
+                </div>
+        </section>
+    </main>
+
+    <div id="custom-alert-modal">
+        <div class="custom-alert-content">
+            <h4 id="alert-title"></h4>
+            <p id="alert-message"></p>
+            <button id="alert-ok-button">OK</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-contact">
+                <h4>Contact La Familia</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Chambers Lane, Westlands, Nairobi, Kenya</p>
+                <p><i class="fas fa-phone"></i> +254 707 176 595</p>
+                <p><i class="fas fa-envelope"></i> info@lafamiliachambers.co.ke</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Notice</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-about">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="about.html">About La Familia</a></li>
+                    <li><a href="developer.html">About the Developer</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/lafamiliachamber" target="_blank" rel="noopener" aria-label="La Familia Chambers on Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com/lafamiliachambers" target="_blank" rel="noopener" aria-label="La Familia Chambers on Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> La Familia Chambers. All rights reserved. Last Modified: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+
+
+    <script src="scripts/main.js"></script>
+    <script>
+    const clubsData = [
+        {
+            id: 'entrepreneurs-alliance',
+            name: 'Entrepreneurs Alliance',
+            description: 'A dynamic club for aspiring and established entrepreneurs to share ideas, gain insights, and collaborate on ventures. Focuses on innovation, funding, and market strategies.',
+            members: 120,
+            frequency: 'Bi-Weekly Meetings',
+            location: 'Nairobi CBD',
+            image: 'https://placehold.co/400x200/4CAF50/ffffff?text=Entrepreneurs+Alliance'
+        },
+        {
+            id: 'tech-innovators-hub',
+            name: 'Tech Innovators Hub',
+            description: 'Connecting tech enthusiasts, developers, and IT professionals. Discuss cutting-edge technologies, coding challenges, and digital transformation trends.',
+            members: 85,
+            frequency: 'Monthly Workshops',
+            location: 'Westlands Tech Hubs',
+            image: 'https://placehold.co/400x200/2196F3/ffffff?text=Tech+Innovators+Hub'
+        },
+        {
+            id: 'women-in-leadership',
+            name: 'Women in Leadership',
+            description: 'Empowering women professionals through mentorship, networking events, and discussions on leadership, career development, and work-life balance.',
+            members: 95,
+            frequency: 'Quarterly Seminars',
+            location: 'Various City Locations',
+            image: 'https://placehold.co/400x200/FFC107/ffffff?text=Women+in+Leadership'
+        },
+        {
+            id: 'creative-arts-guild',
+            name: 'Creative Arts Guild',
+            description: 'For artists, designers, writers, and performers. A space to collaborate, showcase work, and discuss trends in the creative industries.',
+            members: 60,
+            frequency: 'Monthly Meetups',
+            location: 'Karen & Gigiri Art Spaces',
+            image: 'https://placehold.co/400x200/9C27B0/ffffff?text=Creative+Arts+Guild'
+        },
+        {
+            id: 'health-wellness-circle',
+            name: 'Health & Wellness Circle',
+            description: 'Promoting holistic well-being among members. Organizes fitness challenges, wellness workshops, and discussions on mental health and nutrition.',
+            members: 70,
+            frequency: 'Weekly Activities',
+            location: 'Outdoor & Gym Facilities',
+            image: 'https://placehold.co/400x200/00BCD4/ffffff?text=Health+Wellness+Circle'
+        },
+        {
+            id: 'finance-investment-group',
+            name: 'Finance & Investment Group',
+            description: 'Dedicated to financial literacy, investment strategies, and market analysis. Ideal for finance professionals and anyone interested in growing their wealth.',
+            members: 110,
+            frequency: 'Bi-Monthly Webinars',
+            location: 'Virtual & Upper Hill',
+            image: 'https://placehold.co/400x200/FF5722/ffffff?text=Finance+Investment+Group'
+        },
+        {
+            id: 'sustainability-champions',
+            name: 'Sustainability Champions',
+            description: 'Focuses on environmental conservation, sustainable business practices, and green initiatives. Engages in community projects and policy advocacy.',
+            members: 45,
+            frequency: 'Project-Based',
+            location: 'Across Nairobi',
+            image: 'https://placehold.co/400x200/8BC34A/ffffff?text=Sustainability+Champions'
+        },
+        {
+            id: 'culinary-explorers',
+            name: 'Culinary Explorers',
+            description: 'A club for foodies and culinary professionals. Explores diverse cuisines, organises cooking classes, restaurant reviews, and food festivals.',
+            members: 50,
+            frequency: 'Monthly Dining Events',
+            location: 'Gourmet Restaurants & Kitchens',
+            image: 'https://placehold.co/400x200/CDDC39/ffffff?text=Culinary+Explorers'
+        },
+        {
+            id: 'real-estate-investors',
+            name: 'Real Estate Investors',
+            description: 'Connecting professionals and individuals interested in real estate. Discussions on market trends, property law, and investment development projects.',
+            members: 55,
+            frequency: 'Monthly Property Tours',
+            location: 'Nairobi & Environs',
+            image: 'https://placehold.co/400x200/A52A2A/ffffff?text=Real+Estate+Investors'
+        }
+    ];
+
+    const boardMembersData = [
+        {
+            "id": "zawadi-mzuri",
+            "name": "Zawadi Mzuri",
+            "title": "Chairperson",
+            "image": "images/team/zawadi_mzuri.webp",
+            "bio": "Zawadi Mzuri is a seasoned entrepreneur and advocate for sustainable business practices. With over 20 years of experience in the manufacturing sector, she brings a wealth of knowledge in strategic leadership and community development. Her vision for La Familia Chambers is to foster an inclusive and innovative business ecosystem.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/zawadi-mzuri",
+                "twitter": "https://twitter.com/zawadimzuri"
+            }
+        },
+        {
+            "id": "david-kimani",
+            "name": "David Kimani",
+            "title": "Vice-Chairperson",
+            "image": "images/team/david_kimani.webp",
+            "bio": "David Kimani is a legal expert specializing in corporate law and governance. He provides invaluable legal counsel and strategic guidance to the Board, ensuring compliance and ethical operations. David is passionate about creating fair opportunities for all businesses.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/david-kimani",
+                "twitter": "https://twitter.com/davidkimani"
+            }
+        },
+        {
+            "id": "dr-aisha-hassan",
+            "name": "Dr. Aisha Hassan",
+            "title": "Secretary",
+            "image": "images/team/aisha_hassan.webp",
+            "bio": "Dr. Aisha Hassan is an accomplished academic and researcher with a focus on economic development. As Secretary, she meticulously manages board communications and documentation, contributing her analytical skills to policy formulation and strategic planning.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/aisha-hassan",
+                "twitter": "https://twitter.com/aishahassan"
+            }
+        },
+        {
+            "id": "robert-ngugi",
+            "name": "Robert Ngugi",
+            "title": "Treasurer",
+            "image": "images/team/robert_ngugi.webp",
+            "bio": "Robert Ngugi is a certified public accountant with extensive experience in financial management and auditing. He oversees the Chamber's financial health, ensuring transparency and fiscal responsibility. Robert is committed to maximizing resource utilization for member benefits.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/robert-ngugi",
+                "twitter": "https://twitter.com/robertngugi"
+            }
+        },
+        {
+            "id": "sarah-ochieng",
+            "name": "Sarah Ochieng",
+            "title": "Board Member",
+            "image": "images/team/sarah_ochieng.webp",
+            "bio": "Sarah Ochieng is a dynamic marketing professional with a proven track record in brand building and digital strategy. She brings fresh perspectives on member engagement and outreach, helping the Chamber connect with a wider audience and enhance its value proposition.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/sarah-ochieng",
+                "twitter": "https://twitter.com/sarahochieng"
+            }
+        },
+        {
+            "id": "michael-mutua",
+            "name": "Michael Mutua",
+            "title": "Board Member",
+            "image": "images/team/michael_mutua.webp",
+            "bio": "Michael Mutua is a technology innovator and founder of a successful tech startup. His expertise in emerging technologies and digital transformation is crucial for guiding the Chamber's initiatives to support tech-driven businesses and foster a vibrant innovation ecosystem.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/michael-mutua",
+                "twitter": "https://twitter.com/michaelmutua"
+            }
+        }
+    ];
+
+    const executiveTeamData = [
+        {
+            "id": "grace-wanjiku",
+            "name": "Grace Wanjiku",
+            "title": "Chief Executive Officer (CEO)",
+            "image": "images/team/grace_wanjiku.webp",
+            "bio": "Grace Wanjiku leads the day-to-day operations of La Familia Chambers, driving strategic initiatives and ensuring the Chamber's mission is achieved. With a background in organizational leadership and non-profit management, she is dedicated to fostering a thriving business community.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/grace-wanjiku",
+                "twitter": "https://twitter.com/gracewanjiku"
+            }
+        },
+        {
+            "id": "peter-mwangi",
+            "name": "Peter Mwangi",
+            "title": "Operations Manager",
+            "image": "images/team/peter_mwangi.webp",
+            "bio": "Peter Mwangi oversees all operational aspects of the Chamber, ensuring smooth execution of programs and events. His meticulous planning and logistical expertise are vital for delivering high-quality services to members.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/peter-mwangi",
+                "twitter": "https://twitter.com/petermwangi"
+            }
+        },
+        {
+            "id": "esther-njeri",
+            "name": "Esther Njeri",
+            "title": "Membership Coordinator",
+            "image": "images/team/esther_njeri.webp",
+            "bio": "Esther Njeri is the primary point of contact for new and existing members, dedicated to ensuring their needs are met and they fully benefit from Chamber resources. She plays a key role in member retention and recruitment.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/esther-njeri",
+                "twitter": "https://twitter.com/esthernjeri"
+            }
+        },
+        {
+            "id": "collins-omondi",
+            "name": "Collins Omondi",
+            "title": "Events Manager",
+            "image": "images/team/collins_omondi.webp",
+            "bio": "Collins Omondi is responsible for conceptualizing, planning, and executing all Chamber events, from large-scale summits to intimate networking sessions. His creativity and organizational skills ensure memorable and impactful experiences.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/collins-omondi",
+                "twitter": "https://twitter.com/collinsomondi"
+            }
+        },
+        {
+            "id": "faith-chebet",
+            "name": "Faith Chebet",
+            "title": "Communications Manager",
+            "image": "images/team/faith_chebet.webp",
+            "bio": "Faith Chebet manages all internal and external communications for La Familia Chambers, including press releases, newsletters, and social media. She ensures that the Chamber's message is clear, consistent, and reaches its target audience effectively.",
+            "social": {
+                "linkedin": "https://linkedin.com/in/faith-chebet",
+                "twitter": "https://twitter.com/faithchebet"
+            }
+        }
+    ];
+
+    // Combine board members and executive team for "Directory Member" category
+    const allLaFamiliaMembersData = [...boardMembersData, ...executiveTeamData];
+
+    // Dummy club members (no specific data provided, so retaining generic names for demonstration)
+    const clubMembersData = [
+        { id: 'john-doe', name: 'John Doe' },
+        { id: 'jane-smith', name: 'Jane Smith' },
+        { id: 'mark-johnson', name: 'Mark Johnson' }
+    ];
+
+    const joiningFees = {
+        'club-member': 5000, // KES
+        'directory-member': 7500, // KES
+        'board-director': 0, // KES, assuming no fee for board directors
+        'non-member': 10000 // KES
+    };
+
+
+    const form = document.getElementById('joinClubForm');
+    const formSteps = document.querySelectorAll('.form-step');
+    const stepIndicators = document.querySelectorAll('.form-step-indicator');
+    const prevButtons = document.querySelectorAll('.prev-button');
+    const nextButtons = document.querySelectorAll('.next-button');
+    const submitButton = document.querySelector('.submit-button');
+    const joinClubConfirmation = document.getElementById('joinClubConfirmation');
+    const selectedClubIdInput = document.getElementById('selectedClubId');
+    const isMemberYes = document.getElementById('isMemberYes');
+    const isMemberNo = document.getElementById('isMemberNo');
+    const memberTypeSection = document.getElementById('memberTypeSection');
+    const memberCategorySelect = document.getElementById('memberCategory');
+    const memberSelectSection = document.getElementById('memberSelectSection');
+    const memberSelect = document.getElementById('memberSelect');
+    const fullNameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const displayJoiningFee = document.getElementById('displayJoiningFee');
+
+    let currentStep = 0;
+    let selectedClub = null;
+
+    // --- Custom Alert Logic ---
+    const customAlertModal = document.getElementById('custom-alert-modal');
+    const alertTitle = document.getElementById('alert-title');
+    const alertMessage = document.getElementById('alert-message');
+    const alertOkButton = document.getElementById('alert-ok-button');
+
+    function showAlert(message, title = 'Alert') {
+        alertTitle.textContent = title;
+        alertMessage.textContent = message;
+        customAlertModal.style.display = 'flex'; // Use flex to center
+    }
+
+    alertOkButton.addEventListener('click', () => {
+        customAlertModal.style.display = 'none';
+    });
+    // --- End Custom Alert Logic ---
+
+
+    // Function to get URL parameter
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        const results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Function to show a specific step
+    function showStep(step) {
+        formSteps.forEach((stepElement, index) => {
+            stepElement.classList.toggle('active', index === step);
+        });
+        stepIndicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === step);
+        });
+        currentStep = step;
+        updateProgressBar();
+        updateButtonStates(); // Update button states whenever step changes
+    }
+
+    // Function to update progress bar
+    function updateProgressBar() {
+        const progressBar = document.querySelector('.form-progress-bar');
+        const totalSteps = formSteps.length;
+        const progress = (currentStep / (totalSteps -1)) * 100; // Adjusted for 0-indexed steps
+        if (progressBar) { // Check if progressBar exists to prevent errors
+            progressBar.style.width = `${progress}%`;
+        }
+    }
+
+    // Function to update button disabled states
+    function updateButtonStates() {
+        // Assume buttons are inside the active step's form-navigation div
+        const currentNav = formSteps[currentStep].querySelector('.form-navigation');
+        if (!currentNav) return;
+
+        const prevButton = currentNav.querySelector('.prev-button');
+        const nextButton = currentNav.querySelector('.next-button');
+        const submitButton = currentNav.querySelector('.submit-button'); // Get specifically for current step
+
+        if (prevButton) {
+            prevButton.disabled = currentStep === 0;
+        }
+
+        // The "Next" button in Step 1 relies on club selection
+        if (currentStep === 0 && nextButton) {
+            nextButton.disabled = !selectedClub;
+        } else if (nextButton) {
+            nextButton.disabled = false; // Enable for other steps, validation is handled on click
+        }
+    }
+
+
+    // Function to populate the club selection grid
+    function renderClubSelection() {
+        const clubSelectionGrid = document.getElementById('club-selection-grid');
+        clubSelectionGrid.innerHTML = ''; // Clear existing content
+
+        const preSelectedClubId = getUrlParameter('clubId');
+
+        clubsData.forEach(club => {
+            const clubItem = document.createElement('div');
+            clubItem.classList.add('club-selection-item');
+            if (club.id === preSelectedClubId) {
+                clubItem.classList.add('selected');
+                selectedClub = club;
+                selectedClubIdInput.value = club.id;
+            }
+            clubItem.dataset.clubId = club.id;
+            clubItem.innerHTML = `
+                <img src="${club.image}" alt="${club.name}">
+                <h4>${club.name}</h4>
+                <p>${club.description.split('.')[0]}.</p>
+            `;
+            clubItem.addEventListener('click', () => {
+                document.querySelectorAll('.club-selection-item').forEach(item => item.classList.remove('selected'));
+                clubItem.classList.add('selected');
+                selectedClub = club;
+                selectedClubIdInput.value = club.id;
+                updateButtonStates(); // Update button state after club selection
+            });
+            clubSelectionGrid.appendChild(clubItem);
+        });
+        updateButtonStates(); // Initial update after rendering
+    }
+
+    // Function to populate member select dropdown based on category
+    function populateMemberSelect(category) {
+        memberSelect.innerHTML = '<option value="">Select your name</option>';
+        let membersToPopulate = [];
+
+        if (category === 'club-member') {
+            // For 'Club Member', we're using a dummy list as no specific club member data was provided beyond the clubs themselves
+            membersToPopulate = clubMembersData; 
+        } else if (category === 'directory-member') {
+            membersToPopulate = allLaFamiliaMembersData;
+        } else if (category === 'board-director') {
+            membersToPopulate = boardMembersData;
+        }
+
+        membersToPopulate.forEach(member => {
+            const option = document.createElement('option');
+            option.value = member.id;
+            option.textContent = member.name;
+            memberSelect.appendChild(option);
+        });
+    }
+
+    // Event Listeners for Navigation
+    nextButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentStepElement = formSteps[currentStep];
+            let isValid = true;
+
+            // Clear previous errors
+            currentStepElement.querySelectorAll('.error').forEach(input => input.classList.remove('error'));
+
+
+            // Basic validation for current step fields
+            currentStepElement.querySelectorAll('[required]').forEach(input => {
+                if (!input.value.trim() || (input.type === 'email' && !input.checkValidity())) {
+                    isValid = false;
+                    input.classList.add('error'); // Add a class for styling errors
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            // Specific validation for Step 1 (Club Selection)
+            if (currentStep === 0 && !selectedClub) {
+                isValid = false;
+                showAlert('Please select a club to proceed.', 'Validation Error'); // Using custom alert
+            }
+
+            // Specific validation for Step 2 (Membership Status)
+            if (currentStep === 1) {
+                const isMemberSelected = document.querySelector('input[name="isMember"]:checked');
+                if (!isMemberSelected) {
+                    isValid = false;
+                    showAlert('Please select your membership status.', 'Validation Error'); // Using custom alert
+                } else if (isMemberSelected.value === 'yes') {
+                    if (!memberCategorySelect.value) {
+                        isValid = false;
+                        memberCategorySelect.classList.add('error');
+                        showAlert('Please select your member category.', 'Validation Error'); // Using custom alert
+                    } else if (memberCategorySelect.value !== '' && !memberSelect.value) {
+                         isValid = false;
+                         memberSelect.classList.add('error');
+                         showAlert('Please select your name from the list.', 'Validation Error'); // Using custom alert
+                    }
+                }
+            }
+            
+            // Specific validation for Step 3 (Personal Details)
+            if (currentStep === 2) {
+                const nameValid = fullNameInput.value.trim() !== '';
+                const emailValid = emailInput.value.trim() !== '' && emailInput.checkValidity();
+                const phoneValid = phoneInput.value.trim() !== '';
+
+                if (!nameValid) { fullNameInput.classList.add('error'); isValid = false; }
+                if (!emailValid) { emailInput.classList.add('error'); isValid = false; }
+                if (!phoneValid) { phoneInput.classList.add('error'); isValid = false; }
+
+                if (!isValid) {
+                     showAlert('Please fill in all required personal details correctly.', 'Validation Error'); // Using custom alert
+                }
+            }
+
+
+            if (isValid && currentStep < formSteps.length - 1) {
+                showStep(currentStep + 1);
+                 if (currentStep === 2) { // If moving to the payment step (step 4, which is index 3)
+                    const memberStatus = document.querySelector('input[name="isMember"]:checked')?.value;
+                    let fee = 0;
+                    if (memberStatus === 'yes') {
+                        const category = memberCategorySelect.value;
+                        fee = joiningFees[category] || 0;
+                    } else {
+                        fee = joiningFees['non-member'];
+                    }
+                    displayJoiningFee.textContent = `KES ${fee.toLocaleString()}`;
+                }
+            }
+        });
+    });
+
+    prevButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
+        });
+    });
+
+    // Handle Membership Status Change
+    document.querySelectorAll('input[name="isMember"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (isMemberYes.checked) {
+                memberTypeSection.style.display = 'block';
+                memberSelectSection.style.display = 'block';
+                memberCategorySelect.value = ''; // Reset category selection
+                memberSelect.innerHTML = '<option value="">Select your name</option>'; // Clear members
+                // fullNameInput.readOnly = false; // Allow editing until a member is chosen
+                // emailInput.readOnly = false;
+                // phoneInput.readOnly = false;
+            } else { // isMemberNo is checked
+                memberTypeSection.style.display = 'none';
+                memberSelectSection.style.display = 'none';
+                memberCategorySelect.value = '';
+                memberSelect.innerHTML = '<option value="">Select your name</option>';
+                fullNameInput.readOnly = false;
+                emailInput.readOnly = false;
+                phoneInput.readOnly = false;
+
+                // Clear fields if they were pre-filled and membership changes to No
+                fullNameInput.value = '';
+                emailInput.value = '';
+                phoneInput.value = '';
+            }
+            // Clear any error classes from these elements
+            memberCategorySelect.classList.remove('error');
+            memberSelect.classList.remove('error');
+        });
+    });
+
+
+    // Handle Member Category Change
+    memberCategorySelect.addEventListener('change', (event) => {
+        const category = event.target.value;
+        populateMemberSelect(category);
+        if (category !== '') {
+             memberSelectSection.style.display = 'block';
+        } else {
+            memberSelectSection.style.display = 'none';
+        }
+        memberCategorySelect.classList.remove('error'); // Clear error on change
+    });
+
+    // Populate personal details if a member is selected
+    memberSelect.addEventListener('change', (event) => {
+        const selectedMemberId = event.target.value;
+        const memberCategory = memberCategorySelect.value;
+        let selectedMemberDetails = null;
+
+        if (memberCategory === 'club-member') {
+            selectedMemberDetails = clubMembersData.find(m => m.id === selectedMemberId);
+        } else if (memberCategory === 'directory-member') {
+            selectedMemberDetails = allLaFamiliaMembersData.find(m => m.id === selectedMemberId);
+        } else if (memberCategory === 'board-director') {
+            selectedMemberDetails = boardMembersData.find(m => m.id === selectedMemberId);
+        }
+
+        if (selectedMemberDetails) {
+            fullNameInput.value = selectedMemberDetails.name;
+            // Assuming email and phone might not be in the provided JSON, or are fictional for this demo
+            // Set to readOnly true if you want to prevent changes for verified members
+            fullNameInput.readOnly = true; 
+            emailInput.readOnly = false; // Allow members to input/confirm email
+            phoneInput.readOnly = false; // Allow members to input/confirm phone
+        } else {
+            fullNameInput.value = '';
+            fullNameInput.readOnly = false;
+            emailInput.value = '';
+            emailInput.readOnly = false;
+            phoneInput.value = '';
+            phoneInput.readOnly = false;
+        }
+        memberSelect.classList.remove('error'); // Clear error on change
+    });
+
+    // Handle form submission
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        // Final validation for the last step (Payment)
+        const paymentMethodSelected = document.querySelector('input[name="paymentMethod"]:checked');
+        if (!paymentMethodSelected) {
+            showAlert('Please select a payment method.', 'Validation Error'); // Using custom alert
+            return;
+        }
+
+        let applicationDetails = 'Club Application Details:\n';
+        applicationDetails += `Club: ${selectedClub ? selectedClub.name : 'Not selected'}\n`;
+        applicationDetails += `Full Name: ${fullNameInput.value.trim()}\n`;
+        applicationDetails += `Email: ${emailInput.value.trim()}\n`;
+        applicationDetails += `Phone: ${phoneInput.value.trim()}\n`;
+        applicationDetails += `Reason to Join: ${document.getElementById('reasonToJoin').value.trim() || 'N/A'}\n`;
+
+
+        const isMemberStatus = document.querySelector('input[name="isMember"]:checked')?.value;
+        applicationDetails += `La Familia Chambers Member: ${isMemberStatus === 'yes' ? 'Yes' : 'No'}\n`;
+
+        let calculatedFee = 0;
+        let memberTypeChosen = 'N/A';
+
+        if (isMemberStatus === 'yes') {
+            memberTypeChosen = memberCategorySelect.options[memberCategorySelect.selectedIndex].textContent;
+            applicationDetails += `Member Type: ${memberTypeChosen}\n`;
+            if (memberSelect.value) {
+                applicationDetails += `Selected La Familia Member: ${memberSelect.options[memberSelect.selectedIndex].textContent}\n`;
+            }
+            calculatedFee = joiningFees[memberCategorySelect.value] || 0;
+        } else {
+            calculatedFee = joiningFees['non-member'];
+        }
+        
+        applicationDetails += `Joining Fee: KES ${calculatedFee.toLocaleString()}\n`;
+        applicationDetails += `Payment Method: ${paymentMethodSelected.value}\n`;
+
+        // Simulate sending application and show confirmation
+        joinClubConfirmation.textContent = `Thank you for your application to join the ${selectedClub ? selectedClub.name : 'selected club'}!
+
+Here's a summary of your application:
+${applicationDetails}
+
+We have received your details and will process your application shortly. A confirmation email has been sent to your provided email address.`;
+        
+        joinClubConfirmation.style.display = 'block';
+        form.reset(); // Clear the form
+        showStep(0); // Reset to first step
+        selectedClub = null; // Reset selected club
+        selectedClubIdInput.value = ''; // Clear hidden input
+        document.querySelectorAll('.club-selection-item').forEach(item => item.classList.remove('selected')); // Deselect clubs
+        joinClubConfirmation.scrollIntoView({ behavior: 'smooth' }); // Scroll to confirmation
+
+        console.log("Club Application Details:\n", applicationDetails); // Log details for debugging
+    });
+
+    // Initial setup
+    renderClubSelection(); // Populate the club selection grid
+    showStep(0); // Display the first step
+
+    // Handle pre-selection from URL parameter on page load
+    const urlClubId = getUrlParameter('clubId');
+    if (urlClubId) {
+        const preselectClubElement = document.querySelector(`.club-selection-item[data-club-id="${urlClubId}"]`);
+        if (preselectClubElement) {
+            preselectClubElement.click(); // Simulate click to select the club
+            // Option to immediately move to the next step if a club is pre-selected
+            // showStep(1); 
+        }
+    }
+</script>
+
+</body>
+</html>
