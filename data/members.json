@@ -1,7 +1,7 @@
     [
         {
             "id": "duka-lako-supermart",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/dukalako.png",
             "imgAlt": "Duka Lako Supermart Logo",
             "name": "Duka Lako Supermart",
             "description": "Your neighborhood supermarket, offering fresh produce, groceries, and household essentials.",
@@ -272,7 +272,7 @@
         },
         {
             "id": "taste-of-africa-catering",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "images/tac.png",
             "imgAlt": "Taste of Africa Catering Logo",
             "name": "Taste of Africa Catering",
             "description": "Authentic African and international cuisine catering for events of all sizes.",
@@ -337,7 +337,7 @@
         },
         {
             "id": "creative-canvas-studios",
-            "imgSrc": "images/placeholder.png",
+            "imgSrc": "https://placehold.co/600x200/1A2B4C/FFFFFF?text=La+Familia+Chambers",
             "imgAlt": "Creative Canvas Studios Logo",
             "name": "Creative Canvas Studios",
             "description": "Branding, graphic design, and web development services for businesses looking to make an impact.",
